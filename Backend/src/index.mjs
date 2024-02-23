@@ -3,9 +3,12 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import http from "http";
 import cookieParser from "cookie-parser";
-
+import { userRoutes } from "./Firebase/Routes/userRoutes.mjs";
 
 const app = express();
+
+const port = 3001;
+
 const corsOptions = {
   origin: true,
   credentials: true,
@@ -17,7 +20,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-const port = 3001;
+app.use('/user',userRoutes);
+
 
 const server = http.createServer(app);
 
