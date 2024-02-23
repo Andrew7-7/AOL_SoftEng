@@ -1,4 +1,3 @@
-// import { Request, Response } from "express";
 import { collection, getDocs, addDoc, doc } from "firebase/firestore";
 import { db } from "../Config/config.mjs";
 
@@ -13,15 +12,13 @@ export class UserControllers {
 
       for (const user of users) {
         const collectionName = "Courses";
-        const docRef = doc(db, "users", user.id); // Reference to the user document
+        const docRef = doc(db, "users", user.id);
         const collectionSnapshot = await getDocs(
           collection(docRef, collectionName)
         ); 
 
-        // Create an array to store course data
         const courses = [];
 
-        // Check if the collection exists and extract course data
         if (!collectionSnapshot.empty) {
           collectionSnapshot.forEach((collectionDoc) => {
             courses.push({
@@ -31,7 +28,6 @@ export class UserControllers {
           });
         }
 
-        // Add course data to the user object
         user[collectionName] = courses;
       }
 
