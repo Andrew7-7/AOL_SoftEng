@@ -26,5 +26,5 @@ app.use('/user',userRoutes);
 const server = http.createServer(app);
 
 server.listen(port, () => {
-  console.log("hai berjalan " + port);
+  console.log("hai berjalan di: " + port);
 });
