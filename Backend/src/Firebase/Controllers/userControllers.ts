@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 
 interface User {
   id: string;
-  [key: string]: any; // Allow any other properties with string keys
+  [key: string]: any; 
 }
 
 const userCollection = collection(db, "users");
