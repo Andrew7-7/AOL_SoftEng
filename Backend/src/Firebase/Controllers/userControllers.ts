@@ -9,13 +9,25 @@ import {
 import { db } from "../Config/config";
 import { encrypt } from "../../others/encrypt";
 import { Request, Response } from "express";
-
+import jwt from "jsonwebtoken";
 interface User {
   id: string;
   [key: string]: any;
 }
 
+interface UserData {
+  email?: string;
+  password?: string;
+  role?: string;
+  username?: string;
+}
+
+// Collection User
 const userCollection = collection(db, "users");
+
+// Collection Session
+const sessionCollection = collection(db, "session");
+
 export class UserControllers {
   // Testing get user and collection inside it
   static async getUser(req: Request, res: Response) {
@@ -49,29 +61,86 @@ export class UserControllers {
 
       res.status(200).json(users);
     } catch (error) {
-      console.error("Error fetching users:", error);
       res.status(500).json({ error: "Error fetching users" });
+    }
+  }
+
+  // Login User
+  static async loginUser(req: Request, res: Response) {
+    try {
+      const { email, password } = req.body;
+
+      // Cek Email
+      const q = query(userCollection, where("email", "==", email));
+      const user = await getDocs(q);
+      if (user.empty) {
+        return res.status(400).json({ message: "Invalid Email" });
+      }
+
+      // Masukkin data user
+      let userData: UserData = {};
+
+      user.forEach((doc) => {
+        userData = { ...doc.data() };
+      });
+
+      // Cek Password
+      const passwordMatch = await encrypt.comparePass(
+        password,
+        userData.password
+      );
+
+      if (!passwordMatch) {
+        return res.status(401).json({ error: "Invalid password" });
+      }
+
+      // JWT Token
+      const payload = userData;
+
+      // Refresh Token exp 7 hari
+      const REFRESH_TOKEN = process.env.REFRESH_TOKEN!;
+      const refreshToken = jwt.sign(payload, REFRESH_TOKEN, {
+        expiresIn: "7d",
+      });
+
+      // Access Token exp 1 hari
+      const ACCESS_TOKEN = process.env.ACCESS_TOKEN!;
+      const accessToken = jwt.sign(payload, ACCESS_TOKEN, {
+        expiresIn: "1d",
+      });
+
+      // Masukkin Refresh Token ke firebase
+      await addDoc(sessionCollection, {
+        email,
+        refreshToken
+      });
+
+      res.status(200).json({ accessToken, userData });
+    } catch (error) {
+      res.status(500).json(error);
     }
   }
 
   // Register User
   static async registerUser(req: Request, res: Response) {
     try {
-
       let { username, email, password, role } = req.body;
 
+      // Hash Password
       try {
         password = await encrypt.hashPass(password);
       } catch (error) {
         console.log(error);
       }
 
+      // Cek email sama
       const q = query(userCollection, where("email", "==", email));
       const existingUser = await getDocs(q);
       if (!existingUser.empty) {
         return res.status(400).json({ message: "Email already exists" });
       }
 
+      // Masukkin User ke firebase
       await addDoc(userCollection, {
         email,
         username,

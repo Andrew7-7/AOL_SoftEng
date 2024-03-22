@@ -47,8 +47,8 @@ const RegisterPage = () => {
                 placeholder="Confirm Password"
                 onChange={(event) => handleChange(event, setConPassword)}
               ></input>
-            </div>
             <p className="error">{error}</p>
+            </div>
             <BlueButton
               text={"Register"}
               clickFunction={() =>

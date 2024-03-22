@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import StudentNav from "../../../global/components/navbar/student/student_navbar";
 
 const HomePage = ()=>{
-
+    
     return (
         <>
         <StudentNav/>
-        
         </>
     )
 }
