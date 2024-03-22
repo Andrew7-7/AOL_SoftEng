@@ -1,7 +1,7 @@
-:root{
-    --lightBlue:  #B2CBDE;   
-    --lightGrey: #F3F5F8;
-    --lightGrey2: #9DAAB7;
+:root {
+  --lightBlue: #b2cbde;
+  --lightGrey: #f3f5f8;
+  --lightGrey2: #9daab7;
 }
 
 .Outer {
@@ -12,49 +12,36 @@
   align-items: center;
 }
 
-.divContainer{
-    display: flex;
-    background-color: var(--lightGrey);
-    height: 650px;
-    border-radius: 20px;
+.divContainer {
+  display: flex;
+  background-color: var(--lightGrey);
+  height: 650px;
+  border-radius: 20px;
 }
 
-.leftDiv,.rightDiv{
-    width: 550px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.leftDiv,
+.rightDiv {
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.leftDiv{
-    font-size: 18px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    justify-content: space-between;
+.leftDiv {
+  font-size: 18px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  justify-content: space-between;
 }
 
-.rightDiv{
-    justify-content: center;
-}
-
-.innerRight{
-    padding-top:50px ;
-    padding-bottom: 50px;
-    width: 535px;
-    height: 635px;
-    background-color: var(--lightBlue);
-    border-radius: 20px 20px 20px 40px;
-    color: white;
-}
-
-.loginInput{
-    border-top: 0;
-    border-right: 0;
-    border-left: 0;
-    border-bottom: 1px solid var(--lightGrey2);
-    background-color: var(--lightGrey);
-    padding: 10px;
-    padding-bottom: 8px;
-    width: 300px;
-    margin-bottom: 20px;
+.loginInput {
+  border-top: 0;
+  border-right: 0;
+  border-left: 0;
+  border-bottom: 1px solid var(--lightGrey2);
+  background-color: var(--lightGrey);
+  padding: 10px;
+  padding-bottom: 8px;
+  width: 300px;
+  margin-bottom: 20px;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import StudentNav from "../../../components/navbar/student/student_navbar";
+import StudentNav from "../../../global/components/navbar/student/student_navbar";
 
 const HomePage = ()=>{
 

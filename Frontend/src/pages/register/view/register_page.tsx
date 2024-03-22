@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-import "./login_css.css";
-
-import { Link } from "react-router-dom";
-import { handleChange } from "../../../global/controller/handleInput_change";
-import StudentNav from "../../../global/components/navbar/student/student_navbar";
+import { useState } from "react";
 import BlueButton from "../../../global/components/button/blue_button/blue_button";
 import Banner from "../../../global/components/loginRegister/banner/banner";
+import StudentNav from "../../../global/components/navbar/student/student_navbar";
+import { handleChange } from "../../../global/controller/handleInput_change";
+import { Link } from "react-router-dom";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
 
@@ -48,4 +46,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
