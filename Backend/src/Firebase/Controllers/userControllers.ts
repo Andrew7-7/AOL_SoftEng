@@ -1,11 +1,18 @@
-import { collection, getDocs, addDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  query,
+  where,
+} from "firebase/firestore";
 import { db } from "../Config/config";
 import { encrypt } from "../../others/encrypt";
 import { Request, Response } from "express";
 
 interface User {
   id: string;
-  [key: string]: any; 
+  [key: string]: any;
 }
 
 const userCollection = collection(db, "users");
@@ -50,11 +57,19 @@ export class UserControllers {
   // Register User
   static async registerUser(req: Request, res: Response) {
     try {
-      let { email, username, password, role } = req.body;
+
+      let { username, email, password, role } = req.body;
+
       try {
         password = await encrypt.hashPass(password);
       } catch (error) {
         console.log(error);
+      }
+
+      const q = query(userCollection, where("email", "==", email));
+      const existingUser = await getDocs(q);
+      if (!existingUser.empty) {
+        return res.status(400).json({ message: "Email already exists" });
       }
 
       await addDoc(userCollection, {

@@ -6,6 +6,6 @@ const userRoutes = Router();
 
 userRoutes.get("/getUsers", extraAuthorization, UserControllers.getUser);
 
-userRoutes.post("/addUser", extraAuthorization, UserControllers.registerUser);
+userRoutes.post("/register", extraAuthorization, UserControllers.registerUser);
 
 export { userRoutes };

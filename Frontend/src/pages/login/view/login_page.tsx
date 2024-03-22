@@ -38,7 +38,7 @@ const LoginPage = () => {
               clickFunction={() => console.log(password)}
             />
             <p>
-              Don't have any account yet? <Link to="/">Register Now</Link>
+              Don't have any account yet? <Link to="/register">Register Now!</Link>
             </p>
           </div>
           <Banner />

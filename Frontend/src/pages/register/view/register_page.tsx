@@ -3,21 +3,32 @@ import BlueButton from "../../../global/components/button/blue_button/blue_butto
 import Banner from "../../../global/components/loginRegister/banner/banner";
 import StudentNav from "../../../global/components/navbar/student/student_navbar";
 import { handleChange } from "../../../global/controller/handleInput_change";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import "./register_css.css";
+import handleRegister from "../controller/register_controller";
 const RegisterPage = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
-
+  const [conPassword, setConPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   return (
     <>
       <StudentNav />
       <div className="Outer">
         <div className="divContainer">
+          <Banner />
           <div className="leftDiv">
-            <p>Login</p>
+            <p>Register</p>
             <p>Welcome to StepCode</p>
             <div style={{ display: "flex", flexDirection: "column" }}>
+              <input
+                className="loginInput"
+                type="text"
+                placeholder="Username"
+                onChange={(event) => handleChange(event, setUsername)}
+              ></input>
               <input
                 className="loginInput"
                 type="text"
@@ -30,16 +41,31 @@ const RegisterPage = () => {
                 placeholder="Password"
                 onChange={(event) => handleChange(event, setPass)}
               ></input>
+              <input
+                className="loginInput"
+                type="text"
+                placeholder="Confirm Password"
+                onChange={(event) => handleChange(event, setConPassword)}
+              ></input>
             </div>
+            <p className="error">{error}</p>
             <BlueButton
-              text={"Sign In"}
-              clickFunction={() => console.log(password)}
+              text={"Register"}
+              clickFunction={() =>
+                handleRegister(
+                  username,
+                  email,
+                  password,
+                  conPassword,
+                  setError,
+                  navigate
+                )
+              }
             />
             <p>
-              Don't have any account yet? <Link to="/">Register Now</Link>
+              Already have an account? <Link to="/login">Login Now!</Link>
             </p>
           </div>
-          <Banner />
         </div>
       </div>
     </>
