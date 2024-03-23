@@ -11,4 +11,8 @@ userRoutes.post("/register", extraAuthorization, UserControllers.registerUser);
 
 userRoutes.post("/login", extraAuthorization, UserControllers.loginUser);
 
+userRoutes.post("/verifyAccToken",extraAuthorization, UserControllers.verifyAccToken);
+
+userRoutes.post("/verifyRefreshToken",extraAuthorization, UserControllers.verifyRefreshToken);
+
 export { userRoutes };
