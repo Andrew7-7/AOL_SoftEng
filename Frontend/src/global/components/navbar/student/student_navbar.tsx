@@ -3,6 +3,7 @@ import "./studentNav_css.css";
 import { Link } from "react-router-dom";
 
 const StudentNav = () => {
+  const user = JSON.parse(window.localStorage.getItem("user") || "{}");
   return (
     <div className="navContainer">
       <Link to={"/"} className="leftNav">
@@ -10,7 +11,11 @@ const StudentNav = () => {
         <p>CODE</p>
       </Link>
       <div className="rightNav">
-        <Link to={"/login"}>Sign In</Link>
+        {user.username ? (
+          <Link to={"/profile"}>{user.username}</Link>
+        ) : (
+          <Link to={"/login"}>Sign In</Link>
+        )}
       </div>
     </div>
   );
