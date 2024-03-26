@@ -91,6 +91,10 @@ export class UserControllers {
         userData = { ...doc.data() };
       });
 
+      if(userData.role){
+        return res.status(200).json({userData})
+      }
+
       // Cek Password
       const passwordMatch = await encrypt.comparePass(
         password,
