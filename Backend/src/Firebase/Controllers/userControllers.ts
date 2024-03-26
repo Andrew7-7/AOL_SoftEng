@@ -122,6 +122,7 @@ export class UserControllers {
         refreshToken,
       });
 
+      
       res.status(200).json({ accessToken, userData });
     } catch (error) {
       res.status(500).json(error);

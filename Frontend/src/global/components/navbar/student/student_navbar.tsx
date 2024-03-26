@@ -12,7 +12,7 @@ const StudentNav = () => {
       </Link>
       <div className="rightNav">
         {user.username ? (
-          <p>{user.username}</p>
+          <Link to={"/profile"}>{user.username}</Link>
         ) : (
           <Link to={"/login"}>Sign In</Link>
         )}

@@ -9,6 +9,8 @@ import LoginPage from "./pages/login/view/login_page";
 import RegisterPage from "./pages/register/view/register_page";
 import AlreadyLoggedIn from "./middleware/alreadyLoggedIn";
 import VerifyToken from "./middleware/verifyToken";
+import ProfilePage from "./pages/profile/view/profile_page";
+import NeedLogin from "./middleware/NeedLogin";
 function App() {
   return (
     <>
@@ -21,6 +23,11 @@ function App() {
           <Route element={<AlreadyLoggedIn />}>
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/register" element={<RegisterPage />}></Route>
+          </Route>
+
+          {/* Butuh Login */}
+          <Route element={<NeedLogin />}>
+            <Route path="/profile" element={<ProfilePage />}></Route>
           </Route>
         </Route>
       </Routes>
