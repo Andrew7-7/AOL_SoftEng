@@ -28,7 +28,7 @@ const VerifyToken = () => {
               },
             }
           );
-          console.log(response.data.user);
+      
         } catch (error) {
           // kalo Access Token sudah expired (Cek Refresh Token)
           console.log(error);
@@ -45,7 +45,7 @@ const VerifyToken = () => {
                 },
               }
             );
-            console.log(response.data.accessToken);
+
             window.localStorage.setItem("accToken",response.data.accessToken);
 
           } catch (error) {

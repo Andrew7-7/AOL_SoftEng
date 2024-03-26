@@ -25,10 +25,15 @@ const handleLogin = async (
     );
 
     if (res.status === 200) {
-      console.log(JSON.stringify(res.data));
-      window.localStorage.setItem("user", JSON.stringify(res.data.userData));
-      window.localStorage.setItem("accToken", res.data.accessToken);
-      navigate("/");
+      const isBanned = JSON.stringify(res.data.userData.isBanned);
+      console.log(isBanned);
+      if (isBanned === "true") {
+        navigate("/banned");
+      } else {
+        window.localStorage.setItem("user", JSON.stringify(res.data.userData));
+        window.localStorage.setItem("accToken", res.data.accessToken);
+        navigate("/");
+      }
     }
   } catch (err: any) {
     if (err.response && err.response.status === 400) {

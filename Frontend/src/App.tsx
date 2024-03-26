@@ -10,11 +10,18 @@ import RegisterPage from "./pages/register/view/register_page";
 import AlreadyLoggedIn from "./middleware/alreadyLoggedIn";
 import VerifyToken from "./middleware/verifyToken";
 import ProfilePage from "./pages/profile/view/profile_page";
-import NeedLogin from "./middleware/NeedLogin";
+import NeedLogin from "./middleware/needLogin";
+import CheckRole from "./middleware/checkRole";
+import TutorDummy from "./pages/tutor/dummy/tutorDummy";
+import AdminDummy from "./pages/admin/dummy/adminDummy";
+import IsBanned from "./pages/error/isBanned/isBanned";
 function App() {
   return (
     <>
       <Routes>
+        {/* Is Banned */}
+        <Route path="/banned" element={<IsBanned />}></Route>
+
         {/* Verify Token */}
         <Route element={<VerifyToken />}>
           <Route path="/" element={<HomePage />}></Route>
@@ -27,7 +34,20 @@ function App() {
 
           {/* Butuh Login */}
           <Route element={<NeedLogin />}>
-            <Route path="/profile" element={<ProfilePage />}></Route>
+            {/* Student Only Pages */}
+            <Route element={<CheckRole role={"student"} />}>
+              <Route path="/profile" element={<ProfilePage />}></Route>
+            </Route>
+
+            {/* Tutor Only Pages */}
+            <Route element={<CheckRole role={"tutor"} />}>
+              <Route path="/tutorDummy" element={<TutorDummy />}></Route>
+            </Route>
+
+            {/* Admin Only Pages */}
+            <Route element={<CheckRole role={"admin"} />}>
+              <Route path="/adminDummy" element={<AdminDummy />}></Route>
+            </Route>
           </Route>
         </Route>
       </Routes>
