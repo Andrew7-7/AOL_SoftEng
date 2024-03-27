@@ -9,6 +9,8 @@ const handleRegister = (
 ) => {
   const fetchRegister = async () => {
     const role = "student";
+    const isBanned = false;
+    const education = "";
     const extraAuth =
       "aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k";
 
@@ -20,7 +22,7 @@ const handleRegister = (
     try {
       const res = await axios.post(
         "http://localhost:3002/user/register",
-        { username, email, password, role },
+        { username, email, password, role, isBanned, education },
         {
           headers: {
             auth: `Bearer ${extraAuth}`,
