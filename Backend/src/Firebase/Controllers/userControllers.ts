@@ -136,7 +136,7 @@ export class UserControllers {
   // Register User
   static async registerUser(req: Request, res: Response) {
     try {
-      let { username, email, password, role } = req.body;
+      let { username, email, password, role, isBanned, education } = req.body;
 
       // Hash Password
       try {
@@ -158,6 +158,8 @@ export class UserControllers {
         username,
         password,
         role,
+        isBanned,
+        education
       });
 
       res.status(200).json({ message: "User added successfully" });
