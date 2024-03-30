@@ -4,8 +4,17 @@ import { Router } from "express";
 
 const chatRoutes = Router();
 
-chatRoutes.get("/getChat", extraAuthorization, chatControllers.getChatRoom);
+chatRoutes.get(
+  "/getChat",
+  extraAuthorization,
+  chatControllers.getChatRoom,
+  chatControllers.getMessages
+);
 
-chatRoutes.get("/chatRoom/:roomID/Messages", extraAuthorization, chatControllers.getMessages);
+chatRoutes.get(
+  "/chatRoom/:roomID/Messages",
+  extraAuthorization,
+  chatControllers.getMessages
+);
 
 export { chatRoutes };
