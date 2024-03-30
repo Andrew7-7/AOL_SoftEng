@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, doc, query, where } from "firebase/firestore";
+import { collection, getDocs, addDoc, doc, query, where, Query, QuerySnapshot } from "firebase/firestore";
 import { db } from "../Config/config";
 import { Request, Response } from "express";
 
@@ -13,21 +13,28 @@ export class chatControllers {
     //Read
     static async getChatRoom(req: Request, res: Response) {
         try {
-            
-            const {email} = req.body
-
-            const chatRoom = await getDocs(chatRoomCollection);
-            const chat = chatRoom.docs.map((doc) => ({
+            const email1 = "andrew";
+            const email2 = "charles";
+            const q = query(chatRoomCollection, where("email1", "==", email1), where("email2", "==", email2));
+            const querySnapshot: QuerySnapshot = await getDocs(q);
+            const chat = querySnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
             }));
-            
-            res.status(200).json({ chatRooms: chat });
+
+            if (chat.length === 0) {
+                return res.status(404).json({ error: 'Chat room not found' });
+            }
+            const chatRoomId = chat[0].id;
+
+            res.redirect(`/chatRoom/${chatRoomId}/Messages`);
+
         } catch (error) {
-            console.log('error log: ', error);
-            res.status(500).json({ error: 'failed to fetch your chat' })
+            console.error('Error fetching chat room:', error);
+            res.status(500).json({ error: 'Failed to fetch chat room' });
         }
     }
+
 
     static async getMessages(req: Request, res: Response) {
         try {
