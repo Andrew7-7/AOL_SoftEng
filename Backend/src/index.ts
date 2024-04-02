@@ -25,6 +25,7 @@ app.use("/user", userRoutes);
 
 app.use("/chat", chatRoutes);
 const server = http.createServer(app);
+app.use('/api', chatRoutes);
 
 server.listen(port, () => {
   console.log("hai berjalan di " + port);

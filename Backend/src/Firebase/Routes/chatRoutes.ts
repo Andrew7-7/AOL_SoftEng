@@ -4,7 +4,7 @@ import { Router } from "express";
 
 const chatRoutes = Router();
 
-chatRoutes.get(
+chatRoutes.post(
   "/getChat",
   extraAuthorization,
   chatControllers.getChatRoom,
@@ -16,5 +16,7 @@ chatRoutes.get(
   extraAuthorization,
   chatControllers.getMessages
 );
+
+chatRoutes.post("/postMessage", extraAuthorization, chatControllers.sendMessage);
 
 export { chatRoutes };
