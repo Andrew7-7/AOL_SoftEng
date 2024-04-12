@@ -7,8 +7,7 @@ const chatRoutes = Router();
 chatRoutes.post(
   "/getChat",
   extraAuthorization,
-  chatControllers.getChatRoom,
-  chatControllers.getMessages
+  chatControllers.getChatRoom
 );
 
 chatRoutes.get(

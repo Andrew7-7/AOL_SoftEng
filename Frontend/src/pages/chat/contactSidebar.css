@@ -18,6 +18,7 @@
 .sidebar ul li {
     padding: 8px 0;
     cursor: pointer;
+    color: #ffffff;
 }
 
 .sidebar ul li:hover {

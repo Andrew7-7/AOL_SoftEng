@@ -19,35 +19,41 @@ const { auth } = require("firebase/auth");
 export class chatControllers {
   //chat
   //Read
-  static async getChatRoom(req: Request, res: Response, next: NextFunction) {
+
+  static async getChatRoom(req: Request, res: Response) {
     try {
-      // const email1 = "andrew";
-      // const email2 = "charles";
-      const {email1, email2} = req.body;
-      const q = query(
-        chatRoomCollection,
-        where("email1", "==", email1),
-        where("email2", "==", email2)
-      );
-      const querySnapshot: QuerySnapshot = await getDocs(q);
-      const chat = querySnapshot.docs.map((doc) => ({
+      const { email } = req.body;
+
+      const q1 = query(chatRoomCollection, where("email1", "==", email));
+      const querySnapshot1: QuerySnapshot = await getDocs(q1);
+      const chat1 = querySnapshot1.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
 
-      if (chat.length === 0) {
-        return res.status(404).json({ error: "Chat room not found" });
+      const q2 = query(chatRoomCollection, where("email2", "==", email));
+      const querySnapshot2: QuerySnapshot = await getDocs(q2);
+      const chat2 = querySnapshot2.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+
+      const chat = [...chat1, ...chat2];
+
+      if (chat1.length === 0 && chat2.length === 0) {
+        return res.status(404).json({ error: "No chat rooms found for the provided email" });
       }
+
       const chatRoomId = chat[0].id;
 
       req.params.roomID = chatRoomId;
-
-      next();
+      res.status(200).json({ chat });
     } catch (error) {
       console.error("Error fetching chat room:", error);
       res.status(500).json({ error: "Failed to fetch chat room" });
     }
   }
+
 
   static async getMessages(req: Request, res: Response) {
     try {
