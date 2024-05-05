@@ -1,0 +1,156 @@
+.Container {
+  display: flex;
+  background-image: url("../../../global/assets/backgroundWA.png");
+}
+
+.leftDivProfile {
+  display: flex;
+  flex-direction: column;
+  background-color: #f29566;
+  color: white;
+  justify-content: space-around;
+  height: 92vh;
+  width: 18vw;
+  align-items: center;
+}
+
+.welcomeTitle {
+  font-size: 1.8vw;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.signOutButton {
+  padding: 10px;
+  background-color: white;
+  border-color: white;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1vw;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.rightDivProfile {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.profileTitle {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.profileImageContainer {
+  width: 140px;
+  height: 150px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  border: 1px solid black;
+}
+
+.forPencilDiv {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+.profileImage {
+  width: 100%;
+}
+
+.pencilImage {
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 25px;
+  border: 2px solid white;
+  background-color: white;
+  padding: 5px;
+}
+
+.profileUpper {
+  display: flex;
+}
+
+.profileIntro {
+  margin-left: 4vw;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  height: 140px;
+  justify-content: space-evenly;
+  color: #565656;
+}
+
+.profileUsername {
+  font-size: 25px;
+  font-weight: 700;
+  color: black;
+}
+
+.profileMiddle {
+  margin-top: 8vh;
+  display: flex;
+}
+
+.socialMedia {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.subTitle {
+  font-size: 1.3vw;
+  font-weight: 700;
+  margin-bottom: 2vh;
+}
+
+.education {
+  margin-left: 35vw;
+}
+
+.profileBottom {
+  margin-top: 8vh;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.description {
+  width: 70vw;
+  height: 26.4vh;
+  padding: 2vw;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  word-wrap: break-word;
+  text-align: start;
+  line-height: 1.5;
+  overflow-y: auto;
+}
+
+.editProfileButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f17c41;
+  border-radius: 100%;
+  border-color: transparent;
+  padding: 8px;
+  margin-left: 1vw;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.helloImage{
+  width: 9vw;
+}

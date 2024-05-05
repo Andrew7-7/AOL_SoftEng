@@ -26,7 +26,6 @@ const handleLogin = async (
 
     if (res.status === 200) {
       const isBanned = JSON.stringify(res.data.userData.isBanned);
-      console.log(isBanned);
       if (isBanned === "true") {
         navigate("/banned");
       } else {

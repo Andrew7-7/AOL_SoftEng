@@ -91,9 +91,9 @@ export class UserControllers {
         userData = { ...doc.data() };
       });
 
-      if(userData.role){
-        return res.status(200).json({userData})
-      }
+      // if (userData.role) {
+      //   return res.status(200).json({ userData });
+      // }
 
       // Cek Password
       const passwordMatch = await encrypt.comparePass(
@@ -126,7 +126,6 @@ export class UserControllers {
         refreshToken,
       });
 
-      
       res.status(200).json({ accessToken, userData });
     } catch (error) {
       res.status(500).json(error);
@@ -159,7 +158,7 @@ export class UserControllers {
         password,
         role,
         isBanned,
-        education
+        education,
       });
 
       res.status(200).json({ message: "User added successfully" });
