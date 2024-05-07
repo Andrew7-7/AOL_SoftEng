@@ -151,6 +151,84 @@
   cursor: pointer;
 }
 
-.helloImage{
+.helloImage {
   width: 9vw;
+}
+
+.blurBackground {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+}
+
+.editPopup {
+  width: 40vw;
+  height: 60vh;
+  background-color: white;
+  border-radius: 20px;
+  padding: 2vw;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  position: relative;
+}
+
+.exitButton {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+  cursor: pointer;
+}
+
+.saveButton,
+.cancelButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+  background-color: #f17c41;
+  color: white;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.cancelButton {
+  color: white;
+  background-color: black;
+}
+
+.saveDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 7vh;
+  gap: 1vw;
+}
+
+.inputComponent {
+  display: flex;
+  width: 30vw;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 2vw;
+  margin-top: 2vh;
+}
+
+.inputTitle {
+  font-weight: 600;
+}
+
+.inputBox {
+  width: 20vw;
+  height: 4vh;
+  font-size: 0.9vw;
 }

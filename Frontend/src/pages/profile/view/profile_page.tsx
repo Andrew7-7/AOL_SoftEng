@@ -9,26 +9,148 @@ import igImage from "../../../global/assets/instagram.png";
 import facebookImage from "../../../global/assets/facebook.png";
 import twitterImage from "../../../global/assets/twitter.png";
 import pencilImage from "../../../global/assets/Vector.png";
-import { useRef, useState } from "react";
+import loadingSvg from "../../../global/assets/Spin@1x-1.1s-200px-200px.svg";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { log } from "console";
+import axios from "axios";
 
 const ProfilePage = () => {
   const user = JSON.parse(window.localStorage.getItem("user") || "{}");
+  const student = JSON.parse(window.localStorage.getItem("student") || "{}");
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  // const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState(user.username);
+  const [instagram, setInstagram] = useState(student.instagram);
+  const [facebook, setFacebook] = useState(student.facebook);
+  const [linkedin, setLinkedin] = useState(student.linkedin);
+  const [twitter, setTwitter] = useState(student.twitter);
+  const [description, setDescription] = useState(student.aboutMe);
+  const [downloadURL, setDownloadURL] = useState(student.profileURL);
+  const [loading, setLoading] = useState(false);
+  const [edit, setEdit] = useState(false);
+  const extraAuth =
+    "aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k";
+
+  const handleEditButton = () => {
+    setEdit(!edit);
+  };
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files && files.length > 0) {
       setSelectedFile(files[0]);
       // setLoading(true);
+      setDownloadURL(loadingSvg);
     }
   };
+
+  useEffect(() => {
+    const handleUpload = async () => {
+      if (!selectedFile) return;
+
+      const formData = new FormData();
+      formData.append("email", user.email);
+      formData.append("image", selectedFile);
+
+      try {
+        const response = await axios.post(
+          "http://localhost:3002/user/uploadProfilePicture",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              auth: `Bearer ${extraAuth}`,
+            },
+          }
+        );
+        setDownloadURL(response.data.downloadURLs);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    handleUpload();
+  }, [selectedFile]);
 
   const buttonRef = useRef<HTMLInputElement>(null);
   const handleCLickPencil = () => {
     if (buttonRef.current) {
       buttonRef.current.click();
     }
+  };
+
+  const editPopup = () => {
+    const handleClickSave = async () => {
+      try {
+        const res = await axios.post(
+          "http://localhost:3002/user/updateStudent",
+          {
+            aboutMe: description,
+            facebook,
+            instagram,
+            linkedin,
+            twitter,
+            email: user.email,
+          },
+          {
+            headers: {
+              auth: `Bearer ${extraAuth}`,
+            },
+          }
+        );
+        if (res.status === 200) {
+          console.log("hai");
+          handleEditButton();
+        }
+      } catch (err: any) {
+        console.log(err);
+      }
+    };
+    return (
+      <div className="blurBackground">
+        <div className="editPopup">
+          <InputComponent
+            title="Username"
+            setFunction={setUsername}
+            val={username}
+          />
+          <InputComponent
+            title="Instagram"
+            setFunction={setInstagram}
+            val={instagram}
+          />
+          <InputComponent
+            title="Facebook"
+            setFunction={setFacebook}
+            val={facebook}
+          />
+          <InputComponent
+            title="Twitter"
+            setFunction={setTwitter}
+            val={twitter}
+          />
+          <InputComponent
+            title="LinkedIn"
+            setFunction={setLinkedin}
+            val={linkedin}
+          />
+          <InputComponent
+            title="About Me"
+            setFunction={setDescription}
+            val={description}
+          />
+          <div className="saveDiv">
+            <button className="cancelButton" onClick={handleEditButton}>
+              Cancel
+            </button>
+            <button className="saveButton" onClick={handleClickSave}>
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   };
   return (
     <>
@@ -39,6 +161,7 @@ const ProfilePage = () => {
         type="file"
         style={{ visibility: "hidden", position: "fixed" }}
       ></input>
+
       <div className="Container">
         <div className="leftDivProfile">
           <p className="welcomeTitle">Welcome back!</p>
@@ -52,7 +175,7 @@ const ProfilePage = () => {
           <div className="profileUpper">
             <div className="forPencilDiv">
               <div className="profileImageContainer">
-                <img className="profileImage" src={helloImage}></img>
+                <img className="profileImage" src={downloadURL}></img>
               </div>
               <img
                 className="pencilImage"
@@ -104,18 +227,40 @@ const ProfilePage = () => {
           <div className="profileBottom">
             <p className="subTitle">About Me</p>
             <div style={{ display: "flex", alignItems: "end" }}>
-              <div className="description">
-                Hi, I’m very curious about all of the programming languages out
-                there.
-              </div>
-              <button className="editProfileButton">
+              <div className="description">{description}</div>
+              <button onClick={handleEditButton} className="editProfileButton">
                 <img src={pencilImage} width={"20px"}></img>
               </button>
             </div>
           </div>
         </div>
       </div>
+      {edit == true ? editPopup() : null}
     </>
+  );
+};
+
+const InputComponent = ({
+  setFunction,
+  val,
+  title,
+}: {
+  setFunction: Function;
+  val: string;
+  title: string;
+}) => {
+  return (
+    <div className="inputComponent">
+      <p className="inputTitle">{title}</p>
+      <input
+        className="inputBox"
+        type="text"
+        value={val}
+        onChange={(event) => {
+          setFunction(event.target.value);
+        }}
+      />
+    </div>
   );
 };
 

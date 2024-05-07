@@ -23,12 +23,12 @@ const handleLogin = async (
         },
       }
     );
-
     if (res.status === 200) {
       const isBanned = JSON.stringify(res.data.userData.isBanned);
       if (isBanned === "true") {
         navigate("/banned");
       } else {
+        window.localStorage.setItem("student", JSON.stringify(res.data.studentProfile));
         window.localStorage.setItem("user", JSON.stringify(res.data.userData));
         window.localStorage.setItem("accToken", res.data.accessToken);
         navigate("/");
