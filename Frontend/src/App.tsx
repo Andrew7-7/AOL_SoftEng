@@ -15,6 +15,8 @@ import CheckRole from "./middleware/checkRole";
 import TutorDummy from "./pages/tutor/dummy/tutorDummy";
 import AdminDummy from "./pages/admin/dummy/adminDummy";
 import IsBanned from "./pages/error/isBanned/isBanned";
+import ActiveCourse from "./pages/activecourse/view/activecourse_page"
+
 function App() {
   return (
     <>
@@ -37,6 +39,7 @@ function App() {
             {/* Student Only Pages */}
             <Route element={<CheckRole role={"student"} />}>
               <Route path="/profile" element={<ProfilePage />}></Route>
+              <Route path="/activecourse" element={<ActiveCourse />}></Route>
             </Route>
 
             {/* Tutor Only Pages */}
