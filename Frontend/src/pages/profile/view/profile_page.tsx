@@ -87,6 +87,7 @@ const ProfilePage = () => {
         const res = await axios.post(
           "http://localhost:3002/user/updateStudent",
           {
+            username,
             aboutMe: description,
             facebook,
             instagram,
@@ -105,6 +106,11 @@ const ProfilePage = () => {
           window.localStorage.setItem(
             "student",
             JSON.stringify(res.data.studentProfile)
+          );
+          window.localStorage.removeItem("user");
+          window.localStorage.setItem(
+            "user",
+            JSON.stringify(res.data.updatedUser)
           );
           handleEditButton();
         }
@@ -190,7 +196,7 @@ const ProfilePage = () => {
               ></img>
             </div>
             <div className="profileIntro">
-              <p className="profileUsername">{user.username}</p>
+              <p className="profileUsername">{username}</p>
               <p>{user.role}</p>
               <div style={{ display: "flex" }}>
                 <img
