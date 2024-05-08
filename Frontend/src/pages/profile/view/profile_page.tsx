@@ -9,6 +9,7 @@ import igImage from "../../../global/assets/instagram.png";
 import facebookImage from "../../../global/assets/facebook.png";
 import twitterImage from "../../../global/assets/twitter.png";
 import pencilImage from "../../../global/assets/Vector.png";
+import linkedinImage from "../../../global/assets/linkedin.png";
 import loadingSvg from "../../../global/assets/Spin@1x-1.1s-200px-200px.svg";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { log } from "console";
@@ -100,7 +101,11 @@ const ProfilePage = () => {
           }
         );
         if (res.status === 200) {
-          console.log("hai");
+          window.localStorage.removeItem("student");
+          window.localStorage.setItem(
+            "student",
+            JSON.stringify(res.data.studentProfile)
+          );
           handleEditButton();
         }
       } catch (err: any) {
@@ -202,21 +207,22 @@ const ProfilePage = () => {
             <div className="socialMedia">
               <p className="subTitle">Social Media</p>
               <div>
-                <img
-                  src={igImage}
-                  width={"30px"}
-                  style={{ marginRight: "10px" }}
-                ></img>
-                <img
-                  src={facebookImage}
-                  width={"30px"}
-                  style={{ marginRight: "10px" }}
-                ></img>
-                <img
-                  src={twitterImage}
-                  width={"30px"}
-                  style={{ marginRight: "10px" }}
-                ></img>
+                <SocialMedia
+                  link={`https://www.instagram.com/${instagram}`}
+                  image={igImage}
+                />
+                <SocialMedia
+                  link={`https://www.facebook.com/${facebook}`}
+                  image={facebookImage}
+                />
+                <SocialMedia
+                  link={`https://www.twitter.com/${twitter}`}
+                  image={twitterImage}
+                />
+                <SocialMedia
+                  link={`https://www.linkedin.com/${linkedin}`}
+                  image={linkedinImage}
+                />
               </div>
             </div>
             <div className="education">
@@ -237,6 +243,14 @@ const ProfilePage = () => {
       </div>
       {edit == true ? editPopup() : null}
     </>
+  );
+};
+
+const SocialMedia = ({ image, link }: { image: string; link: string }) => {
+  return (
+    <a href={link} target="_blank">
+      <img src={image} width={"30px"} style={{ marginRight: "10px" }}></img>
+    </a>
   );
 };
 

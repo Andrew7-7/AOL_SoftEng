@@ -7,6 +7,7 @@ import {
   where,
   deleteDoc,
   updateDoc,
+  getDoc,
 } from "firebase/firestore";
 import { storages, db } from "../Config/config";
 import { encrypt } from "../../others/encrypt";
@@ -356,18 +357,16 @@ export class UserControllers {
         (error) => {},
         async () => {
           let downloadURLs = "";
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          await getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             // res.json({ success: true, downloadURL });
             downloadURLs = downloadURL;
           });
-
           const backgroundRef = collection(db, "Student");
           const q = query(backgroundRef, where("email", "==", email));
           const querySnapshot = await getDocs(q);
 
           if (!querySnapshot.empty) {
             const doc = querySnapshot.docs[0];
-            console.log(doc);
             const docRef = doc.ref;
             await updateDoc(docRef, {
               profileURL: downloadURLs,
@@ -400,7 +399,9 @@ export class UserControllers {
           linkedin: linkedin,
           twitter: twitter,
         });
-        res.status(200).json({ success: true });
+        const updatedDocSnapshot = await getDoc(docRef);
+        const updatedData = updatedDocSnapshot.data();
+        res.status(200).json({ studentProfile: updatedData });
       } else {
         console.log("No document found with the given email.");
       }
