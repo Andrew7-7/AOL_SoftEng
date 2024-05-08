@@ -1,5 +1,4 @@
 import React from "react";
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -11,7 +10,6 @@ import { Ribbon } from "react-ribbons";
 
 
 const titleFontSize = "1rem";
-const subtitleFontSize = "0.875rem";
 const family = "'Sen', sans-serif";
 
 const StyledCard = styled(Card)(() => ({
@@ -127,7 +125,20 @@ const newsInfoStyles = ({ palette }: Theme) => ({
 
 
 
-export function CourseCard() {
+const CourseCard = ({
+  image,
+  status,
+  title,
+  numSessions,
+  numChapters,
+}: {
+  image: string;
+  status: string;
+  title: string;
+  numSessions: string;
+  numChapters: string;
+}) => {
+
   return (
     <Grid container spacing={10}>
       <Grid item>
@@ -140,36 +151,34 @@ export function CourseCard() {
             display={"flex"}
           >
             <StyledCardMedia
-              image={
-                "https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"
-              }
+              image={image}
             />
             <Ribbon
               side="right"
               type="edge"
               size="normal"
-              backgroundColor="#cc0000"
+              backgroundColor="green"
               color="#fff"
               fontFamily="sans"
               withStripes={false}
             >
-              ACTIVE
+              {status}
             </Ribbon>
             <StyledDivContent>
 
               <TypographyTitle
                 variant={"subtitle1"}>
-                Introduction to Programming
+                {title}
               </TypographyTitle>
             </StyledDivContent>
           </BoxMain>
-          <RowAuthor sx={{ background: "grey.900"}}>
-            <Info useStyles={newsInfoStyles} sx={{ alignSelf: "center"}} >
-              <InfoSubtitle>10</InfoSubtitle>
+          <RowAuthor sx={{ background: "grey.900" }}>
+            <Info useStyles={newsInfoStyles} sx={{ alignSelf: "center" }} >
+              <InfoSubtitle>{numSessions}</InfoSubtitle>
               <InfoTitle>SESSIONS</InfoTitle>
             </Info>
             <Info useStyles={newsInfoStyles}>
-              <InfoSubtitle>8</InfoSubtitle>
+              <InfoSubtitle>{numChapters}</InfoSubtitle>
               <InfoTitle>CHAPTERS</InfoTitle>
             </Info>
           </RowAuthor>
@@ -177,4 +186,6 @@ export function CourseCard() {
       </Grid>
     </Grid>
   );
-}
+};
+
+export default CourseCard;

@@ -1,11 +1,109 @@
 import React from 'react'
 import StudentNav from '../../../global/components/navbar/student/student_navbar'
-import { CourseCard } from './components/card-news3'
+import CourseCard from './components/card-news3/CourseCard'
+import Grid from '@mui/material/Unstable_Grid2';
+
 function activecourse_page() {
   return (
     <>
-    <StudentNav/>
-    <CourseCard />
+      <StudentNav />
+
+      <Grid container spacing={3} justifyContent={"center"} marginTop={"100px"} marginBottom={"180px"}>
+        <Grid>
+          <CourseCard
+            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
+            status={"ACTIVE"}
+            title={"Introduction to Programming"}
+            numSessions={"8"}
+            numChapters={"10"}
+          />
+        </Grid>
+
+        <Grid>
+          <CourseCard
+            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
+            status={"ACTIVE"}
+            title={"Introduction to Programming"}
+            numSessions={"8"}
+            numChapters={"10"}
+          />
+        </Grid>
+
+        <Grid >
+          <CourseCard
+            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
+            status={"ACTIVE"}
+            title={"Introduction to Programming"}
+            numSessions={"8"}
+            numChapters={"10"}
+          />
+        </Grid>
+
+      </Grid>
+      <Grid container spacing={3} justifyContent={"center"} marginTop={"100px"} marginBottom={"180px"}>
+        <Grid>
+          <CourseCard
+            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
+            status={"ACTIVE"}
+            title={"Introduction to Programming"}
+            numSessions={"8"}
+            numChapters={"10"}
+          />
+        </Grid>
+
+        <Grid>
+          <CourseCard
+            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
+            status={"ACTIVE"}
+            title={"Introduction to Programming"}
+            numSessions={"8"}
+            numChapters={"10"}
+          />
+        </Grid>
+
+        <Grid >
+          <CourseCard
+            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
+            status={"ACTIVE"}
+            title={"Introduction to Programming"}
+            numSessions={"8"}
+            numChapters={"10"}
+          />
+        </Grid>
+
+      </Grid>
+      <Grid container spacing={3} justifyContent={"center"} marginTop={"100px"} marginBottom={"180px"}>
+        <Grid>
+          <CourseCard
+            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
+            status={"ACTIVE"}
+            title={"Introduction to Programming"}
+            numSessions={"8"}
+            numChapters={"10"}
+          />
+        </Grid>
+
+        <Grid>
+          <CourseCard
+            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
+            status={"ACTIVE"}
+            title={"Introduction to Programming"}
+            numSessions={"8"}
+            numChapters={"10"}
+          />
+        </Grid>
+
+        <Grid >
+          <CourseCard
+            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
+            status={"ACTIVE"}
+            title={"Introduction to Programming"}
+            numSessions={"8"}
+            numChapters={"10"}
+          />
+        </Grid>
+
+      </Grid>
     </>
 
   )
