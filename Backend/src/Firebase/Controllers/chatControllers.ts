@@ -59,18 +59,14 @@ export class chatControllers {
     try {
       const roomID = req.params.roomID;
       const messageCollection = collection(db, "ChatRoom", roomID, "Messages");
-      const unsubscribe = onSnapshot(messageCollection, (QuerySnapshot) => {
-        const messages = QuerySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
 
-        res.status(200).json({messages});
-      })
+      const querySnapshot = await getDocs(messageCollection);
+      const messages = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
 
-      setTimeout(() => {
-        unsubscribe();
-      }, 1 * 1000 * 60);
+      res.status(200).json({ messages });
     } catch (error) {
       console.error("Error fetching messages:", error);
       res.status(500).json({ error: "Failed to fetch messages" });

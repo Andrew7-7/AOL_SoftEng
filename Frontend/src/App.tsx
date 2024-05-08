@@ -15,10 +15,13 @@ import "./App.css";
 // import TutorDummy from "./pages/tutor/dummy/tutorDummy";
 // import AdminDummy from "./pages/admin/dummy/adminDummy";
 // import IsBanned from "./pages/error/isBanned/isBanned";
-import ContactSidebar from "./pages/chat/contactSidebar";
+// import ContactSidebar from "./pages/sidebar/contactSidebar";
+import ChatPage from "./pages/chat/chatPage";
+// import { Routes } from "react-router-dom";
 function App() {
   return (
-    <ContactSidebar />
+    // <ContactSidebar />
+    <ChatPage/>
   )
   // return (
   //   <>
