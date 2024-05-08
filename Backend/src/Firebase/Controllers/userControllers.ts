@@ -6,11 +6,14 @@ import {
   query,
   where,
   deleteDoc,
+  updateDoc,
+  getDoc,
 } from "firebase/firestore";
-import { db } from "../Config/config";
+import { storages, db } from "../Config/config";
 import { encrypt } from "../../others/encrypt";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 interface User {
   id: string;
   [key: string]: any;
@@ -34,6 +37,9 @@ const userCollection = collection(db, "users");
 
 // Collection Session
 const sessionCollection = collection(db, "session");
+
+// Collection Session
+const studentCollection = collection(db, "Student");
 
 export class UserControllers {
   // Testing get user and collection inside it
@@ -91,9 +97,9 @@ export class UserControllers {
         userData = { ...doc.data() };
       });
 
-      if(userData.role){
-        return res.status(200).json({userData})
-      }
+      // if (userData.role) {
+      //   return res.status(200).json({ userData });
+      // }
 
       // Cek Password
       const passwordMatch = await encrypt.comparePass(
@@ -126,8 +132,26 @@ export class UserControllers {
         refreshToken,
       });
 
-      
-      res.status(200).json({ accessToken, userData });
+      let studentProfile;
+      if (userData.role === "student") {
+        try {
+          const backgroundRef = collection(db, "Student");
+          const q = query(backgroundRef, where("email", "==", email));
+          const querySnapshot = await getDocs(q);
+          if (!querySnapshot.empty) {
+            const doc = querySnapshot.docs[0];
+            studentProfile = doc.data();
+          } else {
+            res
+              .status(404)
+              .json({ error: "No student profile found with the given email" });
+          }
+        } catch (error) {
+          res.status(500).json({ error: "Error retrieving student data" });
+        }
+      }
+
+      res.status(200).json({ accessToken, userData, studentProfile });
     } catch (error) {
       res.status(500).json(error);
     }
@@ -159,8 +183,30 @@ export class UserControllers {
         password,
         role,
         isBanned,
-        education
+        education,
       });
+
+      const aboutMe = "",
+        activeCourse: number[] = [],
+        facebook = "",
+        instagram = "",
+        linkedin = "",
+        profileURL = "",
+        twitter = "";
+
+      // Masukkin Student ke firebase
+      if (role === "student") {
+        await addDoc(studentCollection, {
+          aboutMe,
+          activeCourse,
+          email,
+          facebook,
+          instagram,
+          linkedin,
+          profileURL,
+          twitter,
+        });
+      }
 
       res.status(200).json({ message: "User added successfully" });
     } catch (error) {
@@ -272,6 +318,95 @@ export class UserControllers {
           message: "Internal Server Error",
         });
       }
+    }
+  }
+
+  static async uploadProfileImage(req: Request, res: Response) {
+    try {
+      const email = req.body.email;
+      const file = req.file;
+      const metadata = {
+        contentType: "image/jpeg",
+      };
+
+      const storageRef = ref(
+        storages,
+        "Profile/" + email + "/" + "profilePicture"
+      );
+      const uploadTask = uploadBytesResumable(
+        storageRef,
+        file.buffer,
+        metadata
+      );
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+          }
+        },
+        (error) => {},
+        async () => {
+          let downloadURLs = "";
+          await getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            // res.json({ success: true, downloadURL });
+            downloadURLs = downloadURL;
+          });
+          const backgroundRef = collection(db, "Student");
+          const q = query(backgroundRef, where("email", "==", email));
+          const querySnapshot = await getDocs(q);
+
+          if (!querySnapshot.empty) {
+            const doc = querySnapshot.docs[0];
+            const docRef = doc.ref;
+            await updateDoc(docRef, {
+              profileURL: downloadURLs,
+            });
+          } else {
+            console.log("No document found with the given email.");
+          }
+          res.json({ downloadURLs });
+        }
+      );
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      res.status(500).json({ success: false, error: "Error uploading file" });
+    }
+  }
+
+  static async updateStudent(req: Request, res: Response) {
+    const { aboutMe, facebook, instagram, linkedin, twitter, email } = req.body;
+    try {
+      const backgroundRef = collection(db, "Student");
+      const q = query(backgroundRef, where("email", "==", email));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        const doc = querySnapshot.docs[0];
+        const docRef = doc.ref;
+        await updateDoc(docRef, {
+          aboutMe: aboutMe,
+          facebook: facebook,
+          instagram: instagram,
+          linkedin: linkedin,
+          twitter: twitter,
+        });
+        const updatedDocSnapshot = await getDoc(docRef);
+        const updatedData = updatedDocSnapshot.data();
+        res.status(200).json({ studentProfile: updatedData });
+      } else {
+        console.log("No document found with the given email.");
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Error updating profile data" });
     }
   }
 }
