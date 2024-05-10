@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import StudentNav from '../../../global/components/navbar/student/student_navbar'
 import CourseCard from './components/card-news3/CourseCard'
 import Grid from '@mui/material/Unstable_Grid2';
+import useFetch from '../../../global/hooks/useFetch';
+
+
 
 function activecourse_page() {
+ const data = useFetch("http://localhost:3002/course/getCourses")
+//   fetch("http://localhost:3002/course/getCourses",{
+//   method: 'GET',
+//   headers:{
+//     'Content-Type': 'application/json'
+//   }
+// }).then(res=>{
+//   return res.json()
+// })
+// .then(data=>console.log(data))
+// .catch(error=>console.log('Error'))
+
   return (
     <>
       <StudentNav />
