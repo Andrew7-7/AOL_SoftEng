@@ -5,14 +5,15 @@ import http from "http";
 import cookieParser from "cookie-parser";
 import { userRoutes } from "./Firebase/Routes/userRoutes";
 import { tutorRoutes } from "./Firebase/Routes/tutorRoutes";
+import { chatRoutes } from "./Firebase/Routes/chatRoutes";
 
 const app = express();
 
 const port = 3002;
 
 const corsOptions = {
-	origin: true,
-	credentials: true,
+  origin: true,
+  credentials: true,
 };
 
 app.use(express.json());
@@ -24,8 +25,10 @@ app.use(cookieParser());
 app.use("/user", userRoutes);
 app.use("/tutor", tutorRoutes);
 
+app.use("/chat", chatRoutes);
 const server = http.createServer(app);
+app.use("/api", chatRoutes);
 
 server.listen(port, () => {
-	console.log("hai berjalan di " + port);
+  console.log("hai berjalan di " + port);
 });
