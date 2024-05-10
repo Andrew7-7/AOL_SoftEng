@@ -1,7 +1,7 @@
 import "./App.css";
-// import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-// import StudentNav from "../public/components/navbar/student/student_navbar";
+import StudentNav from "../public/components/navbar/student/student_navbar";
 
 // Pages
 import HomePage from "./pages/home/view/home_page";
@@ -16,6 +16,8 @@ import TutorDummy from "./pages/tutor/dummy/tutorDummy";
 import AdminDummy from "./pages/admin/dummy/adminDummy";
 import IsBanned from "./pages/error/isBanned/isBanned";
 import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
+import ActiveCourse from "./pages/activecourse/view/activecourse_page"
+
 function App() {
   return (
     <>
@@ -38,6 +40,7 @@ function App() {
             {/* Student Only Pages */}
             <Route element={<CheckRole role={"student"} />}>
               <Route path="/profile" element={<ProfilePage />}></Route>
+              <Route path="/activecourse" element={<ActiveCourse />}></Route>
             </Route>
 
             <Route element={<CheckRole role={"student"} />}>
