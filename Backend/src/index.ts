@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import http from "http";
 import cookieParser from "cookie-parser";
 import { userRoutes } from "./Firebase/Routes/userRoutes";
+import { tutorRoutes } from "./Firebase/Routes/tutorRoutes";
 import { chatRoutes } from "./Firebase/Routes/chatRoutes";
 
 const app = express();
@@ -22,10 +23,11 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use("/user", userRoutes);
+app.use("/tutor", tutorRoutes);
 
 app.use("/chat", chatRoutes);
 const server = http.createServer(app);
-app.use('/api', chatRoutes);
+app.use("/api", chatRoutes);
 
 server.listen(port, () => {
   console.log("hai berjalan di " + port);

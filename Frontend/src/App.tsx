@@ -17,12 +17,10 @@ import AdminDummy from "./pages/admin/dummy/adminDummy";
 import IsBanned from "./pages/error/isBanned/isBanned";
 import ContactSidebar from "./pages/sidebar/contactSidebar";
 import ChatPage from "./pages/chat/chatPage";
-// import { Routes } from "react-router-dom";
 function App() {
-  // return (
-  //   // <ContactSidebar />
-  //   <ChatPage/>
-  // )
+
+import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
+function App() {
   return (
     <>
       <Routes>
@@ -44,6 +42,7 @@ function App() {
             {/* Student Only Pages */}
             <Route element={<CheckRole role={"student"} />}>
               <Route path="/profile" element={<ProfilePage />}></Route>
+               <Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
             </Route>
 
             {/* Tutor Only Pages */}
