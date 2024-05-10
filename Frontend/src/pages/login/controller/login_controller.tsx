@@ -12,7 +12,6 @@ const handleLogin = async (
     setError("All fields must be filled");
     return;
   }
-
   try {
     const res = await axios.post(
       "http://localhost:3002/user/login",
@@ -28,7 +27,10 @@ const handleLogin = async (
       if (isBanned === "true") {
         navigate("/banned");
       } else {
-        window.localStorage.setItem("student", JSON.stringify(res.data.studentProfile));
+        window.localStorage.setItem(
+          "student",
+          JSON.stringify(res.data.studentProfile)
+        );
         window.localStorage.setItem("user", JSON.stringify(res.data.userData));
         window.localStorage.setItem("accToken", res.data.accessToken);
         navigate("/");
