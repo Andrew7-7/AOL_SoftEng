@@ -178,10 +178,8 @@ export class forumControllers{
         try {
             const { forumId } = req.params;
 
-            // Construct a reference to the forum document
             const forumDocRef = doc(db, "Forum", forumId);
 
-            // Delete the forum document
             await deleteDoc(forumDocRef);
 
             res.status(200).json({ message: 'Forum deleted successfully' });
