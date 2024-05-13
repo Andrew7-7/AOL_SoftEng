@@ -17,47 +17,47 @@ import AdminDummy from "./pages/admin/dummy/adminDummy";
 import IsBanned from "./pages/error/isBanned/isBanned";
 import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
 function App() {
-  return (
-    <>
-      <Routes>
-        {/* Is Banned */}
-        <Route path="/banned" element={<IsBanned />}></Route>
+	return (
+		<>
+			<Routes>
+				{/* Is Banned */}
+				<Route path="/banned" element={<IsBanned />}></Route>
 
-        {/* Verify Token */}
-        <Route element={<VerifyToken />}>
-          <Route path="/" element={<HomePage />}></Route>
+				{/* Verify Token */}
+				<Route element={<VerifyToken />}>
+					<Route path="/" element={<HomePage />}></Route>
 
-          {/* Kalau udah login gabisa login register lagi */}
-          <Route element={<AlreadyLoggedIn />}>
-            <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/register" element={<RegisterPage />}></Route>
-          </Route>
+					{/* Kalau udah login gabisa login register lagi */}
+					<Route element={<AlreadyLoggedIn />}>
+						<Route path="/login" element={<LoginPage />}></Route>
+						<Route path="/register" element={<RegisterPage />}></Route>
+					</Route>
 
-          {/* Butuh Login */}
-          <Route element={<NeedLogin />}>
-            {/* Student Only Pages */}
-            <Route element={<CheckRole role={"student"} />}>
-              <Route path="/profile" element={<ProfilePage />}></Route>
-            </Route>
+					{/* Butuh Login */}
+					<Route element={<NeedLogin />}>
+						{/* Student Only Pages */}
+						<Route element={<CheckRole role={"student"} />}>
+							<Route path="/profile" element={<ProfilePage />}></Route>
+						</Route>
 
-            <Route element={<CheckRole role={"student"} />}>
-              <Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
-            </Route>
+						<Route element={<CheckRole role={"student"} />}>
+							<Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
+						</Route>
 
-            {/* Tutor Only Pages */}
-            <Route element={<CheckRole role={"tutor"} />}>
-              <Route path="/tutorDummy" element={<TutorDummy />}></Route>
-            </Route>
+						{/* Tutor Only Pages */}
+						<Route element={<CheckRole role={"tutor"} />}>
+							<Route path="/tutorDummy" element={<TutorDummy />}></Route>
+						</Route>
 
-            {/* Admin Only Pages */}
-            <Route element={<CheckRole role={"admin"} />}>
-              <Route path="/adminDummy" element={<AdminDummy />}></Route>
-            </Route>
-          </Route>
-        </Route>
-      </Routes>
-    </>
-  );
+						{/* Admin Only Pages */}
+						<Route element={<CheckRole role={"admin"} />}>
+							<Route path="/adminDummy" element={<AdminDummy />}></Route>
+						</Route>
+					</Route>
+				</Route>
+			</Routes>
+		</>
+	);
 }
 
 export default App;
