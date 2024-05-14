@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 
 const useFetch = (url: string) => {
-	const [data, setData] = useState<any>(null);
+	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState<boolean>(true);
 	const [error, setError] = useState<string>("");
 
@@ -20,6 +20,7 @@ const useFetch = (url: string) => {
 
 			const result = response.data;
 			setData(result);
+			console.log(result)
 		} catch (error) {
 			if (axios.isAxiosError(error)) {
 				//TODO: Ambil error message dari backend

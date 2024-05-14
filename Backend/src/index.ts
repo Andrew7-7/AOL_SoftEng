@@ -6,6 +6,7 @@ import cookieParser from "cookie-parser";
 import { userRoutes } from "./Firebase/Routes/userRoutes";
 import { tutorRoutes } from "./Firebase/Routes/tutorRoutes";
 import { chatRoutes } from "./Firebase/Routes/chatRoutes";
+import { coursesRoutes } from "./Firebase/Routes/courseRoutes";
 
 const app = express();
 
@@ -24,10 +25,12 @@ app.use(cookieParser());
 
 app.use("/user", userRoutes);
 app.use("/tutor", tutorRoutes);
+app.use("/course", coursesRoutes);
 
 app.use("/chat", chatRoutes);
 const server = http.createServer(app);
 app.use("/api", chatRoutes);
+
 
 server.listen(port, () => {
   console.log("hai berjalan di " + port);
