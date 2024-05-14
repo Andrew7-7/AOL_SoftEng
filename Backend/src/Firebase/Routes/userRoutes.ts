@@ -14,28 +14,31 @@ userRoutes.post("/register", extraAuthorization, UserControllers.registerUser);
 userRoutes.post("/login", extraAuthorization, UserControllers.loginUser);
 
 userRoutes.post(
-  "/verifyAccToken",
-  extraAuthorization,
-  UserControllers.verifyAccToken
+	"/verifyAccToken",
+	extraAuthorization,
+	UserControllers.verifyAccToken
 );
 
 userRoutes.post(
-  "/verifyRefreshToken",
-  extraAuthorization,
-  UserControllers.verifyRefreshToken
+	"/verifyRefreshToken",
+	extraAuthorization,
+	UserControllers.verifyRefreshToken
 );
 
 userRoutes.post(
-  "/uploadProfilePicture",
-  upload.single("image"),
-  extraAuthorization,
-  UserControllers.uploadProfileImage
+	"/uploadProfilePicture",
+	upload.single("image"),
+	extraAuthorization,
+	UserControllers.uploadProfileImage
 );
 
 userRoutes.post(
-  "/updateStudent",
-  extraAuthorization,
-  UserControllers.updateStudent
+	"/updateStudent",
+	extraAuthorization,
+	UserControllers.updateStudent
 );
+
+//TODO :middleware
+userRoutes.get("/getUserById/:userId", UserControllers.getUserById);
 
 export { userRoutes };

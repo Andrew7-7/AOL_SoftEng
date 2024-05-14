@@ -19,6 +19,55 @@ import ContactSidebar from "./pages/sidebar/contactSidebar";
 import ChatPage from "./pages/chat/chatPage";
 
 import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
+<<<<<<< sprint1-pick_tutor,tutor_description
+import TutorDetailPage from "./pages/tutorDetail/view/tutor_detail_page.tsx";
+function App() {
+	return (
+		<>
+			<Routes>
+				{/* Is Banned */}
+				<Route path="/banned" element={<IsBanned />}></Route>
+
+				{/* Verify Token */}
+				<Route element={<VerifyToken />}>
+					<Route path="/" element={<HomePage />}></Route>
+
+					{/* Kalau udah login gabisa login register lagi */}
+					<Route element={<AlreadyLoggedIn />}>
+						<Route path="/login" element={<LoginPage />}></Route>
+						<Route path="/register" element={<RegisterPage />}></Route>
+					</Route>
+
+					{/* Butuh Login */}
+					<Route element={<NeedLogin />}>
+						{/* Student Only Pages */}
+						<Route element={<CheckRole role={"student"} />}>
+							<Route path="/profile" element={<ProfilePage />}></Route>
+						</Route>
+
+						<Route element={<CheckRole role={"student"} />}>
+							<Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
+						</Route>
+
+						<Route element={<CheckRole role={"student"} />}>
+							<Route path="/pickTutor/:tutorId" element={<TutorDetailPage />} />
+						</Route>
+
+						{/* Tutor Only Pages */}
+						<Route element={<CheckRole role={"tutor"} />}>
+							<Route path="/tutorDummy" element={<TutorDummy />}></Route>
+						</Route>
+
+						{/* Admin Only Pages */}
+						<Route element={<CheckRole role={"admin"} />}>
+							<Route path="/adminDummy" element={<AdminDummy />}></Route>
+						</Route>
+					</Route>
+				</Route>
+			</Routes>
+		</>
+	);
+=======
 import ActiveCourse from "./pages/activecourse/view/activecourse_page"
 
 function App() {
@@ -64,6 +113,7 @@ function App() {
       </Routes>
     </>
   );
+>>>>>>> main
 }
 
 export default App;
