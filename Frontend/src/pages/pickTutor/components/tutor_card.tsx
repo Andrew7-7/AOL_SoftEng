@@ -18,8 +18,8 @@ const TutorCard: React.FC<{ tutorData: ITutor }> = ({ tutorData }) => {
 						<div className="rating-container">
 							<img src={starIcon} alt="" />
 							<p>
-								{tutorData.rating == null ? "-" : tutorData.rating} / 5 (
-								{tutorData.reviews.length})
+								{tutorData.rating == null ? "-" : tutorData.rating.toFixed(1)} /
+								5 ({tutorData.reviews.length})
 							</p>
 						</div>
 					</div>
