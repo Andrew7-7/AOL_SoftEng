@@ -384,11 +384,26 @@ export class UserControllers {
   }
 
   static async updateStudent(req: Request, res: Response) {
-    const { aboutMe, facebook, instagram, linkedin, twitter, email } = req.body;
+    const { aboutMe, facebook, instagram, linkedin, twitter, email, username } =
+      req.body;
+    let updatedUser;
     try {
-      const backgroundRef = collection(db, "Student");
-      const q = query(backgroundRef, where("email", "==", email));
+      const q = query(studentCollection, where("email", "==", email));
+      const qUser = query(userCollection, where("email", "==", email));
       const querySnapshot = await getDocs(q);
+      const queryUser = await getDocs(qUser);
+      if (!queryUser.empty) {
+        const doc = queryUser.docs[0];
+        const docRef = doc.ref;
+        await updateDoc(docRef, {
+          username: username,
+        });
+        const updatedDocSnapshot = await getDoc(docRef);
+        updatedUser = updatedDocSnapshot.data();
+      } else {
+        console.log("No document found with the given email.");
+      }
+
       if (!querySnapshot.empty) {
         const doc = querySnapshot.docs[0];
         const docRef = doc.ref;
@@ -401,7 +416,7 @@ export class UserControllers {
         });
         const updatedDocSnapshot = await getDoc(docRef);
         const updatedData = updatedDocSnapshot.data();
-        res.status(200).json({ studentProfile: updatedData });
+        res.status(200).json({ studentProfile: updatedData, updatedUser });
       } else {
         console.log("No document found with the given email.");
       }
