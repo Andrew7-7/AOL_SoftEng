@@ -384,11 +384,26 @@ export class UserControllers {
   }
 
   static async updateStudent(req: Request, res: Response) {
-    const { aboutMe, facebook, instagram, linkedin, twitter, email } = req.body;
+    const { aboutMe, facebook, instagram, linkedin, twitter, email, username } =
+      req.body;
+    let updatedUser;
     try {
-      const backgroundRef = collection(db, "Student");
-      const q = query(backgroundRef, where("email", "==", email));
+      const q = query(studentCollection, where("email", "==", email));
+      const qUser = query(userCollection, where("email", "==", email));
       const querySnapshot = await getDocs(q);
+      const queryUser = await getDocs(qUser);
+      if (!queryUser.empty) {
+        const doc = queryUser.docs[0];
+        const docRef = doc.ref;
+        await updateDoc(docRef, {
+          username: username,
+        });
+        const updatedDocSnapshot = await getDoc(docRef);
+        updatedUser = updatedDocSnapshot.data();
+      } else {
+        console.log("No document found with the given email.");
+      }
+
       if (!querySnapshot.empty) {
         const doc = querySnapshot.docs[0];
         const docRef = doc.ref;
@@ -401,49 +416,12 @@ export class UserControllers {
         });
         const updatedDocSnapshot = await getDoc(docRef);
         const updatedData = updatedDocSnapshot.data();
-        res.status(200).json({ studentProfile: updatedData });
+        res.status(200).json({ studentProfile: updatedData, updatedUser });
       } else {
         console.log("No document found with the given email.");
       }
     } catch (error) {
       res.status(500).json({ error: "Error updating profile data" });
-    }
-  }
-  static async getUserById(req: Request, res: Response) {
-    try {
-      const userId = req.params.userId;
-
-      const userDocRef = doc(db, "users", userId);
-
-      const userDocSnapshot = await getDoc(userDocRef);
-
-      if (userDocSnapshot.exists()) {
-        const email = userDocSnapshot.data().email;
-
-        const studentQuery = query(
-          collection(db, "Student"),
-          where("email", "==", email)
-        );
-
-        const studentQuerySnapshot = await getDocs(studentQuery);
-
-        let studentData = null;
-        if (!studentQuerySnapshot.empty) {
-          studentData = studentQuerySnapshot.docs[0].data();
-        }
-
-        const user: User = {
-          id: userId,
-          ...userDocSnapshot.data(),
-          studentData,
-        };
-
-        res.status(200).json(user);
-      } else {
-        res.status(500).json({ error: "User not found" });
-      }
-    } catch (error) {
-      res.status(500).json({ error: "Error fetching user" });
     }
   }
 }
