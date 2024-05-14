@@ -8,9 +8,17 @@ const StudentReviews: React.FC<{ reviews: IReview[] }> = ({ reviews }) => {
 	return (
 		<div className="student-reviews-container">
 			<div className="header">Ratings & reviews</div>
-			{reviews.map((review) => (
-				<Review review={review} key={review.id} />
-			))}
+			{reviews.length == 0 ? (
+				<>
+					<div className="error">There is no review at the moment...</div>
+				</>
+			) : (
+				<>
+					{reviews.map((review) => (
+						<Review review={review} key={review.id} />
+					))}
+				</>
+			)}
 		</div>
 	);
 };

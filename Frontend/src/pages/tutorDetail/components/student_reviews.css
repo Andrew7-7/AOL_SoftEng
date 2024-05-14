@@ -10,3 +10,7 @@
 	font-weight: 500;
 	font-size: 20px;
 }
+
+.student-reviews-container .error {
+	color: var(--font-light3);
+}
