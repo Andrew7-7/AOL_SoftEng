@@ -1,9 +1,3 @@
 .pick-tutor-page-content {
-  margin-top: 30px;
-}
-
-.tutor-list-container {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
+	margin-top: 30px;
 }

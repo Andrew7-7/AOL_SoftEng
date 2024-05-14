@@ -6,7 +6,7 @@ const StudentNav = () => {
   const user = JSON.parse(window.localStorage.getItem("user") || "{}");
   return (
     <div className="navContainer">
-      <Link to={"/"} className="leftNav" style={{ fontWeight: "bold" }}>
+      <Link to={"/"} className="leftNav" style={{fontWeight:"bold"}}>
         <p style={{ color: "#E24E03" }}>STEP</p>
         <p>CODE</p>
       </Link>

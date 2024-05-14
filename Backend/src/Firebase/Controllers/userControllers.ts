@@ -409,7 +409,6 @@ export class UserControllers {
       res.status(500).json({ error: "Error updating profile data" });
     }
   }
-
   static async getUserById(req: Request, res: Response) {
     try {
       const userId = req.params.userId;
