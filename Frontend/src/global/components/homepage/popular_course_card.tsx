@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 import "./pupular_course_card.css";
+import { stringify } from "querystring";
 
-export const Card = ({img, title, session, chapter}:any) => {
+export const Card = ({img, title, session, chapter, link}:any) => {
 
   const imgUrl = (img);
   const text = (title);
@@ -9,6 +11,7 @@ export const Card = ({img, title, session, chapter}:any) => {
 
   return (
     <>
+    <Link to = "/">
       <div className="card">
         <div 
           className="card-title" 
@@ -28,6 +31,7 @@ export const Card = ({img, title, session, chapter}:any) => {
           </div>
         </div>
       </div>
+    </Link>
     </>
   );
 };
