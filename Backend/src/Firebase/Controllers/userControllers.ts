@@ -409,4 +409,42 @@ export class UserControllers {
 			res.status(500).json({ error: "Error updating profile data" });
 		}
 	}
+
+	static async getUserById(req: Request, res: Response) {
+		try {
+			const userId = req.params.userId;
+
+			const userDocRef = doc(db, "users", userId);
+
+			const userDocSnapshot = await getDoc(userDocRef);
+
+			if (userDocSnapshot.exists()) {
+				const email = userDocSnapshot.data().email;
+
+				const studentQuery = query(
+					collection(db, "Student"),
+					where("email", "==", email)
+				);
+
+				const studentQuerySnapshot = await getDocs(studentQuery);
+
+				let studentData = null;
+				if (!studentQuerySnapshot.empty) {
+					studentData = studentQuerySnapshot.docs[0].data();
+				}
+
+				const user: User = {
+					id: userId,
+					...userDocSnapshot.data(),
+					studentData,
+				};
+
+				res.status(200).json(user);
+			} else {
+				res.status(500).json({ error: "User not found" });
+			}
+		} catch (error) {
+			res.status(500).json({ error: "Error fetching user" });
+		}
+	}
 }

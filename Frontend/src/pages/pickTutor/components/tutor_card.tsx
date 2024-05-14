@@ -27,7 +27,7 @@ const TutorCard: React.FC<{ tutorData: ITutor }> = ({ tutorData }) => {
 					<div className="tutor-description">{tutorData.description}</div>
 				</div>
 				<div className="tutor-card-content-right">
-					<Link to={tutorData.id} className="button-container">
+					<Link to={`/pickTutor/${tutorData.id}`} className="button-container">
 						<div className="button-orange">View profile</div>
 					</Link>
 				</div>
