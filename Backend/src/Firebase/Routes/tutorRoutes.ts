@@ -8,6 +8,4 @@ const tutorRoutes = Router();
 // TODO: middleware
 tutorRoutes.get("/getTutors", TutorController.getTutors);
 
-tutorRoutes.get("/getTutor/:tutorId", TutorController.getTutor);
-
 export { tutorRoutes };
