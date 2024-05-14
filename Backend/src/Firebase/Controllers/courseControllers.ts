@@ -11,6 +11,7 @@ import { db } from "../Config/config";
 import { Request, Response } from "express";
 
 const coursesCollection = collection(db, "Courses");
+const transactionCollection = collection (db, "Transaction");
 
 export class CoursesController {
     static async getCourses(req: Request, res: Response) {
@@ -33,5 +34,5 @@ export class CoursesController {
         } catch (error) {
             res.status(500).json({ error: "Error fetching tutors" });
         }
-    }
+    };
 }

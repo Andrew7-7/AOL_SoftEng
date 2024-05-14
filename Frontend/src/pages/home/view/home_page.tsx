@@ -1,11 +1,16 @@
 import { useState, useRef } from "react";
 import StudentNav from "../../../global/components/navbar/student/student_navbar";
 import salyPic from "../../../global/assets/Saly-38.png";
-import { Link, useParams } from "react-router-dom";
-import { Card } from "../../../global/components/homepage/popular_course_card";
+import { Link } from "react-router-dom";
+import { Card, LastCard } from "../../../global/components/homepage/popular_course_card";
 import "./home_css.css";
 import { List } from "../../../global/components/homepage/featured_card";
 import { useDraggable } from "react-use-draggable-scroll";
+import useFetch  from "../../../global/hooks/useFetch"
+
+interface Data {
+
+} 
 
 const HomePage = () => {
   const imgPlaceHolder =
@@ -17,9 +22,15 @@ const HomePage = () => {
   const [session, setSession] = useState("10");
   const [chapter, setChapter] = useState("8");
 
+
   const ref =
     useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
   const { events } = useDraggable(ref); 
+  const data:any = useFetch("http://localhost:3002/course/getCourses").data
+  // const { data } = useFetch("http://localhost:3002/tutor/getTutors");
+
+  // console.log(useFetch("http://localhost:3002/course/getPopularCourses"))
+  const user = JSON.parse(window.localStorage.getItem("user") || "{}");
 
   return (
     <>
@@ -48,14 +59,23 @@ const HomePage = () => {
 
         <p className="section-title">Popular Course</p>
         <div className="popularCourse"  {...events} ref={ref}>
-          <Card img={img} title={title} session={session} chapter={chapter} />
-          <Card img={img} title={title} session={session} chapter={chapter} />
-          <Card img={img} title={title} session={session} chapter={chapter} />
-          <Card img={img} title={title} session={session} chapter={chapter} />
-          <Card img={img} title={title} session={session} chapter={chapter} />
-        </div>    
+          {data.slice(0, 6).map((d:any) =>
+            <Card 
+              title = {d.CourseName} 
+              session = {d.Sessions}
+              chapter = {d. Chapters}
+              img = {d.CourseImage}
+            />
+          )}
+          <LastCard />
+          {/* <Card img={img} title={title} session={session} chapter={chapter} /> */}
+        </div>
+        
+        {user.username? (
+          <p className = "section-title">Active Course</p>
+        ): (<p></p>)}
+    
       </div>
-
     </>
   );
 };
