@@ -19,7 +19,8 @@ import ContactSidebar from "./pages/sidebar/contactSidebar";
 import ChatPage from "./pages/chat/chatPage";
 
 import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
-import ActiveCourse from "./pages/activecourse/view/activecourse_page"
+import ActiveCourse from "./pages/activecourse/view/activecourse_page";
+import TutorDetailPage from "./pages/tutorDetail/view/tutor_detail_page.tsx";
 
 function App() {
   return (
@@ -44,10 +45,8 @@ function App() {
             <Route element={<CheckRole role={"student"} />}>
               <Route path="/profile" element={<ProfilePage />}></Route>
               <Route path="/activecourse" element={<ActiveCourse />}></Route>
-            </Route>
-
-            <Route element={<CheckRole role={"student"} />}>
               <Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
+              <Route path="/pickTutor/:tutorId" element={<TutorDetailPage />} />
             </Route>
 
             {/* Tutor Only Pages */}
