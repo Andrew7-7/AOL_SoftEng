@@ -55,6 +55,10 @@
   font-size: 1vw;
 }
 
+.bottomText a {
+  font-size: 0.9vw;
+}
+
 .welcomeText {
   font-size: 1.2vw;
 }

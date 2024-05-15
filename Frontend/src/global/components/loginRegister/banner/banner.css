@@ -18,6 +18,12 @@
   background-color: var(--lightBlue);
   border-radius: 20px 20px 20px 40px;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+
 }
 
 .bannerTitle {
