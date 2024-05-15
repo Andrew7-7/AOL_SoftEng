@@ -25,7 +25,7 @@ const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
   const [passVisible, setPassVisible] = useState(false);
   const [conPassVisible, setConPassVisible] = useState(false);
-
+  const [resetKey, setResetKey] = useState(0);
   const navigate = useNavigate();
   const OtpInput = () => {
     const [otp, setOtp] = useState(["", "", "", ""]);
@@ -103,10 +103,13 @@ const RegisterPage = () => {
       <div className="otpInputBlur">
         <div className="otpInputDiv">
           <b style={{ fontSize: "20px" }}>Enter OTP sent to {email}</b>
-          <p onClick={handleOTP} style={{ color: "#E24E03" }}>
+          <p
+            onClick={handleOTP}
+            style={{ color: "#E24E03", cursor: "pointer" }}
+          >
             Resend OTP
           </p>
-          <CountdownTimer />
+          <CountdownTimer resetKey={resetKey} />
           <div className="otpInputBox">
             {otp.map((value, index) => {
               return (
@@ -169,6 +172,7 @@ const RegisterPage = () => {
 
       if (res.status === 200) {
         setOtpPopup(true);
+        setResetKey((prev) => prev + 1);
       }
     } catch (error: any) {
       setLoading(false);
@@ -212,7 +216,7 @@ const RegisterPage = () => {
                   <div className="passDiv">
                     <input
                       className="loginInput"
-                      type={passVisible?"text":"password"}
+                      type={passVisible ? "text" : "password"}
                       placeholder="Password"
                       value={password}
                       onChange={(event) => handleChange(event, setPass)}
@@ -226,7 +230,7 @@ const RegisterPage = () => {
                   <div className="passDiv">
                     <input
                       className="loginInput"
-                      type={conPassVisible?"text":"password"}
+                      type={conPassVisible ? "text" : "password"}
                       placeholder="Confirm Password"
                       value={conPassword}
                       onChange={(event) => handleChange(event, setConPassword)}

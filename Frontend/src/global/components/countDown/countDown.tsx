@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
-
-const CountdownTimer = () => {
+interface CountdownTimerProps {
+  resetKey: number;
+}
+const CountdownTimer: React.FC<CountdownTimerProps> = ({ resetKey }) => {
   const [time, setTime] = useState(600);
-
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTime((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+    setTime(600);
+  }, [resetKey]);
+  useEffect(() => {
+    if (time <= 0) return;
+
+    const timerId = setInterval(() => {
+      setTime((prev) => prev - 1);
     }, 1000);
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearInterval(timerId);
+  }, [time]);
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
