@@ -132,7 +132,7 @@ export class UserControllers {
         refreshToken,
       });
 
-      let studentProfile;
+      let profile;
       if (userData.role === "student") {
         try {
           const backgroundRef = collection(db, "Student");
@@ -140,7 +140,7 @@ export class UserControllers {
           const querySnapshot = await getDocs(q);
           if (!querySnapshot.empty) {
             const doc = querySnapshot.docs[0];
-            studentProfile = doc.data();
+            profile = doc.data();
           } else {
             res
               .status(404)
@@ -151,7 +151,7 @@ export class UserControllers {
         }
       }
 
-      res.status(200).json({ accessToken, userData, studentProfile });
+      res.status(200).json({ accessToken, userData, profile });
     } catch (error) {
       res.status(500).json(error);
     }
@@ -173,7 +173,7 @@ export class UserControllers {
       const q = query(userCollection, where("email", "==", email));
       const existingUser = await getDocs(q);
       if (!existingUser.empty) {
-        return res.status(400).json({ message: "Email already exists" });
+        return res.status(404).json({ message: "Email already exists" });
       }
 
       // Masukkin User ke firebase

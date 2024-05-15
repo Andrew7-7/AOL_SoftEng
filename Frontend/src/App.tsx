@@ -17,22 +17,17 @@ import AdminDummy from "./pages/admin/dummy/adminDummy";
 import IsBanned from "./pages/error/isBanned/isBanned";
 import ContactSidebar from "./pages/sidebar/contactSidebar";
 import ChatPage from "./pages/chat/chatPage";
-// import { Routes } from "react-router-dom";
+import AccountManagementPage from "./pages/admin/accountManagement/view/accountManagementPage";
 function App() {
-  // return (
-  //   // <ContactSidebar />
-  //   <ChatPage/>
-  // )
   return (
     <>
       <Routes>
         {/* Is Banned */}
         <Route path="/banned" element={<IsBanned />}></Route>
 
+        <Route path="/" element={<HomePage />}></Route>
         {/* Verify Token */}
         <Route element={<VerifyToken />}>
-          <Route path="/" element={<HomePage />}></Route>
-
           {/* Kalau udah login gabisa login register lagi */}
           <Route element={<AlreadyLoggedIn />}>
             <Route path="/login" element={<LoginPage />}></Route>
@@ -54,6 +49,10 @@ function App() {
             {/* Admin Only Pages */}
             <Route element={<CheckRole role={"admin"} />}>
               <Route path="/adminDummy" element={<AdminDummy />}></Route>
+              <Route
+                path="/accountManagement"
+                element={<AccountManagementPage />}
+              ></Route>
             </Route>
           </Route>
         </Route>
