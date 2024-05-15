@@ -32,6 +32,10 @@ const HomePage = () => {
   // console.log(useFetch("http://localhost:3002/course/getPopularCourses"))
   const user = JSON.parse(window.localStorage.getItem("user") || "{}");
 
+  const activeCourse = () => {
+    <p className = "section-title">Active Course</p>
+  }
+
   return (
     <>
       <StudentNav />
@@ -70,11 +74,8 @@ const HomePage = () => {
           <LastCard />
           {/* <Card img={img} title={title} session={session} chapter={chapter} /> */}
         </div>
-        
-        {user.username? (
-          <p className = "section-title">Active Course</p>
-        ): (<p></p>)}
-    
+
+          
       </div>
     </>
   );
