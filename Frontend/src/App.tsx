@@ -16,16 +16,17 @@ import "./App.css";
 // import AdminDummy from "./pages/admin/dummy/adminDummy";
 // import IsBanned from "./pages/error/isBanned/isBanned";
 // import ContactSidebar from "./pages/sidebar/contactSidebar";
-import ChatPage from "./pages/chat/chatPage";
+// import ChatPage from "./pages/chat/chatPage";
+import ForumPage from "./pages/forum/forumPage";
 // import { Routes } from "react-router-dom";
 function App() {
   return (
-    // <ContactSidebar />
-    <ChatPage/>
+    <ForumPage/>
   )
   // return (
-  //   <>
-  //     <Routes>
+    //   <>
+    //     <Routes>
+    // <ContactSidebar />
   //       {/* Is Banned */}
   //       <Route path="/banned" element={<IsBanned />}></Route>
 

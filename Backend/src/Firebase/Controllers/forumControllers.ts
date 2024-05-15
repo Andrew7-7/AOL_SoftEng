@@ -5,15 +5,25 @@ import { Request, Response } from "express";
 const forumCollection = collection(db, "Forum");
 
 export class forumControllers{
+    
     static async getForum(req: Request, res: Response) {
         try {
-            const querySnapshot: QuerySnapshot = await getDocs(forumCollection);
-            const forum = querySnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
+            const querySnapshot: QuerySnapshot = await getDocs(collection(db, "Forum"));
+            const forums = await Promise.all(querySnapshot.docs.map(async (doc) => {
+                const forumData = doc.data();
+                const forumId = doc.id;
+
+                const repliesSnapshot = await getDocs(collection(db, "Forum", forumId, "Replies"));
+                const repliesCount = repliesSnapshot.size;
+
+                return {
+                    id: forumId,
+                    ...forumData,
+                    repliesCount: repliesCount
+                };
             }));
 
-            res.status(200).json({ forum });
+            res.status(200).json({ forums });
         } catch (error) {
             console.error("Error fetching forum:", error);
             res.status(500).json({ error: "Failed to fetch forum" });

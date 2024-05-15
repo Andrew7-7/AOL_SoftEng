@@ -1,0 +1,39 @@
+.forums {
+    margin: 20px;
+}
+
+.forums h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.forum {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.forum h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.forum p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.forum div {
+    margin-top: 10px;
+}
+
+.forum div h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.forum div p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
