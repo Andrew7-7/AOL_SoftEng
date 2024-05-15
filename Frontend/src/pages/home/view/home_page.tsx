@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import StudentNav from "../../../global/components/navbar/student/student_navbar";
 import salyPic from "../../../global/assets/Saly-38.png";
 import { Link } from "react-router-dom";
@@ -8,23 +8,29 @@ import { List } from "../../../global/components/homepage/featured_card";
 import { useDraggable } from "react-use-draggable-scroll";
 import useFetch  from "../../../global/hooks/useFetch"
 
-interface Data {
+const ActiveCourse = () => {
+  return (
+    <p className = "section-title">Active Course</p>
 
-} 
+  ) 
+}
 
 const HomePage = () => {
   const ref =
     useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
   const { events } = useDraggable(ref); 
-  const data:any = useFetch("http://localhost:3002/course/getCourses").data
-  // const { data } = useFetch("http://localhost:3002/tutor/getTutors");
+  const data:any = useFetch("http://localhost:3002/home/getCourses").data
 
-  // console.log(useFetch("http://localhost:3002/course/getPopularCourses"))
-  const user = JSON.parse(window.localStorage.getItem("user") || "{}");
-  console.log(user)
-  const activeCourse = () => {
-    <p className = "section-title">Active Course</p>
-  }
+  const [isLogin, setIsLogin] = useState(false)
+
+
+  useEffect (() => {
+    const temp = window.localStorage.getItem("user");
+
+    if(temp != null){
+      setIsLogin(true)
+    }
+  })
 
   return (
     <>
@@ -64,8 +70,7 @@ const HomePage = () => {
           <LastCard />
           {/* <Card img={img} title={title} session={session} chapter={chapter} /> */}
         </div>
-        
-          
+        {isLogin && <ActiveCourse />}
       </div>
     </>
   );
