@@ -4,9 +4,9 @@ const Banner = () => {
   return (
     <div className="rightDiv">
       <div className="innerRight">
-        <img src={salyPic}></img>
-        <p>Unleash Your Code Mastery</p>
-        <p>
+        <img className="salyPic" src={salyPic}></img>
+        <p className="bannerTitle">Unleash Your Code Mastery</p>
+        <p className="bannerSubtitle">
           Discover different kinds of programming language <br></br>with our
           experts
         </p>

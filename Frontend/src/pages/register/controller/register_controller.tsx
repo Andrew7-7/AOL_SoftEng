@@ -5,7 +5,8 @@ const handleRegister = (
   password: string,
   confirmPassword: string,
   setError: React.Dispatch<React.SetStateAction<string>>,
-  navigate: any
+  navigate: any,
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   const fetchRegister = async () => {
     const role = "student";
@@ -13,11 +14,6 @@ const handleRegister = (
     const education = "";
     const extraAuth =
       "aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k";
-
-    if (!username || !email || !password || !confirmPassword) {
-      setError("All fields must be filled");
-      return;
-    }
 
     try {
       const res = await axios.post(
@@ -36,8 +32,9 @@ const handleRegister = (
         navigate("/login");
       }
     } catch (err: any) {
-      if (err.response && err.response.status === 400) {
-        setError("Email already exists");
+      setLoading(false);
+      if (err.response && err.response.status === 404) {
+        setError("Email already registered");
       } else {
         console.log(err);
       }

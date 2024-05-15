@@ -15,13 +15,13 @@
 .divContainer {
   display: flex;
   background-color: var(--lightGrey);
-  height: 650px;
+  height: 78vh;
   border-radius: 20px;
 }
 
 .leftDiv,
 .rightDiv {
-  width: 550px;
+  width: 32.5vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,6 +42,31 @@
   background-color: var(--lightGrey);
   padding: 10px;
   padding-bottom: 8px;
-  width: 300px;
+  width: 18vw;
   margin-bottom: 20px;
+}
+
+.loginTitle {
+  font-size: 1.7vw;
+  font-weight: 600;
+}
+
+.bottomText {
+  font-size: 1vw;
+}
+
+.welcomeText {
+  font-size: 1.2vw;
+}
+
+.passVisibleIcon {
+  width: 1.2vw;
+  cursor: pointer;
+}
+
+.passDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1vw;
 }

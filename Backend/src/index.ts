@@ -6,6 +6,8 @@ import cookieParser from "cookie-parser";
 import { userRoutes } from "./Firebase/Routes/userRoutes";
 import { tutorRoutes } from "./Firebase/Routes/tutorRoutes";
 import { chatRoutes } from "./Firebase/Routes/chatRoutes";
+import { adminRoutes } from "./Firebase/Routes/adminRoutes";
+import { otpRoutes } from "./Firebase/Routes/otpRoutes";
 import { coursesRoutes } from "./Firebase/Routes/courseRoutes";
 
 const app = express();
@@ -24,6 +26,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use("/user", userRoutes);
+app.use("/admin", adminRoutes);
+app.use("/otp", otpRoutes);
 app.use("/tutor", tutorRoutes);
 app.use("/course", coursesRoutes);
 

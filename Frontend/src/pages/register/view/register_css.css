@@ -1,4 +1,63 @@
-.error{
-    color: red;
-    font-size: 15px;
+.error {
+  color: red;
+  font-size: 15px;
+}
+
+.otpInputBlur {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(7px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.otpInputDiv {
+  display: flex;
+  background-color: white;
+  padding: 1.5vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  gap: 1.3vh;
+}
+
+
+
+/* .otpInputBox{
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+} */
+
+.otpInput {
+  width: 4vw;
+  height: 4vw;
+  margin: 5px;
+  text-align: center;
+  font-size: 1.2em;
+  border-radius: 5px;
+}
+
+.otpInput:focus {
+  border-color: orange;
+}
+
+.cancelOTPButton {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+  padding: 0.7vw;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  background-color: #ff7a37;
+  color: white;
+  border-radius: 10px;
+  font-size: 1vw;
+  font-weight: 600;
 }

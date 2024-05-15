@@ -17,7 +17,7 @@ import axios from "axios";
 
 const ProfilePage = () => {
   const user = JSON.parse(window.localStorage.getItem("user") || "{}");
-  const student = JSON.parse(window.localStorage.getItem("student") || "{}");
+  const student = JSON.parse(window.localStorage.getItem("profile") || "{}");
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [username, setUsername] = useState(user.username);
@@ -39,7 +39,6 @@ const ProfilePage = () => {
     const files = event.target.files;
     if (files && files.length > 0) {
       setSelectedFile(files[0]);
-      // setLoading(true);
       setDownloadURL(loadingSvg);
     }
   };
@@ -102,10 +101,10 @@ const ProfilePage = () => {
           }
         );
         if (res.status === 200) {
-          window.localStorage.removeItem("student");
+          window.localStorage.removeItem("profile");
           window.localStorage.setItem(
-            "student",
-            JSON.stringify(res.data.studentProfile)
+            "profile",
+            JSON.stringify(res.data.profile)
           );
           window.localStorage.removeItem("user");
           window.localStorage.setItem(

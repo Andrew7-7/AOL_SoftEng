@@ -1,7 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
 
-import StudentNav from "../public/components/navbar/student/student_navbar";
 
 // Pages
 import HomePage from "./pages/home/view/home_page";
@@ -17,11 +16,10 @@ import AdminDummy from "./pages/admin/dummy/adminDummy";
 import IsBanned from "./pages/error/isBanned/isBanned";
 import ContactSidebar from "./pages/sidebar/contactSidebar";
 import ChatPage from "./pages/chat/chatPage";
-
 import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
 import ActiveCourse from "./pages/activecourse/view/activecourse_page";
 import TutorDetailPage from "./pages/tutorDetail/view/tutor_detail_page.tsx";
-
+import AccountManagementPage from "./pages/admin/accountManagement/view/accountManagementPage";
 function App() {
   return (
     <>
@@ -29,10 +27,9 @@ function App() {
         {/* Is Banned */}
         <Route path="/banned" element={<IsBanned />}></Route>
 
+        <Route path="/" element={<HomePage />}></Route>
         {/* Verify Token */}
         <Route element={<VerifyToken />}>
-          <Route path="/" element={<HomePage />}></Route>
-
           {/* Kalau udah login gabisa login register lagi */}
           <Route element={<AlreadyLoggedIn />}>
             <Route path="/login" element={<LoginPage />}></Route>
@@ -57,6 +54,10 @@ function App() {
             {/* Admin Only Pages */}
             <Route element={<CheckRole role={"admin"} />}>
               <Route path="/adminDummy" element={<AdminDummy />}></Route>
+              <Route
+                path="/accountManagement"
+                element={<AccountManagementPage />}
+              ></Route>
             </Route>
           </Route>
         </Route>
