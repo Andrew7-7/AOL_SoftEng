@@ -1,4 +1,4 @@
-export interface CoursesModel {
+export interface ICourse {
     id: string,
     Type: string,
     Color: string,
@@ -7,4 +7,5 @@ export interface CoursesModel {
     Chapters: number,
     CourseID: number,
     Sessions: number,
+    CourseImage: string,
 }
