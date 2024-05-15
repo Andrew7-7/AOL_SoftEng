@@ -13,16 +13,6 @@ interface Data {
 } 
 
 const HomePage = () => {
-  const imgPlaceHolder =
-    "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png";
-  const titlePlaceHolder = "Introduction to C programming";
-
-  const [img, setImg] = useState(imgPlaceHolder);
-  const [title, setTitle] = useState(titlePlaceHolder);
-  const [session, setSession] = useState("10");
-  const [chapter, setChapter] = useState("8");
-
-
   const ref =
     useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
   const { events } = useDraggable(ref); 
@@ -31,7 +21,7 @@ const HomePage = () => {
 
   // console.log(useFetch("http://localhost:3002/course/getPopularCourses"))
   const user = JSON.parse(window.localStorage.getItem("user") || "{}");
-
+  console.log(user)
   const activeCourse = () => {
     <p className = "section-title">Active Course</p>
   }
@@ -74,7 +64,7 @@ const HomePage = () => {
           <LastCard />
           {/* <Card img={img} title={title} session={session} chapter={chapter} /> */}
         </div>
-
+        
           
       </div>
     </>
