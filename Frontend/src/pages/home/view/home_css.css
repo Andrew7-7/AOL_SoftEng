@@ -82,6 +82,12 @@
   margin-right: 32px;
 }
 
+.active-course-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
 @media only screen and (max-width: 1080px) {
   .banner-text p {
     font-weight: bold;

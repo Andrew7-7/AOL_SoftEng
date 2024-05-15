@@ -8,10 +8,28 @@ import { List } from "../../../global/components/homepage/featured_card";
 import { useDraggable } from "react-use-draggable-scroll";
 import useFetch  from "../../../global/hooks/useFetch"
 
-const ActiveCourse = () => {
-  return (
-    <p className = "section-title">Active Course</p>
 
+const ActiveCourse = ({email, data}:any) => {
+  const studentData:any = useFetch("http://localhost:3002/home/getStudent").data
+  const userEmail = email;
+
+  let a:any = [];
+  studentData.map((data:any) => (data.email == userEmail? a = Object.values(data.activeCourse) : null))
+
+  return (
+    <div>
+      <p className = "section-title">Active Course</p>
+      <div className="active-course-list">
+        {data.map((d:any) => a.indexOf(d.CourseID) != -1?
+              (<Card 
+                title = {d.CourseName} 
+                session = {d.Sessions}
+                chapter = {d. Chapters}
+                img = {d.CourseImage}
+              />) : null
+        )}
+      </div>
+    </div>
   ) 
 }
 
@@ -19,15 +37,18 @@ const HomePage = () => {
   const ref =
     useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
   const { events } = useDraggable(ref); 
-  const data:any = useFetch("http://localhost:3002/home/getCourses").data
+  const data = useFetch("http://localhost:3002/home/getCourses").data
 
-  const [isLogin, setIsLogin] = useState(false)
-
+  const [userEmail, setUserEmail] = useState("")
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect (() => {
-    const temp = window.localStorage.getItem("user");
+    const user= JSON.parse(window.localStorage.getItem("user") || "{}");
+    setUserEmail(user?.username)
 
-    if(temp != null){
+    if(userEmail == null){
+      setIsLogin(false)
+    }else{
       setIsLogin(true)
     }
   })
@@ -68,9 +89,8 @@ const HomePage = () => {
             />
           )}
           <LastCard />
-          {/* <Card img={img} title={title} session={session} chapter={chapter} /> */}
         </div>
-        {isLogin && <ActiveCourse />}
+        {isLogin && <ActiveCourse email = {userEmail} data = {data} />}
       </div>
     </>
   );
