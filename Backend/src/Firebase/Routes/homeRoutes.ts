@@ -8,6 +8,6 @@ const homeRoutes = Router();
 // TODO: middleware
 homeRoutes.get("/getCourses", HomeController.getCourses);
 
-homeRoutes.get("/getStudent", accToken ,HomeController.getData);
+// homeRoutes.get("/getStudent", accToken ,HomeController.getData);
 
 export { homeRoutes };
