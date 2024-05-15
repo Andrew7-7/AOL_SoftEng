@@ -13,7 +13,7 @@ export const Card = ({img, title, session, chapter}:any) => {
         <div 
           className="card-title" 
           style = {
-            {backgroundImage: `url("${imgUrl}")`}
+            {backgroundImage: `url("${imgUrl}")`, opacity:"70%"    }
           }>
           <p>{text}</p>
         </div>

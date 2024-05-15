@@ -4,7 +4,8 @@ import useFetch from '../../../global/hooks/useFetch';
 import { Card } from './components/coursecard';
 import { ICourse } from '../../../global/model/course-interface';
 import { useParams } from 'react-router-dom';
-
+import './activecourse_page.css'
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"></link>
 
 const activecourse_page = () => {
 	const { courseId } = useParams();
