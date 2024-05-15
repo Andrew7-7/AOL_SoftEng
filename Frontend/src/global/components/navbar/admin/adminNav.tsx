@@ -6,8 +6,8 @@ import courseImage from "../../../assets/online-learning.png";
 import signOutImage from "../../../assets/logout.png";
 import "./adminNav_css.css";
 import { useState } from "react";
-const AdminNav = () => {
-  const [clicked, setClicked] = useState("Permission");
+const AdminNav = ({ clickedItem }: { clickedItem: string }) => {
+  const [clicked, setClicked] = useState(clickedItem);
   const navigate = useNavigate();
   const signOut = () => {
     window.localStorage.removeItem("accToken");
@@ -44,7 +44,11 @@ const AdminNav = () => {
         <p>CODE</p>
       </div>
       <div>
-        <NavigationLabel image={permissionImage} title="Permission" link="" />
+        <NavigationLabel
+          image={permissionImage}
+          title="Permission"
+          link="/adminDummy"
+        />
         <NavigationLabel
           image={accountImage}
           title="Account"

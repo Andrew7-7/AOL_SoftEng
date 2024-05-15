@@ -17,14 +17,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.445);
   border-radius: 5px;
   padding: 1.2vw;
-  margin-top: 2%;
+  margin-top: 2vh;
   justify-content: space-between;
   align-items: center;
   font-size: 1vw;
   font-weight: 600;
 }
 
-.tableHeader{
+.tableHeader {
   display: flex;
   width: 79vw;
   border-radius: 5px;
@@ -82,7 +82,8 @@
   border: #d0d0d0 1px solid;
   border-radius: 10px;
   background-image: url("../../../../global/assets/magnifier.png");
-  background-position: 10px center;
+  background-size: 1vw;
+  background-position: 0.7vw center;
   background-repeat: no-repeat;
   padding-left: 2.5vw;
   font-size: 1vw;
@@ -174,6 +175,6 @@
   gap: 1vw;
 }
 
-.warningPopupTitle{
+.warningPopupTitle {
   font-size: 1.2vw;
 }

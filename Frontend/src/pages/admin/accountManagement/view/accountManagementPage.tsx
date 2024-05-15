@@ -167,7 +167,7 @@ const AccountManagementPage = () => {
   return (
     <div className="outerDiv">
       {warningPopup === true ? WarningModal() : null}
-      <AdminNav />
+      <AdminNav clickedItem="Account" />
       <div className="accountManagement">
         <p className="accManagementTitle">Account Management</p>
         <input
