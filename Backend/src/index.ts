@@ -7,7 +7,8 @@ import { userRoutes } from "./Firebase/Routes/userRoutes";
 import { tutorRoutes } from "./Firebase/Routes/tutorRoutes";
 import { chatRoutes } from "./Firebase/Routes/chatRoutes";
 import { coursesRoutes } from "./Firebase/Routes/courseRoutes";
-import { homeRoutes } from "Firebase/Routes/homeRoutes";
+import { homeRoutes } from "./Firebase/Routes/homeRoutes";
+
 const app = express();
 
 const port = 3002;
@@ -26,7 +27,7 @@ app.use(cookieParser());
 app.use("/user", userRoutes);
 app.use("/tutor", tutorRoutes);
 app.use("/course", coursesRoutes);
-app.use("/home", coursesRoutes);
+app.use("/home", homeRoutes);
 
 app.use("/chat", chatRoutes);
 const server = http.createServer(app);
