@@ -1,112 +1,49 @@
-import React from 'react'
+import React, { useMemo, useState } from 'react'
 import StudentNav from '../../../global/components/navbar/student/student_navbar'
-import CourseCard from './components/card-news3/CourseCard'
-import Grid from '@mui/material/Unstable_Grid2';
+import useFetch from '../../../global/hooks/useFetch';
+import { Card } from './components/coursecard';
+import { ICourse } from '../../../global/model/course-interface';
+import { useParams } from 'react-router-dom';
 
-function activecourse_page() {
-  return (
-    <>
-      <StudentNav />
 
-      <Grid container spacing={3} justifyContent={"center"} marginTop={"100px"} marginBottom={"180px"}>
-        <Grid>
-          <CourseCard
-            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
-            status={"ACTIVE"}
-            title={"Introduction to Programming"}
-            numSessions={"8"}
-            numChapters={"10"}
-          />
-        </Grid>
+const activecourse_page = () => {
+	const { courseId } = useParams();
 
-        <Grid>
-          <CourseCard
-            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
-            status={"ACTIVE"}
-            title={"Introduction to Programming"}
-            numSessions={"8"}
-            numChapters={"10"}
-          />
-        </Grid>
+	const { data: tutorDatas, loading: tutorLoading } = useFetch(
+		"http://localhost:3002/course/getCourses"
+	);
 
-        <Grid >
-          <CourseCard
-            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
-            status={"ACTIVE"}
-            title={"Introduction to Programming"}
-            numSessions={"8"}
-            numChapters={"10"}
-          />
-        </Grid>
+	console.log(tutorDatas);
 
-      </Grid>
-      <Grid container spacing={3} justifyContent={"center"} marginTop={"100px"} marginBottom={"180px"}>
-        <Grid>
-          <CourseCard
-            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
-            status={"ACTIVE"}
-            title={"Introduction to Programming"}
-            numSessions={"8"}
-            numChapters={"10"}
-          />
-        </Grid>
+	if (tutorLoading) {
+		return <div></div>;
+	}
 
-        <Grid>
-          <CourseCard
-            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
-            status={"ACTIVE"}
-            title={"Introduction to Programming"}
-            numSessions={"8"}
-            numChapters={"10"}
-          />
-        </Grid>
+	return (
+		<>
+			<StudentNav />
+			<div className="pick-tutor-page">
+				<div className="page-center">
+					<div className="pick-tutor-page-content">
+						<div className="back-section"></div>
+						<div className="tutor-list-section">
+							<div className="header">Tutor List</div>
+							<div className="tutor-list-container">
+								{tutorDatas.map((tutorData: ICourse) => (
+									<Card
+                  title = {tutorData.CourseName}
+                  session = {tutorData.Sessions}
+                  chapter = {tutorData. Chapters}
+                  img = {tutorData.CourseImage}
+                />
+								))}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</>
+	);
+};
 
-        <Grid >
-          <CourseCard
-            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
-            status={"ACTIVE"}
-            title={"Introduction to Programming"}
-            numSessions={"8"}
-            numChapters={"10"}
-          />
-        </Grid>
-
-      </Grid>
-      <Grid container spacing={3} justifyContent={"center"} marginTop={"100px"} marginBottom={"180px"}>
-        <Grid>
-          <CourseCard
-            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
-            status={"ACTIVE"}
-            title={"Introduction to Programming"}
-            numSessions={"8"}
-            numChapters={"10"}
-          />
-        </Grid>
-
-        <Grid>
-          <CourseCard
-            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
-            status={"ACTIVE"}
-            title={"Introduction to Programming"}
-            numSessions={"8"}
-            numChapters={"10"}
-          />
-        </Grid>
-
-        <Grid >
-          <CourseCard
-            image={"https://images.unsplash.com/photo-1507676184212-d03ab07a01bf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80"}
-            status={"ACTIVE"}
-            title={"Introduction to Programming"}
-            numSessions={"8"}
-            numChapters={"10"}
-          />
-        </Grid>
-
-      </Grid>
-    </>
-
-  )
-}
-
-export default activecourse_page
+export default activecourse_page;
