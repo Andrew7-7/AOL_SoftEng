@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import StudentNav from "../../../global/components/navbar/student/student_navbar";
 import salyPic from "../../../global/assets/Saly-38.png";
-import { Link } from "react-router-dom";
 import { Card, LastCard } from "../../../global/components/homepage/popular_course_card";
 import "./home_css.css";
 import { List } from "../../../global/components/homepage/featured_card";
@@ -96,13 +95,13 @@ const HomePage = () => {
     </>
   );
 };
-	return (
-		<>
-			<StudentNav />
-			<Link to="/activecourse">ActiveCourse</Link>
-			<Link to={"/1/pickTutor"}>Pcik Tutor Dummy</Link>
-		</>
-	);
-};
+	// return (
+	// 	<>
+	// 		<StudentNav />
+	// 		<Link to="/activecourse">ActiveCourse</Link>
+	// 		<Link to={"/1/pickTutor"}>Pcik Tutor Dummy</Link>
+	// 	</>
+// 	// );
+// };
 
 export default HomePage;
