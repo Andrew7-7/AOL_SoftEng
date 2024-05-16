@@ -12,7 +12,7 @@ import { Link, Route, Routes, useNavigate } from "react-router-dom";
 const ActiveCourse = ({email, data}:any) => {
   const studentData:any = useFetch("http://localhost:3002/home/getStudent").data
   const userEmail = email;
-
+  // console.log(studentData)
   let a:any = [];
   studentData.map((data:any) => (data.email == userEmail? a = Object.values(data.activeCourse) : null))
 
@@ -36,7 +36,8 @@ const ActiveCourse = ({email, data}:any) => {
 const HomePage = () => {
   const ref =
     useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
-  const { events } = useDraggable(ref); 
+  const { events } = useDraggable(ref);
+  // let data = null;
   const data = useFetch("http://localhost:3002/home/getCourses").data
 
   const [userEmail, setUserEmail] = useState("")
@@ -51,10 +52,11 @@ const HomePage = () => {
     }else{
       setIsLogin(true)
     }
-  })
+  }, [])
 
   return (
     <>
+    <Link to={"/1/pickTutor"}>Pcik Tutor Dummy</Link>
       <StudentNav />
       <div className="banner">
         <div className="banner-text">
@@ -80,28 +82,20 @@ const HomePage = () => {
 
         <p className="section-title">Popular Course</p>
         <div className="popularCourse"  {...events} ref={ref}>
-          {data.slice(0, 6).map((d:any) =>
-            <Card 
-              title = {d.CourseName} 
-              session = {d.Sessions}
-              chapter = {d. Chapters}
-              img = {d.CourseImage}
-            />
-          )}
-          <LastCard />
+            {data != null? (data.map((d:any) =>
+              <Card 
+                title = {d.CourseName} 
+                session = {d.Sessions}
+                chapter = {d. Chapters}
+                img = {d.CourseImage}
+              />
+            )): null}
+          <LastCard/>
         </div>
-        {isLogin && <ActiveCourse email = {userEmail} data = {data} />}
+        {/* {isLogin && <ActiveCourse email = {userEmail} data = {data} />} */}
       </div>
     </>
   );
 };
-	// return (
-	// 	<>
-	// 		<StudentNav />
-	// 		<Link to="/activecourse">ActiveCourse</Link>
-	// 		<Link to={"/1/pickTutor"}>Pcik Tutor Dummy</Link>
-	// 	</>
-// 	// );
-// };
 
 export default HomePage;
