@@ -14,7 +14,7 @@ export const Card = ({ img, title, session, chapter, link }: any) => {
         <div className="card">
           <div
             className="card-title"
-            style={{ backgroundImage: `url("${imgUrl}")` }}
+            style={{ backgroundImage: `url("${imgUrl}")`, backgroundSize: "120%" }}
           >
             <p>{text}</p>
           </div>

@@ -39,6 +39,7 @@ a {
     font-size: 28px;
     font-weight: bold;
     align-items: center;
+    text-align: center;
 }
 
 .card-text {
@@ -65,7 +66,6 @@ a {
 }
 
 .lastCard{
-    /* background-color: red; */
     display: flex;
     flex-direction: column;
     height: 378px;
