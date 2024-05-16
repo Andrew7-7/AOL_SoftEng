@@ -14,20 +14,20 @@ const ActiveCourse = ({email, data}:any) => {
   const userEmail = email;
   // console.log(studentData)
   let a:any = [];
-  studentData.map((data:any) => (data.email == userEmail? a = Object.values(data.activeCourse) : null))
+  if(studentData != null ) studentData.map((data:any) => (data.email == userEmail? a = Object.values(data.activeCourse) : null))
 
   return (
     <div>
       <p className = "section-title">Active Course</p>
       <div className="active-course-list">
-        {data.map((d:any) => a.indexOf(d.CourseID) != -1?
+        {data != null? data.map((d:any) => a.indexOf(d.CourseID) != -1?
               (<Card 
                 title = {d.CourseName} 
                 session = {d.Sessions}
                 chapter = {d. Chapters}
                 img = {d.CourseImage}
               />) : null
-        )}
+        ):null}
       </div>
     </div>
   ) 
@@ -52,7 +52,7 @@ const HomePage = () => {
     }else{
       setIsLogin(true)
     }
-  }, [])
+  })
 
   return (
     <>
@@ -92,7 +92,7 @@ const HomePage = () => {
             )): null}
           <LastCard/>
         </div>
-        {/* {isLogin && <ActiveCourse email = {userEmail} data = {data} />} */}
+        {isLogin && <ActiveCourse email = {userEmail} data = {data} />}
       </div>
     </>
   );
