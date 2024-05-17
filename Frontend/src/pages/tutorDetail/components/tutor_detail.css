@@ -64,6 +64,16 @@
 	text-align: center;
 }
 
+.tutor-detail-container .content-top .right .bottom .view-more-button {
+	margin-top: 10px;
+	cursor: pointer;
+	color: var(--primary-orange);
+}
+
+.tutor-detail-container .content-top .right .bottom .view-more-button:hover {
+	text-decoration: underline;
+}
+
 .tutor-detail-container .header {
 	margin-bottom: 10px;
 	font-weight: 500;

@@ -1,0 +1,8 @@
+.course-management-page {
+	display: flex;
+}
+
+.course-management-page .content-section {
+	padding-top: 50px;
+	flex: 1;
+}

@@ -20,6 +20,7 @@ import ActiveCourse from "./pages/activecourse/view/activecourse_page";
 import TutorDetailPage from "./pages/tutorDetail/view/tutor_detail_page.tsx";
 import AccountManagementPage from "./pages/admin/accountManagement/view/accountManagementPage";
 import CourseManagementPage from "./pages/admin/courseManagement/view/course_management_page.tsx";
+import CourseUpdatePage from "./pages/admin/courseUpdate/course_update_page.tsx";
 function App() {
 	return (
 		<>
@@ -61,6 +62,10 @@ function App() {
 							<Route
 								path="/courseManagement"
 								element={<CourseManagementPage />}
+							/>
+							<Route
+								path="/courseManagement/:courseId"
+								element={<CourseUpdatePage />}
 							/>
 						</Route>
 					</Route>
