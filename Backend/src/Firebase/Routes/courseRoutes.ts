@@ -7,5 +7,6 @@ const coursesRoutes = Router();
 
 // TODO: middleware
 coursesRoutes.get("/getCourses", CoursesController.getCourses);
+coursesRoutes.get("/getCourse/:courseId", CoursesController.getCourse);
 
 export { coursesRoutes };

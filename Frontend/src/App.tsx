@@ -21,6 +21,7 @@ import ChatPage from "./pages/chat/chatPage";
 import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
 import ActiveCourse from "./pages/activecourse/view/activecourse_page";
 import TutorDetailPage from "./pages/tutorDetail/view/tutor_detail_page.tsx";
+import CourseDetailPage from "./pages/coursedetail/view/course_detail_page.tsx";
 
 function App() {
   return (
@@ -47,6 +48,8 @@ function App() {
               <Route path="/activecourse" element={<ActiveCourse />}></Route>
               <Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
               <Route path="/pickTutor/:tutorId" element={<TutorDetailPage />} />
+              <Route path="/activecourse/:courseId" element={<CourseDetailPage />} />
+              <Route path="/home" element={<HomePage />}></Route>
             </Route>
 
             {/* Tutor Only Pages */}
