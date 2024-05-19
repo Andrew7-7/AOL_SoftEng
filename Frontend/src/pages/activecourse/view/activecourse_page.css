@@ -1,0 +1,103 @@
+body {
+  background: url("https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/asset%2F28719144-86dc0f70-73b1-11e7-911d-60d70fcded21%203.png?alt=media&token=480deee3-7b59-456e-8b8e-c1cb9b9ac02f");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.banner{
+  background: linear-gradient(180deg, #F9C607, #FFDA4F);
+  position: absolute;
+  left: 0rem;
+  top: 4.5rem;
+  right: 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 7rem 5rem 4.7rem 0;
+  box-sizing: border-box;
+}
+
+.banner-title {
+  margin-right: 200px;
+  margin-bottom: 10px;
+  display: inline-block;
+  align-self: flex-end;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 800;
+  font-size: 1.9rem;
+  color: #FFFFFF;
+}
+.banner-subtitle {
+  text-align: right;
+  margin-left: 500px;
+  margin-right: 20px;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: #FFFFFF;
+}
+.banner .banner-image {
+  background: url('https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/PickCourse%2Fmanwithsunglasses.png?alt=media&token=0ce16e25-495b-46f8-a960-4f29141d949c');
+  position: absolute;
+  left: 5rem;
+  top:9px;
+  display: flex;
+  width: 26.5rem;
+  height: 21.9rem;
+  box-sizing: border-box;
+}
+
+.back-t0-home-page {
+  margin-top: 400px;
+  margin-left: 100px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.btn {
+  background: url("https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/PickCourse%2Fback%20button.svg?alt=media&token=617e835c-1b7b-4a34-b6a2-f5309cac506c");
+  width:100%;
+  height: 100%;
+  rotate: 222deg;
+}
+.back-to-home-button-1 {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  display: flex;
+  width: 0.8rem;
+  height: 1.2rem;
+  box-sizing: border-box;
+}
+
+.back-to-home-page-title {
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #A8A8A8;
+}
+.all-course {
+  margin-left: 100px;
+  display: inline-block;
+  align-self: center;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 2.5rem;
+  color: #000000;
+}
+
+.course-list-container{
+  display: grid;
+  margin-top: 50px;
+  margin-left: 70px;
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
+  grid-gap: 21px;
+  align-items: center;
+  justify-content: center;
+}
+

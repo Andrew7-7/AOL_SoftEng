@@ -22,6 +22,7 @@ const tutorsCollection = collection(db, "tutors");
 export class TutorController {
 	static async getTutors(req: Request, res: Response) {
 		try {
+			// console.log(req)
 			const tutorsSnapshot = await getDocs(tutorsCollection);
 			const tutors: Tutor[] = tutorsSnapshot.docs.map((doc) => ({
 				id: doc.id,
