@@ -4,6 +4,7 @@ import useFetch from "../../../../global/hooks/useFetch";
 import CourseTable from "../components/course_table";
 import "./course_management_page.css";
 import { ICourse } from "../../../../global/model/course-interface";
+import { Link } from "react-router-dom";
 
 const CourseManagementPage = () => {
 	const { data: courseDatas, loading: courseLoading } = useFetch(
@@ -17,10 +18,6 @@ const CourseManagementPage = () => {
 			setSearchItem(courseDatas);
 		}
 	}, [courseDatas]);
-
-	if (courseLoading) {
-		return <AdminNav />;
-	}
 
 	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const search = event.target.value;
@@ -52,9 +49,12 @@ const CourseManagementPage = () => {
 								type="search"
 								onChange={handleInputChange}
 							></input>
+							<Link to={`/createCourse`} className="button-container">
+								<div className="button-orange">Add new</div>
+							</Link>
 						</div>
 						<div className="table-section">
-							<CourseTable courseDatas={searchItem} />
+							{!courseLoading && <CourseTable courseDatas={searchItem} />}
 						</div>
 					</div>
 				</div>
