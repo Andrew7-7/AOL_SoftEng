@@ -11,32 +11,33 @@
   color:red;
 }
 
-.banner {
+.bannerHome {
   background-image: linear-gradient(to bottom right, #f27d42, #e24c00);
   display: block;
   height: 558px;
+  /* background-color: red; */
   justify-content: space-between;
   border-bottom-right-radius: 264px;
-}.banner-picture {
+}.banner-picture-home {
   display: inline-block;
   width: 40%;
   height: 621px;
-}.banner-picture img {
+}.banner-picture-home img {
   width: 621px;
   position: relative;
   top: 30px;
   right: 0vw;
-}.banner-text {
+}.banner-text-home {
   display: inline-block;
   text-align: left;
   width: 55%;
-}.banner-text p {
+}.banner-text-home p {
   font-weight: bold;
   font-size: 60px;
   position: relative;
   top: 150px;
   padding: 5px;
-}.banner-text img {
+}.banner-text-home img {
   width: 778px;
   position: relative;
   bottom: 60px;
@@ -45,18 +46,18 @@
 
 .content {
   padding: 60px;
-}.getStarted {
+}.getStartedHome {
   display: flex;
   justify-content: center;
   align-items: center;
-}.getStarted-button {
+}.getStarted-button-home {
   display: flex;
   border-radius: 50px;
   font-size: 40px;
   align-items: center;
   justify-content: center;
   margin: 50px;
-}.getStarted-button a {
+}.getStarted-button-home a {
   display: flex;
   text-emphasis: none;
   color: white;
@@ -72,9 +73,9 @@
   height: 81px;
   font-size: 35px;
   font-weight: 500;
-}.getStarted-button a:hover{
+}.getStarted-button-home a:hover{
   opacity: 0.92;
-}.getStarted-button a:active{
+}.getStarted-button-home a:active{
   opacity: 0.85;
 }
 .section-title {
@@ -82,39 +83,39 @@
   font-weight: bold;
   text-align: left;
   margin: 20px;
-}.popularCourse {
+}.popularCourseHome {
   display: flex;
   flex-direction: row;
   overflow-x: hidden;
   margin-right: 32px;
 }
 
-.active-course-list {
+.active-course-list-home {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
 }
 
 @media only screen and (max-width: 1080px) {
-  .banner-text p {
+  .banner-text-home p {
     font-weight: bold;
     font-size: 50px;
     position: relative;
     top: 150px;
     padding: 5px;
   }
-  .banner-picture {
+  .banner-picture-home {
     display: inline-block;
     width: 40%;
     height: 621px;
   }
-  .banner-picture img {
+  .banner-picture-home img {
     width: 451px;
     position: absolute;
     top: 180px;
     right: 5px;
   }
-  .banner-text img {
+  .banner-text-home img {
     width: 578px;
     position: relative;
     bottom: 10px;

@@ -11,17 +11,20 @@ const StudentNav = () => {
         <p>CODE</p>
       </Link>
       <div className="rightNav">
-        {user.username ? (
-          user.role === "tutor" ? (
-            <Link to={"/activeClass"}>Tutor Page</Link>
-          ) : user.role === "admin" ? (
-            <Link to={"/accountManagement"}>Admin Page</Link>
+        <Link to={"/1/pickTutor"}>Pick tutor</Link>
+        <div className="profile">
+          {user.username ? (
+            user.role === "tutor" ? (
+              <Link to={"/activeClass"}>Tutor Page</Link>
+            ) : user.role === "admin" ? (
+              <Link to={"/accountManagement"}>Admin Page</Link>
+            ) : (
+              <Link to={"/profile"}>{user.username}</Link>
+            )
           ) : (
-            <Link to={"/profile"}>{user.username}</Link>
-          )
-        ) : (
-          <Link to={"/login"}>Sign In</Link>
-        )}
+            <Link to={"/login"}>Sign In</Link>
+          )}
+        </div>
       </div>
     </div>
   );
