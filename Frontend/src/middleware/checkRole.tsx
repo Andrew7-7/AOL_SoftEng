@@ -11,6 +11,8 @@ const CheckRole = ({ role }: { role: string }) => {
         navigate("/");
       } else if (user.role === "admin") {
         navigate("/accountManagement");
+      } else if (user.role === "tutor") {
+        navigate("/activeClass");
       }
     }
   }, []);

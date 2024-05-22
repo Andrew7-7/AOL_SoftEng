@@ -364,17 +364,19 @@ export class UserControllers {
           const backgroundRef = collection(db, "Student");
           const q = query(backgroundRef, where("email", "==", email));
           const querySnapshot = await getDocs(q);
-
+          let updatedData;
           if (!querySnapshot.empty) {
             const doc = querySnapshot.docs[0];
             const docRef = doc.ref;
             await updateDoc(docRef, {
               profileURL: downloadURLs,
             });
+            const updatedDocSnapshot = await getDoc(docRef);
+            updatedData = updatedDocSnapshot.data();
           } else {
             console.log("No document found with the given email.");
           }
-          res.json({ downloadURLs });
+          res.json({ downloadURLs, profile: updatedData });
         }
       );
     } catch (error) {
@@ -416,7 +418,7 @@ export class UserControllers {
         });
         const updatedDocSnapshot = await getDoc(docRef);
         const updatedData = updatedDocSnapshot.data();
-        res.status(200).json({ studentProfile: updatedData, updatedUser });
+        res.status(200).json({ profile: updatedData, updatedUser });
       } else {
         console.log("No document found with the given email.");
       }
