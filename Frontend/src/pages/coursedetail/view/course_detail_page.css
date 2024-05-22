@@ -1,0 +1,18 @@
+
+.
+.back-to-home-button {
+  box-shadow: 0rem 0rem 0.9rem 0rem rgba(0, 0, 0, 0.25);
+  margin: 0.6rem 9.8rem 15.6rem 0;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+.banner{
+    margin-top: 100px;
+}
+
+.polygon-1 {
+  margin: 0.5rem 0.4rem 0.5rem 0;
+  width: 0.8rem;
+  height: 1.2rem;
+}

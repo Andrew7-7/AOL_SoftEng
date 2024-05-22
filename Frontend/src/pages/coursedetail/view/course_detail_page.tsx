@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import useFetch from "../../../global/hooks/useFetch";
 import StudentNav from "../../../global/components/navbar/student/student_navbar";
-
+import './course_detail_page.css'
 const CourseDetailPage = () => {
   const { courseId } = useParams();
 
@@ -23,6 +23,7 @@ interface currentCourse{
   CourseID: number,
   Sessions: number,
   CourseImage: string,
+  banner:string,
 }
 
   console.log(tutorData);
@@ -30,10 +31,15 @@ interface currentCourse{
   return (
     <>
       <StudentNav />
-      <h1>{courseId}</h1>
-    {tutorData.CourseID}
-    {tutorData.Chapters}
-    <Link to={'/contohdetailpage'}>contoh </Link>
+      <div className="banner-activecourse" style={{backgroundImage: `url("${tutorData.banner}")`, backgroundSize: "100%" }}>
+        <div className="back-to-home-button">
+          <img className="polygon-1" src="assets/vectors/Unknown" />
+          <span className="back-to-course-page">
+          Back to Course Page
+          </span>
+        </div>
+       
+      </div>
     </>
   );
 };

@@ -1,0 +1,459 @@
+.stepcode-2-sub11 {
+  font-family: 'Poppins';
+  font-weight: 900;
+  font-size: 2.8rem;
+  line-height: 1.333;
+}
+.stepcode-2 {
+  font-family: 'Poppins';
+  font-weight: 900;
+  font-size: 2.8rem;
+  line-height: 1.333;
+  color: #000000;
+}
+.course-description-page .stepcode-2 {
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 900;
+  font-size: 2.8rem;
+  color: #E24E03;
+}
+.course-description-page .stepcode-1 {
+  display: flex;
+  box-sizing: border-box;
+}
+.course-description-page .discussion-1 {
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: #000000;
+}
+.course-description-page .discussion {
+  display: flex;
+  box-sizing: border-box;
+}
+.course-description-page .course-1 {
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: #000000;
+}
+.course-description-page .course {
+  display: flex;
+  box-sizing: border-box;
+}
+.course-description-page .container-14 {
+  margin: 0.1rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 16rem;
+  height: fit-content;
+  box-sizing: border-box;
+}
+.course-description-page .sign-in {
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: #FFFFFF;
+}
+.course-description-page .sign-in-button {
+  border-radius: 0.7rem;
+  background: #F17C41;
+  position: relative;
+  display: flex;
+  padding: 0.1rem 0.1rem 0.2rem 0;
+  width: 10.3rem;
+  box-sizing: border-box;
+}
+.course-description-page .container-15 {
+  margin: 1rem 0 0.8rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 28.8rem;
+  height: fit-content;
+  box-sizing: border-box;
+}
+.course-description-page .nav-bar {
+  box-shadow: 0rem -0.1rem 2rem 0rem rgba(63, 63, 63, 0.25);
+  background: #FFFFFF;
+  position: relative;
+  margin: 0 0.1rem 7.1rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1.1rem 3.5rem 0.9rem 3rem;
+  width: 90rem;
+  box-sizing: border-box;
+}
+.course-description-page .course-description {
+  margin: 0 1.7rem 1.7rem 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 1.8rem;
+  color: #000000;
+}
+.course-description-page .this-beginner-level-course-provides-acomprehensive-introduction-to-the-cprogramming-language-you-will-learn-the-fundamentals-of-cincluding-variables-data-types-control-flow-functions-and-arrays-through-hands-on-exercises-and-programming-projects-you-will-gain-asolid-foundation-in-cprogramming-and-be-able-to-write-efficient-and-structured-code {
+  margin: 0 0 2.1rem 24.7rem;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 300;
+  font-size: 1.2rem;
+  color: #2E2E2E;
+}
+.course-description-page .book-this-course {
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 1.8rem;
+  color: #F17C41;
+}
+.course-description-page .book-button {
+  border-radius: 0.8rem;
+  border: 0.2rem solid #F17C41;
+  position: relative;
+  margin: 0 0 2.1rem 0.6rem;
+  display: flex;
+  padding: 0.9rem 0.1rem 0.9rem 0;
+  width: 19rem;
+  box-sizing: border-box;
+}
+.course-description-page .total-hours-9-hours-33-minutes {
+  margin: 1.9rem 0.9rem 0 0;
+  display: inline-block;
+  width: 23.8rem;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 1.2rem;
+  color: #2E2E2E;
+}
+.course-description-page .chapter-breakdown {
+  margin-bottom: 1.1rem;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 1.8rem;
+  color: #000000;
+}
+.course-description-page .container-9 {
+  margin: 0 25.5rem 0.6rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 42.3rem;
+  box-sizing: border-box;
+}
+.course-description-page .chapter-1-introduction-to-cprogramming-chapter-2-variables-and-data-types-chapter-3-operators-and-expressions-chapter-4-control-flow-chapter-5-functions-chapter-6-arrays-and-strings-chapter-7-pointers-and-memory-management-chapter-8-file-input-and-output-chapter-9-advanced-concepts-chapter-10-cprogramming-best-practices {
+  margin-left: 9.7rem;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 300;
+  font-size: 1.2rem;
+  color: #2E2E2E;
+}
+.course-description-page .container-2 {
+  background: url('assets/images/Dc0F7073B111E7911D60D70Fcded212.png');
+  position: relative;
+  margin-left: 0.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16.1rem 0 12.4rem 0;
+  width: 90rem;
+  box-sizing: border-box;
+}
+.course-description-page .container-7 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90.1rem;
+  height: fit-content;
+  box-sizing: border-box;
+}
+.course-description-page .polygon-1 {
+  margin: 0.5rem 0.4rem 0.5rem 0;
+  width: 0.8rem;
+  height: 1.2rem;
+}
+.course-description-page .back-to-course-page {
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #FFFFFF;
+}
+.course-description-page .back-to-home-button {
+  box-shadow: 0rem 0rem 0.9rem 0rem rgba(0, 0, 0, 0.25);
+  margin: 0.6rem 9.8rem 15.6rem 0;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+.course-description-page .introduction-to-cprogramming {
+  box-shadow: 0rem 0rem 0.9rem 0rem rgba(0, 0, 0, 0.25);
+  margin: 4.3rem 3.9rem 0 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 700;
+  font-size: 3.1rem;
+  color: #FFFFFF;
+}
+.course-description-page .logo {
+  background: url('assets/images/Logo.png');
+  margin-bottom: 0.4rem;
+  width: 15.8rem;
+  height: 17.9rem;
+}
+.course-description-page .banner {
+  background: radial-gradient(60.45% 60.45% at 3.58% 4.81%, #C3E1FF 0%, #649AD2 100%);
+  position: absolute;
+  left: 0rem;
+  top: 6.3rem;
+  right: 0rem;
+  display: flex;
+  flex-direction: row;
+  padding: 1.8rem 0 1.4rem 0;
+  box-sizing: border-box;
+}
+.course-description-page .icongoogle-docs {
+  margin-right: 0.9rem;
+  width: 2.6rem;
+  height: 3.1rem;
+}
+.course-description-page .course-detail-1 {
+  margin: 0.4rem 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: #FFFFFF;
+}
+.course-description-page .container {
+  border-radius: 1.3rem;
+  background: #141414;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  padding-top: 1.3rem;
+  width: 21.9rem;
+  height: 26rem;
+  box-sizing: border-box;
+}
+.course-description-page .total-sessions {
+  margin: 0 6.2rem 2.1rem 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #474747;
+}
+.course-description-page .line-10 {
+  background: #C8C8C8;
+  margin-bottom: 2.3rem;
+  width: 21.9rem;
+  height: 0.1rem;
+}
+.course-description-page .total-chapters {
+  margin: 0 6.1rem 2.4rem 0;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #474747;
+}
+.course-description-page .line-11 {
+  background: #C8C8C8;
+  margin-bottom: 2rem;
+  width: 21.9rem;
+  height: 0.1rem;
+}
+.course-description-page .skill-level-beginner {
+  margin-right: 4.4rem;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #474747;
+}
+.course-description-page .container-5 {
+  border-radius: 0 0 1.3rem 1.3rem;
+  background: #FFFFFF;
+  position: absolute;
+  right: 0rem;
+  bottom: 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 20.1rem;
+  box-sizing: border-box;
+}
+.course-description-page .course-detail {
+  box-shadow: 0rem 0.6rem 1.2rem 0rem rgba(0, 0, 0, 0.2), 0rem 0rem 0.5rem 0rem rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: 10.1rem;
+  top: 24.9rem;
+  display: flex;
+  padding-right: 0.3rem;
+  width: 22.2rem;
+  height: 26rem;
+  box-sizing: border-box;
+}
+.course-description-page .container-11 {
+  margin: 0 2rem 3.1rem 0;
+  width: 3.7rem;
+  height: 3.5rem;
+}
+.course-description-page .container-10 {
+  width: 3.7rem;
+  height: 3.5rem;
+}
+.course-description-page .container-12 {
+  width: 3.7rem;
+  height: 3.5rem;
+}
+.course-description-page .ellipse-19 {
+  width: 3.7rem;
+  height: 3.5rem;
+}
+.course-description-page .container-3 {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  column-gap: 2.9rem;
+  width: 16.8rem;
+  height: fit-content;
+  box-sizing: border-box;
+}
+.course-description-page .vector-11 {
+  width: 1.8rem;
+  height: 1.7rem;
+}
+.course-description-page .phone-call {
+  position: absolute;
+  top: 0.8rem;
+  right: 1rem;
+  display: flex;
+  width: 1.8rem;
+  height: 1.7rem;
+  box-sizing: border-box;
+}
+.course-description-page .container-6 {
+  position: relative;
+  margin-bottom: 0.8rem;
+  display: flex;
+  width: 16.8rem;
+  box-sizing: border-box;
+}
+.course-description-page .stepcode {
+  margin: 0.1rem 0rem 0 0;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: #E24E03;
+}
+.stepcode-sub17 {
+  font-family: 'Poppins';
+  font-weight: 900;
+  font-size: 1.5rem;
+  line-height: 1.333;
+}
+.stepcode {
+  font-family: 'Poppins';
+  font-weight: 900;
+  font-size: 1.5rem;
+  line-height: 1.333;
+  color: #000000;
+}
+.course-description-page .container {
+  margin-bottom: 0.1rem;
+  display: inline-block;
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 300;
+  font-size: 1.5rem;
+  color: #000000;
+}
+.course-description-page .container-1 {
+  margin: 0 0.4rem;
+  display: flex;
+  flex-direction: row;
+  align-self: flex-start;
+  width: fit-content;
+  box-sizing: border-box;
+}
+.course-description-page .container-8 {
+  margin-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.course-description-page .ellipse-22 {
+  margin: 0 5.1rem 3.1rem 0;
+  width: 3.7rem;
+  height: 3.5rem;
+}
+.course-description-page .start-learning-with-us-1 {
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 1.5rem;
+  text-decoration-line: underline;
+  color: #F46440;
+}
+.course-description-page .start-learning-with-us {
+  margin: 2.4rem 0 2rem 0;
+  display: flex;
+  box-sizing: border-box;
+}
+.course-description-page .container-4 {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+.course-description-page .vector-12 {
+  width: 1.9rem;
+  height: 1.5rem;
+}
+.course-description-page .twitter {
+  position: absolute;
+  top: 2.2rem;
+  right: 32.6rem;
+  display: flex;
+  width: 1.9rem;
+  height: 1.5rem;
+  box-sizing: border-box;
+}
+.course-description-page .component-2 {
+  background: #FFFFFF;
+  position: absolute;
+  left: -0.1rem;
+  bottom: 0rem;
+  display: flex;
+  padding: 1.3rem 0 2.4rem 20rem;
+  width: 90rem;
+  height: 10.3rem;
+  box-sizing: border-box;
+}
+.course-description-page {
+  background: #FFFFFF;
+  display: flex;
+  padding-bottom: 4.7rem;
+  width: 90rem;
+  box-sizing: border-box;
+}

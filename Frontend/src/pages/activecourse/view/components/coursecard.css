@@ -7,7 +7,7 @@ a {
   text-decoration: none;
   color: black;
 }
-.card {
+.card-activecourse {
   overflow: hidden;
   width: 360px;
   height: 378px;
@@ -20,10 +20,10 @@ a {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
-.card:active {
+.card-activecourse:active {
   opacity: 0.9;
 }
-.card-title {
+.card-title-activecourse {
   border-radius: 22px 22px 0 0;
   display: absolute;
   align-items: center;
@@ -37,7 +37,7 @@ a {
   background-size: 120%;
 }
 
-.card-title p {
+.card-title-activecourse p {
   font-size: 28px;
   font-weight: bold;
   align-self: center;
@@ -47,12 +47,12 @@ a {
   margin-right: 20px;
 }
 
-.card-text {
+.card-text-activecourse {
   display: flex;
   flex-direction: row;
 }
 
-.card-text-detail {
+.card-text-detail-activecourse {
   display: flex;
   width: 180px;
   /* background-color: red; */
@@ -62,14 +62,14 @@ a {
   justify-content: center;
 }
 
-.card-text-detail-title {
+.card-text-detail-title-activecourse {
   font-size: 21px;
 }
-.card-text-detail-number {
+.card-text-detail-number-activecourse {
   font-size: 32px;
   font-weight: bold;
 }
-.card-title span {
+.card-title-activecourse span {
   margin-top: 20px;
   margin-left: 230px;
   margin-bottom: 30px;
