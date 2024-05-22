@@ -13,7 +13,7 @@ const CourseUpdatePage = () => {
 	);
 
 	if (courseLoading) {
-		return <AdminNav />;
+		return <AdminNav clickedItem="Course" />;
 	}
 
 	const courseData: ICourse = data;
@@ -22,7 +22,7 @@ const CourseUpdatePage = () => {
 
 	return (
 		<div className="course-update-page">
-			<AdminNav />
+			<AdminNav clickedItem="Course" />
 			<div className="content-section">
 				<div className="page-center">
 					<div className="content-container">

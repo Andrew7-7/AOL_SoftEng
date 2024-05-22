@@ -35,7 +35,7 @@ const CourseManagementPage = () => {
 
 	return (
 		<div className="course-management-page">
-			<AdminNav />
+			<AdminNav clickedItem="Course" />
 			<div className="content-section">
 				<div className="page-center">
 					<div className="content-container">
