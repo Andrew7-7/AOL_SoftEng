@@ -163,41 +163,40 @@ const AccountManagementPage = () => {
 			</div>
 		);
 	};
-
-	return (
-		<div className="outerDiv">
-			{warningPopup === true ? WarningModal() : null}
-			<AdminNav />
-			<div className="accountManagement">
-				<p className="accManagementTitle">Account Management</p>
-				<input
-					className="searchBar"
-					placeholder="Search"
-					type="search"
-					onChange={handleInputChange}
-				></input>
-				<div className="tableHeader">
-					<div className="dataDiv">
-						<p>Email</p>
-					</div>
-					<div className="roleDiv">
-						<p>Role</p>
-					</div>
-					<div className="actionDiv">Action</div>
-				</div>
-				<div className="accountTable">
-					{searchUsers.map((user, index) => (
-						<AccountCard
-							index={index}
-							email={user.email}
-							role={user.role}
-							isBanned={user.isBanned}
-						/>
-					))}
-				</div>
-			</div>
-		</div>
-	);
+  return (
+    <div className="outerDiv">
+      {warningPopup === true ? WarningModal() : null}
+      <AdminNav clickedItem="Account" />
+      <div className="accountManagement">
+        <p className="accManagementTitle">Account Management</p>
+        <input
+          className="searchBar"
+          placeholder="Search"
+          type="search"
+          onChange={handleInputChange}
+        ></input>
+        <div className="tableHeader">
+          <div className="dataDiv">
+            <p>Email</p>
+          </div>
+          <div className="roleDiv">
+            <p>Role</p>
+          </div>
+          <div className="actionDiv">Action</div>
+        </div>
+        <div className="accountTable">
+          {searchUsers.map((user, index) => (
+            <AccountCard
+              index={index}
+              email={user.email}
+              role={user.role}
+              isBanned={user.isBanned}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default AccountManagementPage;

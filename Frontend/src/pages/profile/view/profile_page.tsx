@@ -62,7 +62,14 @@ const ProfilePage = () => {
             },
           }
         );
-        setDownloadURL(response.data.downloadURLs);
+        if (response.status === 200) {
+          setDownloadURL(response.data.downloadURLs);
+          window.localStorage.removeItem("profile");
+          window.localStorage.setItem(
+            "profile",
+            JSON.stringify(response.data.profile)
+          );
+        }
       } catch (error) {
         console.log(error);
       } finally {
