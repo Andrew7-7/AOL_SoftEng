@@ -1,18 +1,129 @@
+body {
+  background: url("https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/asset%2F28719144-86dc0f70-73b1-11e7-911d-60d70fcded21%203.png?alt=media&token=480deee3-7b59-456e-8b8e-c1cb9b9ac02f");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
-.
-.back-to-home-button {
-  box-shadow: 0rem 0rem 0.9rem 0rem rgba(0, 0, 0, 0.25);
-  margin: 0.6rem 9.8rem 15.6rem 0;
+
+.back-t0-home-page-coursedetail {
+  margin-top: 130px;
+  margin-left: 100px;
+  position: relative;
   display: flex;
   flex-direction: row;
   box-sizing: border-box;
 }
-.banner{
-    margin-top: 100px;
-}
 
-.polygon-1 {
-  margin: 0.5rem 0.4rem 0.5rem 0;
+.btn-coursedetail {
+  background: url("https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/PickCourse%2Fback%20button.svg?alt=media&token=617e835c-1b7b-4a34-b6a2-f5309cac506c");
+  width:100%;
+  height: 100%;
+  rotate: 222deg;
+}
+.back-to-home-button-1-coursedetail {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  display: flex;
   width: 0.8rem;
   height: 1.2rem;
+  box-sizing: border-box;
+}
+
+.back-to-home-page-title-coursedetail {
+  overflow-wrap: break-word;
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #A8A8A8;
+}
+
+.banner-coursedetail {
+  position: absolute;
+  left: 0rem;
+  top: 4.5rem;
+  height: 341px;
+  right: 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 7rem 5rem 4.7rem 0;
+  box-sizing: border-box;
+}
+
+.course-detail-descrption-coursedetail {
+  box-shadow: 0.2rem 0.6rem 1.2rem 0rem rgba(0, 0, 0, 0.2),
+    0rem 0rem 0.5rem 0rem rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: 10rem;
+  top: 20rem;
+  display: flex;
+  width: 21.9rem;
+  height: 27.1rem;
+  box-sizing: border-box;
+  border-radius: 1.3rem 1.3rem 1.3rem 1.3rem;
+}
+.title-description-coursedetail {
+  display: flex;
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 2rem;
+  color: white;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  background-color: rgb(52, 51, 51);
+  padding-right: 57px;
+  align-self: center;
+  justify-content: center;
+  padding-left: 58px;
+  border-radius: 1.3rem 1.3rem 0 0;
+}
+.container-2-coursedetail {
+  border-radius: 1.3rem 1.3rem 1.3rem 1.3rem;
+  background: rgb(255, 255, 255);
+  margin-right: 2100px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 27.1rem;
+  box-sizing: border-box;
+}
+.total-sessions-coursedetail {
+  display: inline-block;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #474747;
+}
+.line-coursedetail {
+  background: #c8c8c8;
+  margin-bottom: 2.3rem;
+  width: 21.9rem;
+  height: 0.1rem;
+}
+.total-chapters-coursedetail {
+  display: inline-block;
+  margin: 0;
+  padding-bottom: 25px;
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #474747;
+}
+.line-1-coursedetail {
+  background: #c8c8c8;
+  width: 21.9rem;
+  height: 0.1rem;
+}
+.skill-level-coursedetail {
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #474747;
 }

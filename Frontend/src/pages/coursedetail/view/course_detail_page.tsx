@@ -5,40 +5,53 @@ import './course_detail_page.css'
 const CourseDetailPage = () => {
   const { courseId } = useParams();
 
-  const { data: tutorData, loading: tutorLoading } = useFetch(
+  const { data: courseData, loading: courseLoading } = useFetch(
     `http://localhost:3002/course/getCourse/${courseId}`
   );
 
-  if (tutorLoading) {
+  if (courseLoading) {
     return <div></div>;
   }
-
-interface currentCourse{
-  id: string,
-  Type: string,
-  Color: string,
-  CourseName: string,
-  Status: string,
-  Chapters: number,
-  CourseID: number,
-  Sessions: number,
-  CourseImage: string,
-  banner:string,
-}
-
-  console.log(tutorData);
 
   return (
     <>
       <StudentNav />
-      <div className="banner-activecourse" style={{backgroundImage: `url("${tutorData.banner}")`, backgroundSize: "100%" }}>
-        <div className="back-to-home-button">
-          <img className="polygon-1" src="assets/vectors/Unknown" />
-          <span className="back-to-course-page">
-          Back to Course Page
-          </span>
+      <div className="banner-coursedetail" style={{ backgroundImage: `url("${courseData.banner}")`, backgroundSize: "100%" }}>
+        <Link to={`/activecourse`}>
+          <div className="back-t0-home-page-coursedetail">
+            <div className="back-t0-home-page-coursedetail">
+              <div className="back-to-home-button-1-coursedetail">
+                <div className="btn-coursedetail"></div>
+              </div>
+              <span className="back-to-home-page-title-coursedetail">
+                Back to Course Page
+              </span>
+            </div>
+          </div>
+        </Link>
+        <div className="course-detail-descrption-coursedetail">
+          <div className="container-coursedetail">
+            <div className="container-2-coursedetail">
+              <div className="title-description-coursedetail">
+                Course Detail
+              </div>
+              <div className="line-1-coursedetail"></div>
+              <div className="total-sessions-coursedetail">
+                {courseData.Sessions} Total Sessions
+              </div>
+              <div className="line-coursedetail">
+              </div>
+              <div className="total-chapters-coursedetail">
+                {courseData.Chapters} Total Chapters
+              </div>
+              <div className="line-coursedetail">
+              </div>
+              <span className="skill-level-coursedetail">
+                Skill Level: {courseData.skill}
+              </span>
+            </div>
+          </div>
         </div>
-       
       </div>
     </>
   );

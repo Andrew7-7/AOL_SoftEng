@@ -28,6 +28,7 @@ import CourseUpdatePage from "./pages/admin/courseUpdate/course_update_page.tsx"
 import CreateCoursePage from "./pages/admin/createCourse/create_course_page.tsx";
 import ActiveClass from "./pages/tutor/activeClass/view/activeClass.tsx";
 import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassDetail.tsx";
+
 function App() {
 	return (
 		<>
