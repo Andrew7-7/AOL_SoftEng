@@ -23,15 +23,17 @@ import TutorDetailPage from "./pages/tutorDetail/view/tutor_detail_page.tsx";
 import CourseDetailPage from "./pages/coursedetail/view/course_detail_page.tsx";
 
 import AccountManagementPage from "./pages/admin/accountManagement/view/accountManagementPage";
+import CourseManagementPage from "./pages/admin/courseManagement/view/course_management_page.tsx";
+import CourseUpdatePage from "./pages/admin/courseUpdate/course_update_page.tsx";
+import CreateCoursePage from "./pages/admin/createCourse/create_course_page.tsx";
 import ActiveClass from "./pages/tutor/activeClass/view/activeClass.tsx";
 import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassDetail.tsx";
 function App() {
-  return (
-    <>
-      <Routes>
-        {/* Is Banned */}
-        <Route path="/banned" element={<IsBanned />}></Route>
-
+	return (
+		<>
+			<Routes>
+				{/* Is Banned */}
+				<Route path="/banned" element={<IsBanned />}></Route>
         <Route path="/" element={<HomePage />}></Route>
         {/* Verify Token */}
         <Route element={<VerifyToken />}>
@@ -63,20 +65,28 @@ function App() {
                 element={<ActiveClassDetail />}
               />
             </Route>
-
-            {/* Admin Only Pages */}
-            <Route element={<CheckRole role={"admin"} />}>
-              <Route path="/adminDummy" element={<AdminDummy />}></Route>
-              <Route
-                path="/accountManagement"
-                element={<AccountManagementPage />}
-              ></Route>
-            </Route>
-          </Route>
-        </Route>
-      </Routes>
-    </>
-  );
+						{/* Admin Only Pages */}
+						<Route element={<CheckRole role={"admin"} />}>
+							<Route path="/adminDummy" element={<AdminDummy />}></Route>
+							<Route
+								path="/accountManagement"
+								element={<AccountManagementPage />}
+							/>
+							<Route
+								path="/courseManagement"
+								element={<CourseManagementPage />}
+							/>
+							<Route
+								path="/courseManagement/:courseId"
+								element={<CourseUpdatePage />}
+							/>
+							<Route path="/createCourse" element={<CreateCoursePage />} />
+						</Route>
+					</Route>
+				</Route>
+			</Routes>
+		</>
+	);
 }
 
 export default App;

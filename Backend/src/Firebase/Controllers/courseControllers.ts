@@ -15,21 +15,90 @@ interface Course {
     [key: string]: any;
 }
 
+interface Course {
+	id: string;
+	[key: string]: any;
+}
+
 const coursesCollection = collection(db, "Courses");
 
 export class CoursesController {
-    static async getCourses(req: Request, res: Response) {
-        try {
-            const coursesSnapshot = await getDocs(coursesCollection);
-            const courses = coursesSnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            res.status(200).json(courses);
-        } catch (error) {
-            res.status(500).json({ error: "Error fetching courses" });
-        }
-    }
+	static async getCourses(req: Request, res: Response) {
+		try {
+			const coursesSnapshot = await getDocs(coursesCollection);
+			const courses: Course[] = coursesSnapshot.docs.map((doc) => ({
+				id: doc.id,
+				...doc.data(),
+			}));
+
+			for (const course of courses) {
+				//fetch course detail collection
+				const collectionName = "CourseDetail";
+				const docRef = doc(db, "Courses", course.id);
+				const collectionSnapshot = await getDocs(
+					collection(docRef, collectionName)
+				);
+
+				//TODO tipe interface courseDetail
+				const courseDetail: any = [];
+
+				if (!collectionSnapshot.empty) {
+					collectionSnapshot.forEach((collectionDoc) => {
+						courseDetail.push({
+							id: collectionDoc.id,
+							...collectionDoc.data(),
+						});
+					});
+				}
+				course[collectionName] = courseDetail;
+			}
+			res.status(200).json(courses);
+		} catch (error) {
+			res.status(500).json({ error: "Error fetching courses" });
+		}
+	}
+
+	static async getCourseById(req: Request, res: Response) {
+		try {
+			const courseId = req.params.courseId;
+
+			const courseDocRef = doc(db, "Courses", courseId);
+
+			const courseDocSnapshot = await getDoc(courseDocRef);
+
+			if (courseDocSnapshot.exists()) {
+				const course: Course = {
+					id: courseId,
+					...courseDocSnapshot.data(),
+				};
+
+				//fetch course detail collection
+				const collectionName = "CourseDetail";
+				const docRef = doc(db, "Courses", course.id);
+				const collectionSnapshot = await getDocs(
+					collection(docRef, collectionName)
+				);
+
+				//TODO tipe interface courseDetail
+				const courseDetail: any = [];
+
+				if (!collectionSnapshot.empty) {
+					collectionSnapshot.forEach((collectionDoc) => {
+						courseDetail.push({
+							id: collectionDoc.id,
+							...collectionDoc.data(),
+						});
+					});
+				}
+				course[collectionName] = courseDetail;
+				res.status(200).json(course);
+			} else {
+				res.status(500).json({ error: "Course not found" });
+			}
+		} catch (error) {
+			res.status(500).json({ error: "Error fetching courses" });
+		}
+	}
 
     static async getCourse(req: Request, res: Response) {
         try {

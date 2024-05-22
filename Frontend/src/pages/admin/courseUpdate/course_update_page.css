@@ -1,0 +1,8 @@
+.course-update-page {
+	display: flex;
+}
+
+.course-update-page .content-section {
+	padding-top: 50px;
+	flex: 1;
+}

@@ -1,0 +1,39 @@
+.course-table-container {
+	margin-top: 20px;
+	overflow-y: auto;
+	height: 70vh;
+}
+
+.course-table-container .table-content {
+}
+
+.course-table-container .table-header {
+	display: grid;
+	grid-template-columns: 5fr 1fr 1fr 1.5fr 1fr;
+	gap: 20px;
+	padding: 15px;
+	border-bottom: 1px rgb(192, 192, 192) solid;
+	font-weight: 600;
+	box-sizing: border-box;
+}
+
+.course-table-container .table-content .table-row {
+	display: grid;
+	grid-template-columns: 5fr 1fr 1fr 1.5fr 1fr;
+	gap: 20px;
+	padding: 15px;
+	border-bottom: 1px rgb(192, 192, 192) solid;
+	transition: all;
+}
+
+.course-table-container .table-content .table-row-container {
+	color: var(--font-light);
+}
+
+.course-table-container .table-content .table-row:hover {
+	background-color: rgb(192, 192, 192);
+	cursor: pointer;
+}
+
+.course-table-container .table-content .table-row p {
+}
