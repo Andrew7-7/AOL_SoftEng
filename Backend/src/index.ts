@@ -9,6 +9,7 @@ import { chatRoutes } from "./Firebase/Routes/chatRoutes";
 import { adminRoutes } from "./Firebase/Routes/adminRoutes";
 import { otpRoutes } from "./Firebase/Routes/otpRoutes";
 import { coursesRoutes } from "./Firebase/Routes/courseRoutes";
+import { homeRoutes } from "./Firebase/Routes/homeRoutes";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use("/admin", adminRoutes);
 app.use("/otp", otpRoutes);
 app.use("/tutor", tutorRoutes);
 app.use("/course", coursesRoutes);
+app.use("/home", homeRoutes);
 
 app.use("/chat", chatRoutes);
 const server = http.createServer(app);
