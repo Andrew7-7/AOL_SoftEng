@@ -1,6 +1,5 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-
 // Pages
 import HomePage from "./pages/home/view/home_page";
 import LoginPage from "./pages/login/view/login_page";
@@ -13,7 +12,11 @@ import CheckRole from "./middleware/checkRole";
 import TutorDummy from "./pages/tutor/dummy/tutorDummy";
 import AdminDummy from "./pages/admin/dummy/adminDummy";
 import IsBanned from "./pages/error/isBanned/isBanned";
+import ContactSidebar from "./pages/sidebar/contactSidebar";
 import ChatPage from "./pages/chat/chatPage";
+import ForumPage from "./pages/forum/forumPage";
+import RepliesPage from "./pages/replies/RepliesPage";
+
 import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
 import ActiveCourse from "./pages/activecourse/view/activecourse_page";
 import TutorDetailPage from "./pages/tutorDetail/view/tutor_detail_page.tsx";
@@ -34,6 +37,9 @@ function App() {
         <Route element={<VerifyToken />}>
           {/* Kalau udah login gabisa login register lagi */}
           <Route element={<AlreadyLoggedIn />}>
+                    <Route path="/chat" element={<ChatPage/>}></Route>
+        <Route path="/reply" element={<ForumPage />}></Route>
+        <Route path="/replies/:forumId" element={<RepliesPage />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/register" element={<RegisterPage />}></Route>
           </Route>
@@ -48,7 +54,6 @@ function App() {
               <Route path="/activecourse" element={<ActiveCourse />}></Route>
             <Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
             <Route path="/pickTutor/:tutorId" element={<TutorDetailPage />} />
-
             {/* Tutor Only Pages */}
             <Route element={<CheckRole role={"tutor"} />}>
               <Route path="/tutorDummy" element={<TutorDummy />}></Route>
