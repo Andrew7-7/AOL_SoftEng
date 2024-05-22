@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { ITutor } from "../../../global/model/tutor-interface";
 import starIcon from "../../../global/assets/star.png";
 
 import "./tutor_detail.css";
 
 const TutorDetail: React.FC<{ tutorData: ITutor }> = ({ tutorData }) => {
+	const [showAllSKills, setShowAllSkills] = useState<boolean>(false);
+
+	const handleToggleSkills = () => {
+		setShowAllSkills(!showAllSKills);
+	};
+
+	const displayedSkills: string[] = showAllSKills
+		? tutorData.skillSet
+		: tutorData.skillSet.slice(0, 6);
+
 	return (
 		<div className="tutor-detail-container">
 			<div className="content-top">
@@ -25,12 +35,17 @@ const TutorDetail: React.FC<{ tutorData: ITutor }> = ({ tutorData }) => {
 					<div className="bottom">
 						<p>Skill set</p>
 						<div className="skill-set-container">
-							{tutorData.skillSet.map((skill, index) => (
+							{displayedSkills.map((skill, index) => (
 								<div className="skill-set" key={index}>
 									{skill}
 								</div>
 							))}
 						</div>
+						{tutorData.skillSet.length > 6 && (
+							<div className="view-more-button" onClick={handleToggleSkills}>
+								{showAllSKills ? "View Less" : "View More"}
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

@@ -1,0 +1,17 @@
+.course-management-page {
+	display: flex;
+}
+
+.course-management-page .content-section {
+	padding-top: 50px;
+	flex: 1;
+}
+
+.course-management-page .top-section {
+	display: flex;
+	justify-content: space-between;
+}
+
+.course-management-page .top-section .button-container {
+	width: 200px;
+}

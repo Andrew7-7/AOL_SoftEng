@@ -9,4 +9,6 @@ const coursesRoutes = Router();
 coursesRoutes.get("/getCourses", CoursesController.getCourses);
 coursesRoutes.get("/getCourse/:courseId", CoursesController.getCourse);
 
+coursesRoutes.get("/getCourseById/:courseId", CoursesController.getCourseById);
+
 export { coursesRoutes };

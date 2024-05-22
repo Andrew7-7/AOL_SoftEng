@@ -10,4 +10,6 @@ tutorRoutes.get("/getTutors", TutorController.getTutors);
 
 tutorRoutes.get("/getTutor/:tutorId", TutorController.getTutor);
 
+tutorRoutes.post("/getActiveClass", accToken, TutorController.getActiveClass);
+tutorRoutes.post("/getActiveClassDetail", accToken, TutorController.getActiveClassDetail);
 export { tutorRoutes };

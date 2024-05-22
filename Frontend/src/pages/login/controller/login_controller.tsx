@@ -37,7 +37,7 @@ const handleLogin = async (
         if (res.data.userData.role === "student") {
           navigate("/");
         } else if (res.data.userData.role === "tutor") {
-          navigate("/");
+          navigate("/activeClass");
         } else if (res.data.userData.role === "admin") {
           navigate("/accountManagement");
         }

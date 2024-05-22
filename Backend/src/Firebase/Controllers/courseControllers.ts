@@ -1,60 +1,125 @@
 import {
-    collection,
-    getDocs,
-    addDoc,
-    doc,
-    query,
-    where,
-    deleteDoc,
-    getDoc,
+	collection,
+	getDocs,
+	addDoc,
+	doc,
+	query,
+	where,
+	deleteDoc,
+	getDoc,
 } from "firebase/firestore";
 import { db } from "../Config/config";
 import { Request, Response } from "express";
 import { connectStorageEmulator } from "firebase/storage";
+
 interface Course {
-    [key: string]: any;
+	id: string;
+	[key: string]: any;
 }
 
 const coursesCollection = collection(db, "Courses");
 
 export class CoursesController {
-    static async getCourses(req: Request, res: Response) {
-        try {
-            const coursesSnapshot = await getDocs(coursesCollection);
-            const courses = coursesSnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data(),
-            }));
-            res.status(200).json(courses);
-        } catch (error) {
-            res.status(500).json({ error: "Error fetching courses" });
-        }
-    }
+	static async getCourses(req: Request, res: Response) {
+		try {
+			const coursesSnapshot = await getDocs(coursesCollection);
+			const courses: Course[] = coursesSnapshot.docs.map((doc) => ({
+				id: doc.id,
+				...doc.data(),
+			}));
 
-    static async getCourse(req: Request, res: Response) {
-        try {
-            const collectionName = "Courses";
-            const documentId = req.params.courseId;
+			for (const course of courses) {
+				//fetch course detail collection
+				const collectionName = "CourseDetail";
+				const docRef = doc(db, "Courses", course.id);
+				const collectionSnapshot = await getDocs(
+					collection(docRef, collectionName)
+				);
 
-            // Create a reference to the document
-            const documentRef = doc(db, collectionName, documentId);
+				//TODO tipe interface courseDetail
+				const courseDetail: any = [];
 
-            // Retrieve the document snapshot
-            const documentSnapshot = await getDoc(documentRef);
+				if (!collectionSnapshot.empty) {
+					collectionSnapshot.forEach((collectionDoc) => {
+						courseDetail.push({
+							id: collectionDoc.id,
+							...collectionDoc.data(),
+						});
+					});
+				}
+				course[collectionName] = courseDetail;
+			}
+			res.status(200).json(courses);
+		} catch (error) {
+			res.status(500).json({ error: "Error fetching courses" });
+		}
+	}
 
-            // Check if the document exists
-            if (documentSnapshot.exists()) {
-                const tutor: Course = {
-                    ...documentSnapshot.data(),
-                };
-                res.status(200).json(tutor)
-            } else {
-                res.status(500).json({ error: "Courses not found" })
-            }
+	static async getCourseById(req: Request, res: Response) {
+		try {
+			const courseId = req.params.courseId;
 
-        } catch (error) {
-            res.status(500).json({ error: "Error fetching tuuutor" });
-        }
+			const courseDocRef = doc(db, "Courses", courseId);
 
-    }
+			const courseDocSnapshot = await getDoc(courseDocRef);
+
+			if (courseDocSnapshot.exists()) {
+				const course: Course = {
+					id: courseId,
+					...courseDocSnapshot.data(),
+				};
+
+				//fetch course detail collection
+				const collectionName = "CourseDetail";
+				const docRef = doc(db, "Courses", course.id);
+				const collectionSnapshot = await getDocs(
+					collection(docRef, collectionName)
+				);
+
+				//TODO tipe interface courseDetail
+				const courseDetail: any = [];
+
+				if (!collectionSnapshot.empty) {
+					collectionSnapshot.forEach((collectionDoc) => {
+						courseDetail.push({
+							id: collectionDoc.id,
+							...collectionDoc.data(),
+						});
+					});
+				}
+				course[collectionName] = courseDetail;
+				res.status(200).json(course);
+			} else {
+				res.status(500).json({ error: "Course not found" });
+			}
+		} catch (error) {
+			res.status(500).json({ error: "Error fetching courses" });
+		}
+	}
+
+	static async getCourse(req: Request, res: Response) {
+		try {
+			const collectionName = "Courses";
+			const documentId = req.params.courseId;
+
+			// Create a reference to the document
+			const documentRef = doc(db, collectionName, documentId);
+
+			// Retrieve the document snapshot
+			const documentSnapshot = await getDoc(documentRef);
+
+			// Check if the document exists
+			if (documentSnapshot.exists()) {
+				const tutor: Course = {
+					id: documentId,
+					...documentSnapshot.data(),
+				};
+				res.status(200).json(tutor);
+			} else {
+				res.status(500).json({ error: "Courses not found" });
+			}
+		} catch (error) {
+			res.status(500).json({ error: "Error fetching tuuutor" });
+		}
+	}
 }

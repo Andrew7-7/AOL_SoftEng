@@ -1,3 +1,5 @@
+import { ICourseDetail } from "./courseDetail-interface";
+
 export interface ICourse {
     id: string,
     Type: string,
@@ -9,4 +11,5 @@ export interface ICourse {
     Sessions: number,
     CourseImage: string,
     banner: string,
+	CourseDetail: ICourseDetail[];
 }

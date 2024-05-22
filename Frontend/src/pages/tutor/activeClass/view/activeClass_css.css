@@ -1,0 +1,95 @@
+.activeClassRight {
+  padding: 3vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 2.5vh;
+}
+
+.activeClassTitle {
+  font-size: 1.8vw;
+  font-weight: 700;
+}
+
+.ActiveClassCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  padding: 1vw;
+  width: 20vw;
+  height: 25vh;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.ActiveClassCardSubtitle {
+  display: flex;
+  font-size: 1vw;
+  gap: 0.4vw;
+  align-items: center;
+}
+
+.ActiveClassCardUpper {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+}
+
+.ActiveClassCardTitle {
+  font-size: 1.6vw;
+  font-weight: 600;
+}
+
+.peopleImage {
+  width: 1.2vw;
+  height: 1.2vw;
+}
+
+.ActiveClassCardBottom {
+  font-size: 0.9vw;
+}
+
+.activeClassCardContainer {
+  display: flex;
+  gap: 2vw;
+  width: 75vw;
+  height: 65vh;
+  flex-wrap: wrap;
+  justify-content: start;
+  padding-top: 2vw;
+  padding-bottom: 3vw;
+}
+
+.pagination {
+  display: flex;
+  gap: 0.5vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.paginationButton {
+  border-radius: 5px;
+  width: 2vw;
+  height: 2vw;
+  border: none;
+  background: none;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid lightgrey;
+  font-size: 0.8vw;
+  font-weight: 600;
+}
+
+.prevImage {
+  width: 1.2vw;
+  height: 1.2vw;
+  cursor: pointer;
+}
+
+.paginationClicked {
+  color: white;
+  background-color: black;
+}
