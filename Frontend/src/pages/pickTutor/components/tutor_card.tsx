@@ -2,9 +2,20 @@ import { Link } from "react-router-dom";
 import { ITutor } from "../../../global/model/tutor-interface";
 import starIcon from "../../../global/assets/star.png";
 import "./tutor_card.css";
+import { useState } from "react";
 
 const TutorCard: React.FC<{ tutorData: ITutor }> = ({ tutorData }) => {
 	const skillSet = tutorData.skillSet?.join(", ");
+
+	const [showAllDescription, setShowAllDescription] = useState<boolean>(false);
+
+	const handleToggleDescription = () => {
+		setShowAllDescription(!showAllDescription);
+	};
+
+	const displayedDescription: string = showAllDescription
+		? tutorData.description
+		: tutorData.description.slice(0, 420);
 
 	return (
 		<div className="tutor-card-container">
@@ -24,7 +35,17 @@ const TutorCard: React.FC<{ tutorData: ITutor }> = ({ tutorData }) => {
 						</div>
 					</div>
 					<div className="tutor-skill-set">{skillSet}</div>
-					<div className="tutor-description">{tutorData.description}</div>
+					<div className="tutor-description">
+						{displayedDescription}{" "}
+						{tutorData.description.length > 420 && (
+							<div
+								className="view-more-button"
+								onClick={handleToggleDescription}
+							>
+								{showAllDescription ? "View Less" : "View More"}
+							</div>
+						)}
+					</div>
 				</div>
 				<div className="tutor-card-content-right">
 					<Link to={`/pickTutor/${tutorData.id}`} className="button-container">
