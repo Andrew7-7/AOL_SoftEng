@@ -11,5 +11,6 @@ export interface ICourse {
     Sessions: number,
     CourseImage: string,
     banner: string,
+    skill: string,
 	CourseDetail: ICourseDetail[];
 }

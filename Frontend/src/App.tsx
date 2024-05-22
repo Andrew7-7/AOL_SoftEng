@@ -28,6 +28,7 @@ import CourseUpdatePage from "./pages/admin/courseUpdate/course_update_page.tsx"
 import CreateCoursePage from "./pages/admin/createCourse/create_course_page.tsx";
 import ActiveClass from "./pages/tutor/activeClass/view/activeClass.tsx";
 import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassDetail.tsx";
+
 function App() {
 	return (
 		<>
@@ -57,6 +58,8 @@ function App() {
               <Route path="/activecourse" element={<ActiveCourse />}></Route>
             <Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
             <Route path="/pickTutor/:tutorId" element={<TutorDetailPage />} />
+            <Route path="/contoh" element={<CourseDescriptionPage />} />
+
             {/* Tutor Only Pages */}
             <Route element={<CheckRole role={"tutor"} />}>
               <Route path="/tutorDummy" element={<TutorDummy />}></Route>
