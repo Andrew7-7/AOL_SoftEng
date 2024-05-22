@@ -34,38 +34,40 @@ function App() {
 			<Routes>
 				{/* Is Banned */}
 				<Route path="/banned" element={<IsBanned />}></Route>
-        <Route path="/" element={<HomePage />}></Route>
-        {/* Verify Token */}
-        <Route element={<VerifyToken />}>
-          {/* Kalau udah login gabisa login register lagi */}
-          <Route element={<AlreadyLoggedIn />}>
-                    <Route path="/chat" element={<ChatPage/>}></Route>
-        <Route path="/reply" element={<ForumPage />}></Route>
-        <Route path="/replies/:forumId" element={<RepliesPage />}></Route>
-            <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/register" element={<RegisterPage />}></Route>
-          </Route>
+				<Route path="/" element={<HomePage />}></Route>
+				{/* Verify Token */}
+				<Route element={<VerifyToken />}>
+					{/* Kalau udah login gabisa login register lagi */}
+					<Route element={<AlreadyLoggedIn />}>
+						<Route path="/login" element={<LoginPage />}></Route>
+						<Route path="/register" element={<RegisterPage />}></Route>
+					</Route>
 
-          {/* Butuh Login */}
-          <Route element={<NeedLogin />}>
-            {/* Student Only Pages */}
-            <Route element={<CheckRole role={"student"} />}>
-              <Route path="/profile" element={<ProfilePage />}></Route>
-
-            </Route>
-              <Route path="/activecourse/:courseId" element={<CourseDetailPage />} />
-              <Route path="/activecourse" element={<ActiveCourse />}></Route>
-            <Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
-            <Route path="/pickTutor/:tutorId" element={<TutorDetailPage />} />
-            {/* Tutor Only Pages */}
-            <Route element={<CheckRole role={"tutor"} />}>
-              <Route path="/tutorDummy" element={<TutorDummy />}></Route>
-              <Route path="/activeClass" element={<ActiveClass />}></Route>
-              <Route
-                path="/activeClassDetail/:id"
-                element={<ActiveClassDetail />}
-              />
-            </Route>
+					{/* Butuh Login */}
+					<Route element={<NeedLogin />}>
+						<Route path="/chat" element={<ChatPage />}></Route>
+						<Route path="/reply" element={<ForumPage />}></Route>
+						<Route path="/replies/:forumId" element={<RepliesPage />}></Route>
+						{/* Student Only Pages */}
+						<Route element={<CheckRole role={"student"} />}>
+							<Route path="/profile" element={<ProfilePage />}></Route>
+						</Route>
+						<Route
+							path="/activecourse/:courseId"
+							element={<CourseDetailPage />}
+						/>
+						<Route path="/activecourse" element={<ActiveCourse />}></Route>
+						<Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
+						<Route path="/pickTutor/:tutorId" element={<TutorDetailPage />} />
+						{/* Tutor Only Pages */}
+						<Route element={<CheckRole role={"tutor"} />}>
+							<Route path="/tutorDummy" element={<TutorDummy />}></Route>
+							<Route path="/activeClass" element={<ActiveClass />}></Route>
+							<Route
+								path="/activeClassDetail/:id"
+								element={<ActiveClassDetail />}
+							/>
+						</Route>
 						{/* Admin Only Pages */}
 						<Route element={<CheckRole role={"admin"} />}>
 							<Route path="/adminDummy" element={<AdminDummy />}></Route>
