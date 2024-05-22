@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import "./forumPage.css";
 
 interface ForumProps {
@@ -16,13 +16,8 @@ interface ForumProps {
 }
 
 const Forum: React.FC<ForumProps> = ({ forum }) => {
-    const { question, detailSnippet, course, view, repliesCount } = forum;
+    const { id, question, detailSnippet, course, view, repliesCount } = forum;
     const { courseName, color } = course;
-    const [showReplies, setShowReplies] = useState(false);
-
-    const toggleReplies = () => {
-        setShowReplies(!showReplies);
-    };
 
     return (
         <div className="forum">
@@ -34,12 +29,7 @@ const Forum: React.FC<ForumProps> = ({ forum }) => {
                 <p>Views: {view}</p>
                 <p>Course Name: {courseName}</p>
                 <p>{repliesCount} Replies</p>
-                {showReplies && (
-                    <div>
-                        {/* Render replies here */}
-                    </div>
-                )}
-                <button onClick={toggleReplies}>See More</button>
+                <button><Link to={`/replies/${id}`}>See More</Link></button>
             </div>
         </div>
     );
