@@ -1,0 +1,43 @@
+.review-container {
+	display: flex;
+	gap: 35px;
+	padding: 25px 5px;
+	border-bottom: 1px solid rgb(228, 228, 228);
+}
+
+.review-container .left {
+}
+
+.review-container .left img {
+	height: 90px;
+	width: 90px;
+	border-radius: 50%;
+	border: 1px solid var(--primary-orange);
+}
+
+.review-container .right {
+}
+
+.review-container .right .name {
+	font-size: 16px;
+	font-weight: 500;
+	margin-bottom: 3px;
+}
+
+.review-container .right .rating-container {
+	margin-bottom: 6px;
+}
+
+.review-container .right .rating-container p {
+	font-size: 13px;
+	color: var(--font-light);
+}
+
+.review-container .right .rating-container img {
+	height: 16px;
+	width: 16px;
+}
+
+.review-container .right .comment {
+	color: var(--font-light3);
+}

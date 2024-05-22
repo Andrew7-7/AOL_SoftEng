@@ -1,12 +1,13 @@
-:root{
-    --skyBlue:  #98C3E3;   
+:root {
+  --skyBlue: #98c3e3;
 }
 
-.blueButton{
-    color: white;
-    background-color: var(--skyBlue);
-    padding: 12px 50px 12px 50px;
-    border-radius: 20px;
-    border: 0;
-    font-size: 17px;
+.blueButton {
+  color: white;
+  background-color: var(--skyBlue);
+  padding: 12px 50px 12px 50px;
+  border-radius: 20px;
+  border: 0;
+  font-size: 1vw;
+  cursor: pointer;
 }

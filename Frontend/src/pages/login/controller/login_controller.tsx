@@ -12,7 +12,6 @@ const handleLogin = async (
     setError("All fields must be filled");
     return;
   }
-
   try {
     const res = await axios.post(
       "http://localhost:3002/user/login",
@@ -26,13 +25,22 @@ const handleLogin = async (
 
     if (res.status === 200) {
       const isBanned = JSON.stringify(res.data.userData.isBanned);
-      console.log(isBanned);
       if (isBanned === "true") {
         navigate("/banned");
       } else {
+        window.localStorage.setItem(
+          "profile",
+          JSON.stringify(res.data.profile)
+        );
         window.localStorage.setItem("user", JSON.stringify(res.data.userData));
         window.localStorage.setItem("accToken", res.data.accessToken);
-        navigate("/");
+        if (res.data.userData.role === "student") {
+          navigate("/");
+        } else if (res.data.userData.role === "tutor") {
+          navigate("/activeClass");
+        } else if (res.data.userData.role === "admin") {
+          navigate("/accountManagement");
+        }
       }
     }
   } catch (err: any) {

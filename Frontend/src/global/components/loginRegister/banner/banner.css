@@ -4,18 +4,38 @@
 
 .rightDiv {
   justify-content: center;
-  width: 550px;
+  width: 32.8vw;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .innerRight {
-  padding-top: 50px;
-  padding-bottom: 50px;
-  width: 535px;
-  height: 635px;
+  padding-top: 6vh;
+  padding-bottom: 6vh;
+  width: 32vw;
+  height: 76vh;
   background-color: var(--lightBlue);
   border-radius: 20px 20px 20px 40px;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+
+}
+
+.bannerTitle {
+  font-size: 1.7vw;
+  font-weight: 600;
+  margin-bottom: 1.5vh;
+}
+
+.bannerSubtitle {
+  font-size: 0.9vw;
+}
+
+.salyPic {
+  width: 22vw;
 }

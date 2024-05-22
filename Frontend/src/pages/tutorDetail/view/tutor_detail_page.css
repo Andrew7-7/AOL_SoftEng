@@ -1,0 +1,29 @@
+.tutor-detail-page {
+	margin-top: 50px;
+}
+
+.tutor-detail-page-content {
+	display: flex;
+	gap: 20px;
+}
+
+.tutor-detail-page-content .left-section {
+	width: 68%;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.tutor-detail-page-content .right-section {
+	flex: 1;
+}
+
+.tutor-detail-page-content .right-section .container {
+	border: 1px rgb(233, 233, 233) solid;
+	padding: 35px;
+	background-color: white;
+}
+
+.tutor-detail-page-content .right-section .container .header {
+	text-align: center;
+}

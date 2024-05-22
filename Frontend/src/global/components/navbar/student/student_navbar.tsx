@@ -6,13 +6,19 @@ const StudentNav = () => {
   const user = JSON.parse(window.localStorage.getItem("user") || "{}");
   return (
     <div className="navContainer">
-      <Link to={"/"} className="leftNav">
+      <Link to={"/"} className="leftNav" style={{ fontWeight: "bold" }}>
         <p style={{ color: "#E24E03" }}>STEP</p>
         <p>CODE</p>
       </Link>
       <div className="rightNav">
         {user.username ? (
-          <Link to={"/profile"}>{user.username}</Link>
+          user.role === "tutor" ? (
+            <Link to={"/activeClass"}>Tutor Page</Link>
+          ) : user.role === "admin" ? (
+            <Link to={"/accountManagement"}>Admin Page</Link>
+          ) : (
+            <Link to={"/profile"}>{user.username}</Link>
+          )
         ) : (
           <Link to={"/login"}>Sign In</Link>
         )}
