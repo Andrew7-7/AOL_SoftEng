@@ -8,4 +8,5 @@ export interface ICourse {
     CourseID: number,
     Sessions: number,
     CourseImage: string,
+    banner: string,
 }

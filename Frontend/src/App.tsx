@@ -18,7 +18,7 @@ import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
 import ActiveCourse from "./pages/activecourse/view/activecourse_page";
 import TutorDetailPage from "./pages/tutorDetail/view/tutor_detail_page.tsx";
 import CourseDetailPage from "./pages/coursedetail/view/course_detail_page.tsx";
-
+import CourseDescriptionPage from "./pages/coursedetail/view/CourseDescriptionPage.tsx";
 import AccountManagementPage from "./pages/admin/accountManagement/view/accountManagementPage";
 function App() {
   return (
@@ -46,6 +46,7 @@ function App() {
               <Route path="/pickTutor/:tutorId" element={<TutorDetailPage />} />
               <Route path="/activecourse/:courseId" element={<CourseDetailPage />} />
               <Route path="/home" element={<HomePage />}></Route>
+              <Route path="/contoh" element={<CourseDescriptionPage />}></Route>
             </Route>
 
             {/* Tutor Only Pages */}

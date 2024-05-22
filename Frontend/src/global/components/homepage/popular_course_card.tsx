@@ -2,15 +2,16 @@ import { Link } from "react-router-dom";
 import "./pupular_course_card.css";
 import arrow from "../../assets/arrow.png";
 
-export const Card = ({ img, title, session, chapter, link }: any) => {
+export const Card = ({ id,img, title, session, chapter, link }: any) => {
   const imgUrl = img;
   const text = title;
   const sessions = session;
   const chapters = chapter;
+  const docId = id;
 
   return (
     <>
-      <Link to="/">
+      <Link to={`/activecourse/${docId}`}>
         <div className="card">
           <div
             className="card-title"

@@ -26,6 +26,7 @@ const ActiveCourse = ({email, data}:any) => {
                 session = {d.Sessions}
                 chapter = {d. Chapters}
                 img = {d.CourseImage}
+                id = {d.id}
               />) : null
         ):null}
       </div>
