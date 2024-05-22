@@ -1,25 +1,124 @@
 import {
-	collection,
-	getDocs,
-	addDoc,
-	doc,
-	query,
-	where,
-	deleteDoc,
-	getDoc,
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  query,
+  where,
+  deleteDoc,
+  getDoc,
+  Timestamp,
 } from "firebase/firestore";
 import { db } from "../Config/config";
 import { Request, Response } from "express";
 
 interface Tutor {
-	id: string;
-	rating: number;
-	[key: string]: any;
+  id: string;
+  rating: number;
+  [key: string]: any;
+}
+
+interface Session {
+  id: string;
+  session: number;
+  present: Array<string>;
+  absent: Array<string>;
+  outline: string;
+  zoomLink: string;
+  startDate: Timestamp;
+  endDate: Timestamp;
+  done: boolean;
+}
+
+interface ClassData {
+  id: string;
+  sessions: Session[];
 }
 
 const tutorsCollection = collection(db, "tutors");
-
+const classCollection = collection(db, "Class");
+const sessionCollection = collection(db, "Session");
 export class TutorController {
+
+
+  static async getActiveClass(req: Request, res: Response) {
+    try {
+      const { tutorEmail } = req.body;
+
+      if (!tutorEmail) {
+        return res.status(404).json({ error: "tutorEmail is required" });
+      }
+
+      const q = query(classCollection, where("tutorEmail", "==", tutorEmail));
+      const querySnapshot = await getDocs(q);
+
+      const classList: any[] = [];
+      for (const classDoc of querySnapshot.docs) {
+        const classData: ClassData = {
+          id: classDoc.id,
+          ...classDoc.data(),
+          sessions: [],
+        };
+
+        const sessionsCollection = collection(
+          classCollection,
+          classDoc.id,
+          "Session"
+        );
+        const sessionsSnapshot = await getDocs(sessionsCollection);
+
+        const sessionsList: any[] = [];
+        sessionsSnapshot.forEach((sessionDoc) => {
+          sessionsList.push({ id: sessionDoc.id, ...sessionDoc.data() });
+        });
+
+        classData.sessions = sessionsList;
+        classList.push(classData);
+      }
+      res.status(200).json(classList);
+    } catch (error) {
+      res.status(500).json({ error: "Error fetching tutor" });
+    }
+  }
+
+  static async getActiveClassDetail(req: Request, res: Response) {
+    try {
+      const { id } = req.body;
+
+      if (!id) {
+        return res.status(404).json({ error: "document ID is required" });
+      }
+
+      const classDocRef = doc(classCollection, id);
+
+      const classDocSnapshot = await getDoc(classDocRef);
+
+      if (!classDocSnapshot.exists()) {
+        return res.status(404).json({ error: "Class not found" });
+      }
+      const sessionCollectionRef = collection(classDocRef, "Session");
+
+      const sessionQuerySnapshot = await getDocs(sessionCollectionRef);
+      const sessionData = sessionQuerySnapshot.docs.map((doc) => {
+        const data = doc.data();
+        const startDate = data.startDate.toDate();
+        const endDate = data.endDate.toDate();
+        return {
+          ...data,
+          id: doc.id,
+          startDateTimestamp: startDate.getTime(),
+          endDateTimestamp: endDate.getTime(),
+        };
+      });
+
+      return res
+        .status(200)
+        .json({ class: classDocSnapshot.data(), sessions: sessionData });
+    } catch (error) {
+      res.status(500).json({ error: "Error fetching tutor" });
+    }
+  }
+}
 	static async getTutors(req: Request, res: Response) {
 		try {
 			// console.log(req)

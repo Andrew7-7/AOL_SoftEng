@@ -20,6 +20,8 @@ import TutorDetailPage from "./pages/tutorDetail/view/tutor_detail_page.tsx";
 import CourseDetailPage from "./pages/coursedetail/view/course_detail_page.tsx";
 
 import AccountManagementPage from "./pages/admin/accountManagement/view/accountManagementPage";
+import ActiveClass from "./pages/tutor/activeClass/view/activeClass.tsx";
+import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassDetail.tsx";
 function App() {
   return (
     <>
@@ -41,16 +43,20 @@ function App() {
             {/* Student Only Pages */}
             <Route element={<CheckRole role={"student"} />}>
               <Route path="/profile" element={<ProfilePage />}></Route>
-              <Route path="/activecourse" element={<ActiveCourse />}></Route>
-              <Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
-              <Route path="/pickTutor/:tutorId" element={<TutorDetailPage />} />
-              <Route path="/activecourse/:courseId" element={<CourseDetailPage />} />
-              <Route path="/home" element={<HomePage />}></Route>
             </Route>
+              <Route path="/activecourse/:courseId" element={<CourseDetailPage />} />
+              <Route path="/activecourse" element={<ActiveCourse />}></Route>
+            <Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
+            <Route path="/pickTutor/:tutorId" element={<TutorDetailPage />} />
 
             {/* Tutor Only Pages */}
             <Route element={<CheckRole role={"tutor"} />}>
               <Route path="/tutorDummy" element={<TutorDummy />}></Route>
+              <Route path="/activeClass" element={<ActiveClass />}></Route>
+              <Route
+                path="/activeClassDetail/:id"
+                element={<ActiveClassDetail />}
+              />
             </Route>
 
             {/* Admin Only Pages */}
