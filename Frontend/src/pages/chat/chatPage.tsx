@@ -1,10 +1,10 @@
 import { useParams } from 'react-router-dom';
 import './chatPage.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 interface Message {
     id: string;
     attachment: string;
-    email: string;
+    user: string;
     message: string;
     timestamp: string;
 }
@@ -12,7 +12,7 @@ interface Message {
 const ChatPage = () => {
     const { roomId } = useParams();
     const [messages, setMessages] = useState<Message[]>([]);
-    const [messageInput, setMessageInput] = useState<string>('');
+    const [messageInput, setMessageInput] = useState('');
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -42,39 +42,36 @@ const ChatPage = () => {
         fetchMessages();
     }, [roomId]);
 
-    const sendMessageBody = {
-        roomID: "1",
-        user: "andrew",
-        message: messageInput,
-        attachment: "-"
-    }
-
-    const sendMessage = async () => {
-        try {
-            const response = await fetch(`http://localhost:3002/chat/postMessage`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'auth': 'Bearer aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k'
-                },
-                body: JSON.stringify(sendMessageBody)
-            })
-            if (!response.ok) {
-                throw new Error('Failed to send message');
+    const sendMessage = useCallback(async () => {
+            try {
+                const response = await fetch(`http://localhost:3002/chat/postMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth': 'Bearer aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k'
+                    },
+                    body: JSON.stringify({
+                        roomID: "1",
+                        user: "andrew",
+                        message: messageInput,
+                        attachment: "-"
+                    })
+                })
+                if (!response.ok) {
+                    throw new Error('Failed to send message');
+                }
+                
+            } catch (error) {
+                console.error("Error sending message:", error);
             }
-            
-        } catch (error) {
-            console.error("Error sending message:", error);
-        }
-    }
+        }, [messageInput])
 
     return (
         <div className="chat-container">
             <div className="messages-container">
                 {messages.map((message, index) => (
-                    <div key={index} className={`message ${message.email === 'andrew' ? 'sent' : 'received'}`}>
-                        <p>{message.email}: {message.message}</p>
-                        <p className="timestamp">{new Date(message.timestamp).toLocaleString()}</p>
+                    <div key={index} className={`message ${message.user === 'andrew' ? 'sent' : 'received'}`}>
+                        <p>{message.user}: {message.message}</p>
                     </div>
                 ))}
             </div>
