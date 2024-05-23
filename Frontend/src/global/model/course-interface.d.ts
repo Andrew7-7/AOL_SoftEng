@@ -12,5 +12,6 @@ export interface ICourse {
     CourseImage: string,
     banner: string,
     skill: string,
+    description: string,
 	CourseDetail: ICourseDetail[];
 }

@@ -13,6 +13,8 @@ const CourseDetailPage = () => {
     return <div></div>;
   }
 
+  const id = courseData.CourseID
+
   return (
     <>
       <StudentNav />
@@ -52,6 +54,22 @@ const CourseDetailPage = () => {
             </div>
           </div>
         </div>
+        <div className="coursedescription-container-coursedetail">
+          <h1>Course Description</h1>
+          <p>{courseData.description}</p>
+          <Link to={`/${id}/pickTutor`}>
+            <div className="book-this-course-button-coursedetail">
+              Book This Course
+            </div>
+          </Link>
+
+        </div>
+
+        {/* <div className="chapterbreakdown-container-coursedetail">
+          <h1>Chapter Breakdown</h1>
+          <p>{courseData.description}</p>
+        </div> */}
+
       </div>
     </>
   );

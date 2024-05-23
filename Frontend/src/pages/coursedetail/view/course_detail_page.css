@@ -1,10 +1,3 @@
-body {
-  background: url("https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/asset%2F28719144-86dc0f70-73b1-11e7-911d-60d70fcded21%203.png?alt=media&token=480deee3-7b59-456e-8b8e-c1cb9b9ac02f");
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
 
 .back-t0-home-page-coursedetail {
   margin-top: 130px;
@@ -17,7 +10,7 @@ body {
 
 .btn-coursedetail {
   background: url("https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/PickCourse%2Fback%20button.svg?alt=media&token=617e835c-1b7b-4a34-b6a2-f5309cac506c");
-  width:100%;
+  width: 100%;
   height: 100%;
   rotate: 222deg;
 }
@@ -31,10 +24,10 @@ body {
 
 .back-to-home-page-title-coursedetail {
   overflow-wrap: break-word;
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-weight: 400;
   font-size: 1.4rem;
-  color: #A8A8A8;
+  color: #a8a8a8;
 }
 
 .banner-coursedetail {
@@ -126,4 +119,64 @@ body {
   font-weight: 400;
   font-size: 1.4rem;
   color: #474747;
+}
+
+.coursedescription-container-coursedetail h1{
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 2rem;
+  position: absolute;
+  left: 37rem;
+}
+.coursedescription-container-coursedetail p{
+  margin-top: 50px;
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 300;
+  font-size: 1.3rem;
+  position: absolute;
+  left: 37rem;
+  margin-bottom: 10px;
+  margin-right: 120px;
+  padding-bottom: 100px;
+}
+.book-this-course-button-coursedetail{
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 2rem;
+  color: #f27d42;;
+  margin-top: 300px;
+  display: flex;
+  position: absolute;
+  left:50rem;
+  background-color: transparent;
+  border:  solid 5px #f27d42;
+  border-radius: 10px 10px 10px 10px;
+  padding: 10px 20px 10px 20px;
+}
+.chapterbreakdown-container-coursedetail {
+  /* padding-top: 100px; */
+  background-color: #474747;
+  z-index: 11;
+}
+.chapterbreakdown-container-coursedetail h1{
+  margin-top: 50px;
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 2rem;
+  left: 0rem;
+}
+
+.chapterbreakdown-container-coursedetail p  {
+  margin-top: 50px;
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 300;
+  font-size: 1.5rem;
+  position: absolute;
+  left: 37rem;
+  margin-bottom: 10px;
+  background-color: red;
 }
