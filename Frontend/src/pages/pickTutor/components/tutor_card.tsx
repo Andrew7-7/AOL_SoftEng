@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ITutor } from "../../../global/model/tutor-interface";
 import starIcon from "../../../global/assets/star.png";
 import "./tutor_card.css";
 
 const TutorCard: React.FC<{ tutorData: ITutor }> = ({ tutorData }) => {
 	const skillSet = tutorData.skillSet?.join(", ");
+	const { courseId } = useParams();
 
 	return (
 		<div className="tutor-card-container">
@@ -27,7 +28,7 @@ const TutorCard: React.FC<{ tutorData: ITutor }> = ({ tutorData }) => {
 					<div className="tutor-description">{tutorData.description}</div>
 				</div>
 				<div className="tutor-card-content-right">
-					<Link to={`/pickTutor/${tutorData.id}`} className="button-container">
+					<Link to={`/${courseId}/pickTutor/${tutorData.id}`} className="button-container">
 						<div className="button-orange">View profile</div>
 					</Link>
 				</div>
