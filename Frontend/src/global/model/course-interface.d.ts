@@ -13,5 +13,7 @@ export interface ICourse {
     banner: string,
     skill: string,
     description: string,
-	CourseDetail: ICourseDetail[];
+    chapterBreakdown: string[];
+    totalHours: string;
+	// CourseDetail: ICourseDetail[];
 }
