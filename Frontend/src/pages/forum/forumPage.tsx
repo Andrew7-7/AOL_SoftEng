@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Forum from '../forum/Forum';
 
 const ForumPage = () => {
@@ -29,11 +30,16 @@ const ForumPage = () => {
     }, []);
 
     return (
-        <div className="forums">
-            <h1>Forums</h1>
-            {forums && forums.map((forum, index) => (
-                <Forum key={index} forum={forum} />
-            ))}
+        <div>
+            <div>
+                <button><Link to={`/addForum`}>Ask Question</Link></button>
+            </div>
+            <div className="forums">
+                <h1>Forums</h1>
+                {forums && forums.map((forum, index) => (
+                    <Forum key={index} forum={forum} />
+                ))}
+            </div>
         </div>
     );
 };
