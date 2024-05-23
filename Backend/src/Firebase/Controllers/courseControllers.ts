@@ -101,19 +101,17 @@ export class CoursesController {
 		try {
 			const collectionName = "Courses";
 			const documentId = req.params.courseId;
-
-			// Create a reference to the document
 			const documentRef = doc(db, collectionName, documentId);
-
-			// Retrieve the document snapshot
 			const documentSnapshot = await getDoc(documentRef);
+			const reviews: any = [];
 
-			// Check if the document exists
 			if (documentSnapshot.exists()) {
 				const tutor: Course = {
 					id: documentId,
 					...documentSnapshot.data(),
 				};
+				tutor["CourseDetail"] = reviews;
+				console.log(reviews)
 				res.status(200).json(tutor);
 			} else {
 				res.status(500).json({ error: "Courses not found" });
