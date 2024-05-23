@@ -22,4 +22,6 @@ forumRoutes.delete('/forum/:forumId/replies/:replyId', forumControllers.deleteRe
 
 forumRoutes.delete('/deleteForum/:forumId', forumControllers.deleteForum);
 
+forumRoutes.post('/incrementView/:forumId', forumControllers.incrementView);
+
 export {forumRoutes};

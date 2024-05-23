@@ -12,10 +12,11 @@ import CheckRole from "./middleware/checkRole";
 import TutorDummy from "./pages/tutor/dummy/tutorDummy";
 import AdminDummy from "./pages/admin/dummy/adminDummy";
 import IsBanned from "./pages/error/isBanned/isBanned";
-import ContactSidebar from "./pages/sidebar/contactSidebar";
+// import ContactSidebar from "./pages/sidebar/contactSidebar";
 import ChatPage from "./pages/chat/chatPage";
 import ForumPage from "./pages/forum/forumPage";
 import RepliesPage from "./pages/replies/RepliesPage";
+import AddForum from "./pages/forum/addForum.tsx";
 
 import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
 import ActiveCourse from "./pages/activecourse/view/activecourse_page";
@@ -38,6 +39,7 @@ function App() {
           {/* Kalau udah login gabisa login register lagi */}
           <Route element={<AlreadyLoggedIn />}>
                     <Route path="/chat" element={<ChatPage/>}></Route>
+                    <Route path="/addForum" element={<AddForum/>}></Route>
         <Route path="/reply" element={<ForumPage />}></Route>
         <Route path="/replies/:forumId" element={<RepliesPage />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
