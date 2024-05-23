@@ -14,7 +14,6 @@ const CourseDetailPage = () => {
     return <div></div>;
   }
 
-  const id = courseData.CourseID
   const displayedChapters: string[] = courseData.chapterBreakdown.slice(0, 5);
 
   return (
@@ -61,7 +60,7 @@ const CourseDetailPage = () => {
           <div className="coursedescription-container-coursedetail">
             <h1>Course Description</h1>
             <p>{courseData.description}</p>
-            <Link to={`/${id}/pickTutor`}>
+            <Link to={`/${courseId}/pickTutor`}>
               <div className="book-this-course-button-coursedetail">
                 Book This Course
               </div>

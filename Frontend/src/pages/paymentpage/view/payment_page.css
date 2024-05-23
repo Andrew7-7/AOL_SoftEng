@@ -1,0 +1,117 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    color: white;
+    font-size: 24px;
+  }
+  
+  .paymentpage-banner{
+    background: url('https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/asset%2FpaymentpageBanner.png?alt=media&token=032c9c20-1dc5-4151-bd66-59ca49b1feac');
+    width: 100%;
+    height: 246px;
+  }
+  .paymentpage-container{
+    background-color: white;
+    margin-left: 50px;
+    margin-right: 50px;
+    border-radius: 10px;
+    height: 200rem;
+  }
+
+  .paymentpage-container .h1-container-paymentpage-selectedcourse{
+    margin-top: 50px;
+    margin-left: 520px;
+    margin-bottom: 20px;
+    justify-content: center;
+    display: flex;
+    align-self: center;
+    padding-top: 20px;
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    background-color:  #ff7a37;
+    color: #ffff;
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 25px;
+    position: absolute;
+    overflow-wrap: break-word;
+  }
+
+  .paymentpage-container   .coursecard-container-paymentpage{
+    display: inline-block;
+    margin-top: 150px;
+    margin-left: 490px;
+  }
+
+  .paymentpage-container .h1-container-paymentpage-selectedtutor{
+    margin-top: 50px;
+    margin-left: 520px;
+    margin-bottom: 20px;
+    justify-content: center;
+    display: flex;
+    align-self: center;
+    padding-top: 20px;
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-bottom: 20px;
+    border-radius: 20px;
+    background-color:  #ff7a37;
+    color: #ffff;
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 25px;
+    position: absolute;
+    overflow-wrap: break-word;
+  }
+
+  .paymentpage-container-title-new{
+        background-color: white;
+        margin-left: 50px;
+        margin-right: 50px;
+        border-radius: 10px;
+        height: 200rem;
+  }
+
+  .paymentpage-container-title-new-fortitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .h1-container-paymentpage-new{
+    margin-top: 50px;
+    color: white;
+    font-weight: 800;
+    font-size: 20px;
+    border-radius: 15px;
+    background-color: #ff7a37;
+    padding: 20px 40px 20px 40px;
+    margin-bottom: 10px;
+  }
+
+  .return-button{
+    display: flex;
+    position: absolute;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    background-color: #ff7a37;
+    padding: 5px 10px 5px 10px;
+    margin-left: 20px;
+    border-radius: 10px;
+    color: white;
+    opacity: 50%;
+  }
+
+  .return-button:hover{
+    opacity: 80%;
+  }

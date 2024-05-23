@@ -21,13 +21,13 @@ import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
 import ActiveCourse from "./pages/activecourse/view/activecourse_page";
 import TutorDetailPage from "./pages/tutorDetail/view/tutor_detail_page.tsx";
 import CourseDetailPage from "./pages/coursedetail/view/course_detail_page.tsx";
-import CourseDescriptionPage from "./pages/coursedetail/view/CourseDescriptionPage.tsx";
 import AccountManagementPage from "./pages/admin/accountManagement/view/accountManagementPage";
 import CourseManagementPage from "./pages/admin/courseManagement/view/course_management_page.tsx";
 import CourseUpdatePage from "./pages/admin/courseUpdate/course_update_page.tsx";
 import CreateCoursePage from "./pages/admin/createCourse/create_course_page.tsx";
 import ActiveClass from "./pages/tutor/activeClass/view/activeClass.tsx";
 import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassDetail.tsx";
+import PaymentPage from "./pages/paymentpage/view/payment_page.tsx";
 
 function App() {
 	return (
@@ -59,7 +59,9 @@ function App() {
 						/>
 						<Route path="/activecourse" element={<ActiveCourse />}></Route>
 						<Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
-						<Route path="/pickTutor/:tutorId" element={<TutorDetailPage />} />
+						<Route path="/:courseId/pickTutor/:tutorId" element={<TutorDetailPage />} />
+						<Route path="/:courseId/:tutorId/payment" element={<PaymentPage />} />
+
 						{/* Tutor Only Pages */}
 						<Route element={<CheckRole role={"tutor"} />}>
 							<Route path="/tutorDummy" element={<TutorDummy />}></Route>
