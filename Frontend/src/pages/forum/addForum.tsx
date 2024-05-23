@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 const AddForum = () => {
-    const user = JSON.parse(window.localStorage.getItem("user") || "{}");
     const [question, setQuestion] = useState('');
     const [detailSnippet, setDetailSnippet] = useState('');
     const [courseName, setCourseName] = useState('');
     const [color, setColor] = useState('');
+    const view = 0;
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -20,10 +20,7 @@ const AddForum = () => {
                     question,
                     detailSnippet,
                     course: { courseName, color },
-                    ForumDetail: {
-                        sender: { senderEmail: user.email, senderImageUrl: user.imageURL || '' },
-                        imageURL: '',
-                    },
+                    view,
                 }),
             });
 
