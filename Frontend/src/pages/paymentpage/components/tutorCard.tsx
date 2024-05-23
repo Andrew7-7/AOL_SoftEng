@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import "./courseCard.css";
+import "./tutorCard.css";
 
-export const CourseCard = ({ id, img, title, session, chapter, link }: any) => {
+export const TutorCard = ({ id, img, title, session, chapter, link }: any) => {
   const imgUrl = img;
   const text = title;
   const sessions = session;
@@ -20,11 +20,11 @@ export const CourseCard = ({ id, img, title, session, chapter, link }: any) => {
         <div className="card-text">
           <div className="card-text-detail">
             <p className="card-text-detail-number">{sessions}</p>
-            <p className="card-text-detail-title">Sessions</p>
+            <p className="card-text-detail-title">Rating</p>
           </div>
           <div className="card-text-detail">
             <p className="card-text-detail-number">{chapters}</p>
-            <p className="card-text-detail-title">Chapters</p>
+            <p className="card-text-detail-title">Reviews</p>
           </div>
         </div>
       </div>
