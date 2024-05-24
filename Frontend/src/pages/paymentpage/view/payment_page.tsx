@@ -16,6 +16,9 @@ const PaymentPage = () => {
     const { courseId, tutorId } = useParams();
     const [tutor, setTutor] = useState<ITutor | null>(null);
     const [course, setCourse] = useState<ICourse | null>(null);
+    const [PPN, setPPN] = useState(Number);
+
+
     useEffect(() => {
         const fetchData1 = async () => {
             try {
@@ -41,6 +44,7 @@ const PaymentPage = () => {
         setSelectedPayment(event.target.value);
     };
 
+
     const handlePaymentSubmit = () => {
         setLoading(true);
         // Simulating payment submission delay with setTimeout
@@ -49,6 +53,9 @@ const PaymentPage = () => {
             alert(`Selected payment method: ${selectedPayment}`);
         }, 2000);
     };
+
+
+
     return (
         <>
             <StudentNav />
@@ -81,8 +88,35 @@ const PaymentPage = () => {
                         </CourseCard>
                     </div>
                 </div>
+                <div className='transaction-detail-container-payment-page'>
+                    <div className='transaction-detail-title-payment-page'>TRANSACTION DETAIL</div>
+                    <div>
+                        <div>
+                            <span>SELECTED COURSE DETAILS</span>
+                            <p>{course?.CourseName}</p>
+                            <p>{course?.skill}</p>
+                            <p>{course?.totalHours}</p>
+                            <p>{course?.Sessions}</p>
+                            <p>{course?.Chapters}</p>
+                            <p>{tutor?.name}</p>
+                        </div>
+                        <div>
+                            <span>{tutor?.price}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <span>PPN (10%)</span>{
+                            tutor?.price && <span>{parseInt(tutor?.price) * 0.1}</span>
+                        }
 
+                    </div>
+
+                    <div>
+
+                    </div>
+                </div>
             </div>
+
             <div>
                 <h1>Payment Page</h1>
                 <form onSubmit={handlePaymentSubmit}>
