@@ -6,6 +6,7 @@ export interface ITutor {
 	description: string;
 	profilePictureURL: string;
 	rating: number;
+	price: string;
 	skillSet: string[];
 	reviews: IReview[];
 }

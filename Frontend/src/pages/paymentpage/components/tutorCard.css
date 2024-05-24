@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    font-family: "Poppins", sans-serif;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+.card-tutor {
+    overflow: hidden;
+    width: 360px;
+    height: 378px;
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 18px;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}.card-tutor:active{
+    opacity: 0.9;
+}
+.card-title-tutor{
+    border-radius: 22px 22px 0 0;
+    display: flex;
+    height: 265px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 265px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-position: center center;
+    background-size: 120%;
+}
+
+.card-title-tutor p{
+    position: absolute;
+    bottom: 80px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.card-text-tutor {
+    display: flex;
+    flex-direction: column;
+    /* background-color: red; */
+
+}
+
+.card-text-detail-tutor-1-container {
+    display: flex;
+    width: 360px;
+    /* background-color: red; */
+    height: 55px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.card-text-star-img img{
+    margin-top: 15px;
+    margin-left: 20px;
+    height: 30px;
+    width: 30px;
+}
+.card-text-rating{
+    margin-left: 8px;
+    font-family: 'Poppins';
+    margin-top: 15px;
+    font-weight: 400;
+    font-size: 22px;
+}
+.card-text-review-count{
+    margin-left:3px;
+    font-family: 'Poppins';
+    margin-top: 18px;
+    font-weight: 600;
+    color: grey;
+    font-size: 17px;
+}
+.card-text-detail-tutor-2-container {
+    display: flex;
+    width: 360px;
+    /* background-color: blue; */
+    height: 55px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.card-text-price-per-course{
+    margin-left: 25px;
+    font-family: 'Poppins';
+    margin-top: 0px;
+    font-weight: 400;
+    font-size: 22px;
+}
+
