@@ -30,7 +30,6 @@ const ActiveClass = () => {
           }
         );
         if (res.status === 200) {
-          // console.log(res.data);
           setClassList(res.data);
           setSearchClass(res.data);
         }
