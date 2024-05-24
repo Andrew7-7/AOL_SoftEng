@@ -136,3 +136,8 @@
   /* background-color: blue; */
   font-weight: 700;
 }
+
+.payment-page-submit-payment-form{
+  margin-top: 50px;
+  margin-left: 150px;
+}
