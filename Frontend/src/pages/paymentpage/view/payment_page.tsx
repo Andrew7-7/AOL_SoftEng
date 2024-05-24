@@ -62,13 +62,14 @@ const PaymentPage = () => {
                 <div className='paymentpage-container-title-new-fortitle'>
                     <div className='coursecard-container-paymentpage'>
                         <TutorCard
-                            session={tutor?.rating.toFixed(1)}
-                            chapter={tutor?.price}
-                            // chapter={tutor?.reviews.length}
-                            title={tutor?.name}
+                            rating={tutor?.rating.toFixed(1)}
+                            price={tutor?.price}
+                            reviewLength={tutor?.reviews.length}
+                            name={tutor?.name}
                             img={tutor?.profilePictureURL}
                         >
-                        </TutorCard></div>
+                        </TutorCard>
+                    </div>
 
                     <div className='coursecard-container-paymentpage'>
                         <CourseCard
@@ -77,7 +78,8 @@ const PaymentPage = () => {
                             title={course?.CourseName}
                             img={course?.CourseImage}
                         >
-                        </CourseCard></div>
+                        </CourseCard>
+                    </div>
                 </div>
 
             </div>
