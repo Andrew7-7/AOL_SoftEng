@@ -11,6 +11,7 @@ export const TutorCard = ({ img, name, reviewLength, rating, price }: any) => {
 
   function formatNumberWithDotSeparator(number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
   }
 
   function NumberWithDotSeparator({ number }) {
@@ -39,9 +40,9 @@ export const TutorCard = ({ img, name, reviewLength, rating, price }: any) => {
             <div className="card-text-review-count">({review})</div>
           </div>
           <div className="card-text-detail-tutor-2-container">
-            <div className="card-text-price-per-course">Rp.  <span>
-              <NumberWithDotSeparator number={pricepercourse} />
-            </span> / Course</div>
+            <div className="card-text-price-per-course">Rp. {pricepercourse && (
+              <span>{formatNumberWithDotSeparator(pricepercourse)}</span>
+            )} / Course</div>
           </div>
         </div>
       </div>
