@@ -131,7 +131,7 @@ const AccountManagementPage = () => {
 		};
 
 		return (
-			<div key={index} className="accountCard">
+			<div key={index} className="accountCardManagement">
 				<div className="dataDiv">
 					<p>{email}</p>
 				</div>

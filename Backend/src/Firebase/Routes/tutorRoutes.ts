@@ -12,4 +12,5 @@ tutorRoutes.get("/getTutor/:tutorId", TutorController.getTutor);
 
 tutorRoutes.post("/getActiveClass", accToken, TutorController.getActiveClass);
 tutorRoutes.post("/getActiveClassDetail", accToken, TutorController.getActiveClassDetail);
+tutorRoutes.post("/editSessionTime", accToken, TutorController.editSessionTime);
 export { tutorRoutes };
