@@ -1,4 +1,4 @@
-export interface IClass {
+export interface IClassSession {
   id: string;
   absent: Array;
   done: boolean;
