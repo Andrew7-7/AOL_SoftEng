@@ -8,7 +8,9 @@ import axios from 'axios';
 import { ITutor } from '../../../global/model/tutor-interface';
 import { CourseCard } from '../components/courseCard';
 import { TutorCard } from '../components/tutorCard';
-
+import Modal from '../components/confirmModal';
+import PaymentForm from '../components/choosePayment';
+import useFetch from '../../../global/hooks/useFetch';
 
 const PaymentPage = () => {
     const [selectedPayment, setSelectedPayment] = useState('');
@@ -16,8 +18,23 @@ const PaymentPage = () => {
     const { courseId, tutorId } = useParams();
     const [tutor, setTutor] = useState<ITutor | null>(null);
     const [course, setCourse] = useState<ICourse | null>(null);
-    const [PPN, setPPN] = useState(Number);
+    const ppn = tutor?.price ? parseInt(tutor.price) * 0.1 : 0;
+    const totalPrice = tutor?.price ? parseInt(tutor.price) + ppn : 0;
 
+    const handlePaymentChange = (event) => {
+        setSelectedPayment(event.target.value);
+    };
+
+    const handlePaymentSubmit = () => {
+        setLoading(true);
+        // Simulating payment submission delay with setTimeout
+        setTimeout(() => {
+            setLoading(false);
+            alert(`Selected payment method: ${selectedPayment}`);
+        }, 2000);
+    };
+
+ 
 
     useEffect(() => {
         const fetchData1 = async () => {
@@ -40,27 +57,13 @@ const PaymentPage = () => {
         fetchData2();
     }, []);
 
-    const handlePaymentChange = (event) => {
-        setSelectedPayment(event.target.value);
-    };
-
-
-    const handlePaymentSubmit = () => {
-        setLoading(true);
-        // Simulating payment submission delay with setTimeout
-        setTimeout(() => {
-            setLoading(false);
-            alert(`Selected payment method: ${selectedPayment}`);
-        }, 2000);
-    };
-
-
 
     return (
         <>
             <StudentNav />
             <div className='paymentpage-banner'></div>
-            <div className='paymentpage-container-title-new'>
+            { course &&tutor &&
+                <div className='paymentpage-container-title-new'>
                 <Link to={`/${courseId}/pickTutor/${tutorId}`}><div className='return-button'>return</div></Link>
                 <div className='paymentpage-container-title-new-fortitle'>
                     <h1 className='h1-container-paymentpage-new'>Selected Tutor</h1>
@@ -105,59 +108,66 @@ const PaymentPage = () => {
                         </div>
                     </div>
                     <div>
-                        <span>PPN (10%)</span>{
-                            tutor?.price && <span>{parseInt(tutor?.price) * 0.1}</span>
-                        }
-
+                        <span>PPN (10%)</span>
+                        <span>{ppn}</span>
                     </div>
 
                     <div>
-
+                        <span>Total Price</span>
+                        <span>{totalPrice}</span>
                     </div>
+                </div>
+                <div className='payment-page-submit-payment-form'>
+                    <div>
+                        <h1>Payment Page</h1>
+                        <form onSubmit={handlePaymentSubmit}>
+                            <div>
+                                <input
+                                    type="radio"
+                                    id="creditCard"
+                                    name="paymentMethod"
+                                    value="creditCard"
+                                    checked={selectedPayment === 'creditCard'}
+                                    onChange={handlePaymentChange}
+                                />
+                                <label htmlFor="creditCard">Credit Card</label>
+                            </div>
+                            <div>
+                                <input
+                                    type="radio"
+                                    id="paypal"
+                                    name="paymentMethod"
+                                    value="paypal"
+                                    checked={selectedPayment === 'paypal'}
+                                    onChange={handlePaymentChange}
+                                />
+                                <label htmlFor="paypal">PayPal</label>
+                            </div>
+                            <div>
+                                <input
+                                    type="radio"
+                                    id="bitcoin"
+                                    name="paymentMethod"
+                                    value="bitcoin"
+                                    checked={selectedPayment === 'bitcoin'}
+                                    onChange={handlePaymentChange}
+                                />
+                                <label htmlFor="bitcoin">Bitcoin</label>
+                            </div>
+
+                        </form>
+                        <Modal
+                            courseData={course}
+                            tutorData={tutor}
+                        />
+                        {/* {loading && <div className="modal">Processing Payment...</div>} */}
+                    </div>
+
                 </div>
             </div>
 
-            <div>
-                <h1>Payment Page</h1>
-                <form onSubmit={handlePaymentSubmit}>
-                    <div>
-                        <input
-                            type="radio"
-                            id="creditCard"
-                            name="paymentMethod"
-                            value="creditCard"
-                            checked={selectedPayment === 'creditCard'}
-                            onChange={handlePaymentChange}
-                        />
-                        <label htmlFor="creditCard">Credit Card</label>
-                    </div>
-                    <div>
-                        <input
-                            type="radio"
-                            id="paypal"
-                            name="paymentMethod"
-                            value="paypal"
-                            checked={selectedPayment === 'paypal'}
-                            onChange={handlePaymentChange}
-                        />
-                        <label htmlFor="paypal">PayPal</label>
-                    </div>
-                    <div>
-                        <input
-                            type="radio"
-                            id="bitcoin"
-                            name="paymentMethod"
-                            value="bitcoin"
-                            checked={selectedPayment === 'bitcoin'}
-                            onChange={handlePaymentChange}
-                        />
-                        <label htmlFor="bitcoin">Bitcoin</label>
-                    </div>
-                    {/* Add more payment options as needed */}
-                    <button type="submit">Submit Payment</button>
-                </form>
-                {loading && <div className="modal">Processing Payment...</div>}
-            </div>
+            }
+
         </>
     );
 };
