@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { MouseEventHandler, useState } from 'react';
+import axios from "axios";
 import './confirmModal.css';
 import { ICourse } from '../../../global/model/course-interface';
 import { useNavigate } from 'react-router-dom';
@@ -9,17 +10,65 @@ import useFetch from '../../../global/hooks/useFetch';
 const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor }> = ({ courseData, tutorData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const [courseId,setCourseId] = useState("")
+  const [paymentMethod, setPaymentMethod] = useState("")
+  const [price, setPrice] = useState("")
+  const [tutorEmail, setTutorEmail] = useState("")
+  const [userEmail, setUserEmail] = useState("")
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
-  const handleYes = () => {
-    // navigate
+  const handleClick: MouseEventHandler<HTMLButtonElement> = (event) => {
+    // Call your function with the required arguments
+    handleRegister(courseId, paymentMethod, price, tutorEmail, userEmail);
   };
+  
 
-  const { data: transactionDatas} = useFetch(
-		"http://localhost:3002/transaction/getTransactions"
-	);
+  const { data: transactionDatas } = useFetch(
+    "http://localhost:3002/transaction/getTransaction/"
+  );
+
+
+  // Frontend/src/pages/register/controller/register_controller.tsx
+
+  const handleRegister = (
+    courseId:string,
+    paymentMethod:string,
+    price:string,
+    tutorEmail:string,
+    userEmail:string,
+  ) => {
+    const fetchRegister = async () => {
+      const extraAuth =
+        "aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k";
+
+      try {
+        const res = await axios.post(
+          "http://localhost:3002/user/register",
+          { courseId,paymentMethod,price,tutorEmail,userEmail },
+          {
+            headers: {
+              auth: `Bearer ${extraAuth}`,
+            },
+          }
+        );
+
+        if (res.status === 200) {
+          console.log(res.data.message);
+
+          navigate("/login");
+        }
+      } catch (err: any) {
+        if (err.response && err.response.status === 404) {
+        } else {
+          console.log(err);
+        }
+      }
+    };
+
+    fetchRegister();
+  };
 
   return (
     <div>
@@ -33,8 +82,7 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor }> = ({ courseDat
               <button
                 onClick={toggleModal}
               >no</button>
-              <button
-              onClick={handleYes}>yes</button>
+             <button onClick={handleClick}>Click me</button>
             </div>
           </div>
         </div>
