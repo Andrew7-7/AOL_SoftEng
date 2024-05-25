@@ -11,7 +11,6 @@ import { adminRoutes } from "./Firebase/Routes/adminRoutes";
 import { otpRoutes } from "./Firebase/Routes/otpRoutes";
 import { coursesRoutes } from "./Firebase/Routes/courseRoutes";
 import { homeRoutes } from "./Firebase/Routes/homeRoutes";
-
 const app = express();
 
 const port = 3002;
@@ -33,11 +32,10 @@ app.use("/otp", otpRoutes);
 app.use("/tutor", tutorRoutes);
 app.use("/course", coursesRoutes);
 app.use("/home", homeRoutes);
-
 app.use("/chat", chatRoutes);
 app.use("/forum", forumRoutes);
-const server = http.createServer(app);
 
+const server = http.createServer(app);
 
 server.listen(port, () => {
   console.log("hai berjalan di " + port);

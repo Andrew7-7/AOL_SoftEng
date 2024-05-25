@@ -10,6 +10,7 @@ import { CourseCard } from '../components/courseCard';
 import { TutorCard } from '../components/tutorCard';
 import Modal from '../components/confirmModal';
 import PaymentForm from '../components/choosePayment';
+import useFetch from '../../../global/hooks/useFetch';
 
 const PaymentPage = () => {
     const [selectedPayment, setSelectedPayment] = useState('');
@@ -32,6 +33,9 @@ const PaymentPage = () => {
             alert(`Selected payment method: ${selectedPayment}`);
         }, 2000);
     };
+
+ 
+
     useEffect(() => {
         const fetchData1 = async () => {
             try {

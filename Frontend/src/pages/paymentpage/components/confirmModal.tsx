@@ -3,6 +3,8 @@ import './confirmModal.css';
 import { ICourse } from '../../../global/model/course-interface';
 import { useNavigate } from 'react-router-dom';
 import { ITutor } from '../../../global/model/tutor-interface';
+import { ITransaction } from '../../../global/model/transaction-interface';
+import useFetch from '../../../global/hooks/useFetch';
 
 const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor }> = ({ courseData, tutorData }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +17,9 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor }> = ({ courseDat
     // navigate
   };
 
+  const { data: transactionDatas} = useFetch(
+		"http://localhost:3002/transaction/getTransactions"
+	);
 
 
   return (
