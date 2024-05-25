@@ -21,7 +21,6 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor }> = ({ courseDat
 		"http://localhost:3002/transaction/getTransactions"
 	);
 
-
   return (
     <div>
       <button className="chapterbreakdown-set-coursedetail-3-paymentpage" onClick={toggleModal}>See All Chapter Breakdowns</button>
