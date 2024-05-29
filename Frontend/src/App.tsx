@@ -40,14 +40,14 @@ function App() {
           <Route element={<AlreadyLoggedIn />}>
                     <Route path="/chat" element={<ChatPage/>}></Route>
                     <Route path="/addForum" element={<AddForum/>}></Route>
-        <Route path="/reply" element={<ForumPage />}></Route>
-        <Route path="/replies/:forumId" element={<RepliesPage />}></Route>
-            <Route path="/login" element={<LoginPage />}></Route>
-            <Route path="/register" element={<RegisterPage />}></Route>
           </Route>
 
           {/* Butuh Login */}
           <Route element={<NeedLogin />}>
+        <Route path="/forum" element={<ForumPage />}></Route>
+        <Route path="/replies/:forumId" element={<RepliesPage />}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/register" element={<RegisterPage />}></Route>
             {/* Student Only Pages */}
             <Route element={<CheckRole role={"student"} />}>
               <Route path="/profile" element={<ProfilePage />}></Route>
