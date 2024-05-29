@@ -33,6 +33,9 @@ const RepliesPage = () => {
     const location = useLocation();
     const forum = location.state?.forum as Forum;
     const [details, setDetails] = useState<ForumDetails | null>(null);
+    const [newReply, setNewReply] = useState<string>('');
+    const [editReplyId, setEditReplyId] = useState<string | null>(null);
+    const [editReplyMessage, setEditReplyMessage] = useState<string>('');
 
     const fetchReplies = async () => {
         try {
@@ -82,6 +85,72 @@ const RepliesPage = () => {
         }
     };
 
+    const addReply = async () => {
+        try {
+            const response = await fetch(`http://localhost:3002/forum/forumRoom/${forumId}/SendReply`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth': 'Bearer aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k'
+                },
+                body: JSON.stringify({ message: newReply, senderEmail: 'tes' })
+            });
+            if (!response.ok) {
+                throw new Error('Failed to add reply');
+            }
+            setNewReply('');
+            fetchReplies();
+        } catch (error) {
+            console.log('Error adding reply', error);
+        }
+    };
+
+    const editReply = (reply: Reply) => {
+        setEditReplyId(reply.id);
+        setEditReplyMessage(reply.message);
+    };
+
+    const updateReply = async () => {
+        if (!editReplyId) return;
+
+        try {
+            const response = await fetch(`http://localhost:3002/forum/forumRoom/${forumId}/replies/${editReplyId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth': 'Bearer aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k'
+                },
+                body: JSON.stringify({ message: editReplyMessage })
+            });
+            if (!response.ok) {
+                throw new Error('Failed to update reply');
+            }
+            setEditReplyId(null);
+            setEditReplyMessage('');
+            fetchReplies();
+        } catch (error) {
+            console.log('Error updating reply:', error);
+        }
+    };
+
+    const deleteReply = async (replyId: string) => {
+        try {
+            const response = await fetch(`http://localhost:3002/forum/forum/${forumId}/replies/${replyId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth': 'Bearer aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k'
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Failed to delete reply');
+            }
+            fetchReplies();
+        } catch (error) {
+            console.log('Error deleting reply:', error);
+        }
+    };
+
     useEffect(() => {
         fetchReplies();
         fetchDetails();
@@ -91,16 +160,42 @@ const RepliesPage = () => {
         <div className="Replies">
             <h1>Replies for Forum: {forum?.question}</h1>
             {details && details.sender && (
-                <p>Sender Email: {details.sender.senderEmail}</p>
+                <p>Sender Email: {details.sender.senderEmail} <br />
+                    Sender PFP: <img src={details.sender.senderImageURL} alt="Profile" /></p>
             )}
+
+            <div>
+                <h2>Add a Reply</h2>
+                <textarea
+                    value={newReply}
+                    onChange={(e) => setNewReply(e.target.value)}
+                    placeholder="Type your reply here..."
+                />
+                <button onClick={addReply}>Add Reply</button>
+            </div>
+
             <ul>
-                {replies.map((reply, index) => (
-                    <li key={index}>
+                {replies.map((reply) => (
+                    <li key={reply.id}>
                         <p>Reply Email: {reply.senderEmail}</p>
                         <p>{reply.message}</p>
+                        <button onClick={() => editReply(reply)}>Edit</button>
+                        <button onClick={() => deleteReply(reply.id)}>Delete</button>
                     </li>
                 ))}
             </ul>
+            {editReplyId && (
+                <div>
+                    <h2>Edit Reply</h2>
+                    <textarea
+                        value={editReplyMessage}
+                        onChange={(e) => setEditReplyMessage(e.target.value)}
+                        placeholder="Edit your reply here..."
+                    />
+                    <button onClick={updateReply}>Update Reply</button>
+                    <button onClick={() => setEditReplyId(null)}>Cancel</button>
+                </div>
+            )}
         </div>
     );
 };
