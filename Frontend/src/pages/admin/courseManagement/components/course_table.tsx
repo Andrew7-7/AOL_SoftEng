@@ -11,7 +11,7 @@ const CourseTable: React.FC<{ courseDatas: ICourse[] }> = ({ courseDatas }) => {
 					<p>Name</p>
 					<p>Status</p>
 					<p>Chapters</p>
-					<p>Total Hours</p>
+					<p>Hours Per Session</p>
 					<p>Level</p>
 				</div>
 				{courseDatas.map((courseData) => (
