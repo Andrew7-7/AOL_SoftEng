@@ -1,10 +1,12 @@
 .course-table-container {
-	margin-top: 20px;
-	overflow-y: auto;
-	height: 70vh;
+	margin-top: 30px;
 }
 
 .course-table-container .table-content {
+	background-color: white;
+	padding: 20px;
+	padding-top: 10px;
+	border-radius: 5px;
 }
 
 .course-table-container .table-header {
@@ -15,6 +17,11 @@
 	border-bottom: 1px rgb(192, 192, 192) solid;
 	font-weight: 600;
 	box-sizing: border-box;
+}
+
+.course-table-container .table-content .table-row-outer-container {
+	height: 60vh;
+	overflow: auto;
 }
 
 .course-table-container .table-content .table-row {

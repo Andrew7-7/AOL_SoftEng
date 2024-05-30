@@ -6,7 +6,7 @@ interface InputFormProps {
 	type: string;
 	name: string;
 	value: any;
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	onChange: (event: React.ChangeEvent<any>) => void;
 }
 
 const InputForm: React.FC<InputFormProps> = ({
@@ -20,24 +20,35 @@ const InputForm: React.FC<InputFormProps> = ({
 	return (
 		<div className="input-form">
 			<p className={type == "file" ? "file" : ""}>{label}</p>
-			<input
-				className={
-					type == "date"
-						? "date"
-						: type == "checkbox"
-						? "checkbox"
-						: type == "file"
-						? "file"
-						: ""
-				}
-				checked={value}
-				placeholder={placeHolder}
-				name={name}
-				value={value}
-				required
-				type={type}
-				onChange={onChange}
-			/>
+			{type == "textarea" ? (
+				<textarea
+					className="text-area"
+					placeholder={placeHolder}
+					name={name}
+					value={value}
+					required
+					onChange={onChange}
+				/>
+			) : (
+				<input
+					className={
+						type == "date"
+							? "date"
+							: type == "checkbox"
+							? "checkbox"
+							: type == "file"
+							? "file"
+							: ""
+					}
+					checked={value}
+					placeholder={placeHolder}
+					name={name}
+					value={value}
+					required
+					type={type}
+					onChange={onChange}
+				/>
+			)}
 		</div>
 	);
 };

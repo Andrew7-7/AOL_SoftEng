@@ -1,0 +1,33 @@
+.create-course-page {
+	display: flex;
+}
+
+.create-course-page .content-section {
+	padding-top: 50px;
+	flex: 1;
+}
+
+.create-course-page .top-section {
+	display: flex;
+	justify-content: space-between;
+}
+
+.create-course-page .top-section .button-container {
+	width: 200px;
+}
+
+.create-course-page .form-container {
+	display: flex;
+	gap: 30px;
+}
+
+.create-course-page .form-container .left {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.create-course-page .form-container .right {
+	flex: 1;
+}

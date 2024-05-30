@@ -1,43 +1,45 @@
-.navContainer {
-  height: 8vh;
-  width: 100%;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* TODO: position sticky */
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 4vw;
-  padding-right: 4vw;
+.navContainer {
+	height: 8vh;
+	width: 100%;
+	background-color: white;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-left: 4vw;
+	padding-right: 4vw;
 }
 
 .leftNav {
-  display: flex;
-  font-weight: 600;
-  color: black;
+	display: flex;
+	font-weight: 600;
+	color: black;
 }
 
 .leftNav p {
-  font-size: 1vw;
+	font-size: 1vw;
 }
 
 .rightNav .profile a {
-  color: white;
-  background-color: #f17c41;
-  padding: 0.5vw;
-  padding-left: 1.5vw;
-  padding-right: 1.5vw;
-  font-weight: 600;
-  border-radius: 11px;
-  font-size: 0.9vw;
+	color: white;
+	background-color: #f17c41;
+	padding: 0.5vw;
+	padding-left: 1.5vw;
+	padding-right: 1.5vw;
+	font-weight: 600;
+	border-radius: 11px;
+	font-size: 0.9vw;
 }
 
 .rightNav {
-  display: flex;
-  gap: 1vw;
-  align-items: center;
+	display: flex;
+	gap: 1vw;
+	align-items: center;
 }
 
 .rightNav a {
-  font-size: 0.9vw;
+	font-size: 0.9vw;
 }

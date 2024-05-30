@@ -62,7 +62,6 @@ export class CoursesController {
 			const documentRef = doc(db, collectionName, documentId);
 			const documentSnapshot = await getDoc(documentRef);
 			const reviews: any = [];
-
 			if (documentSnapshot.exists()) {
 				const tutor: Course = {
 					id: documentId,

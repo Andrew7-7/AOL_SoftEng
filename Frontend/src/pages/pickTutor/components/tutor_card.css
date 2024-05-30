@@ -1,6 +1,5 @@
 .tutor-card-container {
 	/* box-sizing: border-box; */
-	height: 250px;
 	background-color: white;
 	border-radius: 8px;
 	padding: 35px;
@@ -51,6 +50,16 @@
 
 .tutor-card-content-left .tutor-description {
 	color: var(--font-light);
+}
+
+.tutor-card-content-left .tutor-description .view-more-button {
+	color: var(--font-light);
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.tutor-card-content-left .tutor-description .view-more-button:hover {
+	text-decoration: underline;
 }
 
 .tutor-card-content-right {
