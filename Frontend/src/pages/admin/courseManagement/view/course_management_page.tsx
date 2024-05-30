@@ -33,6 +33,8 @@ const CourseManagementPage = () => {
 		}
 	};
 
+	console.log(courseDatas);
+
 	return (
 		<div className="course-management-page">
 			<AdminNav clickedItem="Course" />

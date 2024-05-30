@@ -8,6 +8,7 @@ import {
   deleteDoc,
   getDoc,
   Timestamp,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../Config/config";
 import { Request, Response } from "express";
@@ -202,6 +203,35 @@ export class TutorController {
       } else {
         res.status(500).json({ error: "Tutor not found" });
       }
+    } catch (error) {
+      res.status(500).json({ error: "Error fetching tutor" });
+    }
+  }
+
+  static async editSessionTime(req: Request, res: Response) {
+    try {
+      const { classID, sessionID, updatedStartDate, updatedEndDate } = req.body;
+
+      if (!classID || !sessionID || !updatedStartDate || !updatedEndDate) {
+        return res.status(404).json({ error: "required all items" });
+      }
+
+      const classDocRef = doc(classCollection, classID);
+
+      const classDocSnapshot = await getDoc(classDocRef);
+
+      if (!classDocSnapshot.exists()) {
+        return res.status(404).json({ error: "Class not found" });
+      }
+      const sessionDocRef = doc(classDocRef, "Session", sessionID);
+      const parsedStartDate = Timestamp.fromMillis(parseInt(updatedStartDate));
+      const parsedEndDate = Timestamp.fromMillis(parseInt(updatedEndDate));
+      await updateDoc(sessionDocRef, {
+        startDate: parsedStartDate,
+        endDate: parsedEndDate,
+      });
+
+      return res.status(200).json({ message: "success" });
     } catch (error) {
       res.status(500).json({ error: "Error fetching tutor" });
     }

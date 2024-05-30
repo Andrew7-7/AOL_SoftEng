@@ -1,0 +1,191 @@
+.container-coursedetail{
+  width: 100vw;
+  min-height: 160vh;
+}
+.back-t0-home-page-coursedetail {
+  margin-top: 130px;
+  margin-left: 100px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.btn-coursedetail {
+  background: url("https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/PickCourse%2Fback%20button.svg?alt=media&token=617e835c-1b7b-4a34-b6a2-f5309cac506c");
+  width: 100%;
+  height: 100%;
+  rotate: 222deg;
+}
+.back-to-home-button-1-coursedetail {
+  margin: 0.5rem 0.5rem 0.5rem 0;
+  display: flex;
+  width: 0.8rem;
+  height: 1.2rem;
+  box-sizing: border-box;
+}
+
+.back-to-home-page-title-coursedetail {
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #a8a8a8;
+}
+
+.banner-coursedetail {
+  position: absolute;
+  left: 0rem;
+  top: 4.5rem;
+  height: 341px;
+  right: 0rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 7rem 5rem 4.7rem 0;
+  box-sizing: border-box;
+}
+
+.course-detail-descrption-coursedetail {
+  box-shadow: 0.2rem 0.6rem 1.2rem 0rem rgba(0, 0, 0, 0.2),
+    0rem 0rem 0.5rem 0rem rgba(0, 0, 0, 0.2);
+  position: absolute;
+  left: 10rem;
+  top: 20rem;
+  display: flex;
+  width: 21.9rem;
+  height: 27.1rem;
+  box-sizing: border-box;
+  border-radius: 1.3rem 1.3rem 1.3rem 1.3rem;
+}
+.title-description-coursedetail {
+  display: flex;
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 2rem;
+  color: white;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  background-color: rgb(52, 51, 51);
+  padding-right: 57px;
+  align-self: center;
+  justify-content: center;
+  padding-left: 58px;
+  border-radius: 1.3rem 1.3rem 0 0;
+}
+.container-2-coursedetail {
+  border-radius: 1.3rem 1.3rem 1.3rem 1.3rem;
+  background: rgb(255, 255, 255);
+  margin-right: 2100px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 27.1rem;
+  box-sizing: border-box;
+}
+.total-sessions-coursedetail {
+  display: inline-block;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #474747;
+}
+.line-coursedetail {
+  background: #c8c8c8;
+  margin-bottom: 2.3rem;
+  width: 21.9rem;
+  height: 0.1rem;
+}
+.total-chapters-coursedetail {
+  display: inline-block;
+  margin: 0;
+  padding-bottom: 25px;
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #474747;
+}
+.line-1-coursedetail {
+  background: #c8c8c8;
+  width: 21.9rem;
+  height: 0.1rem;
+}
+.skill-level-coursedetail {
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #474747;
+}
+
+.coursedescription-container-coursedetail h1{
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 2rem;
+  position: absolute;
+  left: 37rem;
+}
+.coursedescription-container-coursedetail p{
+  margin-top: 50px;
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 300;
+  font-size: 1.3rem;
+  position: absolute;
+  left: 37rem;
+  margin-bottom: 10px;
+  margin-right: 120px;
+  padding-bottom: 100px;
+}
+.book-this-course-button-coursedetail{
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 2rem;
+  color: #f27d42;;
+  margin-top: 300px;
+  display: flex;
+  position: absolute;
+  left:50rem;
+  background-color: transparent;
+  border:  solid 5px #f27d42;
+  border-radius: 10px 10px 10px 10px;
+  padding: 10px 20px 10px 20px;
+}
+.chapterbreakdown-container-coursedetail {
+  /* padding-top: 700px; */
+  margin-top: 700px;
+  padding-bottom: 200px;
+  z-index: 11;
+  position: absolute;
+  /* top: 700px; */
+  left: 520px;
+}
+.chapterbreakdown-container-coursedetail h1{
+  margin-top: 0px;
+  overflow-wrap: break-word;
+  font-family: "Poppins";
+  font-weight: 500;
+  font-size: 2rem;
+  left: 0rem;
+  margin-bottom: 10px;
+}
+
+.chapterbreakdown-container-coursedetail-2 .chapterbreakdown-set-coursedetail {
+  box-shadow: 0.2rem 0.6rem 1.2rem 0rem rgba(0, 0, 0, 0.1),
+  0rem 0rem 0.5rem 0rem rgba(0, 0, 0, 0.03);
+	border: 1.5px var(--primary-orange) solid;
+
+	padding: 10px;
+  background-color: #fff;
+	color: var(--primary-orange);
+	border-radius: 10px;
+	text-align: left;
+  margin-bottom: 10px;
+}

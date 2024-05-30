@@ -22,29 +22,29 @@ const activecourse_page = () => {
 	return (
 		<>
 			<StudentNav />
-			<div className="banner">
-				<div className="banner-title">
+			<div className="banner-activecourse">
+				<div className="banner-title-activecourse">
 					Welcome to our comprehensive course
 				</div>
-				<span className="banner-subtitle">
+				<span className="banner-subtitle-activecourse">
 					We offer a wide range of courses designed to help you master the art of coding. Whether you&#39;re a beginner or an experienced programmer, we have something for everyone.
 				</span>
-				<div className="banner-image"></div>
+				<div className="banner-image-activecourse"></div>
 			</div>
 			<Link to={`/home`}>
-			<div className="back-t0-home-page">
-				<div className="back-to-home-button-1">
-					<div className="btn"></div>
+			<div className="back-t0-home-page-activecourse">
+				<div className="back-to-home-button-1-activecourse">
+					<div className="btn-activecourse"></div>
 				</div>
-				<span className="back-to-home-page-title">
+				<span className="back-to-home-page-title-activecourse">
 					Back to Home Page
 				</span>
 			</div>
 			</Link>
-			<div className="all-course">
+			<div className="all-course-activecourse">
 				All Course
 			</div>
-			<div className="course-list-container">
+			<div className="course-list-container-activecourse">
 				{courseDatas.map((CourseData: ICourse) => (
 					<Card
 						title={CourseData.CourseName}

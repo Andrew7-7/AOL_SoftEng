@@ -10,5 +10,9 @@ export interface ICourse {
 	CourseID: number;
 	Sessions: number;
 	CourseImage: string;
-	CourseDetail: ICourseDetail[];
+	banner: string;
+	skill: string;
+	description: string;
+	chapterBreakdown: string[];
+	totalHours: string;
 }

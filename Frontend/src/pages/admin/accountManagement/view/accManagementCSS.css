@@ -11,17 +11,18 @@
 	align-items: start;
 }
 
-.accountCard {
-	display: flex;
-	width: 79vw;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.445);
-	border-radius: 5px;
-	padding: 1.2vw;
-	margin-top: 2vh;
-	justify-content: space-between;
-	align-items: center;
-	font-size: 1vw;
-	font-weight: 600;
+.accountCardManagement {
+  display: flex;
+  width: 79vw;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.445);
+  border-radius: 5px;
+  padding: 1.2vw;
+  margin-top: 2vh;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1vw;
+  font-weight: 600;
+  background-color: white;
 }
 
 .tableHeader {

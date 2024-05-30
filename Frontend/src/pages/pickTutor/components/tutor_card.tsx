@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ITutor } from "../../../global/model/tutor-interface";
 import starIcon from "../../../global/assets/star.png";
 import "./tutor_card.css";
@@ -6,6 +6,7 @@ import { useState } from "react";
 
 const TutorCard: React.FC<{ tutorData: ITutor }> = ({ tutorData }) => {
 	const skillSet = tutorData.skillSet?.join(", ");
+	const { courseId } = useParams();
 
 	const [showAllDescription, setShowAllDescription] = useState<boolean>(false);
 
@@ -48,7 +49,7 @@ const TutorCard: React.FC<{ tutorData: ITutor }> = ({ tutorData }) => {
 					</div>
 				</div>
 				<div className="tutor-card-content-right">
-					<Link to={`/pickTutor/${tutorData.id}`} className="button-container">
+					<Link to={`/${courseId}/pickTutor/${tutorData.id}`} className="button-container">
 						<div className="button-orange">View profile</div>
 					</Link>
 				</div>

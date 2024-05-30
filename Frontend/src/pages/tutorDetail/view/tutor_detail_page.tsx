@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useFetch from "../../../global/hooks/useFetch";
 import "./tutor_detail_page.css";
 import TutorDetail from "../components/tutor_detail";
@@ -7,7 +7,7 @@ import StudentReviews from "../components/student_reviews";
 import { ITutor } from "../../../global/model/tutor-interface";
 
 const TutorDetailPage = () => {
-  const { tutorId } = useParams();
+  const { courseId ,tutorId } = useParams();
 
   const { data: tutorData, loading: tutorLoading } = useFetch(
     `http://localhost:3002/tutor/getTutor/${tutorId}`
@@ -33,7 +33,7 @@ const TutorDetailPage = () => {
               <div className="container">
                 <div className="header">Contact {tutorData.name}</div>
                 <div className="button-container">
-                  <div className="button-orange">Book</div>
+                  <Link to={`/${courseId}/${tutorId}/payment`}><div className="button-orange">Book</div></Link>
                 </div>
               </div>
             </div>
