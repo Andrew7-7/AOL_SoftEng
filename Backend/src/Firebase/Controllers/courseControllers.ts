@@ -27,28 +27,6 @@ export class CoursesController {
 				id: doc.id,
 				...doc.data(),
 			}));
-
-			for (const course of courses) {
-				//fetch course detail collection
-				const collectionName = "CourseDetail";
-				const docRef = doc(db, "Courses", course.id);
-				const collectionSnapshot = await getDocs(
-					collection(docRef, collectionName)
-				);
-
-				//TODO tipe interface courseDetail
-				const courseDetail: any = [];
-
-				if (!collectionSnapshot.empty) {
-					collectionSnapshot.forEach((collectionDoc) => {
-						courseDetail.push({
-							id: collectionDoc.id,
-							...collectionDoc.data(),
-						});
-					});
-				}
-				course[collectionName] = courseDetail;
-			}
 			res.status(200).json(courses);
 		} catch (error) {
 			res.status(500).json({ error: "Error fetching courses" });
@@ -68,26 +46,6 @@ export class CoursesController {
 					id: courseId,
 					...courseDocSnapshot.data(),
 				};
-
-				//fetch course detail collection
-				const collectionName = "CourseDetail";
-				const docRef = doc(db, "Courses", course.id);
-				const collectionSnapshot = await getDocs(
-					collection(docRef, collectionName)
-				);
-
-				//TODO tipe interface courseDetail
-				const courseDetail: any = [];
-
-				if (!collectionSnapshot.empty) {
-					collectionSnapshot.forEach((collectionDoc) => {
-						courseDetail.push({
-							id: collectionDoc.id,
-							...collectionDoc.data(),
-						});
-					});
-				}
-				course[collectionName] = courseDetail;
 				res.status(200).json(course);
 			} else {
 				res.status(500).json({ error: "Course not found" });
@@ -111,7 +69,7 @@ export class CoursesController {
 					...documentSnapshot.data(),
 				};
 				tutor["CourseDetail"] = reviews;
-				console.log(reviews)
+				console.log(reviews);
 				res.status(200).json(tutor);
 			} else {
 				res.status(500).json({ error: "Courses not found" });

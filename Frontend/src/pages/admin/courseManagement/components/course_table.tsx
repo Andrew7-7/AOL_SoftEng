@@ -11,7 +11,7 @@ const CourseTable: React.FC<{ courseDatas: ICourse[] }> = ({ courseDatas }) => {
 					<p>Name</p>
 					<p>Status</p>
 					<p>Chapters</p>
-					<p>Hour per session</p>
+					<p>Total Hours</p>
 					<p>Level</p>
 				</div>
 				{courseDatas.map((courseData) => (
@@ -24,8 +24,8 @@ const CourseTable: React.FC<{ courseDatas: ICourse[] }> = ({ courseDatas }) => {
 							<p>{courseData.CourseName}</p>
 							<p>{courseData.Status}</p>
 							<p>{courseData.Chapters}</p>
-							<p>{courseData.CourseDetail[0].hoursPerSession}h</p>
-							<p>{courseData.CourseDetail[0].skillLevel}</p>
+							<p>{courseData.totalHours}h</p>
+							<p>{courseData.skill}</p>
 						</div>
 					</Link>
 				))}
