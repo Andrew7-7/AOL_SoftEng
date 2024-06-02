@@ -4,15 +4,25 @@ import InputForm from "../../../global/components/textBox/InputForm";
 import "./create_course.css";
 import SelectForm from "../../../global/components/selectForm/SelectForm";
 import trashcanRedIcon from "../../../global/assets/trash_can.svg";
+import ErrorMessage from "../../../global/components/errorMessage/ErrorMessage";
+import axios from "axios";
 
 const CreateCoursePage = () => {
   const [courseFormData, setCourseFormData] = useState({
     courseName: "",
     courseDescription: "",
     skill: "",
+    totalSession: "",
     hourPerSession: "",
     chapterBreakdowns: [""],
   });
+
+  const [error, setError] = useState({
+    message: "",
+    show: false,
+  });
+
+  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
   const skillLevelOption = [
     {
@@ -29,7 +39,7 @@ const CreateCoursePage = () => {
     },
   ];
 
-  const [selecttedImage, setSelectedImage] = useState<File | null>(null);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,15 +102,81 @@ const CreateCoursePage = () => {
     });
   };
 
+  const handleError = (message: string) => {
+    setError({
+      message: message,
+      show: true,
+    });
+    setTimeout(() => {
+      setError({
+        message: message,
+        show: false,
+      });
+    }, 5000); // Hide after 5 seconds
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    if (
+      courseFormData.courseName == "" ||
+      courseFormData.chapterBreakdowns[0] == "" ||
+      courseFormData.courseDescription == "" ||
+      courseFormData.hourPerSession == "" ||
+      courseFormData.totalSession == "" ||
+      courseFormData.skill == "" ||
+      !selectedImage
+    ) {
+      handleError("Please input all required field");
+    }
+    setSubmitLoading(true);
+    try {
+      const {
+        courseName,
+        courseDescription,
+        skill,
+        totalSession,
+        hourPerSession,
+        chapterBreakdowns,
+      } = courseFormData;
+      const res = await axios.post(
+        "http://localhost:3002/course/createCourse",
+        {
+          courseName,
+          courseDescription,
+          skill,
+          totalSession,
+          hourPerSession,
+          chapterBreakdowns,
+          imageURL: selectedImage,
+        },
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      console.log(res.data.message);
+    } catch (error: any) {
+      console.log(error);
+      return;
+    } finally {
+      setSubmitLoading(false);
+    }
+  };
+
   return (
     <div className="create-course-page">
+      <ErrorMessage message={error.message} show={error.show} />
       <AdminNav clickedItem="Course" />
       <div className="content-section">
         <div className="page-center">
+          <div className="header-section">
+            <div className="header">Create Course</div>
+          </div>
           <div className="content-container">
-            <div className="header-section">
-              <div className="header">Create Course</div>
-              <form className="form-container">
+            <form className="form-outer-container">
+              <div className="form-container">
                 <div className="left">
                   <InputForm
                     label="Course name"
@@ -124,6 +200,14 @@ const CreateCoursePage = () => {
                     onChange={handleInputChange}
                     value={courseFormData.skill}
                     options={skillLevelOption}
+                  />
+                  <InputForm
+                    label="Total sessions"
+                    name="totalSession"
+                    onChange={handleInputChange}
+                    placeHolder="Insert total session"
+                    type="number"
+                    value={courseFormData.totalSession}
                   />
                   <InputForm
                     label="Hour per session"
@@ -182,8 +266,15 @@ const CreateCoursePage = () => {
                     </div>
                   </div>
                 </div>
-              </form>
-            </div>
+              </div>
+              <button
+                className="submit-button"
+                type="submit"
+                onClick={handleSubmit}
+              >
+                Create Course
+              </button>
+            </form>
           </div>
         </div>
       </div>
