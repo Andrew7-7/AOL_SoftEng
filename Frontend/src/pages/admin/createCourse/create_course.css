@@ -1,33 +1,101 @@
 .create-course-page {
-	display: flex;
+  display: flex;
 }
 
 .create-course-page .content-section {
-	padding-top: 50px;
-	flex: 1;
+  padding-top: 50px;
+  flex: 1;
 }
 
 .create-course-page .top-section {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .create-course-page .top-section .button-container {
-	width: 200px;
+  width: 200px;
 }
 
 .create-course-page .form-container {
-	display: flex;
-	gap: 30px;
+  display: flex;
+  gap: 30px;
 }
 
 .create-course-page .form-container .left {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .create-course-page .form-container .right {
-	flex: 1;
+  flex: 1;
+}
+
+.create-course-page .form-container .right .chapter-breakdown-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.create-course-page
+  .form-container
+  .right
+  .chapter-breakdown-container
+  .delete-button {
+  background-color: white;
+  border: 1px solid #ff6961;
+  border-radius: 5px;
+  height: 38px;
+  margin-top: 2px;
+  cursor: pointer;
+}
+
+.create-course-page
+  .form-container
+  .right
+  .chapter-breakdown-container
+  .delete-button:hover {
+  background-color: #ff6961;
+}
+
+.create-course-page
+  .form-container
+  .right
+  .chapter-breakdown-container
+  .delete-button:hover
+  img {
+  filter: brightness(100);
+}
+
+.create-course-page .form-container .right .chapter-breakdown-outer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.create-course-page
+  .form-container
+  .right
+  .chapter-breakdown-outer-container
+  .add-button {
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--primary-orange);
+  color: var(--primary-orange);
+  background-color: white;
+  font-size: 13px;
+}
+
+.create-course-page
+  .form-container
+  .right
+  .chapter-breakdown-outer-container
+  .add-button:hover {
+  background-color: var(--primary-orange);
+  color: white;
+  cursor: pointer;
 }

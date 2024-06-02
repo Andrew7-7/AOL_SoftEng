@@ -1,78 +1,78 @@
 .input-form {
-	width: 100%;
+  width: 100%;
 }
 
 .input-form p {
-	margin-bottom: 4px;
-	color: var(--font-light-1);
+  margin-bottom: 4px;
+  color: var(--font-light-1);
 }
 
 .input-form p.file {
-	margin-bottom: 4px;
-	color: var(--font-light-1);
+  margin-bottom: 4px;
+  color: var(--font-light-1);
 }
 
 .input-form input {
-	color: var(--font-light-3);
-	box-sizing: border-box;
-	border: 1px solid;
-	border-radius: 3px;
-	border-color: rgb(210, 209, 209);
-	background-color: white;
-	padding: 8px;
-	width: 100%;
+  color: var(--font-light-3);
+  box-sizing: border-box;
+  border: 1px solid;
+  border-radius: 3px;
+  border-color: rgb(210, 209, 209);
+  background-color: white;
+  padding: 8px;
+  width: 100%;
 }
 
 .input-form input.file {
-	margin-top: 3px;
-	box-sizing: border-box;
-	border: 0px;
-	border-radius: 3px;
-	border-color: rgb(210, 209, 209);
-	background-color: white;
-	padding: 0px;
-	width: 100%;
+  margin-top: 3px;
+  box-sizing: border-box;
+  border: 0px;
+  border-radius: 3px;
+  border-color: rgb(210, 209, 209);
+  background-color: white;
+  padding: 0px;
+  width: 100%;
 }
 
 .input-form input.date {
-	height: 34px;
+  height: 34px;
 }
 
 .input-form input.checkbox {
-	width: auto;
+  width: auto;
 }
 
 .input-form input::placeholder {
-	color: rgb(188, 188, 188);
+  color: rgb(188, 188, 188);
 }
 
 .input-form input:hover {
-	border-color: rgb(82, 82, 82);
+  border-color: rgb(82, 82, 82);
 }
 
 .input-form input:focus {
-	border-color: #1494c6;
+  border-color: #1494c6 !important;
 }
 
 .input-form .text-area {
-	color: var(--font-light-3);
-	box-sizing: border-box;
-	border: 1px solid;
-	border-radius: 3px;
-	border-color: rgb(210, 209, 209);
-	background-color: white;
-	padding: 8px;
-	width: 100%;
+  color: var(--font-light-3);
+  box-sizing: border-box;
+  border: 1px solid;
+  border-radius: 3px;
+  border-color: rgb(210, 209, 209);
+  background-color: white;
+  padding: 8px;
+  width: 100%;
 }
 
 .input-form .text-area::placeholder {
-	color: rgb(188, 188, 188);
+  color: rgb(188, 188, 188);
 }
 
 .input-form .text-area:hover {
-	border-color: rgb(82, 82, 82);
+  border-color: rgb(82, 82, 82);
 }
 
 .input-form .text-area:focus {
-	border-color: #1494c6;
+  border-color: #1494c6;
 }
