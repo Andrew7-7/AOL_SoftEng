@@ -28,7 +28,7 @@ import CreateCoursePage from "./pages/admin/createCourse/create_course_page.tsx"
 import ActiveClass from "./pages/tutor/activeClass/view/activeClass.tsx";
 import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassDetail.tsx";
 import PaymentPage from "./pages/paymentpage/view/payment_page.tsx";
-
+import ConfirmedPage from "./pages/paymentpage/view/confirmed_page.tsx";
 function App() {
 	return (
 		<>
@@ -61,7 +61,7 @@ function App() {
 						<Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
 						<Route path="/:courseId/pickTutor/:tutorId" element={<TutorDetailPage />} />
 						<Route path="/:courseId/:tutorId/payment" element={<PaymentPage />} />
-
+						<Route path="/:courseId/:tutorId/payment/confirmed" element={<ConfirmedPage />} />
 						{/* Tutor Only Pages */}
 						<Route element={<CheckRole role={"tutor"} />}>
 							<Route path="/tutorDummy" element={<TutorDummy />}></Route>

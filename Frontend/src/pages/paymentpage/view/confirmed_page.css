@@ -1,0 +1,69 @@
+.paymentpage-banner {
+  background: url("https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/asset%2FpaymentpageBanner.png?alt=media&token=032c9c20-1dc5-4151-bd66-59ca49b1feac");
+  width: 100%;
+  height: 246px;
+}
+
+.loading-bar-modal {
+  box-shadow: 0.2rem 0.6rem 1.2rem 0rem rgba(0, 0, 0, 0.1),
+    0rem 0rem 0.5rem 0rem rgba(0, 0, 0, 0.03);
+  background-color: #fffdfc;
+  border: #ff7a37 solid 7px;
+  margin-top: 50px;
+  margin-left: 170px;
+  display: flex;
+  width: 80rem;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-bar-modal-h1 {
+  font-weight: 900;
+  font-size: 30px;
+  font-family: "Poppins";
+  display: flex;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-bar-modal-h3 {
+  font-weight: 300;
+  text-align: start;
+  font-size: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.loading-bar-progress-modal-not-completed {
+  border: #ff7a37 solid 5px;
+  margin-left: 30px;
+  border-radius: 20px;
+  width: 95%;
+  background-color: #ffebe1;
+}
+.loading-bar-progress-modal-completed {
+  height: 30px;
+  margin-left: 0px;
+  border-radius: 20px;
+  background-color: #3cec41;
+  transition: width 0.3s ease-in-out;
+}
+
+.loading-bar-progress-container {
+  display: flex;
+  width: 95%;
+}
+
+.loading-bar-modal-h5 {
+  font-weight: 300;
+  text-align: start;
+  font-size: 15px;
+  justify-content: center;
+  margin-top: 10px;
+  align-items: center;
+}

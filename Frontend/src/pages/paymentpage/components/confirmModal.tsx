@@ -4,12 +4,14 @@ import './confirmModal.css';
 import { ICourse } from '../../../global/model/course-interface';
 import { useNavigate } from 'react-router-dom';
 import { ITutor } from '../../../global/model/tutor-interface';
+import LoadingProgressBar from './loadingbar';
 import { IUser } from '../../../global/model/user-interface';
 import { ITransaction } from '../../../global/model/transaction-interface';
 import useFetch from '../../../global/hooks/useFetch';
 
 const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string; totalPrice: number }> = ({ courseData, tutorData, payment, totalPrice }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCompleted,setIsCompleted] =useState(false)
   const user = JSON.parse(window.localStorage.getItem("user") || "{}");
   const navigate = useNavigate();
   const [courseId, setCourseId] = useState("")
@@ -17,26 +19,27 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string;
   const [price, setPrice] = useState("")
   const [tutorEmail, setTutorEmail] = useState("")
   const [userEmail, setUserEmail] = useState("")
+  const [tutorId, setTutorId] = useState("")
 
   useEffect(() => {
     setCourseId(courseData.CourseID)
     setPaymentMethod(payment)
     setPrice(totalPrice.toString())
     setTutorEmail(tutorData.id)
-  }, []); // Empty dependency array ensures this effect runs only once, similar to componentDidMount
+    setTutorId(tutorData.id)
+  }, []);
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
-  const handleClick: MouseEventHandler<HTMLButtonElement> = (event) => {
-    // Call your function with the required arguments
+  const handleClick: MouseEventHandler<HTMLButtonElement> = () => {
     handleRegister(courseId, paymentMethod, price, tutorEmail, userEmail);
   };
 
 
-  const { data: transactionDatas } = useFetch(
-    "http://localhost:3002/transaction/getTransaction/"
-  );
+  // const { data: transactionDatas } = useFetch(
+  //   "http://localhost:3002/transaction/getTransaction/"
+  // );
 
   const handleRegister = (
     courseId: string,
@@ -62,11 +65,15 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string;
 
         if (res.status === 200) {
           console.log(res.data.message)
+          navigate(`/${courseId}/${tutorId}/payment/confirmed`)
+          setIsCompleted(true)
         }
       } catch (err: any) {
         if (err.response && err.response.status === 404) {
+       setIsCompleted(false)
         } else {
           console.log(err);
+          setIsCompleted(false)
         }
       }
     };
@@ -76,17 +83,35 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string;
 
   return (
     <div>
-      <button className="chapterbreakdown-set-coursedetail-3-paymentpage" onClick={toggleModal}>See All Chapter Breakdowns</button>
+      <button className="chapterbreakdown-set-coursedetail-3-paymentpage"
+        onClick={toggleModal}>
+        Complete Payment
+      </button>
       {isOpen && (
         <div className="modal-paymentpage">
           <div className="modal-content-paymentpage">
-            <button className="close-paymentpage-paymentpage" onClick={toggleModal}>&times;</button>
-            <h2>tutor name {tutorData.name} - {courseData.CourseName}</h2>
-            <div className=".chapterbreakdown-container-coursedetail-paymentpage">
+            <div className='modal-content-paymentpage-title-container'>
+              <h1>
+                Confirm your order
+              </h1>
+              <h2>
+                Note: you can not undo (cancel) this order anymore
+              </h2>
+              <h2>
+                if you choose yes
+              </h2>
+            </div>
+            <div className="chapterbreakdown-container-coursedetail-paymentpage">
               <button
                 onClick={toggleModal}
-              >no</button>
-              <button onClick={handleClick}>Click me</button>
+              >
+                NO
+              </button>
+              <button
+                onClick={handleClick}
+              >
+                YES
+              </button>
             </div>
           </div>
         </div>

@@ -23,7 +23,6 @@
   margin-left: 50px;
   margin-right: 50px;
   border-radius: 10px;
-  height: 200rem;
 }
 
 .paymentpage-container .h1-container-paymentpage-selectedcourse {
@@ -79,7 +78,7 @@
   margin-left: 50px;
   margin-right: 50px;
   border-radius: 10px;
-  height: 200rem;
+  padding-bottom: 100px;
 }
 
 .paymentpage-container-title-new-fortitle {
@@ -218,4 +217,47 @@
   padding-bottom: 2px;
   color: #f3ece5;
   border-radius: 10px;
+}
+
+.payment-page-submit-payment-form {
+  display: flex;
+  padding-left: 30px;
+}
+
+.payment-page-submit-payment-form-h1 {
+  font-weight: 700;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: #ff7a37;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 30px;
+  margin-bottom: 10px;
+}
+
+.payment-method-radio-container-payment-page {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.payment-method-radio-container-payment-page-row  {
+display: flex;
+flex-direction: row;
+padding-top: 10px;
+padding-bottom: 10px;
+align-items: center;
+}
+.payment-method-radio-container-payment-page-row input {
+  width: 30px;
+  height: 30px;
+}
+
+.payment-method-radio-container-payment-page-row label {
+  font-size: 15px;
+  padding-left: 10px;
+  text-align: center;
+  vertical-align: center;
+  margin-top: 0px;
 }

@@ -150,49 +150,73 @@ const PaymentPage = () => {
                     </div>
                     <div className='payment-page-submit-payment-form'>
                         <div>
-                            <h1>Payment Page</h1>
+                            <div className='payment-page-submit-payment-form-h1'>Choose Your Payment Method</div>
                             <form onSubmit={handlePaymentSubmit}>
-                                <div>
-                                    <input
-                                        type="radio"
-                                        id="creditCard"
-                                        name="paymentMethod"
-                                        value="creditCard"
-                                        checked={selectedPayment === 'creditCard'}
-                                        onChange={handlePaymentChange}
-                                    />
-                                    <label htmlFor="creditCard">Credit Card</label>
+                                <div className='payment-method-radio-container-payment-page'>
+                                    <div className='payment-method-radio-container-payment-page-row'>
+                                        <input
+                                            type="radio"
+                                            id="bankTransfer"
+                                            name="paymentMethod"
+                                            value="bankTransfer"
+                                            checked={selectedPayment === 'bankTransfer'}
+                                            onChange={handlePaymentChange}
+                                        />
+                                        <label htmlFor="bankTransfer">Bank Transfer (with Virtual Account)</label>
+                                    </div>
+                                    <div className='payment-method-radio-container-payment-page-row'>
+                                        <input
+                                            type="radio"
+                                            id="ovo"
+                                            name="paymentMethod"
+                                            value="ovo"
+                                            checked={selectedPayment === 'ovo'}
+                                            onChange={handlePaymentChange}
+                                        />
+                                        <label htmlFor="ovo">OVO</label>
+                                    </div>
+                                    <div className='payment-method-radio-container-payment-page-row'>
+                                        <input
+                                            type="radio"
+                                            id="gopay"
+                                            name="paymentMethod"
+                                            value="gopay"
+                                            checked={selectedPayment === 'gopay'}
+                                            onChange={handlePaymentChange}
+                                        />
+                                        <label htmlFor="gopay">Gopay</label>
+                                    </div>
+                                    <div className='payment-method-radio-container-payment-page-row'>
+                                        <input
+                                            type="radio"
+                                            id="shopeepay"
+                                            name="paymentMethod"
+                                            value="shopeepay"
+                                            checked={selectedPayment === 'shopeepay'}
+                                            onChange={handlePaymentChange}
+                                        />
+                                        <label htmlFor="shopeepay">Shopee Pay</label>
+                                    </div>
+                                    <div className='payment-method-radio-container-payment-page-row'>
+                                        <input
+                                            type="radio"
+                                            id="creditCard"
+                                            name="paymentMethod"
+                                            value="creditCard"
+                                            checked={selectedPayment === 'creditCard'}
+                                            onChange={handlePaymentChange}
+                                        />
+                                        <label htmlFor="creditCard">Credit Card</label>
+                                    </div>
                                 </div>
-                                <div>
-                                    <input
-                                        type="radio"
-                                        id="paypal"
-                                        name="paymentMethod"
-                                        value="paypal"
-                                        checked={selectedPayment === 'paypal'}
-                                        onChange={handlePaymentChange}
-                                    />
-                                    <label htmlFor="paypal">PayPal</label>
-                                </div>
-                                <div>
-                                    <input
-                                        type="radio"
-                                        id="bitcoin"
-                                        name="paymentMethod"
-                                        value="bitcoin"
-                                        checked={selectedPayment === 'bitcoin'}
-                                        onChange={handlePaymentChange}
-                                    />
-                                    <label htmlFor="bitcoin">Bitcoin</label>
-                                </div>
-
                             </form>
-                            <Modal
-                                courseData={course}
-                                tutorData={tutor}
-                                payment={selectedPayment}
-                                totalPrice={totalPrice}
-                            />
+                            {selectedPayment &&
+                                <Modal
+                                    courseData={course}
+                                    tutorData={tutor}
+                                    payment={selectedPayment}
+                                    totalPrice={totalPrice}
+                                />}
                             {/* {loading && <div className="modal">Processing Payment...</div>} */}
                         </div>
 
