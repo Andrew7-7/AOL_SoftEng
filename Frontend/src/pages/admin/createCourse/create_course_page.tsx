@@ -29,6 +29,17 @@ const CreateCoursePage = () => {
     },
   ];
 
+  const [selecttedImage, setSelectedImage] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files ? e.target.files[0] : null;
+    if (file) {
+      setSelectedImage(file);
+      setPreviewUrl(URL.createObjectURL(file));
+    }
+  };
+
   const handleInputChange = (
     event: ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -41,7 +52,7 @@ const CreateCoursePage = () => {
       if (num < 1) {
         setCourseFormData((prevData) => ({
           ...prevData,
-          [name]: "1", // Set the value to 1 if it is less than 1
+          [name]: "1",
         }));
         return;
       }
@@ -122,6 +133,25 @@ const CreateCoursePage = () => {
                     type="number"
                     value={courseFormData.hourPerSession}
                   />
+                  <div className="image-input-form">
+                    <div className="label">Course image</div>
+                    <input
+                      type="file"
+                      id="imageInput"
+                      onChange={handleImageChange}
+                    />
+                    <label className="custom-file-input" htmlFor="imageInput">
+                      Upload image
+                    </label>
+                    {previewUrl && (
+                      <>
+                        <div className="image-preview">
+                          <div>Image preview</div>
+                          <img src={previewUrl} />
+                        </div>
+                      </>
+                    )}
+                  </div>
                 </div>
                 <div className="right">
                   <p className="chapter-breakdown-label">Chapter breakdowns</p>
@@ -139,14 +169,12 @@ const CreateCoursePage = () => {
                             handleChapterBreakdownChange(index, e.target.value)
                           }
                         />
-                        {/* {index != 0 && ( */}
                         <div
                           className="delete-button"
                           onClick={() => deleteChapterBreakdown(index)}
                         >
                           <img className="red" src={trashcanRedIcon} alt="" />
                         </div>
-                        {/* )} */}
                       </div>
                     ))}
                     <div className="add-button" onClick={addChapterBreakdown}>
