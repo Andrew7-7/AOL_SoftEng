@@ -8,5 +8,6 @@ const transactionsRoutes = Router();
 // TODO: middleware
 transactionsRoutes.get("/getTransactions", transactionControllers.getTransactions);
 transactionsRoutes.get("/getTransaction/:transactionId", transactionControllers.getTransaction);
+transactionsRoutes.post("/registerTransaction", transactionControllers.registerTransaction);
 
 export { transactionsRoutes };

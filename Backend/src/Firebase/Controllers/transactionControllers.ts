@@ -20,7 +20,7 @@ interface Transaction {
 const transactionCollection = collection(db, "Transaction");
 export class transactionControllers {
 
-    static async getTransactions (req: Request, res: Response) {
+    static async getTransactions(req: Request, res: Response) {
         try {
             const coursesSnapshot = await getDocs(transactionCollection);
             const courses: Transaction[] = coursesSnapshot.docs.map((doc) => ({
@@ -76,6 +76,25 @@ export class transactionControllers {
             }
         } catch (error) {
             res.status(500).json({ error: "Error fetching tuuutor" });
+        }
+    }
+
+    static async registerTransaction(req: Request, res: Response) {
+        try {
+            const userCollection = collection(db, "Transaction");
+            let { courseId, paymentMethod, price, tutorEmail, userEmail } = req.body;
+
+            await addDoc(userCollection, {
+                courseId,
+                paymentMethod,
+                price,
+                tutorEmail,
+                userEmail
+            });
+
+            res.status(200).json({ message: "User added successfully" });
+        } catch (error) {
+            res.status(500).json(error);
         }
     }
 }
