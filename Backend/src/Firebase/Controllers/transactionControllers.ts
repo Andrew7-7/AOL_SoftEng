@@ -92,7 +92,7 @@ export class transactionControllers {
                 userEmail
             });
 
-            res.status(200).json({ message: "User added successfully" });
+            res.status(200).json({ message: "New Transaction added successfully" });
         } catch (error) {
             res.status(500).json(error);
         }

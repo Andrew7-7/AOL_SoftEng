@@ -7,7 +7,7 @@ export interface ICourse {
 	CourseName: string;
 	Status: string;
 	Chapters: number;
-	CourseID: number;
+	CourseID: string;
 	Sessions: number;
 	CourseImage: string;
 	banner: string;

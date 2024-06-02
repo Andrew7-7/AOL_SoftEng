@@ -1,20 +1,29 @@
-import React, { MouseEventHandler, useState } from 'react';
+import React, { MouseEventHandler, useState, useEffect } from 'react';
 import axios from "axios";
 import './confirmModal.css';
 import { ICourse } from '../../../global/model/course-interface';
 import { useNavigate } from 'react-router-dom';
 import { ITutor } from '../../../global/model/tutor-interface';
+import { IUser } from '../../../global/model/user-interface';
 import { ITransaction } from '../../../global/model/transaction-interface';
 import useFetch from '../../../global/hooks/useFetch';
 
-const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor }> = ({ courseData, tutorData }) => {
+const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string; totalPrice: number }> = ({ courseData, tutorData, payment, totalPrice }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const user = JSON.parse(window.localStorage.getItem("user") || "{}");
   const navigate = useNavigate();
-  const [courseId,setCourseId] = useState("")
+  const [courseId, setCourseId] = useState("")
   const [paymentMethod, setPaymentMethod] = useState("")
   const [price, setPrice] = useState("")
   const [tutorEmail, setTutorEmail] = useState("")
   const [userEmail, setUserEmail] = useState("")
+
+  useEffect(() => {
+    setCourseId(courseData.CourseID)
+    setPaymentMethod(payment)
+    setPrice(totalPrice.toString())
+    setTutorEmail(tutorData.id)
+  }, []); // Empty dependency array ensures this effect runs only once, similar to componentDidMount
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -23,21 +32,18 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor }> = ({ courseDat
     // Call your function with the required arguments
     handleRegister(courseId, paymentMethod, price, tutorEmail, userEmail);
   };
-  
+
 
   const { data: transactionDatas } = useFetch(
     "http://localhost:3002/transaction/getTransaction/"
   );
 
-
-  // Frontend/src/pages/register/controller/register_controller.tsx
-
   const handleRegister = (
-    courseId:string,
-    paymentMethod:string,
-    price:string,
-    tutorEmail:string,
-    userEmail:string,
+    courseId: string,
+    paymentMethod: string,
+    price: string,
+    tutorEmail: string,
+    userEmail: string,
   ) => {
     const fetchRegister = async () => {
       const extraAuth =
@@ -45,8 +51,8 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor }> = ({ courseDat
 
       try {
         const res = await axios.post(
-          "http://localhost:3002/user/register",
-          { courseId,paymentMethod,price,tutorEmail,userEmail },
+          "http://localhost:3002/transaction/registerTransaction",
+          { courseId, paymentMethod, price, tutorEmail, userEmail },
           {
             headers: {
               auth: `Bearer ${extraAuth}`,
@@ -55,9 +61,7 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor }> = ({ courseDat
         );
 
         if (res.status === 200) {
-          console.log(res.data.message);
-
-          navigate("/login");
+          console.log(res.data.message)
         }
       } catch (err: any) {
         if (err.response && err.response.status === 404) {
@@ -82,7 +86,7 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor }> = ({ courseDat
               <button
                 onClick={toggleModal}
               >no</button>
-             <button onClick={handleClick}>Click me</button>
+              <button onClick={handleClick}>Click me</button>
             </div>
           </div>
         </div>

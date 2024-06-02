@@ -9,8 +9,8 @@ import { ITutor } from '../../../global/model/tutor-interface';
 import { CourseCard } from '../components/courseCard';
 import { TutorCard } from '../components/tutorCard';
 import Modal from '../components/confirmModal';
-import PaymentForm from '../components/choosePayment';
-import useFetch from '../../../global/hooks/useFetch';
+// import PaymentForm from '../components/choosePayment';
+// import useFetch from '../../../global/hooks/useFetch';
 
 const PaymentPage = () => {
     const [selectedPayment, setSelectedPayment] = useState('');
@@ -159,6 +159,8 @@ const PaymentPage = () => {
                         <Modal
                             courseData={course}
                             tutorData={tutor}
+                            payment={selectedPayment}
+                            totalPrice={totalPrice}
                         />
                         {/* {loading && <div className="modal">Processing Payment...</div>} */}
                     </div>
