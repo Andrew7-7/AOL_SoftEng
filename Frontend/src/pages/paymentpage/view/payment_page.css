@@ -118,7 +118,7 @@
 
 .transaction-detail-container-payment-page {
   display: inline-block;
-  height: 500px;
+  height: 620px;
   width: 80%;
   margin-top: 100px;
   margin-left: 140px;
@@ -126,7 +126,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   border-radius: 50px;
 }
-.transaction-detail-title-payment-page{
+.transaction-detail-title-payment-page {
   font-size: 30px;
   display: flex;
   margin-top: 30px;
@@ -137,7 +137,85 @@
   font-weight: 700;
 }
 
-.payment-page-submit-payment-form{
+.payment-page-submit-payment-form {
   margin-top: 50px;
   margin-left: 150px;
+}
+
+.transaction-detail-payment-page-container-1 {
+  padding-top: 20px;
+  padding-left: 50px;
+  /* background-color: #ff7a37; */
+}
+.transaction-detail-payment-page-container-1-course {
+  padding-top: 70px;
+  padding-left: 50px;
+}
+.transaction-detail-payment-page-container-1-course span {
+  font-weight: 700;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: #ff7a37;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 30px;
+}
+.transaction-detail-payment-page-container-1 span {
+  font-weight: 700;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: #ff7a37;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border-radius: 30px;
+}
+
+.transaction-detail-payment-page-container-1-column-container {
+  display: flex;
+  padding-left: 20px;
+  padding-top: 15px;
+  padding-right: 70px;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.transaction-detail-payment-page-container-1-column-container-totalPrice {
+  display: flex;
+  padding-left: 20px;
+  padding-top: 30px;
+  padding-right: 70px;
+  flex-direction: row;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.transaction-detail-totalPrice-title {
+  background-color: #ff7a37;
+  font-size: 16px;
+  font-weight: 700;
+  padding-right: 9px;
+  padding-left: 9px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #f3ece5;
+  border-radius: 10px;
+}
+
+.transaction-detail-totalPrice-details {
+  background-color: #ff7a37;
+  font-size: 16px;
+  font-weight: 700;
+  padding-right: 9px;
+  padding-left: 9px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  color: #f3ece5;
+  border-radius: 10px;
 }
