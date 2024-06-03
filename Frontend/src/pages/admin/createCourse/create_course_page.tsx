@@ -149,12 +149,12 @@ const CreateCoursePage = () => {
 			return;
 		}
 
-		courseFormData.chapterBreakdowns.forEach((chapter) => {
+		for (const chapter of courseFormData.chapterBreakdowns) {
 			if (chapter == "") {
-				handleError("Please input all required field");
+				handleError("Please input all required fields");
 				return;
 			}
-		});
+		}
 
 		setSubmitLoading(true);
 		try {
