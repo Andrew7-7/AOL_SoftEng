@@ -5,13 +5,22 @@ import CourseTable from "../components/course_table";
 import "./course_management_page.css";
 import { ICourse } from "../../../../global/model/course-interface";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import SuccessMessage from "../../../../global/components/successMessage/SuccessMessage";
 
 const CourseManagementPage = () => {
-	const { data: courseDatas, loading: courseLoading } = useFetch(
-		"http://localhost:3002/course/getCourses"
-	);
+	const {
+		data: courseDatas,
+		loading: courseLoading,
+		refetch,
+	} = useFetch("http://localhost:3002/course/getCourses");
 
 	const [searchItem, setSearchItem] = useState<ICourse[]>([]);
+
+	const [success, setSuccess] = useState({
+		message: "",
+		show: false,
+	});
 
 	useEffect(() => {
 		if (courseDatas) {
@@ -22,7 +31,6 @@ const CourseManagementPage = () => {
 	const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const search = event.target.value;
 		if (search === "") {
-			console.log(courseDatas);
 			setSearchItem(courseDatas);
 		} else {
 			setSearchItem(
@@ -33,10 +41,37 @@ const CourseManagementPage = () => {
 		}
 	};
 
+	const handleSuccess = (message: string) => {
+		setSuccess({
+			message: message,
+			show: true,
+		});
+		setTimeout(() => {
+			setSuccess({
+				message: message,
+				show: false,
+			});
+		}, 5000);
+	};
+
+	const handleDelete = async (courseId: string) => {
+		try {
+			const res = await axios.delete(
+				`http://localhost:3002/course/deleteCourse/${courseId}`
+			);
+
+			handleSuccess(res.data.message);
+			refetch();
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	console.log(courseDatas);
 
 	return (
 		<div className="course-management-page">
+			<SuccessMessage message={success.message} show={success.show} />
 			<AdminNav clickedItem="Course" />
 			<div className="content-section">
 				<div className="page-center">
@@ -56,7 +91,12 @@ const CourseManagementPage = () => {
 							</Link>
 						</div>
 						<div className="table-section">
-							{!courseLoading && <CourseTable courseDatas={searchItem} />}
+							{!courseLoading && (
+								<CourseTable
+									handleDelete={handleDelete}
+									courseDatas={searchItem}
+								/>
+							)}
 						</div>
 					</div>
 				</div>
