@@ -139,7 +139,6 @@ const CreateCoursePage = () => {
 		e.preventDefault();
 		if (
 			courseFormData.courseName == "" ||
-			courseFormData.chapterBreakdowns[0] == "" ||
 			courseFormData.courseDescription == "" ||
 			courseFormData.hourPerSession == "" ||
 			courseFormData.totalSession == "" ||
@@ -147,7 +146,16 @@ const CreateCoursePage = () => {
 			!selectedImage
 		) {
 			handleError("Please input all required field");
+			return;
 		}
+
+		courseFormData.chapterBreakdowns.forEach((chapter) => {
+			if (chapter == "") {
+				handleError("Please input all required field");
+				return;
+			}
+		});
+
 		setSubmitLoading(true);
 		try {
 			const {
