@@ -7,6 +7,7 @@ import { ICourse } from "../../../../global/model/course-interface";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import SuccessMessage from "../../../../global/components/successMessage/SuccessMessage";
+import WarningModal from "../../../../global/components/warningModal/WarningModal";
 
 const CourseManagementPage = () => {
 	const {
@@ -16,6 +17,15 @@ const CourseManagementPage = () => {
 	} = useFetch("http://localhost:3002/course/getCourses");
 
 	const [searchItem, setSearchItem] = useState<ICourse[]>([]);
+
+	const [confirmation, setConfirmation] = useState(false);
+
+	const [courseIdToDelete, setCourseIdToDelete] = useState("");
+
+	const [modal, setModal] = useState({
+		message: "",
+		show: false,
+	});
 
 	const [success, setSuccess] = useState({
 		message: "",
@@ -41,6 +51,22 @@ const CourseManagementPage = () => {
 		}
 	};
 
+	const openModal = (courseId: string) => {
+		setCourseIdToDelete(courseId);
+		setModal({
+			message: "Are you sure?",
+			show: true,
+		});
+	};
+
+	const closeModal = () => {
+		setCourseIdToDelete("");
+		setModal({
+			message: "",
+			show: false,
+		});
+	};
+
 	const handleSuccess = (message: string) => {
 		setSuccess({
 			message: message,
@@ -54,16 +80,18 @@ const CourseManagementPage = () => {
 		}, 5000);
 	};
 
-	const handleDelete = async (courseId: string) => {
+	const handleDelete = async () => {
 		try {
 			const res = await axios.delete(
-				`http://localhost:3002/course/deleteCourse/${courseId}`
+				`http://localhost:3002/course/deleteCourse/${courseIdToDelete}`
 			);
 
 			handleSuccess(res.data.message);
 			refetch();
 		} catch (error) {
 			console.log(error);
+		} finally {
+			closeModal();
 		}
 	};
 
@@ -72,6 +100,12 @@ const CourseManagementPage = () => {
 	return (
 		<div className="course-management-page">
 			<SuccessMessage message={success.message} show={success.show} />
+			<WarningModal
+				show={modal.show}
+				message={modal.message}
+				confirm={handleDelete}
+				cancel={closeModal}
+			/>
 			<AdminNav clickedItem="Course" />
 			<div className="content-section">
 				<div className="page-center">
@@ -93,7 +127,7 @@ const CourseManagementPage = () => {
 						<div className="table-section">
 							{!courseLoading && (
 								<CourseTable
-									handleDelete={handleDelete}
+									handleDelete={openModal}
 									courseDatas={searchItem}
 								/>
 							)}

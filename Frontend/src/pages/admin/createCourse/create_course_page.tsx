@@ -8,6 +8,7 @@ import ErrorMessage from "../../../global/components/errorMessage/ErrorMessage";
 import axios from "axios";
 import LoadingMessage from "../../../global/components/loadingMessage/LoadingMessage";
 import SuccessMessage from "../../../global/components/successMessage/SuccessMessage";
+import WarningModal from "../../../global/components/warningModal/WarningModal";
 
 const CreateCoursePage = () => {
 	const [courseFormData, setCourseFormData] = useState({
