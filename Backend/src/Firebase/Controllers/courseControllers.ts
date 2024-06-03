@@ -147,7 +147,7 @@ export class CoursesController {
 					chapterBreakdown: chapterBreakdowns,
 					description: courseDescription,
 					skill,
-					totalHour: Number(hourPerSession),
+					totalHours: Number(hourPerSession),
 				});
 
 				res.status(200).json({ message: "Course created successfully" });
