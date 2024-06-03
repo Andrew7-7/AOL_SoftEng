@@ -1,14 +1,14 @@
-.error-message {
+.success-message {
 	position: fixed;
 	top: 20px;
 	right: -300px;
-	background-color: #ff6961;
+	background-color: #4bb543;
 	color: white;
 	padding: 10px 20px;
 	border-radius: 5px;
 	transition: right 0.5s ease-in-out;
 }
 
-.error-message.show {
+.success-message.show {
 	right: 20px;
 }
