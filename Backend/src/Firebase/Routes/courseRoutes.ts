@@ -13,9 +13,15 @@ coursesRoutes.get("/getCourse/:courseId", CoursesController.getCourse);
 
 coursesRoutes.get("/getCourseById/:courseId", CoursesController.getCourseById);
 coursesRoutes.post(
-  "/createCourse",
-  upload.single("imageURL"),
-  CoursesController.createCourse
+	"/createCourse",
+	upload.single("imageURL"),
+	CoursesController.createCourse
+);
+
+coursesRoutes.post(
+	"/updateCourse",
+	upload.single("imageURL"),
+	CoursesController.updateCourse
 );
 
 export { coursesRoutes };

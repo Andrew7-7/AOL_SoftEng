@@ -79,7 +79,7 @@ const CourseUpdatePage = () => {
 		return <AdminNav clickedItem="Course" />;
 	}
 
-	const resetForm = () => {
+	const resetForm = async () => {
 		setCourseFormData({
 			courseName: courseData.CourseName,
 			courseDescription: courseData.description,
@@ -177,8 +177,7 @@ const CourseUpdatePage = () => {
 			courseFormData.courseDescription == "" ||
 			courseFormData.hourPerSession == "" ||
 			courseFormData.totalSession.toString() == "" ||
-			courseFormData.skill == "" ||
-			!selectedImage
+			courseFormData.skill == ""
 		) {
 			handleError("Please input all required field");
 			return;
@@ -202,8 +201,9 @@ const CourseUpdatePage = () => {
 				chapterBreakdowns,
 			} = courseFormData;
 			const res = await axios.post(
-				"http://localhost:3002/course/createCourse",
+				"http://localhost:3002/course/updateCourse",
 				{
+					id: courseData.id,
 					courseName,
 					courseDescription,
 					skill,
@@ -238,6 +238,9 @@ const CourseUpdatePage = () => {
 				<div className="page-center">
 					<div className="header-section">
 						<div className="header">Update Course</div>
+						<div className="reset-button" onClick={() => resetForm()}>
+							Reset
+						</div>
 					</div>
 					<div className="content-container">
 						<form className="form-outer-container">
