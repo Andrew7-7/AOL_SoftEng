@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 
+
 interface Reply {
     id: string;
     senderEmail: string;
@@ -28,6 +29,7 @@ interface ForumDetails {
 }
 
 const RepliesPage = () => {
+    const user = JSON.parse(window.localStorage.getItem("user") || "{}");
     const [replies, setReplies] = useState<Reply[]>([]);
     const { forumId } = useParams<{ forumId: string }>();
     const location = useLocation();
@@ -93,7 +95,7 @@ const RepliesPage = () => {
                     'Content-Type': 'application/json',
                     'auth': 'Bearer aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k'
                 },
-                body: JSON.stringify({ message: newReply, senderEmail: 'tes' })
+                body: JSON.stringify({message: newReply, senderEmail: user.email })
             });
             if (!response.ok) {
                 throw new Error('Failed to add reply');
