@@ -61,12 +61,12 @@ export const List = () => {
         <FeaturedCard1/>
         <FeaturedCard2 />
       </Slider>
-      <button className="buttonNext">
+      {/* <button className="buttonNext">
         <img src="https://www.freeiconspng.com/uploads/arrow-icon--myiconfinder-23.png"/>
         </button>
         <button className="buttonPrev">
           <img src="https://www.freeiconspng.com/uploads/arrow-icon--myiconfinder-23.png"/>
-        </button>
+        </button> */}
     </div>  
   )
 }
