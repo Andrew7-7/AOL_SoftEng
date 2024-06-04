@@ -7,12 +7,54 @@ import peopleImage from "../../../../global/assets/ic_baseline-people.png";
 import pencilEdit from "../../../../global/assets/pencilEdit.png";
 import axios from "axios";
 import { IClassSession } from "../../../../global/model/classSession-interface";
+import AttendanceModal from "../component/attendance_modal";
+import SuccessMessage from "../../../../global/components/successMessage/SuccessMessage";
 const ActiveClassDetail = () => {
   const { id } = useParams();
   const accToken = window.localStorage.getItem("accToken");
   const [classDetail, setClassDetail] = useState<any>({});
   const [editStatus, setEditStatus] = useState(true);
   const [session, setSession] = useState<IClassSession[]>([]);
+  const [attendanceModal, setAttendanceModal] = useState({
+    show: false,
+    student: [""],
+    sessionID: "",
+  });
+
+  const [success, setSuccess] = useState({
+    message: "",
+    show: false,
+  });
+
+  const handleSuccess = (message: string) => {
+    setSuccess({
+      message: message,
+      show: true,
+    });
+    setTimeout(() => {
+      setSuccess({
+        message: message,
+        show: false,
+      });
+    }, 5000);
+  };
+
+  const handleAttendanceClick = (sessionID: string) => {
+    setAttendanceModal({
+      show: true,
+      student: classDetail.student,
+      sessionID: sessionID,
+    });
+  };
+
+  const closeModal = () => {
+    setAttendanceModal({
+      show: false,
+      student: [""],
+      sessionID: "",
+    });
+  };
+
   const navigate = useNavigate();
   useEffect(() => {
     const getActiveClassDetail = async () => {
@@ -181,7 +223,10 @@ const ActiveClassDetail = () => {
                   </a>
                 </p>
               </p>
-              <button className="attendanceButton" onClick={() => {}}>
+              <button
+                className="attendanceButton"
+                onClick={() => handleAttendanceClick(sessionID)}
+              >
                 Attendance
               </button>
             </div>
@@ -221,8 +266,20 @@ const ActiveClassDetail = () => {
       </>
     );
   };
+
   return (
     <div className="outerDiv">
+      <AttendanceModal
+        setEditStatus={setEditStatus}
+        editStatus={editStatus}
+        sessionId={attendanceModal.sessionID}
+        classId={id}
+        closeModal={closeModal}
+        show={attendanceModal.show}
+        student={attendanceModal.student}
+        handleSuccess={handleSuccess}
+      />
+      <SuccessMessage message={success.message} show={success.show} />
       <TutorNav clickedItem="Active Class" />
       <div className="detailRightDiv">
         <div>
