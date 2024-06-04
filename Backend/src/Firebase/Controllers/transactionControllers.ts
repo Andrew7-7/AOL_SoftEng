@@ -17,8 +17,8 @@ interface Transaction {
     id: string;
     [key: string]: any;
 }
-const firestore = firebase.firestore();
-const docRef = firestore.collection('collectionName').doc('documentId');
+// const firestore = firebase.firestore();
+// const docRef = firestore.collection('collectionName').doc('documentId');
 const transactionCollection = collection(db, "Transaction");
 export class transactionControllers {
 
@@ -100,30 +100,30 @@ export class transactionControllers {
         }
     }
 
-    static async addActiveCourse(req: Request, res: Response) {
-        try {
+    // static async addActiveCourse(req: Request, res: Response) {
+    //     try {
             
 
-            // Step 1: Retrieve the Document
-            docRef.get().then((doc) => {
-                if (doc.exists) {
-                    // Step 2: Update the Array
-                    const data = doc.data();
-                    const newArray = data.arrayField; // Assume 'arrayField' is the name of your array field
-                    newArray.push('newElement'); // Adding a new element to the array
+    //         // Step 1: Retrieve the Document
+    //         docRef.get().then((doc) => {
+    //             if (doc.exists) {
+    //                 // Step 2: Update the Array
+    //                 const data = doc.data();
+    //                 const newArray = data.arrayField; // Assume 'arrayField' is the name of your array field
+    //                 newArray.push('newElement'); // Adding a new element to the array
 
-                    // Step 3: Update the Document
-                    return docRef.update({ arrayField: newArray });
-                } else {
-                    console.log("Document not found");
-                }
-            }).then(() => {
-                console.log("Document updated successfully");
-            }).catch((error) => {
-                console.error("Error updating document: ", error);
-            });
-        } catch (error) {
+    //                 // Step 3: Update the Document
+    //                 return docRef.update({ arrayField: newArray });
+    //             } else {
+    //                 console.log("Document not found");
+    //             }
+    //         }).then(() => {
+    //             console.log("Document updated successfully");
+    //         }).catch((error) => {
+    //             console.error("Error updating document: ", error);
+    //         });
+    //     } catch (error) {
 
-        }
-    }
+    //     }
+    // }
 }
