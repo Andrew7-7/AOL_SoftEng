@@ -41,4 +41,6 @@ userRoutes.post(
 //TODO :middleware
 userRoutes.get("/getUserById/:userId", UserControllers.getUserById);
 
+userRoutes.get("/getUserByEmail/:userEmail", UserControllers.getUserByEmail);
+
 export { userRoutes };
