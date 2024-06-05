@@ -30,6 +30,7 @@ import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassD
 import PaymentPage from "./pages/paymentpage/view/payment_page.tsx";
 import ConfirmedPage from "./pages/paymentpage/view/confirmed_page.tsx";
 import PermissionManagementPage from "./pages/admin/permissionManagement/view/permissionManagement_page.tsx";
+import PermissionManagementDetailPage from "./pages/admin/permissionManagement/view/permissionManagementDetail_page.tsx";
 function App() {
 	return (
 		<>
@@ -76,6 +77,7 @@ function App() {
 						<Route element={<CheckRole role={"admin"} />}>
 							<Route path="/adminDummy" element={<AdminDummy />}></Route>
 							<Route path="/permissionManagement" element={<PermissionManagementPage />} />
+							<Route path="/permissionManagement/:permissionId" element={<PermissionManagementDetailPage />} />
 							<Route
 								path="/accountManagement"
 								element={<AccountManagementPage />}
