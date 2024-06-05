@@ -3,7 +3,7 @@ import AdminNav from '../../../../global/components/navbar/admin/adminNav';
 import PermissionTable from '../components/permission_table';
 import useFetch from '../../../../global/hooks/useFetch';
 import { IReqCourse } from '../../../../global/model/requestCourse-interface';
-
+import './permissionManagement_page.css'
 const PermissionManagementPage = () => {
     const { data: reqcourseDatas } = useFetch("http://localhost:3002/permission/getPermissions");
     const [searchItem, setSearchItem] = useState<IReqCourse[]>([]);
@@ -39,7 +39,7 @@ const PermissionManagementPage = () => {
                         <div className="top-section">
                             <input
                                 className="searchBar"
-                                placeholder="Search"
+                                placeholder="search by tutor name"
                                 type="search"
                                 onChange={handleInputChange}
                             ></input>

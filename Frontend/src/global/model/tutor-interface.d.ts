@@ -8,5 +8,6 @@ export interface ITutor {
 	rating: number;
 	price: string;
 	skillSet: string[];
+	courseIds:string[];
 	reviews: IReview[];
 }
