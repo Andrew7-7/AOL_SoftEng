@@ -12,6 +12,8 @@ import { otpRoutes } from "./Firebase/Routes/otpRoutes";
 import { coursesRoutes } from "./Firebase/Routes/courseRoutes";
 import { homeRoutes } from "./Firebase/Routes/homeRoutes";
 import { transactionsRoutes } from "./Firebase/Routes/transactionRoutes";
+import { reportRoutes } from "./Firebase/Routes/reportRoutes";
+
 const app = express();
 
 const port = 3002;
@@ -36,6 +38,8 @@ app.use("/home", homeRoutes);
 app.use("/chat", chatRoutes);
 app.use("/forum", forumRoutes);
 app.use("/transaction", transactionsRoutes)
+app.use("/report", reportRoutes)
+
 const server = http.createServer(app);
 
 server.listen(port, () => {
