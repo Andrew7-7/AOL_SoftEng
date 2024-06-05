@@ -1,17 +1,17 @@
-.course-table-container {
+.course-table-container-permission-table {
 	margin-top: 30px;
 }
 
-.course-table-container .table-content {
+.course-table-container-permission-table .table-content-permission-table {
 	background-color: white;
 	padding: 20px;
 	padding-top: 10px;
 	border-radius: 5px;
 }
 
-.course-table-container .table-header {
+.course-table-container-permission-table .table-header-permission-table {
 	display: grid;
-	grid-template-columns: 0.3fr 2fr 4.5fr 1fr;
+	grid-template-columns: 0.3fr 2fr 2.5fr 1.5fr 0.6fr;
 	gap: 15px;
 	padding: 15px;
 	border-bottom: 1px rgb(192, 192, 192) solid;
@@ -20,15 +20,15 @@
 	text-align: start;
 }
 
-.course-table-container .table-content .table-row-outer-container {
+.course-table-container-permission-table .table-content-permission-table .table-row-outer-container-permission-table {
 	height: 60vh;
 	overflow: auto;
 }
 
-.course-table-container .table-content .table-row {
+.course-table-container-permission-table .table-content-permission-table .table-row-permission-table {
 	display: grid;
 	text-align: start;
-	grid-template-columns: 0.3fr 2fr 4.5fr 1fr;
+	grid-template-columns: 0.3fr 2fr 2.5fr 1.5fr 0.6fr;
 	gap: 15px;
 	padding: 15px;
 	border-bottom: 1px rgb(192, 192, 192) solid;
@@ -36,18 +36,7 @@
 	color: var(--font-light2);
 }
 
-.course-table-container .table-content .edit-button {
-	background-color: rgb(0, 162, 255);
-	border-radius: 5px;
-	text-align: center;
-	color: white;
-}
-
-.course-table-container .table-content .edit-button:hover {
-	background-color: rgb(14, 136, 206);
-}
-
-.course-table-container .table-content .delete-button {
+.course-table-container-permission-table .table-content-permission-table .delete-button-permission-table {
 	cursor: pointer;
 	color: white;
 	background-color: #ff6961;
@@ -55,7 +44,7 @@
 	text-align: center;
 }
 
-.course-table-container .table-content .delete-button:hover {
+.course-table-container-permission-table .table-content-permission-table .delete-button-permission-table:hover {
 	background-color: #cf4b44;
 }
 

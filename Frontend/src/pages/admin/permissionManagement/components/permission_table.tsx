@@ -6,26 +6,27 @@ import { IReqCourse } from "../../../../global/model/requestCourse-interface";
 const PermissionTable: React.FC<{ reqCourses: IReqCourse[] }> = ({
 	reqCourses
 }) => {
-	
+
 	return (
-		<div className="course-table-container">
-			<div className="table-content">
-				<div className="table-header">
+		<div className="course-table-container-permission-table">
+			<div className="table-content-permission-table">
+				<div className="table-header-permission-table">
 					<p>ID</p>
 					<p>Tutor Name</p>
 					<p>Requested Class</p>
+					<p>Status</p>
 					<p>Action</p>
-					<p></p>
 				</div>
-				<div className="table-row-outer-container">
+				<div className="table-row-outer-container-permission-table">
 					{reqCourses
 						.sort((a, b) => parseInt(b.permissionID) - parseInt(a.permissionID)) // Sort the array based on the id
 						.map((reqCourse) => (
-							<div className="table-row" key={reqCourse.id}>
+							<div className="table-row-permission-table" key={reqCourse.id}>
 								<p>{reqCourse.permissionID}</p>
 								<p>{reqCourse.tutorName}</p>
 								<p>{reqCourse.requestedClass}</p>
-								<Link to={`/permissionManagement/${reqCourse.id}`}>
+								<p>{reqCourse.status ? 'reqCourse.status' : 'Waiting to be checked'}</p>
+								<Link className="delete-button-permission-table" to={`/permissionManagement/${reqCourse.id}`}>
 									details
 								</Link>
 							</div>
