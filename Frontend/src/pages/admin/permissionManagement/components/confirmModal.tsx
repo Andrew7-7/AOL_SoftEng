@@ -4,7 +4,7 @@ import './confirmModal.css';
 import { useNavigate } from 'react-router-dom'
 import { IReqCourse } from '../../../../global/model/requestCourse-interface';
 import ReasonModal from './reasonModal';
-const Modal: React.FC<{ permissionData: IReqCourse;}> = ({ permissionData}) => {
+const Modal: React.FC<{ permissionData: IReqCourse; }> = ({ permissionData }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isAccepting, setIsAccepting] = useState(false)
   const [isDenying, setIsDenying] = useState(false)
@@ -27,7 +27,7 @@ const Modal: React.FC<{ permissionData: IReqCourse;}> = ({ permissionData}) => {
   const handleDeny = () => {
     setIsDenying(true);
   };
-  const handleidk = ()=>{
+  const handleidk = () => {
     setIsOpen(false)
     setIsAccepting(true)
   }
@@ -51,16 +51,16 @@ const Modal: React.FC<{ permissionData: IReqCourse;}> = ({ permissionData}) => {
                 Tutor's Name : {permissionData.tutorName}
               </h2>
               <h2>
-              Requested Class : {permissionData.requestedClass}
+                Requested Class : {permissionData.requestedClass}
               </h2>
               <div className='image-container-confirmmodal-permission-management'>
-              <img className="certificate-image-confirm-modal" src={permissionData.certificateImg} />
+                <img className="certificate-image-confirm-modal" src={permissionData.certificateImg} />
               </div>
               {/* todo: blob,  status */}
             </div>
             <div className="chapterbreakdown-container-coursedetail-paymentpage">
-            <button className='chapterbreakdown-container-coursedetail-paymentpage-deny-btn'
-            onClick={handleDeny}
+              <button className='chapterbreakdown-container-coursedetail-paymentpage-deny-btn'
+                onClick={handleDeny}
               >
                 DENY
               </button>
@@ -70,13 +70,12 @@ const Modal: React.FC<{ permissionData: IReqCourse;}> = ({ permissionData}) => {
                 BACK
               </button>
               <button className='chapterbreakdown-container-coursedetail-paymentpage-accept-btn'
-              onClick={handleidk}
+                onClick={handleidk}
               >
                 ACCEPT
               </button>
-              {isAccepting && <ReasonModal  onClose={() => setIsOpenModal1(false)}
-              permissionData={permissionData} statusData={'Accept'} handleOpen={true}/>}
-              {isDenying && <ReasonModal permissionData={permissionData} statusData={'Deny'} handleOpen={true}/>}
+              {isAccepting && <ReasonModal permissionData={permissionData} statusData={'Accept'} handleOpen={true} />}
+              {isDenying && <ReasonModal permissionData={permissionData} statusData={'Deny'} handleOpen={true} />}
             </div>
           </div>
         </div>
