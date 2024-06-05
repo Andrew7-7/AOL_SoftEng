@@ -11,12 +11,13 @@
 
 .course-table-container .table-header {
 	display: grid;
-	grid-template-columns: 4.5fr 1fr 1fr 1fr 1fr 0.8fr 0.8fr;
+	grid-template-columns: 0.3fr 2fr 4.5fr 1fr;
 	gap: 15px;
 	padding: 15px;
 	border-bottom: 1px rgb(192, 192, 192) solid;
 	font-weight: 600;
 	box-sizing: border-box;
+	text-align: start;
 }
 
 .course-table-container .table-content .table-row-outer-container {
@@ -26,7 +27,8 @@
 
 .course-table-container .table-content .table-row {
 	display: grid;
-	grid-template-columns: 4.5fr 1fr 1fr 1fr 1fr 0.8fr 0.8fr;
+	text-align: start;
+	grid-template-columns: 0.3fr 2fr 4.5fr 1fr;
 	gap: 15px;
 	padding: 15px;
 	border-bottom: 1px rgb(192, 192, 192) solid;
