@@ -75,3 +75,37 @@
 .reportListComponentContainer .fourth{
     padding-left: 50px;
 }
+.reportListComponentContainer .reportListButton {
+    position: inherit;
+    width: 40px;
+    height: 40px;
+    margin-left: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.reportListComponentContainer .reportListButton img{
+    position: relative;
+    right: 40px;
+}.reportListComponentContainer .reportListButton img:hover{
+    opacity: 0.9;
+}.reportListComponentContainer .reportListButton img:active{
+    opacity: 0.8;
+}
+
+.popupReport {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 2px solid #D2D2D2;
+}
+
+.popupReport-button{
+    width: 10%;
+    margin: 20px 0;
+    border-radius: 8px;
+    background-color: #402528;
+    color: white;
+    border: none;
+    padding: 5px;
+}
