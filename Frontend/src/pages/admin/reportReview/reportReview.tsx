@@ -87,7 +87,7 @@ const ReportList = (props: any) => {
             />
           ))
         ) : (
-          <div> loading ... </div>
+          <div> Please wait your request is being processed, if you see this long enough you request might be invalid</div>
         )}
       </div>
     </>
