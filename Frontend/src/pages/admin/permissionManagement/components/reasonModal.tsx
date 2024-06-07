@@ -46,6 +46,7 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
     status: "",
     tutorName: "",
     certificateImg: "",
+    requestedClassID:"",
   });
 
   const resetForm = () => {
@@ -57,6 +58,7 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
       status: permissionData.status,
       tutorName: permissionData.tutorName,
       certificateImg: permissionData.certificateImg,
+      requestedClassID: permissionData.requestedClassID,
     });
     setMessage(permissionData.message);
     setStatusForm(permissionData.status);
@@ -116,6 +118,7 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
         requestedClass,
         tutorName,
         certificateImg,
+        requestedClassID,
       } = permissionFormData;
 
       const status = statusData === 'Accept' ? 'Accepted' : 'Denied';
@@ -130,14 +133,15 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
           status,
           tutorName,
           certificateImg,
+          requestedClassID,
         },
         {
           headers: {
-            "Content-Type": "application/json", // Use application/json for JSON data
+            "Content-Type": "application/json",
           },
         }
       );
-
+      
       handleSuccess(res.data.message);
       navigate("/permissionManagement")
     } catch (error: any) {

@@ -11,36 +11,35 @@ const PermissionManagementDetailPage = () => {
     const [reqCourse, setReqCourse] = useState<IReqCourse | null>(null);
     const [isAccepting, setIsAccepting] = useState(false);
     const [isDenying, setIsDenying] = useState(false);
-    const [status, setStatus] = useState("")
+    const [status, setStatus] = useState("");
 
     const handleAccept = () => {
         setIsAccepting(true);
-        setIsDenying(false); // Ensure denying is reset
+        setIsDenying(false);
     };
 
     const handleDeny = () => {
         setIsDenying(true);
-        setIsAccepting(false); // Ensure accepting is reset
+        setIsAccepting(false);
     };
 
     const handleCloseModal = () => {
         setIsAccepting(false);
         setIsDenying(false);
     };
-    const handleStatus = (statusdata: string) => {
-        setStatus(statusdata)
-    }
+
+    const fetchPermissionData = async () => {
+        try {
+            const response = await axios.get(`http://localhost:3002/permission/getPermission/${permissionId}`);
+            setReqCourse(response.data);
+            setStatus(response.data.status);
+        } catch (error) {
+            console.error('Error fetching data from API:', error);
+        }
+    };
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get(`http://localhost:3002/permission/getPermission/${permissionId}`);
-                setReqCourse(response.data);
-            } catch (error) {
-                console.error('Error fetching data from API:', error);
-            }
-        };
-        fetchData();
-        handleStatus(reqCourse?.status ? reqCourse.status : 'Waiting to be checked')
+        fetchPermissionData();
     }, [permissionId]);
 
     const openImageInNewWindow = (imageUrl: string) => {
@@ -68,7 +67,7 @@ const PermissionManagementDetailPage = () => {
                             </div>
                             <div className="permission-management-detail-item">
                                 <span className="permission-management-detail-title">Status:</span>
-                                <span className="permission-management-detail-content">{status}</span>
+                                <span className="permission-management-detail-content">{(status === 'Accepted' ||  status ===  'Denied')?status:'Waiting to be checked'}</span>
                             </div>
                             <div className="permission-management-detail-item">
                                 <span className="permission-management-detail-title">Tutor Name:</span>
@@ -77,6 +76,10 @@ const PermissionManagementDetailPage = () => {
                             <div className="permission-management-detail-item">
                                 <span className="permission-management-detail-title">Requested Course:</span>
                                 <span className="permission-management-detail-content">{reqCourse?.requestedClass}</span>
+                            </div>
+                            <div className="permission-management-detail-item">
+                                <span className="permission-management-detail-title">Requested Course ID:</span>
+                                <span className="permission-management-detail-content">{reqCourse?.requestedClassID}</span>
                             </div>
                             <div className="permission-management-detail-item-certification">
                                 <span className="permission-management-detail-title">Certification Image:</span>
@@ -91,13 +94,13 @@ const PermissionManagementDetailPage = () => {
                                 </div>
                                 <span className='permission-management-detail-info'>Please Click to see the full size of the picture</span>
                             </div>
-                            {status.includes('Waiting to be checked') &&
+                            { (status !== 'Accepted' &&  status !==  'Denied') &&
                                 <div className="permission-management-detail-button-container">
                                     <button className="permission-management-detail-action-button accept" onClick={handleAccept}>Accept</button>
                                     <button className="permission-management-detail-action-button deny" onClick={handleDeny}>Deny</button>
                                 </div>
                             }
-                            {!status.includes('Waiting to be checked') &&
+                            {(status === 'Accepted' ||  status ===  'Denied') &&
                                 <div className="permission-management-detail-button-container">
                                     <span className="permission-management-detail-content" >Remark: {reqCourse?.message}</span>
                                 </div>
