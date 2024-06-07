@@ -1,6 +1,4 @@
-/* reasonModal.css */
-
-.modal-paymentpage {
+.reason-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -8,113 +6,108 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
-  padding-top: 200px;
-  align-items: start;
+  align-items: center;
   justify-content: center;
+  z-index: 1000;
+  padding-left: 200px;
 }
 
-.modal-content-paymentpage {
+.reason-modal-content {
   background: #fff;
-  opacity: 80%;
-  border-radius: 60px;
+  border-radius: 10px;
   width: 800px;
-  height: 500px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  text-align: center;
+  position: relative;
 }
 
-
-.line-confirmModal {
-  height: 1px;
-  background: #ddd;
-  margin: 20px 0;
+.reason-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-h1,
-h2 {
-  margin: 5px 0;
+.reason-modal-header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.reason-modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.reason-modal-body {
+  margin-bottom: 20px;
+}
+
+.reason-modal-body p {
+  margin: 10px 0;
   font-family: Arial, sans-serif;
 }
 
-input[type="text"] {
-  height: 50px;
-  width: 70%;
-  padding: 8px;
+.reason-modal-body input[type="text"] {
+  width: 600px;
+  padding: 10px;
   margin: 10px 0;
-  box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
-form{
+.reason-modal-body form {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  /* background-color: #0056b3; */
-  width: 500px;
-  margin-left: 150px;
-  margin-right: 150px;
 }
 
-button {
-  padding: 5px 20px;
-  margin: 5px;
-  margin-bottom: 0;
+.reason-modal-submit-btn {
+  background-color: #4caf50;
+  color: white;
+  margin-top: 11px;
+  margin-bottom: 11px;
+  padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #ddd;
+.reason-modal-submit-btn:hover {
+  background-color: #45a049;
 }
 
-button[type="submit"] {
-  background-color: #4caf50;
-  opacity: 70%;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
-  padding: 0px 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-button[type="submit"]:hover{
-  opacity: 100%;
-}
-
-button.chapterbreakdown-container-coursedetail-paymentpage-accept-btn {
-  background-color: #007bff;
-  color: white;
-  font-weight: 500;
-  padding: 2px 20px;
-  font-size: 20px;
-  margin-right: 100px;
-}
-
-button.chapterbreakdown-container-coursedetail-paymentpage-accept-btn:hover {
-  background-color: #0056b3;
-}
-
-.chapterbreakdown-container-coursedetail-paymentpage {
+.reason-modal-footer {
   display: flex;
   justify-content: space-between;
 }
 
-button.chapterbreakdown-container-coursedetail-paymentpage-back-btn {
-  background-color: #bababa;
-  color: white;
-  font-weight: 500;
-  padding: 2px 20px;
-  font-size: 20px;
-  margin-left: 100px;
+.reason-modal-back-btn,
+.reason-modal-confirm-btn {
   padding: 10px 20px;
-
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-button.chapterbreakdown-container-coursedetail-paymentpage-back-btn:hover {
+.reason-modal-back-btn {
+  background-color: #bababa;
+  color: white;
+}
+
+.reason-modal-back-btn:hover {
   background-color: #a4a3a3;
+}
+
+.reason-modal-confirm-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.reason-modal-confirm-btn:hover {
+  background-color: #0056b3;
 }

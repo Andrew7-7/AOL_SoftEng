@@ -1,76 +1,96 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AdminNav from '../../../../global/components/navbar/admin/adminNav';
 import { IReqCourse } from '../../../../global/model/requestCourse-interface';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import './permissionManagementDetail_page.css'
+import './permissionManagementDetail_page.css';
 import ReasonModal from '../components/reasonModal';
+
 const PermissionManagementDetailPage = () => {
-    const { permissionId } = useParams()
-    const [reqCourse, setreqCourse] = useState<IReqCourse | null>(null);
-    const [isAccepting, setIsAccepting] = useState(false)
-    const [isDenying, setIsDenying] = useState(false)
+    const { permissionId } = useParams();
+    const [reqCourse, setReqCourse] = useState<IReqCourse | null>(null);
+    const [isAccepting, setIsAccepting] = useState(false);
+    const [isDenying, setIsDenying] = useState(false);
 
     const handleAccept = () => {
         setIsAccepting(true);
     };
+
     const handleDeny = () => {
         setIsDenying(true);
     };
+
     useEffect(() => {
-        const fetchData1 = async () => {
+        const fetchData = async () => {
             try {
-                const response1 = await axios.get(`http://localhost:3002/permission/getPermission/${permissionId}`);
-                setreqCourse(response1.data)
+                const response = await axios.get(`http://localhost:3002/permission/getPermission/${permissionId}`);
+                setReqCourse(response.data);
             } catch (error) {
-                console.error('Error fetching data from API 1:', error);
+                console.error('Error fetching data from API:', error);
             }
         };
-        fetchData1();
-    }, []);
+        fetchData();
+    }, [permissionId]);
+
+    const openImageInNewWindow = (imageUrl: string) => {
+        const newWindow = window.open();
+        if (newWindow) {
+            newWindow.document.write(`<img src="${imageUrl}" alt="Certification Image" style="width:100%;">`);
+            newWindow.document.title = "Certification Image";
+        }
+    };
 
     return (
-        <div className="course-management-page">
+        <div className="permission-management-detail-page">
             <AdminNav clickedItem="Permission" />
-            <div className="content-section">
-                <div className="page-center">
-                    <div className="content-container">
-                        <div className="header-section">
-                            <div className="header">Permission Management Detail</div>
-                            <Link to={"/permissionManagement"}>back</Link>
+            <div className="permission-management-detail-content-section">
+                <div className="permission-management-detail-page-center">
+                    <div className="permission-management-detail-content-container">
+                        <div className="permission-management-detail-header-section">
+                            <h1 className="permission-management-detail-header">Permission Management Detail</h1>
+                            <Link to="/permissionManagement" className="permission-management-detail-back-link">Back</Link>
                         </div>
-                        <div className="top-section">
-
+                        <div className="permission-management-detail-details-section">
+                            <div className="permission-management-detail-item">
+                                <span className="permission-management-detail-title">Permission ID:</span>
+                                <span className="permission-management-detail-content">{reqCourse?.permissionID}</span>
+                            </div>
+                            <div className="permission-management-detail-item">
+                                <span className="permission-management-detail-title">Tutor Name:</span>
+                                <span className="permission-management-detail-content">{reqCourse?.tutorName}</span>
+                            </div>
+                            <div className="permission-management-detail-item">
+                                <span className="permission-management-detail-title">Requested Course:</span>
+                                <span className="permission-management-detail-content">{reqCourse?.requestedClass}</span>
+                            </div>
+                            <div className="permission-management-detail-item-certification">
+                                <span className="permission-management-detail-title">Certification Image:</span>
+                                <div className="permission-management-detail-content-image-container">
+                                    <img 
+                                        src={reqCourse?.certificateImg} 
+                                        className="permission-management-detail-content-image" 
+                                        alt="Certification" 
+                                        onClick={() => openImageInNewWindow(reqCourse?.certificateImg!)} 
+                                        style={{cursor: 'pointer'}}
+                                    />
+                                </div>
+                                <span className='permission-management-detail-info'>Please Click to see the full size of the picture</span>
+                            </div>
+                            <div className="permission-management-detail-button-container">
+                                <button className="permission-management-detail-action-button accept" onClick={handleAccept}>Accept</button>
+                                <button className="permission-management-detail-action-button deny" onClick={handleDeny}>Deny</button>
+                            </div>
                         </div>
-                        <div className="table-section-permission-detail">
-                            <div>
-                                <div>Permission Id</div>
-                                <div>{reqCourse?.permissionID}</div>
+                        {reqCourse && isAccepting && (
+                            <div className="permission-management-detail-reason-section">
+                                <ReasonModal permissionData={reqCourse} statusData="Accept" handleOpen={true} />
                             </div>
-                            <div>
-                                <div>Tutor Name</div>
-                                <div>{reqCourse?.tutorName}</div>
+                        )}
+                        {reqCourse && isDenying && (
+                            <div className="permission-management-detail-reason-section">
+                                <ReasonModal permissionData={reqCourse} statusData="Deny" handleOpen={true} />
                             </div>
-                            <div>
-                                <div>Requested Course</div>
-                                <div>{reqCourse?.requestedClass}</div>
-                            </div>
-                            <div>
-                                <div>Requested Course</div>
-                                {/* <img src={reqCourse?.certificateImg} /> */}
-                            </div>
-                            {reqCourse && <div>
-                                <button  onClick={handleAccept}>
-                                    ACCEPT
-                                </button>
-                                <button  onClick={handleDeny}>
-                                    DENY
-                                </button>
-                            </div>}
-                            {reqCourse && isAccepting && <ReasonModal permissionData={reqCourse} statusData={'Accept'} handleOpen={true}/>}
-                            {reqCourse && isDenying && <ReasonModal permissionData={reqCourse} statusData={'Deny'} handleOpen={true}/>}
-                            {/* course details, tutor details */}
-                        </div>
+                        )}
                     </div>
                 </div>
             </div>
