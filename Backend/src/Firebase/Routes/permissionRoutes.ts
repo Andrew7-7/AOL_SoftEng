@@ -9,5 +9,6 @@ const permissionRoutes = Router();
 // TODO: middleware
 permissionRoutes.get("/getPermissions", PermissionControllers.getPermissions);
 permissionRoutes.get("/getPermission/:permissionId", PermissionControllers.getPermission);
+permissionRoutes.post("/updatePermission", PermissionControllers.updatePermission)
 
 export { permissionRoutes };
