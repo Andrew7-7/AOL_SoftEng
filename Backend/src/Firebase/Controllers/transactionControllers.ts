@@ -7,18 +7,16 @@ import {
     where,
     deleteDoc,
     getDoc,
+    updateDoc,
 } from "firebase/firestore";
 import { db } from "../Config/config";
 import { Request, Response } from "express";
-import { connectStorageEmulator } from "firebase/storage";
-import firebase from "firebase/compat/app";
 
 interface Transaction {
     id: string;
     [key: string]: any;
 }
-// const firestore = firebase.firestore();
-// const docRef = firestore.collection('collectionName').doc('documentId');
+
 const transactionCollection = collection(db, "Transaction");
 export class transactionControllers {
 
@@ -83,10 +81,10 @@ export class transactionControllers {
 
     static async registerTransaction(req: Request, res: Response) {
         try {
-            const userCollection = collection(db, "Transaction");
+            const transactionCollection = collection(db, "Transaction");
             let { courseId, paymentMethod, price, tutorEmail, userEmail } = req.body;
 
-            await addDoc(userCollection, {
+            await addDoc(transactionCollection, {
                 courseId,
                 paymentMethod,
                 price,
@@ -94,36 +92,29 @@ export class transactionControllers {
                 userEmail
             });
 
+            const studentsRef = collection(db, "Student");
+            const studentQuery = query(studentsRef, where("email", "==", userEmail));
+            const studentSnapshot = await getDocs(studentQuery);
+
+            if (studentSnapshot.empty) {
+                throw new Error('Student not found');
+            }
+
+            studentSnapshot.forEach(async (doc) => {
+                const studentData = doc.data();
+                const activeCourses = studentData.activeCourse || [];
+
+                if (!activeCourses.includes(courseId)) {
+                    activeCourses.push(courseId);
+                }
+                await updateDoc(doc.ref, {
+                    activeCourses,
+                });
+            });
+
             res.status(200).json({ message: "New Transaction added successfully" });
         } catch (error) {
             res.status(500).json(error);
         }
     }
-
-    // static async addActiveCourse(req: Request, res: Response) {
-    //     try {
-            
-
-    //         // Step 1: Retrieve the Document
-    //         docRef.get().then((doc) => {
-    //             if (doc.exists) {
-    //                 // Step 2: Update the Array
-    //                 const data = doc.data();
-    //                 const newArray = data.arrayField; // Assume 'arrayField' is the name of your array field
-    //                 newArray.push('newElement'); // Adding a new element to the array
-
-    //                 // Step 3: Update the Document
-    //                 return docRef.update({ arrayField: newArray });
-    //             } else {
-    //                 console.log("Document not found");
-    //             }
-    //         }).then(() => {
-    //             console.log("Document updated successfully");
-    //         }).catch((error) => {
-    //             console.error("Error updating document: ", error);
-    //         });
-    //     } catch (error) {
-
-    //     }
-    // }
 }
