@@ -79,7 +79,7 @@ export class PermissionControllers {
                 requestedClassID,
             });
             if(status === 'Accepted'){
-                 // Find the tutor document by tutor name
+            // Find the tutor document by tutor name
             const tutorsRef = collection(db, "tutors");
             const tutorQuery = query(tutorsRef, where("name", "==", tutorName));
             const tutorSnapshot = await getDocs(tutorQuery);
