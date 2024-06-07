@@ -14,10 +14,17 @@ const PermissionManagementDetailPage = () => {
 
     const handleAccept = () => {
         setIsAccepting(true);
+        setIsDenying(false); // Ensure denying is reset
     };
 
     const handleDeny = () => {
         setIsDenying(true);
+        setIsAccepting(false); // Ensure accepting is reset
+    };
+
+    const handleCloseModal = () => {
+        setIsAccepting(false);
+        setIsDenying(false);
     };
 
     useEffect(() => {
@@ -66,12 +73,12 @@ const PermissionManagementDetailPage = () => {
                             <div className="permission-management-detail-item-certification">
                                 <span className="permission-management-detail-title">Certification Image:</span>
                                 <div className="permission-management-detail-content-image-container">
-                                    <img 
-                                        src={reqCourse?.certificateImg} 
-                                        className="permission-management-detail-content-image" 
-                                        alt="Certification" 
-                                        onClick={() => openImageInNewWindow(reqCourse?.certificateImg!)} 
-                                        style={{cursor: 'pointer'}}
+                                    <img
+                                        src={reqCourse?.certificateImg}
+                                        className="permission-management-detail-content-image"
+                                        alt="Certification"
+                                        onClick={() => openImageInNewWindow(reqCourse?.certificateImg!)}
+                                        style={{ cursor: 'pointer' }}
                                     />
                                 </div>
                                 <span className='permission-management-detail-info'>Please Click to see the full size of the picture</span>
@@ -81,14 +88,14 @@ const PermissionManagementDetailPage = () => {
                                 <button className="permission-management-detail-action-button deny" onClick={handleDeny}>Deny</button>
                             </div>
                         </div>
-                        {reqCourse && isAccepting && (
+                        {reqCourse && (isAccepting || isDenying) && (
                             <div className="permission-management-detail-reason-section">
-                                <ReasonModal permissionData={reqCourse} statusData="Accept" handleOpen={true} />
-                            </div>
-                        )}
-                        {reqCourse && isDenying && (
-                            <div className="permission-management-detail-reason-section">
-                                <ReasonModal permissionData={reqCourse} statusData="Deny" handleOpen={true} />
+                                <ReasonModal
+                                    permissionData={reqCourse}
+                                    statusData={isAccepting ? "Accept" : "Deny"}
+                                    handleOpen={true}
+                                    onClose={handleCloseModal}
+                                />
                             </div>
                         )}
                     </div>

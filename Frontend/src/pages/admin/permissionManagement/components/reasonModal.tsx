@@ -4,16 +4,19 @@ import './reasonModal.css';
 import toast from 'react-hot-toast';
 import { IReqCourse } from '../../../../global/model/requestCourse-interface';
 
-const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; handleOpen: boolean }> = ({ permissionData, statusData, handleOpen }) => {
+const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; handleOpen: boolean; onClose: () => void }> = ({ permissionData, statusData, handleOpen, onClose }) => {
   const [isOpen, setIsOpen] = useState(handleOpen);
   const [message, setMessage] = useState("");
-  
+
   useEffect(() => {
     setIsOpen(handleOpen);
   }, [handleOpen]);
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
+    if (isOpen) {
+      onClose();
+    }
   };
 
   const [inputValue, setInputValue] = useState('');
