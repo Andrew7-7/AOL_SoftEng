@@ -1,5 +1,127 @@
-.table-section-permission-detail{
-    background-color: aliceblue;
-    height: 500px;
-    width : 80%;
+.permission-management-detail-page {
+    display: flex;
+}
+
+.permission-management-detail-content-section {
+    flex: 1;
+    padding: 20px;
+}
+
+.permission-management-detail-page-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.permission-management-detail-content-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.permission-management-detail-header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.permission-management-detail-header {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.permission-management-detail-back-link {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.permission-management-detail-details-section {
+    margin-bottom: 20px;
+}
+
+.permission-management-detail-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.permission-management-detail-title {
+    font-weight: bold;
+}
+
+.permission-management-detail-content {
+    color: #555;
+}
+
+.permission-management-detail-button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.permission-management-detail-action-button {
+    padding: 3px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.accept {
+    background-color: #28a745;
+    color: white;
+}
+
+.accept:hover {
+    background-color: #218838;
+}
+
+.deny {
+    background-color: #dc3545;
+    color: white;
+}
+
+.deny:hover {
+    background-color: #c82333;
+}
+
+.permission-management-detail-reason-section {
+    margin-top: 20px;
+}
+
+.permission-management-detail-item-certification {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-top: 20px;
+}
+
+.permission-management-detail-content-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    margin-top: 10px;
+    height: auto;
+    margin-left: 200px;
+    background: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.permission-management-detail-info {
+    font-weight: 300;
+    margin-top: 5px;
+    margin-left: 150px;
+}
+
+.permission-management-detail-content-image {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
 }

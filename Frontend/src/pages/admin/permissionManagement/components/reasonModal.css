@@ -1,197 +1,113 @@
-.modal-paymentpage {
-  display: flex;
-  align-items: start;
-  padding-top: 50px;
-  justify-content: center;
+.reason-modal-overlay {
   position: fixed;
-  z-index: 1;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content-paymentpage {
-  background-color: #fefefe;
-  padding: 1px 20px 20px 20px;
-  border: 1px solid #888;
-  border-radius: 20px;
-  width: 800px;
-  height: 700px;
-}
-.modal-content-paymentpage-title-container {
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: start;
-  padding-top: 20px;
-  padding-bottom: 25px;
+  z-index: 1000;
+  padding-left: 200px;
 }
 
-.modal-content-paymentpage-title-container h1 {
-  font-weight: 500;
-  font-size: 25px;
-  font-family: "Poppins";
-  text-align: center;
-  margin-left: 40px;
-  color: #000000;
-  margin-top: 2px;
-}
-
-.modal-content-paymentpage-title-container h2 {
-  font-weight: 500;
-  /* display: flex; */
-  /* justify-content: space-around; */
-  font-size: 20px;
-  font-family: "Poppins";
-  text-align: center;
-  color: #000000;
-  margin-top: 0px;
-  margin-left: 40px;
-}
-.line-confirmModal {
-  background-color: #c9c9c9;
-  width: 100%;
-  height: 2px;
-  margin-bottom: 10px;
-}
-
-.image-container-confirmmodal-permission-management {
-  background-color: #dbdbdb7c;
-  height: 400px;
-  align-self: center;
-  width: 90%;
-  margin-top: 30px;
-}
-.certificate-image-confirm-modal {
-  height: 400px;
-  width: 90%;
-  margin-left: 30px;
-}
-.close-paymentpage {
-  color: #aaa;
-  float: right;
-  background-color: transparent;
-  font-size: 28px;
-  font-weight: bold;
-  border: none;
-}
-
-.close-paymentpage:hover {
-  color: black;
-  text-decoration: none;
-}
-.chapterbreakdown-set-coursedetail-3 {
-  box-shadow: 0.2rem 0.6rem 1.2rem 0rem rgba(0, 0, 0, 0.1),
-    0rem 0rem 0.5rem 0rem rgba(0, 0, 0, 0.03);
-  border: 1.5px var(--primary-orange) solid;
-  padding: 10px 120px 10px 120px;
-  background-color: var(--primary-orange);
-  opacity: 50%;
-  color: #ffff;
+.reason-modal-content {
+  background: #fff;
   border-radius: 10px;
-  text-align: center;
-  margin-bottom: 10px;
-}
-.chapterbreakdown-set-coursedetail-3:hover {
-  opacity: 80%;
-}
-
-.chapterbreakdown-set-coursedetail-paymentpage {
-  box-shadow: 0.2rem 0.6rem 1.2rem 0rem rgba(0, 0, 0, 0.1),
-    0rem 0rem 0.5rem 0rem rgba(0, 0, 0, 0.03);
-  border: 1.5px var(--primary-orange) solid;
-  padding: 10px;
-  background-color: #fff;
-  color: var(--primary-orange);
-  border-radius: 10px;
-  text-align: left;
-  margin-bottom: 10px;
+  width: 800px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
-.chapterbreakdown-set-coursedetail-3-paymentpage {
+.reason-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.reason-modal-header h1 {
+  font-size: 24px;
   margin: 0;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  font-size: 15px;
-  border-radius: 15px;
+}
+
+.reason-modal-close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.reason-modal-body {
+  margin-bottom: 20px;
+}
+
+.reason-modal-body p {
+  margin: 10px 0;
+  font-family: Arial, sans-serif;
+}
+
+.reason-modal-body input[type="text"] {
+  width: 600px;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.reason-modal-body form {
   display: flex;
-  font-weight: 400;
-  color: #ffffff;
-  background-color: #ff7a37;
+  justify-content: space-between;
+}
+
+.reason-modal-submit-btn {
+  background-color: #4caf50;
+  color: white;
+  margin-top: 11px;
+  margin-bottom: 11px;
+  padding: 10px 20px;
   border: none;
-  opacity: 50%;
-  /* color: var(--font-light2); */
-  box-shadow: 0.2rem 0.6rem 1.2rem 0rem rgba(0, 0, 0, 0.1),
-    0rem 0rem 0.5rem 0rem rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.chapterbreakdown-set-coursedetail-3-paymentpage:hover {
-  opacity: 100%;
+.reason-modal-submit-btn:hover {
+  background-color: #45a049;
 }
 
-.chapterbreakdown-container-coursedetail-paymentpage {
+.reason-modal-footer {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
-.chapterbreakdown-container-coursedetail-paymentpage button {
-  font-weight: 500;
-  font-size: 29px;
-  color: #ffffff;
-  background-color: #61616190;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
+.reason-modal-back-btn,
+.reason-modal-confirm-btn {
+  padding: 10px 20px;
   border: none;
-  opacity: 50%;
-  box-shadow: 0.2rem 0.6rem 1.2rem 0rem rgba(0, 0, 0, 0.1),
-    0rem 0rem 0.5rem 0rem rgba(0, 0, 0, 0.03);
-}
-.chapterbreakdown-container-coursedetail-paymentpage button:hover {
-  opacity: 100%;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-.chapterbreakdown-container-coursedetail-paymentpage-deny-btn {
-  font-weight: 500;
-  font-size: 29px;
-  color: #ffffff;
-  background-color: #61616190;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-  border: none;
-  opacity: 50%;
-  box-shadow: 0.2rem 0.6rem 1.2rem 0rem rgba(0, 0, 0, 0.1),
-    0rem 0rem 0.5rem 0rem rgba(0, 0, 0, 0.03);
+.reason-modal-back-btn {
+  background-color: #bababa;
+  color: white;
 }
 
-.chapterbreakdown-container-coursedetail-paymentpage-accept-btn:hover{
-  background-color: rgb(105, 212, 176)  ;
-  opacity: 50%;
-}
-.chapterbreakdown-container-coursedetail-paymentpage-deny-btn:hover{
-  background-color: rgb(212, 105, 105)  ;
-  opacity: 50%;
+.reason-modal-back-btn:hover {
+  background-color: #a4a3a3;
 }
 
-.chapterbreakdown-container-coursedetail-paymentpage-accept-btn {
-  font-weight: 500;
-  font-size: 29px;
-  color: #ffffff;
-  background-color: #61616190;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-bottom: 10px;
-  border: none;
-  opacity: 50%;
-  box-shadow: 0.2rem 0.6rem 1.2rem 0rem rgba(0, 0, 0, 0.1),
-    0rem 0rem 0.5rem 0rem rgba(0, 0, 0, 0.03);
+.reason-modal-confirm-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.reason-modal-confirm-btn:hover {
+  background-color: #0056b3;
 }

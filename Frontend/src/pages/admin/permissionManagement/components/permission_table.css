@@ -1,52 +1,51 @@
-.course-table-container-permission-table {
+.permission-table-container {
 	margin-top: 30px;
 }
 
-.course-table-container-permission-table .table-content-permission-table {
+.permission-table-content {
 	background-color: white;
 	padding: 20px;
 	padding-top: 10px;
 	border-radius: 5px;
 }
 
-.course-table-container-permission-table .table-header-permission-table {
+.permission-table-header {
 	display: grid;
 	grid-template-columns: 0.3fr 2fr 2.5fr 1.5fr 0.6fr;
 	gap: 15px;
 	padding: 15px;
-	border-bottom: 1px rgb(192, 192, 192) solid;
+	border-bottom: 1px solid rgb(192, 192, 192);
 	font-weight: 600;
 	box-sizing: border-box;
 	text-align: start;
 }
 
-.course-table-container-permission-table .table-content-permission-table .table-row-outer-container-permission-table {
+.permission-table-row-outer-container {
 	height: 60vh;
 	overflow: auto;
 }
 
-.course-table-container-permission-table .table-content-permission-table .table-row-permission-table {
+.permission-table-row {
 	display: grid;
 	text-align: start;
 	grid-template-columns: 0.3fr 2fr 2.5fr 1.5fr 0.6fr;
 	gap: 15px;
 	padding: 15px;
-	border-bottom: 1px rgb(192, 192, 192) solid;
-	transition: all;
+	border-bottom: 1px solid rgb(192, 192, 192);
+	transition: all 0.3s;
 	color: var(--font-light2);
 }
 
-.course-table-container-permission-table .table-content-permission-table .delete-button-permission-table {
+.permission-table-details-button {
 	cursor: pointer;
 	color: white;
 	background-color: #ff6961;
 	border-radius: 5px;
 	text-align: center;
+	padding: 5px 10px;
+	text-decoration: none;
 }
 
-.course-table-container-permission-table .table-content-permission-table .delete-button-permission-table:hover {
+.permission-table-details-button:hover {
 	background-color: #cf4b44;
-}
-
-.course-table-container .table-content .table-row p {
 }
