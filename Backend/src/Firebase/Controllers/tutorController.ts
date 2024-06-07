@@ -236,4 +236,37 @@ export class TutorController {
       res.status(500).json({ error: "Error fetching tutor" });
     }
   }
+
+  static async submitAttendance(req: Request, res: Response) {
+    try {
+      const { classId, sessionId, attend, absent } = req.body;
+
+      console.log(req.body);
+
+      if (!classId || !sessionId || !attend || !absent) {
+        return res.status(404).json({ error: "required all items" });
+      }
+
+      const classDocRef = doc(classCollection, classId);
+
+      const classDocSnapshot = await getDoc(classDocRef);
+
+      if (!classDocSnapshot.exists()) {
+        return res.status(404).json({ error: "Class not found" });
+      }
+      const sessionDocRef = doc(classDocRef, "Session", sessionId);
+
+      await updateDoc(sessionDocRef, {
+        attend: attend,
+        absent: absent,
+        done: true,
+      });
+
+      return res
+        .status(200)
+        .json({ message: "Attendance submitted successfully" });
+    } catch (error) {
+      res.status(500).json({ error: "error" });
+    }
+  }
 }

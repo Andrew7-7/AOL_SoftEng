@@ -10,7 +10,7 @@ import ProfilePage from "./pages/profile/view/profile_page";
 import NeedLogin from "./middleware/needLogin";
 import CheckRole from "./middleware/checkRole";
 import TutorDummy from "./pages/tutor/dummy/tutorDummy";
-import AdminDummy from "./pages/admin/dummy/adminDummy";
+import AdminDummy from "./pages/admin/dummy/permissionManagement.tsx";
 import IsBanned from "./pages/error/isBanned/isBanned";
 import ContactSidebar from "./pages/sidebar/contactSidebar";
 import ChatPage from "./pages/chat/chatPage";
@@ -30,6 +30,8 @@ import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassD
 import PaymentPage from "./pages/paymentpage/view/payment_page.tsx";
 import ConfirmedPage from "./pages/paymentpage/view/confirmed_page.tsx";
 import ReportReviewPage from "./pages/admin/reportReview/reportReview.tsx"
+import PermissionManagementPage from "./pages/admin/permissionManagement/view/permissionManagement_page.tsx";
+import PermissionManagementDetailPage from "./pages/admin/permissionManagement/view/permissionManagementDetail_page.tsx";
 
 function App() {
 	return (
@@ -76,6 +78,8 @@ function App() {
 						{/* Admin Only Pages */}
 						<Route element={<CheckRole role={"admin"} />}>
 							<Route path="/adminDummy" element={<AdminDummy />}></Route>
+							<Route path="/permissionManagement" element={<PermissionManagementPage />} />
+							<Route path="/permissionManagement/:permissionId" element={<PermissionManagementDetailPage />} />
 							<Route
 								path="/accountManagement"
 								element={<AccountManagementPage />}

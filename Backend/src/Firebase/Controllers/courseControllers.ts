@@ -253,4 +253,18 @@ export class CoursesController {
 			res.status(500).json({ error: error.message });
 		}
 	}
+
+	static async deleteCourse(req: Request, res: Response) {
+		try {
+			const courseId = req.params.courseId;
+
+			const courseDocRef = doc(db, "Courses", courseId);
+
+			await deleteDoc(courseDocRef);
+
+			res.status(200).json({ message: "Course deleted successfully" });
+		} catch (error) {
+			res.status(500).json({ error: error.message });
+		}
+	}
 }

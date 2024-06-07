@@ -29,17 +29,17 @@ const TutorNav = ({ clickedItem }: { clickedItem: string }) => {
       <Link to={link}>
         <div
           onClick={() => setClicked(title)}
-          className={`navLabel ${clicked === title ? "clicked" : ""}`}
+          className={`tutornavLabel ${clicked === title ? "clicked" : ""}`}
         >
-          <img className="navLabelImage" src={image}></img>
+          <img className="tutornavLabelImage" src={image}></img>
           <p>{title}</p>
         </div>
       </Link>
     );
   };
   return (
-    <div className="adminNav">
-      <div className="adminNavTitle">
+    <div className="tutorNav">
+      <div className="tutorNavTitle">
         <p style={{ color: "#E24E03" }}>STEP</p>
         <p>CODE</p>
       </div>
@@ -56,8 +56,8 @@ const TutorNav = ({ clickedItem }: { clickedItem: string }) => {
         />
         <NavigationLabel image={reportImage} title="Active Class" link="" />
       </div>
-      <div onClick={signOut} className="signOutAdmin">
-        <img className="navLabelImage" src={signOutImage}></img>
+      <div onClick={signOut} className="signOutTutor">
+        <img className="tutornavLabelImage" src={signOutImage}></img>
         <p>Sign Out</p>
       </div>
     </div>

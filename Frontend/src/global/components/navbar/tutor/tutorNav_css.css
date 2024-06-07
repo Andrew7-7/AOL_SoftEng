@@ -1,4 +1,4 @@
-.adminNav {
+.tutorNav {
   background-color: #402528;
   height: 100vh;
   width: 15vw;
@@ -11,17 +11,17 @@
   z-index: 1;
 }
 
-.adminNavTitle {
+.tutorNavTitle {
   display: flex;
   color: white;
 }
 
-.adminNavTitle p {
+.tutorNavTitle p {
   font-size: 2.4vw;
   font-weight: bold;
 }
 
-.navLabel {
+.tutornavLabel {
   display: flex;
   color: white;
   justify-content: center;
@@ -41,11 +41,11 @@
   border-radius: 10px;
 }
 
-.navLabelImage {
+.tutornavLabelImage {
   width: 2vw;
 }
 
-.signOutAdmin {
+.signOutTutor {
   display: flex;
   color: white;
   justify-content: center;

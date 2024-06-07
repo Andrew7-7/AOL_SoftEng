@@ -24,4 +24,6 @@ coursesRoutes.post(
 	CoursesController.updateCourse
 );
 
+coursesRoutes.delete("/deleteCourse/:courseId", CoursesController.deleteCourse);
+
 export { coursesRoutes };

@@ -4,15 +4,12 @@ import './confirmModal.css';
 import { ICourse } from '../../../global/model/course-interface';
 import { useNavigate } from 'react-router-dom';
 import { ITutor } from '../../../global/model/tutor-interface';
-import LoadingProgressBar from './loadingbar';
 import { IUser } from '../../../global/model/user-interface';
 import { ITransaction } from '../../../global/model/transaction-interface';
 import useFetch from '../../../global/hooks/useFetch';
 
 const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string; totalPrice: number }> = ({ courseData, tutorData, payment, totalPrice }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isCompleted,setIsCompleted] =useState(false)
-  const user = JSON.parse(window.localStorage.getItem("user") || "{}");
   const navigate = useNavigate();
   const [courseId, setCourseId] = useState("")
   const [paymentMethod, setPaymentMethod] = useState("")
@@ -21,7 +18,10 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string;
   const [userEmail, setUserEmail] = useState("")
   const [tutorId, setTutorId] = useState("")
 
+
   useEffect(() => {
+    const user = JSON.parse(window.localStorage.getItem("user") || "{}");
+		setUserEmail(user?.username);
     setCourseId(courseData.CourseID)
     setPaymentMethod(payment)
     setPrice(totalPrice.toString())
@@ -66,14 +66,11 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string;
         if (res.status === 200) {
           console.log(res.data.message)
           navigate(`/${courseId}/${tutorId}/payment/confirmed`)
-          setIsCompleted(true)
         }
       } catch (err: any) {
         if (err.response && err.response.status === 404) {
-       setIsCompleted(false)
         } else {
           console.log(err);
-          setIsCompleted(false)
         }
       }
     };

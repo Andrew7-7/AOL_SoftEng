@@ -47,7 +47,7 @@ const AdminNav = ({ clickedItem }: { clickedItem: string }) => {
 				<NavigationLabel
 					image={permissionImage}
 					title="Permission"
-					link="/adminDummy"
+					link="/permissionManagement"
 				/>
 				<NavigationLabel
 					image={accountImage}
