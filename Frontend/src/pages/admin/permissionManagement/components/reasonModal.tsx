@@ -8,6 +8,7 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
   const [isOpen, setIsOpen] = useState(handleOpen);
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState("");
+  
   useEffect(() => {
     setIsOpen(handleOpen);
   }, [handleOpen]);
@@ -18,54 +19,46 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
 
   const [inputValue, setInputValue] = useState('');
 
-  // Event handler to update the input value state
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevent form submission
 
-    if (!inputValue.trim()) { // Check if input is empty or whitespace
-      toast.error('Please fill in the required field.'); // Show error toast
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!inputValue.trim()) {
+      toast.error('Please fill in the required field.');
       return;
     }
-    //update status 
-    // Handle form submission here
-    // For example, you can send the input value to a server or perform any other action
+    
+    // Update status here
     console.log('Form submitted with value:', inputValue);
   };
+
   return (
     <div>
       {isOpen && (
         <div className="modal-paymentpage">
           <div className="modal-content-paymentpage">
             <div className='modal-content-paymentpage-title-container'>
-              <h1>
-                Permission Details
-              </h1>
+              <h1>Permission Details</h1>
               <div className='line-confirmModal'></div>
-              <h2>
-                Are you sure to {statusData} this request ?
-              </h2>
-              <h2>
-                Requested Class : {permissionData.requestedClass}
-              </h2>
+              <h2>Are you sure to {statusData} this request?</h2>
+              <h2>Tutor's Name: {permissionData.tutorName}</h2>
+              <h2>Requested Class: {permissionData.requestedClass}</h2>
               <form onSubmit={handleSubmit}>
                 <input
                   type="text"
                   value={inputValue}
                   onChange={handleInputChange}
                   placeholder="Type something..."
-                  required // Make the field required
+                  required
                 />
-                <button type="submit">Submit</button>
+                <button type="submit">Add Message</button>
               </form>
-              {/* todo: blob,  status */}
             </div>
             <div className="chapterbreakdown-container-coursedetail-paymentpage">
-              <button onClick={toggleModal}>
-                BACK
-              </button>
+              <button className='chapterbreakdown-container-coursedetail-paymentpage-back-btn' onClick={toggleModal}>BACK</button>
               <button className='chapterbreakdown-container-coursedetail-paymentpage-accept-btn'>
                 {statusData.toUpperCase()}
               </button>
