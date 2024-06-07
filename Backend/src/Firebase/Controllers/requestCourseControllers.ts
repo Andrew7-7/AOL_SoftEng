@@ -7,6 +7,7 @@ import {
     where,
     deleteDoc,
     getDoc,
+    updateDoc,
 } from "firebase/firestore";
 import { db } from "../Config/config";
 import { Request, Response } from "express";
@@ -51,6 +52,34 @@ export class PermissionControllers {
             }
         } catch (error) {
             res.status(500).json({ error: "Error fetching tuuutor" });
+        }
+    }
+
+    static async updatePermission(req: Request, res: Response) {
+        try {
+            const {
+                id,
+                message,
+                permissionID,
+                requestedClass,
+                status,
+                tutorName,
+                certificateImg,
+            } = req.body;
+
+            const permissionRef = doc(db, "permissions", id);
+            await updateDoc(permissionRef, {
+                message,
+                permissionID,
+                requestedClass,
+                status,
+                tutorName,
+                certificateImg,
+            });
+
+            res.status(200).json({ message: "Permission Request updated successfully" });
+        } catch (error) {
+            res.status(500).json({ error: error.message });
         }
     }
 }
