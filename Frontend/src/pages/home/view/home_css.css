@@ -94,6 +94,12 @@
 	text-align: left;
 	margin: 20px;
 }
+
+.containerPopularCourseHome{
+	display: flex;
+	flex-direction: row;
+}
+
 .popularCourseHome {
 	display: flex;
 	flex-direction: row;

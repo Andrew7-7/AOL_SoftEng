@@ -29,8 +29,10 @@ import ActiveClass from "./pages/tutor/activeClass/view/activeClass.tsx";
 import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassDetail.tsx";
 import PaymentPage from "./pages/paymentpage/view/payment_page.tsx";
 import ConfirmedPage from "./pages/paymentpage/view/confirmed_page.tsx";
+import ReportReviewPage from "./pages/admin/reportReview/reportReview.tsx"
 import PermissionManagementPage from "./pages/admin/permissionManagement/view/permissionManagement_page.tsx";
 import PermissionManagementDetailPage from "./pages/admin/permissionManagement/view/permissionManagementDetail_page.tsx";
+
 function App() {
 	return (
 		<>
@@ -89,6 +91,10 @@ function App() {
 							<Route
 								path="/courseManagement/:courseId"
 								element={<CourseUpdatePage />}
+							/>
+							<Route 
+								path="/reportReview"
+								element={<ReportReviewPage />}
 							/>
 							<Route path="/createCourse" element={<CreateCoursePage />} />
 						</Route>

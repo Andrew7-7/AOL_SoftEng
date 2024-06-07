@@ -54,7 +54,11 @@ const AdminNav = ({ clickedItem }: { clickedItem: string }) => {
 					title="Account"
 					link="/accountManagement"
 				/>
-				<NavigationLabel image={reportImage} title="Report" link="" />
+				<NavigationLabel 
+					image={reportImage} 
+					title="Report" 
+					link="/reportReview"
+				/>
 				<NavigationLabel
 					image={courseImage}
 					title="Course"
