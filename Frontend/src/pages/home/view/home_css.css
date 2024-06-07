@@ -97,7 +97,7 @@
 .popularCourseHome {
 	display: flex;
 	flex-direction: row;
-	overflow-x: hidden;
+	overflow-x: auto;
 	margin-right: 32px;
 }
 
