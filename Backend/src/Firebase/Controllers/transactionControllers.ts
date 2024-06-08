@@ -22,21 +22,18 @@ export class transactionControllers {
 
     static async getTransactions(req: Request, res: Response) {
         try {
-            const coursesSnapshot = await getDocs(transactionCollection);
-            const courses: Transaction[] = coursesSnapshot.docs.map((doc) => ({
+            const transactionSnapshot = await getDocs(transactionCollection);
+            const transactions: Transaction[] = transactionSnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
             }));
 
-            for (const course of courses) {
-                //fetch course detail collection
+            for (const transaction of transactions) {
                 const collectionName = "CourseDetail";
-                const docRef = doc(db, "Transaction", course.id);
+                const docRef = doc(db, "Transaction", transaction.id);
                 const collectionSnapshot = await getDocs(
                     collection(docRef, collectionName)
                 );
-
-                //TODO tipe interface courseDetail
                 const courseDetail: any = [];
 
                 if (!collectionSnapshot.empty) {
@@ -47,11 +44,11 @@ export class transactionControllers {
                         });
                     });
                 }
-                course[collectionName] = courseDetail;
+                transaction[collectionName] = courseDetail;
             }
-            res.status(200).json(courses);
+            res.status(200).json(transactions);
         } catch (error) {
-            res.status(500).json({ error: "Error fetching courses" });
+            res.status(500).json({ error: error.message });
         }
     }
 
@@ -65,30 +62,30 @@ export class transactionControllers {
             const reviews: any = [];
 
             if (documentSnapshot.exists()) {
-                const tutor: Transaction = {
+                const transaction: Transaction = {
                     id: documentId,
                     ...documentSnapshot.data(),
                 };
                 console.log(reviews)
-                res.status(200).json(tutor);
+                res.status(200).json(transaction);
             } else {
-                res.status(500).json({ error: "Courses not found" });
+                res.status(500).json({ error: "Transaction not found" });
             }
         } catch (error) {
-            res.status(500).json({ error: "Error fetching tuuutor" });
+            res.status(500).json({ error: error.message });
         }
     }
 
     static async registerTransaction(req: Request, res: Response) {
         try {
             const transactionCollection = collection(db, "Transaction");
-            let { courseId, paymentMethod, price, tutorEmail, userEmail } = req.body;
+            let { courseId, paymentMethod, price, tutorName, userEmail } = req.body;
 
             await addDoc(transactionCollection, {
                 courseId,
                 paymentMethod,
                 price,
-                tutorEmail,
+                tutorName,
                 userEmail
             });
 
@@ -102,19 +99,20 @@ export class transactionControllers {
 
             studentSnapshot.forEach(async (doc) => {
                 const studentData = doc.data();
-                const activeCourses = studentData.activeCourse || [];
+                const activeCourse = studentData.activeCourse || [];
 
-                if (!activeCourses.includes(courseId)) {
-                    activeCourses.push(courseId);
+                if (!activeCourse.includes(courseId)) {
+                    activeCourse.push(courseId);
                 }
                 await updateDoc(doc.ref, {
-                    activeCourses,
+                    activeCourse,
                 });
             });
 
             res.status(200).json({ message: "New Transaction added successfully" });
         } catch (error) {
-            res.status(500).json(error);
+            console.error("Error making new transaction:", error);
+            res.status(500).json({ error: error.message });
         }
     }
 }

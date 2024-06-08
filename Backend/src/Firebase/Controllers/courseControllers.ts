@@ -76,7 +76,7 @@ export class CoursesController {
 				res.status(500).json({ error: "Courses not found" });
 			}
 		} catch (error) {
-			res.status(500).json({ error: "Error fetching tuuutor" });
+			res.status(500).json({ error: "Error fetching Courses" });
 		}
 	}
 
