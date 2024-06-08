@@ -14,18 +14,18 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string;
   const [courseId, setCourseId] = useState("")
   const [paymentMethod, setPaymentMethod] = useState("")
   const [price, setPrice] = useState("")
-  const [tutorEmail, setTutorEmail] = useState("")
+  const [tutorName, setTutorName] = useState("")
   const [userEmail, setUserEmail] = useState("")
   const [tutorId, setTutorId] = useState("")
 
 
   useEffect(() => {
     const user = JSON.parse(window.localStorage.getItem("user") || "{}");
-		setUserEmail(user?.username);
+		setUserEmail(user?.email);
     setCourseId(courseData.CourseID)
     setPaymentMethod(payment)
     setPrice(totalPrice.toString())
-    setTutorEmail(tutorData.id)
+    setTutorName(tutorData.name)
     setTutorId(tutorData.id)
   }, []);
 
@@ -33,7 +33,7 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string;
     setIsOpen(!isOpen);
   };
   const handleClick: MouseEventHandler<HTMLButtonElement> = () => {
-    handleRegister(courseId, paymentMethod, price, tutorEmail, userEmail);
+    handleRegister(courseId, paymentMethod, price, tutorName, userEmail);
   };
 
 
@@ -45,7 +45,7 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string;
     courseId: string,
     paymentMethod: string,
     price: string,
-    tutorEmail: string,
+    tutorName: string,
     userEmail: string,
   ) => {
     const fetchRegister = async () => {
@@ -55,7 +55,7 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string;
       try {
         const res = await axios.post(
           "http://localhost:3002/transaction/registerTransaction",
-          { courseId, paymentMethod, price, tutorEmail, userEmail },
+          { courseId, paymentMethod, price, tutorName, userEmail },
           {
             headers: {
               auth: `Bearer ${extraAuth}`,
