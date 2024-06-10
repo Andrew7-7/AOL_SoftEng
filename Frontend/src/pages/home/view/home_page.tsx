@@ -52,6 +52,7 @@ const HomePage = () => {
 //   const { events } = useDraggable(ref);
   // let data = null;
   const data = useFetch("http://localhost:3002/home/getCourses").data;
+  console.log(data)
 
   const [userEmail, setUserEmail] = useState("");
   const [isLogin, setIsLogin] = useState(false);
@@ -130,6 +131,7 @@ const HomePage = () => {
                   session={d.Sessions}
                   chapter={d.Chapters}
                   img={d.CourseImage}
+                  id={d.id}
                 />
               ))
             : null}

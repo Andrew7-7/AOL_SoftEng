@@ -31,7 +31,7 @@ const activecourse_page = () => {
 				</span>
 				<div className="banner-image-activecourse"></div>
 			</div>
-			<Link to={`/home`}>
+			<Link to={`/`}>
 			<div className="back-t0-home-page-activecourse">
 				<div className="back-to-home-button-1-activecourse">
 					<div className="btn-activecourse"></div>
