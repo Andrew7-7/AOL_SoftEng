@@ -18,7 +18,6 @@ const ActiveCourse = ({ email, data }: any) => {
     "http://localhost:3002/home/getStudent"
   ).data;
   const userEmail = email;
-  // console.log(studentData)
   let a: any = [];
   if (studentData != null)
     studentData.map((data: any) =>
@@ -48,11 +47,11 @@ const ActiveCourse = ({ email, data }: any) => {
 };
 
 const HomePage = () => {
-//   const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
-//   const { events } = useDraggable(ref);
+  //   const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
+  //   const { events } = useDraggable(ref);
   // let data = null;
   const data = useFetch("http://localhost:3002/home/getCourses").data;
-  console.log(data)
+  console.log(data);
 
   const [userEmail, setUserEmail] = useState("");
   const [isLogin, setIsLogin] = useState(false);
@@ -68,29 +67,27 @@ const HomePage = () => {
     }
   });
 
-  
-  function SamplePrevArrow(props:any) {
-	const { className, style, onClick } = props;
-	return (
-	  <div
-		className={className}
-		style={{ ...style, display: "block"}}
-		onClick={onClick}
-	  />
-	);
+  function SamplePrevArrow(props: any) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block" }}
+        onClick={onClick}
+      />
+    );
   }
 
   var settings = {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
-	swipeToSlide: true,
-	infinite: false,
-	nextArrow: <SamplePrevArrow />,
-	prevArrow: <SamplePrevArrow />
+    swipeToSlide: true,
+    infinite: false,
+    nextArrow: <SamplePrevArrow />,
+    prevArrow: <SamplePrevArrow />,
   };
 
-  
   return (
     <>
       <StudentNav />
@@ -115,30 +112,36 @@ const HomePage = () => {
           <List />
         </div>
 
-        <div className="getStartedHome">
-          <div className="getStarted-button-home">
-            <Link to="/register">Get Started</Link>
+        {isLogin ? null : (
+          <div className="getStartedHome">
+            <div className="getStarted-button-home">
+              <Link to="/register">Get Started</Link>
+            </div>
           </div>
+        )}
+
+        <div className="popularCourseHomeDiv">
+          <p className="section-title">Popular Course</p>
+          <Link to="/activecourse" className="viewAllHome">View All</Link>
         </div>
 
-        <p className="section-title">Popular Course</p>
-		
         <Slider {...settings}>
           {data != null
-            ? data.slice(0, 6).map((d: any) => (
-                <Card
-                  title={d.CourseName}
-                  session={d.Sessions}
-                  chapter={d.Chapters}
-                  img={d.CourseImage}
-                  id={d.id}
-                />
-              ))
+            ? data
+                .slice(0, 6)
+                .map((d: any) => (
+                  <Card
+                    title={d.CourseName}
+                    session={d.Sessions}
+                    chapter={d.Chapters}
+                    img={d.CourseImage}
+                    id={d.id}
+                  />
+                ))
             : null}
-          <LastCard />
+          {/* <LastCard /> */}
         </Slider>
         {isLogin && <ActiveCourse email={userEmail} data={data} />}
-
       </div>
     </>
   );

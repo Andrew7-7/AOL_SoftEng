@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 .main-card {
   display: flex;
@@ -23,40 +23,40 @@
   border-radius: 15px 0 0 15px;
   flex-direction: column;
 }
-.left-card1 p{
-    padding-top: 50px;
-    display: flex;
-    font-family: "Poppins";
-    font-size: 36px;
-    color: #F46440;
-    font-weight: bold;
-    text-align: left;
-    width: 398px;
-    /* background-color: red; */
-    /* padding-bottom: 30px; */
+.left-card1 p {
+  padding-top: 50px;
+  display: flex;
+  font-family: "Poppins";
+  font-size: 36px;
+  color: #f46440;
+  font-weight: bold;
+  text-align: left;
+  width: 398px;
+  /* background-color: red; */
+  /* padding-bottom: 30px; */
 }
 .left-card1 > div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 .left-card1 > div img {
   margin-left: 80px;
   margin-right: 150px;
 }
 .left-card1 a {
-    font-family: "Poppins", sans-serif;
-    font-size: 21px;
-    color: white;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: 40px;
-    background-color: #F3C304;
-    padding:7px 16px;
-    justify-content: center;
-    margin-right: 220px;
-    width: 157px;
+  /* font-family: "Poppins", sans-serif;
+  font-size: 21px;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 40px;
+  background-color: #f3c304;
+  padding: 7px 16px;
+  justify-content: center;
+  margin-right: 220px;
+  width: 157px; */
 }
 .right-card1 {
   display: flex;
@@ -108,34 +108,38 @@
 }
 
 .main-card2 a {
-  margin-right: 111px;
+  /* margin-right: 111px;
   font-family: "Poppins", sans-serif;
   font-size: 21px;
   color: white;
   font-weight: 600;
   text-decoration: none;
   border-radius: 40px;
-  background-color: #F3C304;
-  padding:2px 16px;
+  background-color: #f3c304;
+  padding: 2px 16px;
   max-height: 40px;
-  width: 157px;
-}.main-card2 a:hover{
+  width: 157px; */
+}
+.main-card2 a:hover {
   opacity: 0.92;
-}.main-card2 a:active{
+}
+.main-card2 a:active {
   opacity: 0.85;
-}.main-card a:hover{
+}
+.main-card a:hover {
   opacity: 0.92;
-}.main-card a:active{
+}
+.main-card a:active {
   opacity: 0.85;
 }
 
-.clogo{
+.clogo {
   width: 111px;
   position: relative;
   right: 32vw;
 }
 
-.featured-list{
+.featured-list {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -145,7 +149,7 @@
   overflow: hidden;
 }
 
-.buttonNext{
+.buttonNext {
   all: unset;
   display: block;
   position: absolute;
@@ -156,7 +160,7 @@
   cursor: pointer;
 }
 
-.buttonNext img{
+.buttonNext img {
   background-color: white;
   border-radius: 100px;
   padding: 0px 1px;
@@ -175,27 +179,44 @@
   cursor: pointer;
 }
 
-.buttonPrev img{
+.buttonPrev img {
   width: 37px;
   background-color: white;
   border-radius: 100px;
   padding: 0px 1px;
 }
 
-.buttonNext:hover{
+.buttonNext:hover {
   opacity: 0.92;
-}.buttonNext:active{
+}
+.buttonNext:active {
   opacity: 0.82;
 }
 
-.buttonPrev:hover{
+.buttonPrev:hover {
   opacity: 0.92;
-}.buttonPrev:active{
+}
+.buttonPrev:active {
   opacity: 0.82;
+}
+
+.learnMoreButton {
+  display: flex;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1vw;
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 30px;
+  background-color: #f3c304;
+  padding: 7px 16px;
+  justify-content: center;
+  margin-right: 220px;
+  width: 157px;
 }
 
 @media only screen and (max-width: 1080px) {
   .left-card1 > div img {
     margin-right: 50px;
-}
+  }
 }

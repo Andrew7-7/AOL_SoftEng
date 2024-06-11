@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import "./featured_card.css";
-import Slider from "react-slick"
+import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const FeaturedCard1 = () => {
-
   return (
     <>
       <div className="main-card">
@@ -16,7 +15,9 @@ const FeaturedCard1 = () => {
               className="discountIcon"
               src="https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/asset%2F50%25off.png?alt=media&token=66cb3eca-4410-48f4-b49c-58874f80d7e8"
             />
-            <Link to="/">Learn More</Link>
+            <Link to="/activeCourse" className="learnMoreButton">
+              Learn More
+            </Link>
           </div>
         </div>
         <div className="right-card1">
@@ -32,12 +33,14 @@ const FeaturedCard2 = () => {
     <>
       <div className="main-card2">
         <p>Get 40% Off On C Programming Language</p>
-        <div className = "card2-detail">
+        <div className="card2-detail">
           <img
             className="clogo"
             src="https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/asset%2FClogo.png?alt=media&token=30b13dbc-5b5c-41df-bcf9-fbd8882a55a4"
           />
-          <Link to="/">Learn More</Link>
+          <Link to="/activeCourse" className="learnMoreButton">
+            Learn More
+          </Link>
         </div>
       </div>
     </>
@@ -53,12 +56,12 @@ export const List = () => {
     autoplay: true,
     pauseOnHover: true,
     autoplaySpeed: 6000,
-  }
+  };
 
-  return(
-    <div style = {{position:"relative"}}>
-      <Slider className="featured-list" {...settings} >
-        <FeaturedCard1/>
+  return (
+    <div style={{ position: "relative" }}>
+      <Slider className="featured-list" {...settings}>
+        <FeaturedCard1 />
         <FeaturedCard2 />
       </Slider>
       {/* <button className="buttonNext">
@@ -67,6 +70,6 @@ export const List = () => {
         <button className="buttonPrev">
           <img src="https://www.freeiconspng.com/uploads/arrow-icon--myiconfinder-23.png"/>
         </button> */}
-    </div>  
-  )
-}
+    </div>
+  );
+};

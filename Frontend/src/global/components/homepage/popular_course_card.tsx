@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./pupular_course_card.css";
 import arrow from "../../assets/arrow.png";
 
-export const Card = ({ id,img, title, session, chapter, link }: any) => {
+export const Card = ({ id, img, title, session, chapter, link }: any) => {
   const imgUrl = img;
   const text = title;
   const sessions = session;
@@ -12,10 +12,13 @@ export const Card = ({ id,img, title, session, chapter, link }: any) => {
   return (
     <>
       <Link to={`/activecourse/${docId}`}>
-        <div className="card">
+        <div className="card2">
           <div
             className="card-title"
-            style={{ backgroundImage: `url("${imgUrl}")`, backgroundSize: "120%" }}
+            style={{
+              backgroundImage: `url("${imgUrl}")`,
+              backgroundSize: "120%",
+            }}
           >
             <p>{text}</p>
           </div>
