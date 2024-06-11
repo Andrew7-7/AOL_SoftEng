@@ -17,7 +17,7 @@ export const Card = ({ id, img, title, session, chapter, link }: any) => {
             className="card-title"
             style={{
               backgroundImage: `url("${imgUrl}")`,
-              backgroundSize: "120%",
+              backgroundSize: "125%",
             }}
           >
             <p>{text}</p>
