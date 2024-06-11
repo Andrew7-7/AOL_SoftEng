@@ -48,7 +48,6 @@ function App() {
           {/* Kalau udah login gabisa login register lagi */}
           <Route element={<AlreadyLoggedIn />}>
                     <Route path="/chat" element={<ChatPage/>}></Route>
-                    <Route path="/addForum" element={<AddForum/>}></Route>
           </Route>
 
           {/* Butuh Login */}
