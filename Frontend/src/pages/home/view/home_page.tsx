@@ -15,52 +15,43 @@ import "slick-carousel/slick/slick-theme.css";
 
 const ActiveCourse = ({ email, data }: any) => {
   const studentData: any = useFetch(
-    "http://localhost:3002/home/getStudent"
+    "http://localhost:3002/home/getStudentActiveCourse/" + email
   ).data;
-  const userEmail = email;
-  // console.log(studentData)
-  let a: any = [];
-  if (studentData != null)
-    studentData.map((data: any) =>
-      data.email == userEmail ? (a = Object.values(data.activeCourse)) : null
-    );
+
+  if (!studentData) {
+    return <p>there's no active Course</p>;
+  }
 
   return (
     <div>
       <p className="section-title">Active Course</p>
       <div className="active-course-list-home">
-        {data != null
-          ? data.map((d: any) =>
-              a.indexOf(d.CourseID) != -1 ? (
-                <Card
-                  title={d.CourseName}
-                  session={d.Sessions}
-                  chapter={d.Chapters}
-                  img={d.CourseImage}
-                  id={d.id}
-                />
-              ) : null
-            )
-          : null}
+        {data.map((d: any) =>
+          studentData.indexOf(d.id) != -1 ? (
+            <Card
+              key={d.id}
+              title={d.CourseName}
+              session={d.Sessions}
+              chapter={d.Chapters}
+              img={d.CourseImage}
+              id={d.id}
+            />
+          ) : null
+        )}
       </div>
     </div>
   );
 };
 
 const HomePage = () => {
-//   const ref = useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
-//   const { events } = useDraggable(ref);
-  // let data = null;
   const data = useFetch("http://localhost:3002/home/getCourses").data;
-  console.log(data)
-
   const [userEmail, setUserEmail] = useState("");
   const [isLogin, setIsLogin] = useState(false);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     const user = JSON.parse(window.localStorage.getItem("user") || "{}");
-    setUserEmail(user?.username);
-
+    setUserEmail(user?.email);
     if (userEmail == null) {
       setIsLogin(false);
     } else {
@@ -68,33 +59,31 @@ const HomePage = () => {
     }
   });
 
-  
-  function SamplePrevArrow(props:any) {
-	const { className, style, onClick } = props;
-	return (
-	  <div
-		className={className}
-		style={{ ...style, display: "block"}}
-		onClick={onClick}
-	  />
-	);
+  function SamplePrevArrow(props: any) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style, display: "block" }}
+        onClick={onClick}
+      />
+    );
   }
 
   var settings = {
     speed: 500,
     slidesToShow: 4,
-    slidesToScroll: 4,
-	swipeToSlide: true,
-	infinite: false,
-	nextArrow: <SamplePrevArrow />,
-	prevArrow: <SamplePrevArrow />
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    infinite: false,
+    nextArrow: <SamplePrevArrow />,
+    prevArrow: <SamplePrevArrow />,
   };
 
-  
   return (
     <>
+      <p>{userId}</p>
       <StudentNav />
-      {/* <Link to={"/1/pickTutor"}>Pcik Tutor Dummy</Link> */}
       <div className="bannerHome">
         <div className="banner-text-home">
           <p>UNLEASH YOUR CODING POTENTIAL WITH</p>
@@ -117,28 +106,32 @@ const HomePage = () => {
 
         <div className="getStartedHome">
           <div className="getStarted-button-home">
-            <Link to="/register">Get Started</Link>
+            {isLogin && <Link to="/register">Get Started</Link>}
           </div>
         </div>
 
         <p className="section-title">Popular Course</p>
-		
-        <Slider {...settings}>
-          {data != null
-            ? data.slice(0, 6).map((d: any) => (
-                <Card
-                  title={d.CourseName}
-                  session={d.Sessions}
-                  chapter={d.Chapters}
-                  img={d.CourseImage}
-                  id={d.id}
-                />
-              ))
-            : null}
-          <LastCard />
-        </Slider>
-        {isLogin && <ActiveCourse email={userEmail} data={data} />}
 
+        <div className="popolarCourseSliderContainer">
+          <Slider {...settings}>
+            {data != null
+              ? data
+                  .slice(1, 8)
+                  .map((d: any) => (
+                    <Card
+                      key={d.id}
+                      title={d.CourseName}
+                      session={d.Sessions}
+                      chapter={d.Chapters}
+                      img={d.CourseImage}
+                      id={d.id}
+                    />
+                  ))
+              : null}
+            <LastCard />
+          </Slider>
+        </div>
+        {isLogin && <ActiveCourse email={userEmail} data={data} />}
       </div>
     </>
   );

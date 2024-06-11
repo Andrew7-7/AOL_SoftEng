@@ -10,7 +10,7 @@ export const Card = ({ id,img, title, session, chapter, link }: any) => {
   const docId = id;
 
   return (
-    <>
+    <div className="globalCard">
       <Link to={`/activecourse/${docId}`}>
         <div className="card">
           <div
@@ -31,19 +31,19 @@ export const Card = ({ id,img, title, session, chapter, link }: any) => {
           </div>
         </div>
       </Link>
-    </>
+    </div>
   );
 };
 
 export const LastCard = () => {
   return (
-    <>
+    <div className="globalLastCard">
       <Link to="/activecourse">
         <div className="lastCard">
           <img src={arrow} />
           <p>View All</p>
         </div>
       </Link>
-    </>
+    </div>
   );
 };

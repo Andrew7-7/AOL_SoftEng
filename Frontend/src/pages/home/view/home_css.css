@@ -113,6 +113,7 @@
 	justify-content: flex-start;
 }
 
+
 @media only screen and (max-width: 1080px) {
 	.banner-text-home p {
 		font-weight: bold;
