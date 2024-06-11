@@ -10,7 +10,9 @@ a {
 .card-tutor {
     overflow: hidden;
     width: 360px;
+    /* width: 15vw; */
     height: 378px;
+    /* height: 15.5vw; */
     border-radius: 22px;
     display: flex;
     flex-direction: column;

@@ -11,7 +11,8 @@ const StudentNav = () => {
         <p>CODE</p>
       </Link>
       <div className="rightNav">
-        <Link to={"/1/pickTutor"}>Pick tutor</Link>
+        <Link to={"/activeCourse"}>Course</Link>
+        <Link to={"/reply"}>Forum</Link>
         <div className="profile">
           {user.username ? (
             user.role === "tutor" ? (

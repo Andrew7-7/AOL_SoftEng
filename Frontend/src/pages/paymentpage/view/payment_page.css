@@ -75,13 +75,15 @@
 
 .paymentpage-container-title-new {
   background-color: white;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 15vw;
+  margin-right: 15vw;
   border-radius: 10px;
   padding-bottom: 100px;
+  margin-bottom: 20px;
 }
 
 .paymentpage-container-title-new-fortitle {
+  margin-top: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -90,12 +92,12 @@
 .h1-container-paymentpage-new {
   margin-top: 50px;
   color: white;
-  font-weight: 800;
-  font-size: 20px;
+  font-weight: 600;
+ font-size: 1.1vw;
   border-radius: 15px;
   background-color: #ff7a37;
-  padding: 20px 40px 20px 40px;
-  margin-bottom: 10px;
+  padding: 0.5vw 1vw 0.5vw 1vw;
+  /* margin-bottom: 10px; */
 }
 
 .return-button {
