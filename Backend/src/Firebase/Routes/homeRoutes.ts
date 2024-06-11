@@ -9,4 +9,7 @@ const homeRoutes = Router();
 homeRoutes.get("/getCourses", HomeController.getCourses);
 
 homeRoutes.get("/getStudent", HomeController.getStudent);
+
+homeRoutes.get("/getStudentActiveCourse/:studentEmail", HomeController.getStudentByEmail)
+
 export { homeRoutes };
