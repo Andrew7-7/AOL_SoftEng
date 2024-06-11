@@ -123,7 +123,7 @@ export class forumControllers{
                 question,
                 view,
             });
-
+            
             const forumDetailRef = await addDoc(collection(forumRef, 'ForumDetail'), {
                 imageURL,
                 sender: { senderEmail, senderImageUrl },
