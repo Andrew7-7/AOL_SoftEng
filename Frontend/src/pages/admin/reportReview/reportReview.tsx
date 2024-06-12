@@ -3,8 +3,10 @@ import AdminNav from "../../../global/components/navbar/admin/adminNav";
 import "./reportReview.css";
 import pencil from "../../../global/assets/icon _pencil_.png";
 import useFetch from "../../../global/hooks/useFetch";
+import axios from "axios";
 
-const ReportDetailPopup = ({ report, onClose }:any) => {
+const accToken = window.localStorage.getItem("accToken");
+const ReportDetailPopup = ({ report, onClose, blockUser }: any) => {
   return (
     <div className="popupReport">
       <div className="popupReport-content">
@@ -14,7 +16,14 @@ const ReportDetailPopup = ({ report, onClose }:any) => {
         <p>Message</p>
         <p>{report.message}</p>
       </div>
-      <button className = "popupReport-button"onClick={onClose}>Close</button>
+      <div>
+        <button className="popupReport-button" onClick={onClose}>
+          Close
+        </button>
+        <button className="popupReport-button-ban" onClick={blockUser}>
+          Ban
+        </button>
+      </div>
       <div className="popupReport-overlay" onClick={onClose}></div>
     </div>
   );
@@ -29,7 +38,27 @@ const ReportListComponent = (props: any) => {
 
   const togglePopup = () => {
     setIsPopupOpen(!isPopupOpen);
-    setIsVisible(true)
+    setIsVisible(true);
+  };
+
+  const blockUser = async () => {
+    try {
+      const res = await axios.post(
+        "http://localhost:3002/admin/blockUser",
+        { email: user, block: true },
+        {
+          headers: {
+            auth: `Bearer ${accToken}`,
+          },
+        }
+      );
+
+      if (res.status === 200) {
+        /// buat API reviewed TRUE
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -39,7 +68,12 @@ const ReportListComponent = (props: any) => {
           <p className="first">{user}</p>
           <p className="second">{sender}</p>
           <p className="third">{message}</p>
-          <button className="reportListButton" onClick={() => (setIsPopupOpen(true),setIsVisible(false))}><img src={pencil} className="fourth" /></button>
+          <button
+            className="reportListButton"
+            onClick={() => (setIsPopupOpen(true), setIsVisible(false))}
+          >
+            <img src={pencil} className="fourth" />
+          </button>
         </div>
       )}
       {isPopupOpen && (
@@ -47,10 +81,12 @@ const ReportListComponent = (props: any) => {
           report={{
             userName: props.user,
             sender: props.sender,
-            message: props.message
+            message: props.message,
           }}
           onClose={togglePopup}
-        />)}
+          blockUser={blockUser}
+        />
+      )}
     </div>
   );
 };
@@ -87,7 +123,11 @@ const ReportList = (props: any) => {
             />
           ))
         ) : (
-          <div> Please wait your request is being processed, if you see this long enough you request might be invalid</div>
+          <div>
+            {" "}
+            Please wait your request is being processed, if you see this long
+            enough you request might be invalid
+          </div>
         )}
       </div>
     </>

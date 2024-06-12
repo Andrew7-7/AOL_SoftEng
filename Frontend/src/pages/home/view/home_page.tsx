@@ -104,11 +104,13 @@ const HomePage = () => {
           <List />
         </div>
 
-        <div className="getStartedHome">
-          <div className="getStarted-button-home">
-            {isLogin && <Link to="/register">Get Started</Link>}
+        {isLogin ? null : (
+          <div className="getStartedHome">
+            <div className="getStarted-button-home">
+              {isLogin && <Link to="/register">Get Started</Link>}
+            </div>
           </div>
-        </div>
+        )}
 
         <p className="section-title">Popular Course</p>
 

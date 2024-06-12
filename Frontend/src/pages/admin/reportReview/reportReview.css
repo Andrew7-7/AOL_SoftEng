@@ -108,4 +108,16 @@
     color: white;
     border: none;
     padding: 5px;
+    margin-right: 1vw;
+}
+
+.popupReport-button-ban{
+    width: 10%;
+    margin: 20px 0;
+    border-radius: 8px;
+    background-color: #b32a3a;
+    color: white;
+    border: none;
+    padding: 5px;
+    margin-right: 1vw;
 }
