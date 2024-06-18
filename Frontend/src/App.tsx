@@ -26,6 +26,7 @@ import CourseDetailPage from "./pages/coursedetail/view/course_detail_page.tsx";
 import AccountManagementPage from "./pages/admin/accountManagement/view/accountManagementPage";
 import ActiveClass from "./pages/tutor/activeClass/view/activeClass.tsx";
 import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassDetail.tsx";
+import CoursesPage from "./pages/applyCourses/courseList.tsx";
 function App() {
   return (
     <>
@@ -60,6 +61,7 @@ function App() {
             <Route element={<CheckRole role={"tutor"} />}>
               <Route path="/tutorDummy" element={<TutorDummy />}></Route>
               <Route path="/activeClass" element={<ActiveClass />}></Route>
+              <Route path="/courseList" element={<CoursesPage/>}></Route>
               <Route
                 path="/activeClassDetail/:id"
                 element={<ActiveClassDetail />}
