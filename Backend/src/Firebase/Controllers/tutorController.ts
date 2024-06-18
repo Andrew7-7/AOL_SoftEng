@@ -38,7 +38,6 @@ interface ClassData {
 
 const tutorsCollection = collection(db, "tutors");
 const classCollection = collection(db, "Class");
-const sessionCollection = collection(db, "Session");
 export class TutorController {
   static async getActiveClass(req: Request, res: Response) {
     try {
@@ -117,10 +116,17 @@ export class TutorController {
       res.status(500).json({ error: "Error fetching tutor" });
     }
   }
+
   static async getTutors(req: Request, res: Response) {
     try {
-      // console.log(req)
-      const tutorsSnapshot = await getDocs(tutorsCollection);
+      const courseId = req.params.courseId;
+
+      const q = query(
+        tutorsCollection,
+        where("courseIds", "array-contains", courseId)
+      );
+
+      const tutorsSnapshot = await getDocs(q);
       const tutors: Tutor[] = tutorsSnapshot.docs.map((doc) => ({
         id: doc.id,
         rating: null,
