@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import './RepliesPage.css';
+import StudentNav from '../../global/components/navbar/student/student_navbar';
 
 interface Reply {
     id: string;
@@ -9,6 +11,8 @@ interface Reply {
 
 const RepliesPage = () => {
     const [replies, setReplies] = useState<Reply[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
     const { forumId } = useParams<{ forumId: string }>();
 
     const fetchReplies = async () => {
@@ -26,31 +30,58 @@ const RepliesPage = () => {
             const data = await response.json();
 
             if (data && Array.isArray(data.replies)) {
-                console.log("Data fetched:", data.replies);
                 setReplies(data.replies);
             } else {
-                console.error('Data fetched is not in the expected format:', data);
+                setError('Unexpected response format');
             }
-        } catch (error) {
-            console.error('Error fetching replies:', error);
+        } catch (err) {
+            setError((err as Error).message);
+        } finally {
+            setLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
         fetchReplies();
     }, [forumId]);
 
+    if (loading) {
+        return <div className="Replies">Loading...</div>;
+    }
+
+    if (error) {
+        return <div className="Replies">Error: {error}</div>;
+    }
+
     return (
         <div className="Replies">
-            <h1>Replies for Forum ID: {forumId}</h1>
+
+            <StudentNav />
+            <div className="forum-header">
+                <h1>FORUM PAGE</h1>
+                <div className="sharing-banner">#sharingiscaring</div>
+            </div>
             <ul>
-                {replies && replies.map((reply, index) => (
-                    <li key={index}>
-                        <p>Sender Email: {reply.senderEmail}</p>
-                        <p>{reply.message}</p>
+                {replies.map((reply, index) => (
+                    <li key={index} className="reply-item">
+                        <div className="reply-content">
+                            <h2 className="reply-title">Title Placeholder</h2>
+                            <p className="reply-message">{reply.message}</p>
+                            <p className="reply-meta">
+                                <span className="sender-email">{reply.senderEmail}</span>
+                                <span className="reply-count">{index + 1} replies</span>
+                            </p>
+                            <button className="see-more">see more..</button>
+                        </div>
                     </li>
                 ))}
             </ul>
+            <div className="pagination">
+                <button className="page-btn">1</button>
+                <button className="page-btn">2</button>
+                <button className="page-btn">3</button>
+                <span>...</span>
+            </div>
         </div>
     );
 }
