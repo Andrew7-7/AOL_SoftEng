@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import useFetch from "../../../global/hooks/useFetch";
 import StudentNav from "../../../global/components/navbar/student/student_navbar";
-import './course_detail_page.css'
+import "./course_detail_page.css";
 import Modal from "../components/modal";
 const CourseDetailPage = () => {
   const { courseId } = useParams();
@@ -20,7 +20,14 @@ const CourseDetailPage = () => {
     <>
       <StudentNav />
       <div className="container-coursedetail">
-        <div className="banner-coursedetail" style={{ backgroundImage: `url("${courseData.banner}")`, backgroundSize: "100%" }}>
+        <div
+          className="banner-coursedetail"
+          style={{
+            backgroundColor: "rgb(241, 124, 65)",
+            backgroundSize: "100%",
+          }}
+        >
+          <div className="course-name">{courseData.CourseName}</div>
           <Link to={`/activecourse`}>
             <div className="back-t0-home-page-coursedetail">
               <div className="back-t0-home-page-coursedetail">
@@ -43,18 +50,15 @@ const CourseDetailPage = () => {
                 <div className="total-sessions-coursedetail">
                   {courseData.Sessions} Total Sessions
                 </div>
-                <div className="line-coursedetail">
-                </div>
+                <div className="line-coursedetail"></div>
                 <div className="total-chapters-coursedetail">
                   {courseData.Chapters} Total Chapters
                 </div>
-                <div className="line-coursedetail">
-                </div>
+                <div className="line-coursedetail"></div>
                 <span className="skill-level-coursedetail">
                   Skill Level: {courseData.skill}
                 </span>
               </div>
-
             </div>
           </div>
           <div className="coursedescription-container-coursedetail">
@@ -66,12 +70,12 @@ const CourseDetailPage = () => {
               </div>
             </Link>
           </div>
-
           <div className="chapterbreakdown-container-coursedetail">
-            <p>Total Hours : {courseData.totalHours} hours</p>
-            <h1>
-              Chapter Breakdown
-            </h1>
+            <p>
+              Total Hours : {courseData.hourPerSession * courseData.Sessions}{" "}
+              hours
+            </p>
+            <h1>Chapter Breakdown</h1>
             <div className="chapterbreakdown-container-coursedetail-2">
               {displayedChapters.map((name, index) => (
                 <div className="chapterbreakdown-set-coursedetail" key={index}>
@@ -81,8 +85,6 @@ const CourseDetailPage = () => {
               <Modal courseData={courseData} />
             </div>
           </div>
-
-
         </div>
       </div>
     </>

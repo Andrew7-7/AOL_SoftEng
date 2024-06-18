@@ -6,16 +6,20 @@ const chatRoutes = Router();
 
 chatRoutes.post(
   "/getChat",
-  extraAuthorization,
+  // extraAuthorization,
   chatControllers.getChatRoom
 );
 
 chatRoutes.get(
   "/chatRoom/:roomID/Messages",
-  extraAuthorization,
+  // extraAuthorization,
   chatControllers.getMessages
 );
 
-chatRoutes.post("/postMessage", extraAuthorization, chatControllers.sendMessage);
+chatRoutes.post(
+  "/postMessage",
+  // extraAuthorization,
+  chatControllers.sendMessage
+);
 
 export { chatRoutes };

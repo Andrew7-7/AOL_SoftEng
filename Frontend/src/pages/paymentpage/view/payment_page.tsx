@@ -21,7 +21,7 @@ const PaymentPage = () => {
   const ppn = tutor?.price ? parseInt(tutor.price) * 0.11 : 0;
   const totalPrice = tutor?.price ? parseInt(tutor.price) + ppn : 0;
 
-  const handlePaymentChange = (event) => {
+  const handlePaymentChange = (event: any) => {
     setSelectedPayment(event.target.value);
   };
 
@@ -79,7 +79,7 @@ const PaymentPage = () => {
           <div className="paymentpage-container-title-new-fortitle">
             <div className="coursecard-container-paymentpage">
               <TutorCard
-                rating={tutor?.rating.toFixed(1)}
+                rating={tutor.rating == null ? 0 : tutor?.rating.toFixed(1)}
                 price={tutor?.price}
                 reviewLength={tutor?.reviews.length}
                 name={tutor?.name}
