@@ -28,6 +28,7 @@ import CourseUpdatePage from "./pages/admin/courseUpdate/course_update_page.tsx"
 import CreateCoursePage from "./pages/admin/createCourse/create_course_page.tsx";
 import ActiveClass from "./pages/tutor/activeClass/view/activeClass.tsx";
 import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassDetail.tsx";
+import CoursesPage from "./pages/applyCourses/courseList.tsx";
 import PaymentPage from "./pages/paymentpage/view/payment_page.tsx";
 import ConfirmedPage from "./pages/paymentpage/view/confirmed_page.tsx";
 import ReportReviewPage from "./pages/admin/reportReview/reportReview.tsx"
@@ -68,6 +69,7 @@ function App() {
             <Route element={<CheckRole role={"tutor"} />}>
               <Route path="/tutorDummy" element={<TutorDummy />}></Route>
               <Route path="/activeClass" element={<ActiveClass />}></Route>
+              <Route path="/courseList" element={<CoursesPage/>}></Route>
               <Route
                 path="/activeClassDetail/:id"
                 element={<ActiveClassDetail />}
