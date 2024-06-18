@@ -20,7 +20,9 @@
 
 .leftChatDiv .top img {
   width: 200px;
+  height: 200px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .leftChatDiv .bottom {
@@ -100,4 +102,83 @@
   justify-content: center;
   font-size: 30px;
   color: var(--font-light3);
+}
+
+.rightChatDiv .message-container {
+  padding: 30px;
+  height: 100%;
+  position: relative;
+}
+
+.message-container .messages {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.message-container .messages .left-message {
+  display: flex;
+  gap: 20px;
+}
+
+.message-container .messages .left-message img {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.message-container .messages .left-message {
+  display: flex;
+  justify-content: start;
+}
+
+.message-container .messages .left-message .message {
+  font-size: 14px;
+  background-color: rgb(163, 238, 170);
+  padding: 20px;
+  border-radius: 10px;
+  width: fit-content;
+  height: fit-content;
+}
+
+.message-container .messages .right-message {
+  display: flex;
+  justify-content: end;
+}
+
+.message-container .messages .right-message .message {
+  font-size: 14px;
+  background-color: rgb(163, 238, 170);
+  padding: 20px;
+  border-radius: 10px;
+  width: fit-content;
+}
+
+.chatDiv .input-form-container {
+  height: 50px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: absolute;
+  bottom: 30px;
+}
+
+.chatDiv .input-form-container .input-message {
+  height: 100%;
+  width: 85%;
+  border: solid 1px rgb(238, 238, 238);
+  padding: 0px 20px;
+}
+
+.chatDiv .input-form-container .send-button {
+  height: 100%;
+  border-radius: 5px;
+  flex: 1;
+  text-align: center;
+  padding: 15px;
+  color: white;
+  background-color: var(--primary-orange);
+  width: 40px;
 }

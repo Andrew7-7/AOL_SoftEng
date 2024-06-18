@@ -23,9 +23,9 @@ const ChatPage = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [messageInput, setMessageInput] = useState("");
   const user = JSON.parse(window.localStorage.getItem("user") || "{}");
-  const student = JSON.parse(window.localStorage.getItem("profile") || "{}");
   const [chatRooms, setChatRooms] = useState<any>([]);
   const [currRoom, setCurrRoom] = useState<string>("");
+  const [currProfileURL, setCurrProfileURL] = useState<string>("");
   const [userCache, setUserCache] = useState<{ [key: string]: any }>({});
 
   useEffect(() => {
@@ -60,6 +60,11 @@ const ChatPage = () => {
       return () => unsubscribe();
     }
   }, [currRoom]);
+
+  const handleRoomClick = (roomId: string, profileURL: string) => {
+    setCurrRoom(roomId);
+    setCurrProfileURL(profileURL);
+  };
 
   const sendMessage = async () => {
     try {
@@ -130,9 +135,23 @@ const ChatPage = () => {
           currRoom == roomId ? "chat-room-card select" : "chat-room-card"
         }
         key={roomId}
-        onClick={() => setCurrRoom(roomId)}
+        onClick={() =>
+          handleRoomClick(
+            roomId,
+            userData.profileURL != ""
+              ? userData.profileURL
+              : "https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/Profile%2Fanonymous_profilce_picture.webp?alt=media&token=24c17cb1-3032-432f-a1a1-98c7d9fbff06"
+          )
+        }
       >
-        <img src={userData.profileURL} alt="User profile" />
+        <img
+          src={
+            userData.profileURL != ""
+              ? userData.profileURL
+              : "https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/Profile%2Fanonymous_profilce_picture.webp?alt=media&token=24c17cb1-3032-432f-a1a1-98c7d9fbff06"
+          }
+          alt="User profile"
+        />
         <div className="right">
           <div className="top">
             <div className="name">{userData.username}</div>
@@ -155,8 +174,8 @@ const ChatPage = () => {
             <div className="name">{user.username}</div>
             <img
               src={
-                student.profileURL != ""
-                  ? student.profileURL
+                user.profileURL != ""
+                  ? user.profileURL
                   : "https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/Profile%2Fanonymous_profilce_picture.webp?alt=media&token=24c17cb1-3032-432f-a1a1-98c7d9fbff06"
               }
               alt="Profile"
@@ -182,19 +201,38 @@ const ChatPage = () => {
             {currRoom === "" ? (
               <div className="blank-room">Blank Room</div>
             ) : (
-              <div className="messages">
-                {messages.map((message, index) => (
-                  <div className="message" key={index}>
-                    <div>{message.message}</div>
+              <div className="message-container">
+                <div className="messages">
+                  {messages.map((message, index) => (
+                    <>
+                      {message.email != user.email ? (
+                        <div className="left-message">
+                          <img src={currProfileURL} alt="" />
+                          <div className="message">{message.message}</div>
+                        </div>
+                      ) : (
+                        <div
+                          className="right-message
+                      "
+                        >
+                          <div className="message">{message.message}</div>
+                        </div>
+                      )}
+                    </>
+                  ))}
+                </div>
+                <div className="input-form-container">
+                  <input
+                    className="input-message"
+                    type="text"
+                    name="messageInput"
+                    onChange={handleInputChange}
+                    value={messageInput}
+                  />
+                  <div className="send-button" onClick={sendMessage}>
+                    Send
                   </div>
-                ))}
-                <input
-                  type="text"
-                  name="messageInput"
-                  onChange={handleInputChange}
-                  value={messageInput}
-                />
-                <div onClick={sendMessage}>Send</div>
+                </div>
               </div>
             )}
           </div>

@@ -13,6 +13,7 @@ const StudentNav = () => {
       <div className="rightNav">
         <Link to={"/activeCourse"}>Course</Link>
         <Link to={"/reply"}>Forum</Link>
+        <Link to={"/chat"}>Chat</Link>
         <div className="profile">
           {user.username ? (
             user.role === "tutor" ? (
