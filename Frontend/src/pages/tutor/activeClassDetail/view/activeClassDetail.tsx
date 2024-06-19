@@ -15,6 +15,9 @@ const ActiveClassDetail = () => {
   const [classDetail, setClassDetail] = useState<any>({});
   const [editStatus, setEditStatus] = useState(true);
   const [session, setSession] = useState<IClassSession[]>([]);
+  const [doneClass, setDoneClass] = useState(true);
+  const [presentClass, setPresentClass] = useState<string[]>([]);
+  const [absentClass, setAbsentClass] = useState<string[]>([]);
   const [attendanceModal, setAttendanceModal] = useState({
     show: false,
     student: [""],
@@ -39,7 +42,15 @@ const ActiveClassDetail = () => {
     }, 5000);
   };
 
-  const handleAttendanceClick = (sessionID: string) => {
+  const handleAttendanceClick = (
+    sessionID: string,
+    done: boolean,
+    present: Array<string>,
+    absents: Array<string>
+  ) => {
+    setDoneClass(done);
+    setPresentClass(present);
+    setAbsentClass(absents);
     setAttendanceModal({
       show: true,
       student: classDetail.student,
@@ -114,6 +125,9 @@ const ActiveClassDetail = () => {
     sessionNumber,
     outline,
     zoomLink,
+    done,
+    present,
+    absent,
   }: {
     startDate: string;
     endDate: string;
@@ -121,6 +135,9 @@ const ActiveClassDetail = () => {
     sessionNumber: number;
     outline: string;
     zoomLink: string;
+    done: boolean;
+    present: Array<string>;
+    absent: Array<string>;
   }) => {
     const toISOStringWithoutTimezone = (date: Date) => {
       const tzOffset = date.getTimezoneOffset() * 60000;
@@ -192,7 +209,7 @@ const ActiveClassDetail = () => {
             <div>
               <p className="sessionNumber">Session {sessionNumber}</p>
               <p className="sessionDate">{formatDate(endDate)},</p>
-              <p className="sessionDate">
+              <p className="sessionDateClock">
                 {formatTime(startDate)} - {formatTime(endDate)}
               </p>
             </div>
@@ -225,7 +242,9 @@ const ActiveClassDetail = () => {
               </p>
               <button
                 className="attendanceButton"
-                onClick={() => handleAttendanceClick(sessionID)}
+                onClick={() =>
+                  handleAttendanceClick(sessionID, done, present, absent)
+                }
               >
                 Attendance
               </button>
@@ -278,6 +297,9 @@ const ActiveClassDetail = () => {
         show={attendanceModal.show}
         student={attendanceModal.student}
         handleSuccess={handleSuccess}
+        doneClass={doneClass}
+        present={presentClass}
+        absents={absentClass}
       />
       <SuccessMessage message={success.message} show={success.show} />
       <TutorNav clickedItem="Active Class" />
@@ -308,6 +330,9 @@ const ActiveClassDetail = () => {
                     sessionID={item.id}
                     outline={item.outline}
                     zoomLink={item.zoomLink}
+                    done={item.done}
+                    present={item.present}
+                    absent={item.absent}
                   />
                 ))}
             </div>
@@ -326,6 +351,9 @@ const ActiveClassDetail = () => {
                     sessionID={item.id}
                     outline={item.outline}
                     zoomLink={item.zoomLink}
+                    done={item.done}
+                    present={item.present}
+                    absent={item.absent}
                   />
                 ))}
             </div>

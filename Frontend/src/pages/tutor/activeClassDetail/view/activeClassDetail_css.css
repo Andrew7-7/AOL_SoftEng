@@ -75,6 +75,11 @@
   font-weight: 600;
 }
 
+.sessionDateClock {
+  font-size: 0.8vw;
+  font-weight: 500;
+}
+
 .sessionOutline {
   font-size: 1.6vw;
   color: #ff5500;

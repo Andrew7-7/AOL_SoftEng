@@ -13,6 +13,9 @@ interface attendanceModalProps {
   handleSuccess: any;
   setEditStatus: any;
   editStatus: boolean;
+  doneClass: boolean;
+  present: Array<string>;
+  absents: Array<string>;
 }
 
 interface studentRowProps {
@@ -20,6 +23,8 @@ interface studentRowProps {
   index: number;
   checkState: boolean[];
   handleChange: any;
+  doneClass: boolean;
+  status: boolean;
 }
 
 const StudentRow: React.FC<studentRowProps> = ({
@@ -27,6 +32,8 @@ const StudentRow: React.FC<studentRowProps> = ({
   index,
   checkState,
   handleChange,
+  doneClass,
+  status,
 }) => {
   const { data: userData, loading: userLoading } = useFetch(
     `http://localhost:3002/user/getUserByEmail/${studentEmail}`
@@ -35,7 +42,7 @@ const StudentRow: React.FC<studentRowProps> = ({
   if (userLoading) {
     return <div></div>;
   }
-
+  checkState[index] = status;
   return (
     <div className="student-row">
       <div className="left-side">
@@ -50,6 +57,7 @@ const StudentRow: React.FC<studentRowProps> = ({
       <div className="right-side">
         <input
           type="checkbox"
+          disabled={doneClass ? true : false}
           checked={checkState[index]}
           onClick={() => handleChange(index)}
         />
@@ -67,6 +75,9 @@ const AttendanceModal: React.FC<attendanceModalProps> = ({
   handleSuccess,
   editStatus,
   setEditStatus,
+  present,
+  doneClass,
+  absents,
 }) => {
   const accToken = window.localStorage.getItem("accToken");
 
@@ -124,8 +135,6 @@ const AttendanceModal: React.FC<attendanceModalProps> = ({
     }
   };
 
-  console.log(sessionId);
-
   return (
     <div className="attendance-modal">
       <div className="overlay"></div>
@@ -136,29 +145,55 @@ const AttendanceModal: React.FC<attendanceModalProps> = ({
         <div className="top-section">
           <div className="title">Attendance List</div>
         </div>
-        <div className="table-header">
-          <p>Student</p>
-          <p>Attendance</p>
-        </div>
-        <div className="student-list-container">
-          {student.map((s, index) => (
-            <StudentRow
-              key={index}
-              studentEmail={s}
-              index={index}
-              checkState={checkState}
-              handleChange={handleCheckboxChange}
-            />
-          ))}
-        </div>
-        <div className="bottom-section">
-          <div
-            className="submit-button"
-            onClick={() => handleSubmitAttendance(sessionId)}
-          >
-            Submit
-          </div>
-        </div>
+        {doneClass ? (
+          <>
+            <div className="table-header">
+              <p>Student</p>
+              <p>Attendance</p>
+            </div>
+            <div className="student-list-container">
+              {student.map((s, index) => (
+                <StudentRow
+                  key={index}
+                  studentEmail={s}
+                  index={index}
+                  checkState={checkState}
+                  handleChange={handleCheckboxChange}
+                  doneClass={doneClass}
+                  status={present.includes(s) ? true : false}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="table-header">
+              <p>Student</p>
+              <p>Attendance</p>
+            </div>
+            <div className="student-list-container">
+              {student.map((s, index) => (
+                <StudentRow
+                  key={index}
+                  studentEmail={s}
+                  index={index}
+                  checkState={checkState}
+                  handleChange={handleCheckboxChange}
+                  doneClass={doneClass}
+                  status={false}
+                />
+              ))}
+            </div>
+            <div className="bottom-section">
+              <div
+                className="submit-button"
+                onClick={() => handleSubmitAttendance(sessionId)}
+              >
+                Submit
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

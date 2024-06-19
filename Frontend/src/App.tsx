@@ -31,7 +31,7 @@ import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassD
 import CoursesPage from "./pages/applyCourses/courseList.tsx";
 import PaymentPage from "./pages/paymentpage/view/payment_page.tsx";
 import ConfirmedPage from "./pages/paymentpage/view/confirmed_page.tsx";
-import ReportReviewPage from "./pages/admin/reportReview/reportReview.tsx"
+import ReportReviewPage from "./pages/admin/reportReview/reportReview.tsx";
 import PermissionManagementPage from "./pages/admin/permissionManagement/view/permissionManagement_page.tsx";
 import PermissionManagementDetailPage from "./pages/admin/permissionManagement/view/permissionManagementDetail_page.tsx";
 
@@ -46,30 +46,32 @@ function App() {
         {/* Verify Token */}
         <Route element={<VerifyToken />}>
           {/* Kalau udah login gabisa login register lagi */}
-          <Route element={<AlreadyLoggedIn />}>
-                    <Route path="/chat" element={<ChatPage/>}></Route>
-          </Route>
+          <Route element={<AlreadyLoggedIn />}></Route>
 
           {/* Butuh Login */}
           <Route element={<NeedLogin />}>
-        <Route path="/forum" element={<ForumPage />}></Route>
-        <Route path="/replies/:forumId" element={<RepliesPage />}></Route>
-                    <Route path="/addForum" element={<AddForum/>}></Route>
+            <Route path="/chat" element={<ChatPage />}></Route>
+            <Route path="/forum" element={<ForumPage />}></Route>
+            <Route path="/replies/:forumId" element={<RepliesPage />}></Route>
+            <Route path="/addForum" element={<AddForum />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/register" element={<RegisterPage />}></Route>
             {/* Student Only Pages */}
             <Route element={<CheckRole role={"student"} />}>
               <Route path="/profile" element={<ProfilePage />}></Route>
             </Route>
-              <Route path="/activecourse/:courseId" element={<CourseDetailPage />} />
-              <Route path="/activecourse" element={<ActiveCourse />}></Route>
+            <Route
+              path="/activecourse/:courseId"
+              element={<CourseDetailPage />}
+            />
+            <Route path="/activecourse" element={<ActiveCourse />}></Route>
             <Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
             <Route path="/pickTutor/:tutorId" element={<TutorDetailPage />} />
             {/* Tutor Only Pages */}
             <Route element={<CheckRole role={"tutor"} />}>
               <Route path="/tutorDummy" element={<TutorDummy />}></Route>
               <Route path="/activeClass" element={<ActiveClass />}></Route>
-              <Route path="/courseList" element={<CoursesPage/>}></Route>
+              <Route path="/courseList" element={<CoursesPage />}></Route>
               <Route
                 path="/activeClassDetail/:id"
                 element={<ActiveClassDetail />}

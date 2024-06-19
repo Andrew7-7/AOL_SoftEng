@@ -152,3 +152,28 @@
 .attendance-modal .modal-container .submit-button:hover {
   background-color: var(--primary-orange-hovered);
 }
+
+.table-header-done {
+  padding-left: 10vw;
+  padding-right: 10vw;
+  display: grid;
+  grid-template-columns: 0.9fr 0.1fr;
+  padding-bottom: 10px;
+  border-bottom: solid 1px rgb(219, 219, 219);
+  font-size: 17px;
+}
+
+.absensiDiv {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.student-list-container-done {
+  display: flex;
+  padding-left: 6vw;
+  padding-right: 11vw;
+  justify-content: space-between;
+}
