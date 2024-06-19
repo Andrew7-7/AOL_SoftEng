@@ -29,7 +29,7 @@ import ActiveClass from "./pages/tutor/activeClass/view/activeClass.tsx";
 import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassDetail.tsx";
 import PaymentPage from "./pages/paymentpage/view/payment_page.tsx";
 import ConfirmedPage from "./pages/paymentpage/view/confirmed_page.tsx";
-import ReportReviewPage from "./pages/admin/reportReview/reportReview.tsx"
+import ReportReviewPage from "./pages/admin/reportReview/reportReview.tsx";
 import PermissionManagementPage from "./pages/admin/permissionManagement/view/permissionManagement_page.tsx";
 import PermissionManagementDetailPage from "./pages/admin/permissionManagement/view/permissionManagementDetail_page.tsx";
 
@@ -50,7 +50,7 @@ function App() {
 
 					{/* Butuh Login */}
 					<Route element={<NeedLogin />}>
-						<Route path="/chat" element={<ChatPage />}></Route>
+						<Route path="/chat/:tutorId" element={<ChatPage />}></Route>
 						<Route path="/reply" element={<ForumPage />}></Route>
 						<Route path="/replies/:forumId" element={<RepliesPage />}></Route>
 						{/* Student Only Pages */}
@@ -63,9 +63,18 @@ function App() {
 						/>
 						<Route path="/activecourse" element={<ActiveCourse />}></Route>
 						<Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
-						<Route path="/:courseId/pickTutor/:tutorId" element={<TutorDetailPage />} />
-						<Route path="/:courseId/:tutorId/payment" element={<PaymentPage />} />
-						<Route path="/:courseId/:tutorId/payment/confirmed" element={<ConfirmedPage />} />
+						<Route
+							path="/:courseId/pickTutor/:tutorId"
+							element={<TutorDetailPage />}
+						/>
+						<Route
+							path="/:courseId/:tutorId/payment"
+							element={<PaymentPage />}
+						/>
+						<Route
+							path="/:courseId/:tutorId/payment/confirmed"
+							element={<ConfirmedPage />}
+						/>
 						{/* Tutor Only Pages */}
 						<Route element={<CheckRole role={"tutor"} />}>
 							<Route path="/tutorDummy" element={<TutorDummy />}></Route>
@@ -78,8 +87,14 @@ function App() {
 						{/* Admin Only Pages */}
 						<Route element={<CheckRole role={"admin"} />}>
 							<Route path="/adminDummy" element={<AdminDummy />}></Route>
-							<Route path="/permissionManagement" element={<PermissionManagementPage />} />
-							<Route path="/permissionManagement/:permissionId" element={<PermissionManagementDetailPage />} />
+							<Route
+								path="/permissionManagement"
+								element={<PermissionManagementPage />}
+							/>
+							<Route
+								path="/permissionManagement/:permissionId"
+								element={<PermissionManagementDetailPage />}
+							/>
 							<Route
 								path="/accountManagement"
 								element={<AccountManagementPage />}
@@ -92,10 +107,7 @@ function App() {
 								path="/courseManagement/:courseId"
 								element={<CourseUpdatePage />}
 							/>
-							<Route 
-								path="/reportReview"
-								element={<ReportReviewPage />}
-							/>
+							<Route path="/reportReview" element={<ReportReviewPage />} />
 							<Route path="/createCourse" element={<CreateCoursePage />} />
 						</Route>
 					</Route>

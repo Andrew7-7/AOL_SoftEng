@@ -5,21 +5,27 @@ import { Router } from "express";
 const chatRoutes = Router();
 
 chatRoutes.post(
-  "/getChat",
-  // extraAuthorization,
-  chatControllers.getChatRoom
+	"/getChat",
+	// extraAuthorization,
+	chatControllers.getChatRoom
 );
 
 chatRoutes.get(
-  "/chatRoom/:roomID/Messages",
-  // extraAuthorization,
-  chatControllers.getMessages
+	"/chatRoom/:roomID/Messages",
+	// extraAuthorization,
+	chatControllers.getMessages
 );
 
 chatRoutes.post(
-  "/postMessage",
-  // extraAuthorization,
-  chatControllers.sendMessage
+	"/postMessage",
+	// extraAuthorization,
+	chatControllers.sendMessage
+);
+
+chatRoutes.post(
+	"/createRoom",
+	// extraAuthorization,
+	chatControllers.createChatRoom
 );
 
 export { chatRoutes };
