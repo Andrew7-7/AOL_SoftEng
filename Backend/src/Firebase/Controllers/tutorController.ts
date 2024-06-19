@@ -117,6 +117,7 @@ export class TutorController {
       res.status(500).json({ error: "Error fetching tutor" });
     }
   }
+
   static async getTutors(req: Request, res: Response) {
     try {
       // console.log(req)
