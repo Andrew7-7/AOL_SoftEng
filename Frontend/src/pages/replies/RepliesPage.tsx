@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import { useParams } from 'react-router-dom';
 import './RepliesPage.css';
 import StudentNav from '../../global/components/navbar/student/student_navbar';
@@ -9,11 +10,38 @@ interface Reply {
     message: string;
 }
 
+interface Forum {
+    id: string;
+    question: string;
+    detailSnippet: string;
+    senderEmail: string;
+    course: {
+        courseName: string;
+        color: string;
+    };
+    view: number;
+    repliesCount: number;
+}
+
+interface ForumDetails {
+    sender: {
+        senderEmail: string;
+        senderImageURL: string;
+    };
+}
+
 const RepliesPage = () => {
+    const user = JSON.parse(window.localStorage.getItem("user") || "{}");
     const [replies, setReplies] = useState<Reply[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const { forumId } = useParams<{ forumId: string }>();
+    const location = useLocation();
+    const forum = location.state?.forum as Forum;
+    const [details, setDetails] = useState<ForumDetails | null>(null);
+    const [newReply, setNewReply] = useState<string>('');
+    const [editReplyId, setEditReplyId] = useState<string | null>(null);
+    const [editReplyMessage, setEditReplyMessage] = useState<string>('');
 
     const fetchReplies = async () => {
         try {
@@ -28,7 +56,7 @@ const RepliesPage = () => {
                 throw new Error('Failed to fetch replies');
             }
             const data = await response.json();
-
+            console.log("Replies fetched:", data.replies);
             if (data && Array.isArray(data.replies)) {
                 setReplies(data.replies);
             } else {
@@ -43,6 +71,7 @@ const RepliesPage = () => {
 
     useEffect(() => {
         fetchReplies();
+        fetchDetails();
     }, [forumId]);
 
     if (loading) {
@@ -55,6 +84,7 @@ const RepliesPage = () => {
 
     return (
         <div className="Replies">
+
 
             <StudentNav />
             <div className="forum-header">
@@ -84,6 +114,6 @@ const RepliesPage = () => {
             </div>
         </div>
     );
-}
+};
 
 export default RepliesPage;
