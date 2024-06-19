@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Forum from '../forum/Forum';
+import './forumPage.css';
+import StudentNav from '../../global/components/navbar/student/student_navbar';
 
 const ForumPage = () => {
     const [forums, setForums] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const forumsPerPage = 4;
 
     const fetchForums = async () => {
         try {
-            const response = await fetch(`http://localhost:3002/forum/getForum`, {
+            const response = await fetch('http://localhost:3002/forum/getForum', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -18,8 +22,7 @@ const ForumPage = () => {
                 throw new Error('Failed to fetch forums');
             }
             const data = await response.json();
-            console.log("Data fetched:", data);
-            console.log("set forums:",setForums(data.forums));
+            setForums(data.forums);
         } catch (error) {
             console.error('Error fetching forums:', error);
         }
@@ -29,16 +32,39 @@ const ForumPage = () => {
         fetchForums();
     }, []);
 
+    const indexOfLastForum = currentPage * forumsPerPage;
+    const indexOfFirstForum = indexOfLastForum - forumsPerPage;
+    const currentForums = forums.slice(indexOfFirstForum, indexOfLastForum);
+
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const totalPages = Math.ceil(forums.length / forumsPerPage);
+
     return (
         <div>
-            <div>
-                <button><Link to={`/addForum`}>Ask Question</Link></button>
-            </div>
-            <div className="forums">
-                <h1>Forums</h1>
-                {forums && forums.map((forum, index) => (
-                    <Forum key={index} forum={forum} />
-                ))}
+
+            <StudentNav />
+            <div className="forum-page-banner-sharing-iscaring"></div>
+            <div className="forum-page">
+                <div className="pagination">
+                    {[...Array(totalPages)].map((_, index) => (
+                        <button
+                            key={index}
+                            className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
+                            onClick={() => paginate(index + 1)}
+                        >
+                            {index + 1}
+                        </button>
+                    ))}
+                    {totalPages > 3 && <span>...</span>}
+                </div>
+                <div className="forums">
+                    {currentForums.map((forum, index) => (
+                        <Forum key={index} forum={forum} />
+                    ))}
+                </div>
             </div>
         </div>
     );

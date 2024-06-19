@@ -1,39 +1,76 @@
+.forum-page {
+  font-family: Arial, sans-serif;
+  margin: 370px 20px 20px 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  z-index: 0;
+  position: relative;
+}
+
+.forum-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.forum-header h1 {
+  font-size: 24px;
+  color: #333;
+}
+
+.sharing-banner {
+  background-color: #ffda44;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #333;
+  font-weight: bold;
+}
+
 .forums {
-    margin: 20px;
+  list-style-type: none;
+  padding: 0;
 }
 
-.forums h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
+.pagination {
+  display: flex;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 10px 20px;
+  background-color: #f9f9f9;
+  justify-content: end;
+  align-items: center;
 }
 
-.forum {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
+.page-btn {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 5px;
 }
 
-.forum h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
+.page-btn:hover {
+  background-color: #e59648;
 }
 
-.forum p {
-    font-size: 16px;
-    margin-bottom: 10px;
+.page-btn.active {
+  background-color: #ffda44;
+  border-color: #ffda44;
 }
 
-.forum div {
-    margin-top: 10px;
-}
-
-.forum div h3 {
-    font-size: 18px;
-    margin-bottom: 5px;
-}
-
-.forum div p {
-    font-size: 16px;
-    margin-bottom: 5px;
+.forum-page-banner-sharing-iscaring {
+  background: url("https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/asset%2FGroup%20152.png?alt=media&token=6980bd63-1bd4-45c3-92ca-6ad5d78f7c66");
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 940px;
+  height: 450px;
+  z-index: 999;
 }

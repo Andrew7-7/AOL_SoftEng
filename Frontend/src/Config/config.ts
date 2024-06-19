@@ -1,16 +1,15 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
-import "dotenv/config";
 
 // const firebaseConfig = {
-//   apiKey: process.env.apiKey,
-//   authDomain: process.env.authDomain,
-//   projectId: process.env.projectId,
-//   storageBucket: process.env.storageBucket,
-//   messagingSenderId: process.env.messagingSenderId,
-//   appId: process.env.appId,
-//   measurementId: process.env.measurementId,
+//   apiKey: "AIzaSyA9aFv0P3aLL6mRs1Ws69teQ64zO_r4nHc",
+//   authDomain: "aolsofteng.firebaseapp.com",
+//   projectId: "aolsofteng",
+//   storageBucket: "aolsofteng.appspot.com",
+//   messagingSenderId: "44471509166",
+//   appId: "1:44471509166:web:1958984b1ccee246de0d3f",
+//   measurementId: "G-Y46L692TML",
 // };
 
 const firebaseConfig = {

@@ -6,7 +6,7 @@ import { extraAuthorization } from "middleware/extraAuth";
 const tutorRoutes = Router();
 
 // TODO: middleware
-tutorRoutes.get("/getTutors", TutorController.getTutors);
+tutorRoutes.get("/getTutors/:courseId", TutorController.getTutors);
 
 tutorRoutes.get("/getTutor/:tutorId", TutorController.getTutor);
 

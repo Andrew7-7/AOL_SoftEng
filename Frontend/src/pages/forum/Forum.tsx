@@ -1,5 +1,6 @@
-import { useNavigate } from 'react-router-dom';
-import "./forumPage.css";
+
+import { Link } from 'react-router-dom';
+import "./Forum.css";
 
 interface ForumProps {
     forum: {
@@ -45,17 +46,20 @@ const Forum: React.FC<ForumProps> = ({ forum }) => {
     }
 
     return (
-        <div className="forum">
-            <h2>{question}</h2>
-            <p>{detailSnippet}</p>
-            <div>
-                <h3>Course</h3>
-                <p>Color: {color}</p>
-                <p>Views: {view}</p>
-                <p>Course Name: {courseName}</p>
-                <p>Sender Email: {senderEmail}</p>
-                <p>{repliesCount} Replies</p>
-                <button onClick={handleSeeMore}>See More</button>
+
+        <div className="forum-item">
+            <div className="forum-header">
+                <h2 className="forum-question">{question}</h2>
+                <div className="forum-details">
+                    <p className="forum-snippet">{detailSnippet}</p>
+                    <div className="forum-meta">
+                        <span className="forum-course" style={{ backgroundColor: color }}>{courseName}</span>
+                        <span className="forum-replies">{repliesCount} replies</span>
+
+                    </div>
+                    <Link to={`/replies/${id}`} className="see-more">see more..</Link>
+                </div>
+
             </div>
         </div>
     );

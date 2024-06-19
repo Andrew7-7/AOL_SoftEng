@@ -1,14 +1,17 @@
 import {
+  Query,
+  QuerySnapshot,
+  onSnapshot,
+  Timestamp,
   collection,
   getDocs,
   addDoc,
   doc,
   query,
   where,
-  Query,
-  QuerySnapshot,
-  onSnapshot,
-  Timestamp,
+  deleteDoc,
+  getDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "../Config/config";
 import { NextFunction } from "express";
@@ -24,36 +27,32 @@ export class chatControllers {
     try {
       const { email } = req.body;
 
-      const q1 = query(chatRoomCollection, where("email1", "==", email));
-      const querySnapshot1: QuerySnapshot = await getDocs(q1);
-      const chat1 = querySnapshot1.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      const q = query(
+        chatRoomCollection,
+        where("emails", "array-contains", email)
+      );
 
-      const q2 = query(chatRoomCollection, where("email2", "==", email));
-      const querySnapshot2: QuerySnapshot = await getDocs(q2);
-      const chat2 = querySnapshot2.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      const chatroomSnapshot = await getDocs(q);
 
-      const chat = [...chat1, ...chat2];
-
-      if (chat1.length === 0 && chat2.length === 0) {
-        return res.status(404).json({ error: "No chat rooms found for the provided email" });
+      if (chatroomSnapshot.empty) {
+        return res.status(404).send("There is no chat");
       }
 
-      const chatRoomId = chat[0].id;
+      const chatroomDocs: any = [];
 
-      req.params.roomID = chatRoomId;
-      res.status(200).json({ chat });
+      chatroomSnapshot.forEach((doc) => {
+        const otherEmail = doc
+          .data()
+          .emails.find((currEmail: any) => currEmail !== email);
+        chatroomDocs.push({ id: doc.id, otherEmail, ...doc.data() });
+      });
+
+      res.status(200).json({ chatroomDocs });
     } catch (error) {
       console.error("Error fetching chat room:", error);
       res.status(500).json({ error: "Failed to fetch chat room" });
     }
   }
-
 
   static async getMessages(req: Request, res: Response) {
     try {
@@ -76,16 +75,21 @@ export class chatControllers {
   //Create
   static async sendMessage(req: Request, res: Response) {
     try {
-      const { roomID, user, message, attachment } = req.body;
+      const { roomID, email, message } = req.body;
 
       const messageCollection = collection(db, "ChatRoom", roomID, "Messages");
+      const chatroomRef = doc(db, "ChatRoom", roomID);
       const timestamp = Timestamp.now();
 
       await addDoc(messageCollection, {
-        user: user,
+        email: email,
         message: message,
-        attachment: attachment,
-        timestamp: timestamp
+        timestamp: timestamp,
+      });
+
+      await updateDoc(chatroomRef, {
+        lastTimeStamp: timestamp,
+        lastMessage: message,
       });
 
       res.status(200).json({ message: "Message sent successfully!" });

@@ -1,91 +1,245 @@
-import { useParams } from 'react-router-dom';
-import './chatPage.css';
-import { useEffect, useState, useCallback } from 'react';
+import "./chatPage.css";
+import { format } from "date-fns";
+import { useEffect, useState, useCallback, useMemo } from "react";
+import axios from "axios";
+import {
+  Timestamp,
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
+import { db } from "../../Config/config";
+import StudentNav from "../../global/components/navbar/student/student_navbar";
+import useFetch from "../../global/hooks/useFetch";
 interface Message {
-    id: string;
-    attachment: string;
-    user: string;
-    message: string;
-    timestamp: string;
+  email: string;
+  message: string;
+  timestamp: string;
 }
 
 const ChatPage = () => {
-    const { roomId } = useParams();
-    const [messages, setMessages] = useState<Message[]>([]);
-    const [messageInput, setMessageInput] = useState('');
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [messageInput, setMessageInput] = useState("");
+  const user = JSON.parse(window.localStorage.getItem("user") || "{}");
+  const [chatRooms, setChatRooms] = useState<any>([]);
+  const [currRoom, setCurrRoom] = useState<string>("");
+  const [currProfileURL, setCurrProfileURL] = useState<string>("");
+  const [userCache, setUserCache] = useState<{ [key: string]: any }>({});
+
+  useEffect(() => {
+    const fetchChatRooms = async () => {
+      try {
+        const res = await axios.post("http://localhost:3002/chat/getChat", {
+          email: user.email,
+        });
+
+        if (res != null) {
+          setChatRooms(res.data.chatroomDocs);
+        }
+      } catch (error: any) {}
+    };
+
+    fetchChatRooms();
+  }, []);
+
+  useEffect(() => {
+    console.log("onSnapshot");
+    if (currRoom != "") {
+      const colRef = collection(db, "ChatRoom", currRoom, "Messages");
+      const q = query(colRef, orderBy("timestamp", "asc"));
+
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const msgs: any = [];
+        querySnapshot.forEach((doc) => {
+          msgs.push(doc.data());
+        });
+        setMessages(msgs);
+      });
+      return () => unsubscribe();
+    }
+  }, [currRoom]);
+
+  const handleRoomClick = (roomId: string, profileURL: string) => {
+    setCurrRoom(roomId);
+    setCurrProfileURL(profileURL);
+  };
+
+  const sendMessage = async () => {
+    try {
+      await axios.post("http://localhost:3002/chat/postMessage", {
+        roomID: currRoom,
+        email: user.email,
+        message: messageInput,
+      });
+      setMessageInput("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleInputChange = (e: any) => {
+    setMessageInput(e.target.value);
+  };
+
+  const fetchUserData = useCallback(
+    async (email: string) => {
+      if (userCache[email]) {
+        return userCache[email];
+      }
+
+      console.log("fetchUserData");
+      const res = await axios.get(
+        `http://localhost:3002/user/getUserByEmail/${email}`
+      );
+      const userData = res.data;
+      setUserCache((prevCache) => ({ ...prevCache, [email]: userData }));
+      return userData;
+    },
+    [userCache]
+  );
+
+  interface ChatRoomCardProps {
+    roomId: string;
+    otherEmail: string;
+    lastTimeStamp: Timestamp;
+    lastMessage: string;
+  }
+
+  const ChatRoomCard: React.FC<ChatRoomCardProps> = ({
+    roomId,
+    otherEmail,
+    lastTimeStamp,
+    lastMessage,
+  }) => {
+    const [userData, setUserData] = useState<any>(null);
 
     useEffect(() => {
-        const fetchMessages = async () => {
-            try {
-                const response = await fetch(`http://localhost:3002/chat/chatRoom/1/Messages`, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'auth': 'Bearer aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k'
-                    },
-                });
-                if (!response.ok) {
-                    throw new Error('Failed to fetch messages');
-                }
-                const data = await response.json();
-                console.log("Fetched data:", data);
-                if (Array.isArray(data.messages)) {
-                    const sortedMessages = data.messages.sort((a: Message, b: Message) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
-                    setMessages(sortedMessages);
-                } else {
-                    console.error("Messages array not found in data:", data);
-                }
-            } catch (error) {
-                console.error("Error fetching messages:", error);
-            }
-        };
-        fetchMessages();
-    }, [roomId]);
+      fetchUserData(otherEmail).then((data) => setUserData(data));
+    }, [otherEmail, fetchUserData]);
 
-    const sendMessage = useCallback(async () => {
-            try {
-                const response = await fetch(`http://localhost:3002/chat/postMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'auth': 'Bearer aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k'
-                    },
-                    body: JSON.stringify({
-                        roomID: "1",
-                        user: "andrew",
-                        message: messageInput,
-                        attachment: "-"
-                    })
-                })
-                if (!response.ok) {
-                    throw new Error('Failed to send message');
-                }
-                
-            } catch (error) {
-                console.error("Error sending message:", error);
-            }
-        }, [messageInput])
+    const lastTime = new Date(
+      lastTimeStamp.seconds * 1000 + lastTimeStamp.nanoseconds / 1000000
+    );
+
+    const formattedTime = format(lastTime, "HH:mm");
+
+    if (!userData) {
+      return <div></div>;
+    }
 
     return (
-        <div className="chat-container">
-            <div className="messages-container">
-                {messages.map((message, index) => (
-                    <div key={index} className={`message ${message.user === 'andrew' ? 'sent' : 'received'}`}>
-                        <p>{message.user}: {message.message}</p>
-                    </div>
-                ))}
-            </div>
-            <div className="input-container">
-                <input
-                    type="text"
-                    placeholder="Type a message..."
-                    value={messageInput}
-                    onChange={(e) => setMessageInput(e.target.value)}
-                />
-                <button onClick={sendMessage}>Send</button>
-            </div>
+      <div
+        className={
+          currRoom == roomId ? "chat-room-card select" : "chat-room-card"
+        }
+        key={roomId}
+        onClick={() =>
+          handleRoomClick(
+            roomId,
+            userData.profileURL != ""
+              ? userData.profileURL
+              : "https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/Profile%2Fanonymous_profilce_picture.webp?alt=media&token=24c17cb1-3032-432f-a1a1-98c7d9fbff06"
+          )
+        }
+      >
+        <img
+          src={
+            userData.profileURL != ""
+              ? userData.profileURL
+              : "https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/Profile%2Fanonymous_profilce_picture.webp?alt=media&token=24c17cb1-3032-432f-a1a1-98c7d9fbff06"
+          }
+          alt="User profile"
+        />
+        <div className="right">
+          <div className="top">
+            <div className="name">{userData.username}</div>
+            <div className="time">{formattedTime}</div>
+          </div>
+          <div className="last-message">
+            {lastMessage == null ? "Empty chat" : lastMessage}
+          </div>
         </div>
+      </div>
     );
+  };
+
+  return (
+    <>
+      <StudentNav />
+      <div className="chatDiv">
+        <div className="leftChatDiv">
+          <div className="top">
+            <div className="name">{user.username}</div>
+            <img
+              src={
+                user.profileURL != ""
+                  ? user.profileURL
+                  : "https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/Profile%2Fanonymous_profilce_picture.webp?alt=media&token=24c17cb1-3032-432f-a1a1-98c7d9fbff06"
+              }
+              alt="Profile"
+            />
+          </div>
+          <div className="bottom">
+            <div className="header">Chat</div>
+            <div className="chat-room-container">
+              {chatRooms.map((room: any) => (
+                <ChatRoomCard
+                  key={room.id}
+                  otherEmail={room.otherEmail}
+                  roomId={room.id}
+                  lastTimeStamp={room.lastTimeStamp}
+                  lastMessage={room.lastMessage}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="rightChatDiv">
+          <div className="room-container">
+            {currRoom === "" ? (
+              <div className="blank-room">Blank Room</div>
+            ) : (
+              <div className="message-container">
+                <div className="messages">
+                  {messages.map((message, index) => (
+                    <>
+                      {message.email != user.email ? (
+                        <div className="left-message">
+                          <img src={currProfileURL} alt="" />
+                          <div className="message">{message.message}</div>
+                        </div>
+                      ) : (
+                        <div
+                          className="right-message
+                      "
+                        >
+                          <div className="message">{message.message}</div>
+                        </div>
+                      )}
+                    </>
+                  ))}
+                </div>
+                <div className="input-form-container">
+                  <input
+                    className="input-message"
+                    type="text"
+                    name="messageInput"
+                    onChange={handleInputChange}
+                    value={messageInput}
+                  />
+                  <div className="send-button" onClick={sendMessage}>
+                    Send
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default ChatPage;

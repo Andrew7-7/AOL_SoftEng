@@ -118,7 +118,7 @@ const HomePage = () => {
           <Slider {...settings}>
             {data != null
               ? data
-                  .slice(1, 8)
+                  .slice(0, 7)
                   .map((d: any) => (
                     <Card
                       key={d.id}
