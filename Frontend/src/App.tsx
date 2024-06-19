@@ -16,7 +16,7 @@ import ContactSidebar from "./pages/sidebar/contactSidebar";
 import ChatPage from "./pages/chat/chatPage";
 import ForumPage from "./pages/forum/forumPage";
 import RepliesPage from "./pages/replies/RepliesPage";
-
+import WalletPage from "./pages/tutor/walletPage/walletPage.tsx";
 import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
 import ActiveCourse from "./pages/activecourse/view/activecourse_page";
 import TutorDetailPage from "./pages/tutorDetail/view/tutor_detail_page.tsx";
@@ -74,6 +74,7 @@ function App() {
 								path="/activeClassDetail/:id"
 								element={<ActiveClassDetail />}
 							/>
+							<Route path = "/walletPage" element = {<WalletPage/>}></Route>
 						</Route>
 						{/* Admin Only Pages */}
 						<Route element={<CheckRole role={"admin"} />}>

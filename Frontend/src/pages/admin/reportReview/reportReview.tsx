@@ -117,7 +117,7 @@ const ReportList = (props: any) => {
           reportData.map((report: any) => (
             <ReportListComponent
               key={report.id}
-              user={report.userName}
+              user={report.user}
               sender={report.sender}
               message={report.message}
             />
