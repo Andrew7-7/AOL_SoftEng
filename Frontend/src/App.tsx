@@ -12,11 +12,10 @@ import CheckRole from "./middleware/checkRole";
 import TutorDummy from "./pages/tutor/dummy/tutorDummy";
 import AdminDummy from "./pages/admin/dummy/permissionManagement.tsx";
 import IsBanned from "./pages/error/isBanned/isBanned";
-// import ContactSidebar from "./pages/sidebar/contactSidebar";
+import ContactSidebar from "./pages/sidebar/contactSidebar";
 import ChatPage from "./pages/chat/chatPage";
 import ForumPage from "./pages/forum/forumPage";
 import RepliesPage from "./pages/replies/RepliesPage";
-import AddForum from "./pages/forum/addForum.tsx";
 
 import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
 import ActiveCourse from "./pages/activecourse/view/activecourse_page";
@@ -28,7 +27,6 @@ import CourseUpdatePage from "./pages/admin/courseUpdate/course_update_page.tsx"
 import CreateCoursePage from "./pages/admin/createCourse/create_course_page.tsx";
 import ActiveClass from "./pages/tutor/activeClass/view/activeClass.tsx";
 import ActiveClassDetail from "./pages/tutor/activeClassDetail/view/activeClassDetail.tsx";
-import CoursesPage from "./pages/applyCourses/courseList.tsx";
 import PaymentPage from "./pages/paymentpage/view/payment_page.tsx";
 import ConfirmedPage from "./pages/paymentpage/view/confirmed_page.tsx";
 import ReportReviewPage from "./pages/admin/reportReview/reportReview.tsx";
@@ -36,11 +34,19 @@ import PermissionManagementPage from "./pages/admin/permissionManagement/view/pe
 import PermissionManagementDetailPage from "./pages/admin/permissionManagement/view/permissionManagementDetail_page.tsx";
 
 function App() {
-  return (
-    <>
-      <Routes>
-        {/* Is Banned */}
-        <Route path="/banned" element={<IsBanned />}></Route>
+	return (
+		<>
+			<Routes>
+				{/* Is Banned */}
+				<Route path="/banned" element={<IsBanned />}></Route>
+				<Route path="/" element={<HomePage />}></Route>
+				{/* Verify Token */}
+				<Route element={<VerifyToken />}>
+					{/* Kalau udah login gabisa login register lagi */}
+					<Route element={<AlreadyLoggedIn />}>
+						<Route path="/login" element={<LoginPage />}></Route>
+						<Route path="/register" element={<RegisterPage />}></Route>
+					</Route>
 
 					{/* Butuh Login */}
 					<Route element={<NeedLogin />}>
