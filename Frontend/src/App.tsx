@@ -32,6 +32,9 @@ import ConfirmedPage from "./pages/paymentpage/view/confirmed_page.tsx";
 import ReportReviewPage from "./pages/admin/reportReview/reportReview.tsx"
 import PermissionManagementPage from "./pages/admin/permissionManagement/view/permissionManagement_page.tsx";
 import PermissionManagementDetailPage from "./pages/admin/permissionManagement/view/permissionManagementDetail_page.tsx";
+import TransactionHistory from "./pages/tutor/walletPage/pages/transactionHisotory.tsx";
+import WithdrawBalance from "./pages/tutor/walletPage/pages/withdrawBalance.tsx";
+import PaymentReceived from "./pages/tutor/walletPage/pages/paymentReceived.tsx";
 
 function App() {
 	return (
@@ -75,6 +78,9 @@ function App() {
 								element={<ActiveClassDetail />}
 							/>
 							<Route path = "/walletPage" element = {<WalletPage/>}></Route>
+							<Route path = "/walletPage/TransactionHistory" element = {<TransactionHistory />}></Route>
+							<Route path = "walletPage/withdraw" element = {<WithdrawBalance />}></Route>
+							<Route path = "walletPage/payment" element = {<PaymentReceived />}></Route>
 						</Route>
 						{/* Admin Only Pages */}
 						<Route element={<CheckRole role={"admin"} />}>

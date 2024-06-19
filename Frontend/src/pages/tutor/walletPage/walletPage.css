@@ -1,71 +1,116 @@
 .walletPageMain {
-    display: flex;
+  display: flex;
 }
 
-.walletPageRight{
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+.walletPageRight {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .walletPageMain .activeBalance {
-    font-weight: bold;
-    font-size: 24px;
-    margin: 10px;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 10px;
 }
 
 .walletPageMain .walletMenu {
-    display: flex;
-    background-color: #d8d7d7;
-    height: 18rem;
-    width: 80vw;
-    border-radius: 15px;
-    margin: 20px;
-    padding: 20px;
-    justify-content: space-evenly;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  background-color: #d8d7d7;
+  height: 18rem;
+  width: 80vw;
+  border-radius: 15px;
+  margin: 20px;
+  padding: 20px;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
 }
 .walletPageMain .sectionTitle {
-    font-weight: bold;
-    font-size: 22px;
-    margin: 20px;
+  font-weight: bold;
+  font-size: 22px;
+  margin: 20px;
 }
 
 .walletPageMain .recentTransaction {
-    margin: 0 20px;
-    background-color: #ffffff;
-    min-height: 22rem;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    overflow: hidden;
+  margin: 0 20px;
+  background-color: #ffffff;
+  min-height: 20rem;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  overflow: hidden;
 }
 
 .walletPageMain .recentTransaction .viewAllTransaction {
-    text-align: right;
-    padding: 20px 0 0 0;
-    font-size: 14px;
-}.walletPageMain .recentTransaction .viewAllTransaction:hover {
-    text-decoration: underline;
-}.walletPageMain .recentTransaction .viewAllTransaction:active {
-    opacity: 0.9;
+  text-align: right;
+  padding: 20px 0 0 0;
+  font-size: 14px;
+}
+.walletPageMain .recentTransaction .viewAllTransaction:hover {
+  text-decoration: underline;
+}
+.walletPageMain .recentTransaction .viewAllTransaction:active {
+  opacity: 0.9;
 }
 .walletPageMain a > p {
-    font-weight: 500;
-    font-size: 18px;
-}.walletPageMain a:hover {
-    opacity: 0.95;
-}.walletPageMain a:active{
-    opacity: 0.85;
+  font-weight: 500;
+  font-size: 18px;
+}
+.walletPageMain a:hover {
+  opacity: 0.95;
+}
+.walletPageMain a:active {
+  opacity: 0.85;
 }
 
-.transactionComponentMain{
-    margin: 0 5px;
-    height: 6rem;
-    width: 99%;
-    padding: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.733);
+.transactionComponentMain {
+  display: flex;
+  flex-direction: row;
+  margin: 0 5px;
+  height: 6rem;
+  width: 99%;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.733);
 }
 
+.transactionComponentMain .transactionLeftComponent {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-left: 5px solid rgb(15, 172, 15);
+}
+
+.transactionComponentMain .transactionLeftComponent p {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.transactionComponentMain .transactionRightComponent {
+  flex: 6;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.transactionComponentMain .transactionRightComponent .componentDetail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}.transactionComponentMain .transactionRightComponent .componentDetail .title{
+  font-size: 16px;
+  font-weight: bold;
+}
+.transactionComponentMain .transactionRightComponent .componentAmount {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}.transactionComponentMain .transactionRightComponent .componentAmount p{
+  font-size: 16px;
+}
