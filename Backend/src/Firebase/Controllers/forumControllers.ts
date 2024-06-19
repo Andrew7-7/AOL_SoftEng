@@ -1,4 +1,4 @@
-import { QuerySnapshot, addDoc, collection, getDocs, Timestamp, getDoc, doc, updateDoc, deleteDoc } from "firebase/firestore";
+import { QuerySnapshot, addDoc, collection, getDocs, Timestamp, getDoc, doc, updateDoc, deleteDoc, increment } from "firebase/firestore";
 import { db } from "../Config/config";
 import { Request, Response } from "express";
 
@@ -123,7 +123,7 @@ export class forumControllers{
                 question,
                 view,
             });
-
+            
             const forumDetailRef = await addDoc(collection(forumRef, 'ForumDetail'), {
                 imageURL,
                 sender: { senderEmail, senderImageUrl },
@@ -196,6 +196,20 @@ export class forumControllers{
         } catch (error) {
             console.error('Error deleting forum:', error);
             res.status(500).json({ error: 'Failed to delete forum' });
+        }
+    }
+
+    static async incrementView(req: Request, res: Response){
+        try {
+            const { forumId } = req.params;
+            const forumDocRef = doc(db, "Forum", forumId);
+            await updateDoc(forumDocRef,{
+                view: increment(1)
+            });
+            res.status(200).json({message: 'view count incremented'})
+        } catch (error) {
+            console.error('Error incrementing view count:', error);
+            res.status(500).json({error: 'Failed to increment view count'});
         }
     }
 

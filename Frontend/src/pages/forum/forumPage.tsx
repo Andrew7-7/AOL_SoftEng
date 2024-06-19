@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Forum from '../forum/Forum';
 import './forumPage.css';
 import StudentNav from '../../global/components/navbar/student/student_navbar';
@@ -43,6 +44,7 @@ const ForumPage = () => {
 
     return (
         <div>
+
             <StudentNav />
             <div className="forum-page-banner-sharing-iscaring"></div>
             <div className="forum-page">

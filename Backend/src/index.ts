@@ -11,6 +11,7 @@ import { adminRoutes } from "./Firebase/Routes/adminRoutes";
 import { otpRoutes } from "./Firebase/Routes/otpRoutes";
 import { coursesRoutes } from "./Firebase/Routes/courseRoutes";
 import { homeRoutes } from "./Firebase/Routes/homeRoutes";
+import { tutorCourse } from "./Firebase/Routes/applyCrsRoutes";
 import { transactionsRoutes } from "./Firebase/Routes/transactionRoutes";
 import { reportRoutes } from "./Firebase/Routes/reportRoutes";
 import { permissionRoutes } from "./Firebase/Routes/permissionRoutes";
@@ -35,6 +36,7 @@ app.use("/otp", otpRoutes);
 app.use("/tutor", tutorRoutes);
 app.use("/course", coursesRoutes);
 app.use("/home", homeRoutes);
+app.use("/apply", tutorCourse);
 app.use("/chat", chatRoutes);
 app.use("/forum", forumRoutes);
 app.use("/transaction", transactionsRoutes)
