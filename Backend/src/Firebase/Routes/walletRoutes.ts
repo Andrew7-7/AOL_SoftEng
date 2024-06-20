@@ -4,5 +4,6 @@ import { WalletController } from "../Controllers/walletControllers";
 const walletRoutes = Router ();
 
 walletRoutes.get("/getFinalTransaction/:email", WalletController.getFinalTransaction);
+walletRoutes.get("/getAmount/:email", WalletController.countValues)
 
 export {walletRoutes};

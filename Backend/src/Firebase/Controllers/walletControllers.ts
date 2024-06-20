@@ -23,7 +23,7 @@ export class WalletController {
         const docData = doc.data();
         if (docData.date && docData.date.toDate) {
           const date = docData.date.toDate();
-          docData.date = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+          // docData.date = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
         }
         return docData;
       });
@@ -32,6 +32,29 @@ export class WalletController {
       res.status(200).json(data)
     }catch(error){
       res.status(500).json({error: "error fetching data"})
+    }
+  }static async countValues (req: Request, res:Response){
+    try{
+      const email = req.params.email;
+      const q = query(walletCollection, where("email", "==", email))
+
+      const querySnapshot = await getDocs(q)
+
+      let totalAmount = 0;
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        if(data.type){
+          totalAmount += data.amount;
+        }else{
+          totalAmount -= data.amount;
+        }
+
+      });
+      
+      res.status(200).json(totalAmount)
+    }catch(error){
+      res.status(500).json({error: "error fetching value"})
     }
   }
 }
