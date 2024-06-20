@@ -5,16 +5,17 @@ import withdrawBalanceIcon from "../../../global/assets/withdrawBalanceIcon.png"
 import paymentIcon from "../../../global/assets/paymentIcon.png"
 import "./walletPage.css"
 import { Link } from "react-router-dom";
+import useFetch from "../../../global/hooks/useFetch";
 
 
-    const TransactionComponent = ({date, title, type, amount}:any) => {
+const TransactionComponent = ({date, title, type, amount}:any) => {
     const tempDate = 18;
     const tempMonth = "January"
     const tempTime = "07.07"
     const formattedAmount = amount.toLocaleString('en-US', {style: 'currency', currency: 'IDR', }).replace("IDR", 'RP.')
 
     const style = {
-        borderLeft: type == "true"? '5px solid rgb(15, 172, 15)' : '5px solid red'
+        borderLeft: type == "true"? '8px solid rgb(15, 172, 15)' : '8px solid red'
     };
 
     return (
@@ -39,6 +40,8 @@ import { Link } from "react-router-dom";
 const WalletPage = () => {
     const [value, setValue] = useState(1000000)
     const [formattedValue, setFormattedValue] = useState('');
+
+    const data:any = useFetch("http://localhost:3002/wallet/getFinalTransaction/tutor").data;
 
     useEffect(() => {
         const formatValue = (val:any) => {
@@ -68,9 +71,10 @@ const WalletPage = () => {
                 </div>
                 <p className="sectionTitle">Recent Transaction</p>
                 <div className="recentTransaction">
-                    <TransactionComponent date = "21 May" title = "withdrawal" type = "true" amount = {500000}/>
+                    <TransactionComponent date = "21 May" title = "payment" type = "true" amount = {500000}/>
                     <TransactionComponent date = "21 May" title = "withdrawal" type = "false" amount = {500000}/>
-                    <Link to = "/walletPage">
+                    {(data)? <p>{data[0].date}</p>:null}
+                    <Link to = "/walletPage/TransactionHistory">
                         <p className="viewAllTransaction">View All Transaction</p>
                     </Link>
                 </div>
