@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import TutorNav from "../../../global/components/navbar/tutor/tutorNav";
 import TransactionHistoryIcon from "../../../global/assets/transactionHistoryIcon.png";
 import withdrawBalanceIcon from "../../../global/assets/withdrawBalanceIcon.png";
@@ -6,6 +6,7 @@ import paymentIcon from "../../../global/assets/paymentIcon.png";
 import "./walletPage.css";
 import { Link } from "react-router-dom";
 import useFetch from "../../../global/hooks/useFetch";
+import { userInfo } from "os";
 
 const TransactionComponent = ({date, title, type, amount }: any) => {
   const transactionDate = new Date(
@@ -59,9 +60,7 @@ const TransactionComponent = ({date, title, type, amount }: any) => {
   );
 };
 
-
-
-const RenderRecentTransaction = () => {
+const RenderRecentTransaction = ({email}:any) => {
   const data: any = useFetch(
     "http://localhost:3002/wallet/getFinalTransaction/tutor"
   ).data;
@@ -71,9 +70,9 @@ const RenderRecentTransaction = () => {
   } else if (data.length < 5) {
     return (
       <>
-        {data.map((d: any) => (
+        {data.map((d: any, index: number) => (
           <TransactionComponent
-            key={d.id}
+            key={index}
             title={d.title}
             amount={d.amount}
             type={d.type}
@@ -85,9 +84,9 @@ const RenderRecentTransaction = () => {
   }
   return (
     <>
-      {data.slice(0, 5).map((d: any) => (
+      {data.slice(0, 5).map((d: any, index: number) => (
         <TransactionComponent
-          key={d.id}
+          key={index}
           title={d.title}
           amount={d.amount}
           type={d.type}
@@ -99,12 +98,18 @@ const RenderRecentTransaction = () => {
   );
 };
 
+
 const WalletPage = () => {
   const [value, setValue] = useState(0);
   const [formattedValue, setFormattedValue] = useState("");
-  const amount = Number(useFetch("http://localhost:3002/wallet/getAmount/tutor").data)
+  const user = JSON.parse(window.localStorage.getItem("user") || "{}");
+  const amount = Number(useFetch("http://localhost:3002/wallet/getAmount/" + user.email).data)
+
 
   useEffect(() => {
+
+    // setUserEmail(user?.email);
+    console.log(user)
     if (amount !== undefined) { 
       setValue(Number(amount));
       const formatValue = (val: number) => {
@@ -140,10 +145,14 @@ const WalletPage = () => {
         </div>
         <p className="sectionTitle">Recent Transaction</p>
         <div className="recentTransaction">
-          <RenderRecentTransaction/>
+          <RenderRecentTransaction email = {user.email}/>
           <Link to="/walletPage/TransactionHistory">
             <p className="viewAllTransaction">View All Transaction</p>
           </Link>
+        </div>
+        <p className="sectionTitle">Pending Payment</p>
+        <div className="pendingPayment">
+          <p>hello there</p>
         </div>
       </div>
     </div>

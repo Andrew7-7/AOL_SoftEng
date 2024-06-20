@@ -3,7 +3,7 @@ import { db } from "../Config/config";
 import { collection, getDocs, where, query, orderBy } from "firebase/firestore";
 
 const walletCollection = collection(db, "Wallet");
-
+const transactionCollection = collection(db, "Transaction")
 export class WalletController {
   static async getFinalTransaction(req: Request, res: Response){
     try{
@@ -55,6 +55,12 @@ export class WalletController {
       res.status(200).json(totalAmount)
     }catch(error){
       res.status(500).json({error: "error fetching value"})
+    }
+  }static async getPendingPayment (req: Request, res: Response){
+    try{ 
+      res.status(200).json({message: "hello there"})
+    }catch(error){
+      res.status(500).json({error: "failed to fetch pending payment"})
     }
   }
 }

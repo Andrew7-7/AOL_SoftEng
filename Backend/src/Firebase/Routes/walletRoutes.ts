@@ -5,5 +5,5 @@ const walletRoutes = Router ();
 
 walletRoutes.get("/getFinalTransaction/:email", WalletController.getFinalTransaction);
 walletRoutes.get("/getAmount/:email", WalletController.countValues)
-
+walletRoutes.get("/getPendingPayment/:email", WalletController.getPendingPayment)
 export {walletRoutes};
