@@ -40,6 +40,10 @@ const TransactionComponent = ({date, title, type, amount, status }: any) => {
         color: status == 'failed'? "red":"black",
     }
 
+    const amountStatus = {
+        textDecoration: status == "failed"? "line-through": "none"
+    }
+
     return (
       <div className="transactionComponentMain">
         <div className="transactionLeftComponent" style={style}>
@@ -52,7 +56,7 @@ const TransactionComponent = ({date, title, type, amount, status }: any) => {
             <p className="title">{title}</p>
             <p>{time}</p>
           </div>
-          <div className="componentAmount">
+          <div className="componentAmount" style = {amountStatus}>
             {type ? <p>{formattedAmount}</p> : <p>({formattedAmount})</p>}
           </div>
         </div>
