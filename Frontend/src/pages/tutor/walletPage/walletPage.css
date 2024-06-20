@@ -114,3 +114,46 @@
 }.transactionComponentMain .transactionRightComponent .componentAmount p{
   font-size: 16px;
 }
+
+.walletPageMain .pendingPayment{
+  display: flex;
+  background-color: #ffffff;
+  min-height: 25rem;
+  max-height: 25rem;
+  overflow: auto;
+  width: 80vw;
+  border-radius: 15px;
+  margin: 20px;
+  padding: 20px;
+  justify-content: space-evenly;
+  text-align: center;
+}
+
+
+.renderPendingPayment .pendingPaymentComponent {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 76vw;
+  padding: 0 10px;
+  height: 6rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.733);
+  align-items: center;
+}
+.renderPendingPayment .pendingPaymentComponent .status{
+  flex: 1;
+  border-left: 6px solid rgba(255, 255, 0, 0.822);
+  padding: 3px 0;
+}.renderPendingPayment .pendingPaymentComponent .status p{
+  font-weight: bold;
+  font-size: 15px;
+}
+.renderPendingPayment .pendingPaymentComponent .courseName{
+  flex: 3;
+}
+.renderPendingPayment .pendingPaymentComponent .coursePrice{
+  flex: 2;
+}
+.renderPendingPayment .pendingPaymentComponent .studentEmail{
+  flex: 2;
+}

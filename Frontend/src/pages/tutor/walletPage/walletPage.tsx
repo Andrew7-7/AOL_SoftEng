@@ -93,11 +93,42 @@ const RenderRecentTransaction = ({email}:any) => {
           date={d.date}
         />
       ))}
-
     </>
   );
 };
 
+const PendingPaymentComponent = ({courseId, price, userEmail}:any) => {
+  const name = useFetch("http://localhost:3002/wallet/getCourseName/" + courseId).data
+  const formattedAmount = Number(price)
+    .toLocaleString("en-US", { style: "currency", currency: "IDR" })
+    .replace("IDR", "RP.");
+  return(
+    <div className="pendingPaymentComponent">
+      <div className="status"> 
+        <p>Status</p>
+        <p>on Going</p> 
+      </div>
+      <p className = "courseName">{name}</p>
+      <p className="coursePrice">{formattedAmount}</p>
+      <p className="studentEmail">{userEmail}</p>
+    </div>
+  )
+}
+
+const RenderPendingPayment = ({email}:any) => {
+  const data = useFetch("http://localhost:3002/wallet/getPendingPayment/" + email).data
+
+  if(!data){
+    return(<p>there's no pending payment</p>)
+  }
+  return (
+    <div className="renderPendingPayment">
+        {data.map((d:any) => (
+          <PendingPaymentComponent courseId={d.courseId} price = {d.price} userEmail = {d.userEmail}/>
+        ))}
+    </div>
+  )
+}
 
 const WalletPage = () => {
   const [value, setValue] = useState(0);
@@ -105,11 +136,7 @@ const WalletPage = () => {
   const user = JSON.parse(window.localStorage.getItem("user") || "{}");
   const amount = Number(useFetch("http://localhost:3002/wallet/getAmount/" + user.email).data)
 
-
   useEffect(() => {
-
-    // setUserEmail(user?.email);
-    console.log(user)
     if (amount !== undefined) { 
       setValue(Number(amount));
       const formatValue = (val: number) => {
@@ -152,7 +179,7 @@ const WalletPage = () => {
         </div>
         <p className="sectionTitle">Pending Payment</p>
         <div className="pendingPayment">
-          <p>hello there</p>
+          <RenderPendingPayment email = {user.email}/>
         </div>
       </div>
     </div>

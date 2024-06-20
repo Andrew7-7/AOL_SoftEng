@@ -1,9 +1,11 @@
 import { Request, Response} from "express";
 import { db } from "../Config/config";
-import { collection, getDocs, where, query, orderBy } from "firebase/firestore";
+import { collection, getDocs, where, query, getDoc } from "firebase/firestore";
 
 const walletCollection = collection(db, "Wallet");
-const transactionCollection = collection(db, "Transaction")
+const transactionCollection = collection(db, "Transaction");
+const courseCollection = collection(db, "Courses");
+
 export class WalletController {
   static async getFinalTransaction(req: Request, res: Response){
     try{
@@ -13,7 +15,7 @@ export class WalletController {
         return res.status(400).json({ error: 'Email parameter is required' });
       }
 
-      const q = query(walletCollection, where("email", "==", email));
+      const q = query(walletCollection, where("email", "==", email), where("status", "==", "successful"));
       const querySnapshot = await getDocs(q)
 
       if (querySnapshot.empty) {
@@ -36,7 +38,7 @@ export class WalletController {
   }static async countValues (req: Request, res:Response){
     try{
       const email = req.params.email;
-      const q = query(walletCollection, where("email", "==", email))
+      const q = query(walletCollection, where("email", "==", email), where("status", "==", "successful"))
 
       const querySnapshot = await getDocs(q)
 
@@ -49,7 +51,6 @@ export class WalletController {
         }else{
           totalAmount -= data.amount;
         }
-
       });
       
       res.status(200).json(totalAmount)
@@ -57,10 +58,50 @@ export class WalletController {
       res.status(500).json({error: "error fetching value"})
     }
   }static async getPendingPayment (req: Request, res: Response){
-    try{ 
-      res.status(200).json({message: "hello there"})
+    try{
+      const email = req.params.email;
+
+      const q = query(transactionCollection, where("tutorEmail", "==", email), where("status", "==", "onGoing")) 
+
+      const querySnapshot = await getDocs(q);
+      const data = querySnapshot.docs.map(doc => doc.data());
+
+      res.status(200).json(data);
     }catch(error){
       res.status(500).json({error: "failed to fetch pending payment"})
+    }
+  }static async getCourseName (req: Request, res: Response){
+    try{
+      const id = req.params.id;
+
+      if (!id) {
+        return res.status(400).json({ error: "ID parameter is missing" });
+      }
+
+      const q = query(courseCollection, where("CourseID", "==", id));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot) {
+        return res.status(404).json({ error: "Course not found" });
+      }
+
+      const courseData = querySnapshot.docs.map(doc => doc.data());
+
+      res.status(200).json(courseData[0].CourseName);
+    }catch(error){
+      res.status(500).json({error: "error fetching course name"})
+    }
+  }static async getPaymentReceived(req: Request, res: Response){
+    try{
+      const email = req.params.email;
+      const q = query(walletCollection, where("email", "==", email));
+      const querySnapshot = await getDocs(q)
+
+      const data = querySnapshot.docs.map(doc => doc.data());
+
+      res.status(200).json(data)
+    }catch(error){
+      res.status(500).json({error: "error fetching data"})
     }
   }
 }
