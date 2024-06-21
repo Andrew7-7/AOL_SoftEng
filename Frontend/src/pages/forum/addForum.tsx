@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "./addForum.css"; 
 
 const AddForum = () => {
     const user = JSON.parse(window.localStorage.getItem("user") || "{}");
@@ -43,25 +44,39 @@ const AddForum = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Question:</label>
-                <input type="text" value={question} onChange={(e) => setQuestion(e.target.value)} />
+        <div className="forum-page">
+            <div className="forum-header">
+                <h1>FORUM PAGE</h1>
+                <p>#sharingiscaring</p>
             </div>
-            <div>
-                <label>Detail Snippet:</label>
-                <input type="text" value={detailSnippet} onChange={(e) => setDetailSnippet(e.target.value)} />
-            </div>
-            <div>
-                <label>Course Name:</label>
-                <input type="text" value={courseName} onChange={(e) => setCourseName(e.target.value)} />
-            </div>
-            <div>
-                <label>Color:</label>
-                <input type="text" value={color} onChange={(e) => setColor(e.target.value)} />
-            </div>
-            <button type="submit">Add Forum</button>
-        </form>
+            <form className="forum-form" onSubmit={handleSubmit}>
+                <div className="form-group">
+                    <label>Question's Title:</label>
+                    <textarea
+                        value={question}
+                        onChange={(e) => setQuestion(e.target.value)}
+                        placeholder="Type here ..."
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Description:</label>
+                    <textarea
+                        value={detailSnippet}
+                        onChange={(e) => setDetailSnippet(e.target.value)}
+                        placeholder="Type here ..."
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Related topic(s) to this question:</label>
+                    <textarea
+                        value={courseName}
+                        onChange={(e) => setCourseName(e.target.value)}
+                        placeholder="Type here ..."
+                    />
+                </div>
+                <button type="submit" className="submit-button">Post Question</button>
+            </form>
+        </div>
     );
 };
 

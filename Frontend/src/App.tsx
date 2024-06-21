@@ -37,6 +37,7 @@ import TransactionHistory from "./pages/tutor/walletPage/pages/transactionHisoto
 import WithdrawBalance from "./pages/tutor/walletPage/pages/withdrawBalance.tsx";
 import PaymentReceived from "./pages/tutor/walletPage/pages/paymentReceived.tsx";
 import Yeay from "./pages/tutor/walletPage/pages/yeay.tsx";
+import AddForum from "./pages/forum/addForum";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
               element={<MaterialPage />}
             ></Route>
 						<Route path="/reply" element={<ForumPage />}></Route>
+					  <Route path="/add" element={<AddForum />}></Route>
 						<Route path="/replies/:forumId" element={<RepliesPage />}></Route>
 						{/* Student Only Pages */}
 						<Route element={<CheckRole role={"student"} />}>
