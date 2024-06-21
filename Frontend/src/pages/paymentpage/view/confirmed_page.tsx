@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import StudentNav from "../../../global/components/navbar/student/student_navbar";
 import "./confirmed_page.css";
+import { useNavigate } from "react-router-dom";
 
 const ConfirmedPage = () => {
   const [progress, setProgress] = useState(0);
+  const navigate = useNavigate()
+
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prevProgress) => {
@@ -14,6 +17,12 @@ const ConfirmedPage = () => {
 
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    if (progress === 100) {
+      navigate("/");
+    }
+  }, [progress, navigate]);
 
   return (
     <>

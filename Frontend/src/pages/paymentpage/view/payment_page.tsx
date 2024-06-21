@@ -31,6 +31,7 @@ const PaymentPage = () => {
     setTimeout(() => {
       setLoading(false);
       alert(`Selected payment method: ${selectedPayment}`);
+
     }, 2000);
   };
 

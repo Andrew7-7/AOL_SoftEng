@@ -50,7 +50,7 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string;
   ) => {
     const fetchRegister = async () => {
       const extraAuth =
-        "aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k";
+      "aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k";
 
       try {
         const res = await axios.post(
@@ -75,6 +75,16 @@ const Modal: React.FC<{ courseData: ICourse; tutorData: ITutor; payment: string;
       }
     };
 
+    const applyClass = async() => {
+      console.log("TESSS");
+        await axios.post("http://localhost:3002/tutor/studentApplyClass", {
+          student: userEmail,
+          tutorEmail: tutorData.tutorEmail,
+          courseId: courseId
+        })
+    }
+
+    applyClass();
     fetchRegister();
   };
 

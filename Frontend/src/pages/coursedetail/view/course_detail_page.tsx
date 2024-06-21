@@ -20,14 +20,7 @@ const CourseDetailPage = () => {
     <>
       <StudentNav />
       <div className="container-coursedetail">
-        <div
-          className="banner-coursedetail"
-          style={{
-            backgroundColor: "rgb(241, 124, 65)",
-            backgroundSize: "100%",
-          }}
-        >
-          <div className="course-name">{courseData.CourseName}</div>
+      <div className="banner-coursedetail" style={{ backgroundImage: `url("${courseData.banner}")`, backgroundSize: "100%" }}>
           <Link to={`/activecourse`}>
             <div className="back-t0-home-page-coursedetail">
               <div className="back-t0-home-page-coursedetail">

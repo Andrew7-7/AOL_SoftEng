@@ -23,4 +23,13 @@ tutorRoutes.put(
   TutorController.submitAttendance
 );
 
+tutorRoutes.post("/studentApplyClass", TutorController.studentApplyClass);
+
+tutorRoutes.post(
+  "/getCurrActiveClassDetail",
+  TutorController.getCurrActiveClass
+);
+
+tutorRoutes.post("/createReview", TutorController.createReview);
+
 export { tutorRoutes };

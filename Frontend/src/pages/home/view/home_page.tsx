@@ -12,6 +12,7 @@ import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Card2 } from "../../../global/components/homepage/card";
 
 const ActiveCourse = ({ email, data }: any) => {
   const studentData: any = useFetch(
@@ -114,10 +115,16 @@ const HomePage = () => {
           </div>
         )}
 
-        <p className="section-title">Popular Course</p>
+        <div className="popular-course-section">
+          <p className="section-title">Popular Course</p>
+          <Link className="link" to={"/activeCourse"}>
+            View All
+          </Link>
+        </div>
 
         <div className="popolarCourseSliderContainer">
           <Slider {...settings}>
+
             {data2 != null
               ? data.map((d: any) =>
                     data2.indexOf(d.id) !== -1 ? (
@@ -132,7 +139,7 @@ const HomePage = () => {
                     ) : null
                   )
               : null}
-            <LastCard />
+            {/* <LastCard /> */}
           </Slider>
         </div>
         {isLogin && <ActiveCourse email={userEmail} data={data} />}

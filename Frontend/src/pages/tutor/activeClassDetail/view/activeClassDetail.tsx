@@ -146,6 +146,7 @@ const ActiveClassDetail = () => {
         .slice(0, 16);
       return localISOTime;
     };
+
     const [editTime, setEditTime] = useState(false);
     const [newStartDate, setNewStartDate] = useState(
       toISOStringWithoutTimezone(new Date(startDate))

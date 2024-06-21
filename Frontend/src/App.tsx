@@ -32,29 +32,33 @@ import ConfirmedPage from "./pages/paymentpage/view/confirmed_page.tsx";
 import ReportReviewPage from "./pages/admin/reportReview/reportReview.tsx";
 import PermissionManagementPage from "./pages/admin/permissionManagement/view/permissionManagement_page.tsx";
 import PermissionManagementDetailPage from "./pages/admin/permissionManagement/view/permissionManagementDetail_page.tsx";
+import MaterialPage from "./pages/material/MaterialPage.tsx";
 import TransactionHistory from "./pages/tutor/walletPage/pages/transactionHisotory.tsx";
 import WithdrawBalance from "./pages/tutor/walletPage/pages/withdrawBalance.tsx";
 import PaymentReceived from "./pages/tutor/walletPage/pages/paymentReceived.tsx";
 import Yeay from "./pages/tutor/walletPage/pages/yeay.tsx";
 
 function App() {
-	return (
-		<>
-			<Routes>
-				{/* Is Banned */}
-				<Route path="/banned" element={<IsBanned />}></Route>
-				<Route path="/" element={<HomePage />}></Route>
-				{/* Verify Token */}
-				<Route element={<VerifyToken />}>
-					{/* Kalau udah login gabisa login register lagi */}
-					<Route element={<AlreadyLoggedIn />}>
-						<Route path="/login" element={<LoginPage />}></Route>
-						<Route path="/register" element={<RegisterPage />}></Route>
-					</Route>
-
+  return (
+    <>
+      <Routes>
+        {/* Is Banned */}
+        <Route path="/banned" element={<IsBanned />}></Route>
+        <Route path="/" element={<HomePage />}></Route>
+        {/* Verify Token */}
+        <Route element={<VerifyToken />}>
+          {/* Kalau udah login gabisa login register lagi */}
+          <Route element={<AlreadyLoggedIn />}>
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/register" element={<RegisterPage />}></Route>
+          </Route>
 					{/* Butuh Login */}
 					<Route element={<NeedLogin />}>
 						<Route path="/chat/:tutorId" element={<ChatPage />}></Route>
+            <Route
+              path="/material/:id/:email"
+              element={<MaterialPage />}
+            ></Route>
 						<Route path="/reply" element={<ForumPage />}></Route>
 						<Route path="/replies/:forumId" element={<RepliesPage />}></Route>
 						{/* Student Only Pages */}
