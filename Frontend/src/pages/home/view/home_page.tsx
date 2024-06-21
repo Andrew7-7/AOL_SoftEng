@@ -46,6 +46,8 @@ const ActiveCourse = ({ email, data }: any) => {
 
 const HomePage = () => {
   const data = useFetch("http://localhost:3002/home/getCourses").data;
+  const data2 = useFetch("http://localhost:3002/home/getPopularCourse").data;
+
   const [userEmail, setUserEmail] = useState("");
   const [isLogin, setIsLogin] = useState(false);
   const [userId, setUserId] = useState("");
@@ -83,7 +85,7 @@ const HomePage = () => {
 
   return (
     <>
-      <p>{userId}</p>
+      {/* {data2? <p>{data2[0]}</p>:null} */}
       <StudentNav />
       <div className="bannerHome">
         <div className="banner-text-home">
@@ -122,19 +124,20 @@ const HomePage = () => {
 
         <div className="popolarCourseSliderContainer">
           <Slider {...settings}>
-            {data != null
-              ? data
-                  .slice(0, 7)
-                  .map((d: any) => (
-                    <Card2
-                      key={d.id}
-                      title={d.CourseName}
-                      session={d.Sessions}
-                      chapter={d.Chapters}
-                      img={d.CourseImage}
-                      id={d.id}
-                    />
-                  ))
+
+            {data2 != null
+              ? data.map((d: any) =>
+                    data2.indexOf(d.id) !== -1 ? (
+                      <Card
+                        key={d.id}
+                        title={d.CourseName}
+                        session={d.Sessions}
+                        chapter={d.Chapters}
+                        img={d.CourseImage}
+                        id={d.id}
+                      />
+                    ) : null
+                  )
               : null}
             {/* <LastCard /> */}
           </Slider>
