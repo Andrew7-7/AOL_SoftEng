@@ -1,0 +1,103 @@
+.transactionHistory {
+  display: flex;
+}
+
+.transactionHistoryMain {
+  margin: 5vh 6vw;
+}
+
+.transactionHistoryMainContent {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.transactionHistoryMain .back{
+  font-size: 16px;
+  margin-bottom: 10px;
+}.transactionHistoryMain .back:hover{
+  text-decoration: underline;
+}.transactionHistoryMain .back:active{
+  opacity: 0.9;
+}
+
+.transactionHistoryMainContent .currentBalance {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 10px;
+  width: 72vw;
+  height: 10rem;
+  justify-content: center;
+  align-items: flex-start;
+  border-radius: 15px;
+  margin-bottom: 50px;
+}
+.transactionHistoryMainContent .currentBalance p {
+  font-size: 22px;
+  font-weight: bold;
+  padding: 5px 20px;
+  border-radius: 15px;
+}
+
+.transactionHistoryMainContent .transactionList {
+  background-color: white;
+  border-radius: 15px;
+  width: 72vw;
+  padding: 10px;
+  min-height: 31rem;
+  max-height: 31rem;
+  overflow: auto;
+}
+
+.transactionComponentMain {
+  display: flex;
+  flex-direction: row;
+  margin: 0 5px;
+  height: 6rem;
+  width: 99%;
+  padding: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.733);
+}
+
+.transactionComponentMain .transactionLeftComponent {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-left: 5px solid rgb(15, 172, 15);
+}
+
+.transactionComponentMain .transactionLeftComponent p {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.transactionComponentMain .transactionRightComponent {
+  flex: 6;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.transactionComponentMain .transactionRightComponent .componentDetail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.transactionComponentMain .transactionRightComponent .componentDetail .title {
+  font-size: 16px;
+  font-weight: bold;
+}
+.transactionComponentMain .transactionRightComponent .componentAmount {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.transactionComponentMain .transactionRightComponent .componentAmount p {
+  font-size: 16px;
+}

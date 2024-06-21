@@ -1,0 +1,40 @@
+.paymentReceived{
+    display: flex;
+}
+.paymentReceived .rightComponent{
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    margin: 3vh 7.5vw;
+    width: 70vw;
+    background-color: white;
+    border-radius: 15px;
+}
+.paymentReceived .rightComponent .back{
+    font-size: 16px;
+}.paymentReceived .rightComponent .back:hover{
+    text-decoration: underline;
+}.paymentReceived .rightComponent .back:active{
+    opacity: 0.9;
+}
+
+.paymentReceived .rightComponent .sectionTitle{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.paymentReceived .rightComponent .paymentReceivedList{
+    display: flex;
+    /* background-color: red; */
+    flex-direction: column;
+}
+
+.transactionComponentMain .status{
+    display: flex;
+    align-items: center;
+    flex: 2;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+}

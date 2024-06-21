@@ -1,4 +1,4 @@
-import { collection, getDoc, getDocs, query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../Config/config";
 import { Request, Response } from "express";
 

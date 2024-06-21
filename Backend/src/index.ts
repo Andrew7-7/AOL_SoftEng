@@ -15,6 +15,8 @@ import { tutorCourse } from "./Firebase/Routes/applyCrsRoutes";
 import { transactionsRoutes } from "./Firebase/Routes/transactionRoutes";
 import { reportRoutes } from "./Firebase/Routes/reportRoutes";
 import { permissionRoutes } from "./Firebase/Routes/permissionRoutes";
+import { walletRoutes } from "./Firebase/Routes/walletRoutes";
+
 const app = express();
 
 const port = 3002;
@@ -42,6 +44,8 @@ app.use("/forum", forumRoutes);
 app.use("/transaction", transactionsRoutes)
 app.use("/report", reportRoutes)
 app.use("/permission", permissionRoutes )
+app.use("/wallet", walletRoutes);
+
 const server = http.createServer(app);
 
 server.listen(port, () => {
