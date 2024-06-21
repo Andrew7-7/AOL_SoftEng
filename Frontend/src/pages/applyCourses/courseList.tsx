@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     Table,
     TableBody,
@@ -9,6 +8,7 @@ import {
     Paper,
     Button
 } from '@mui/material';
+import React, { useState, useEffect } from 'react';
 
 interface Course {
     id: number;
@@ -91,6 +91,43 @@ const ApplicationStatusTable: React.FC<ApplicationStatusTableProps> = ({ applica
 );
 
 const CoursesPage: React.FC = () => {
+    const [error, setError] = useState<string | null>(null);
+
+    const fetchPermission = async() => {
+        try {
+            const response = await fetch(`http://localhost:3002/apply/getPermissions`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth': 'Bearer aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k'
+                },
+            })
+            if(!response.ok){
+                throw new Error('Failed to fetch application');
+            }
+        } catch (error) {
+            setError((error as Error).message);
+        }
+    }
+
+    const fetchCourseList = async() => {
+        try {
+            const response = await fetch(`http://localhost:3002/apply/getTutorCourses`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth': 'Bearer aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k'
+                },
+            })
+            if (!response.ok) {
+                throw new Error('Failed to fetch course list');
+            }
+        } catch (error) {
+            setError((error as Error).message);
+        }
+    }
+
+
     const newCourses: Course[] = [
         { id: 1, name: 'DevOps Fundamentals', category: 'DevOps' },
         { id: 2, name: 'Node.js Essentials', category: 'Backend' },
