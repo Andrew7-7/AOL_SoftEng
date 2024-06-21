@@ -119,9 +119,7 @@ const HomePage = () => {
         <div className="popolarCourseSliderContainer">
           <Slider {...settings}>
             {data2 != null
-              ? data
-                  .slice(0, 4)
-                  .map((d: any) =>
+              ? data.map((d: any) =>
                     data2.indexOf(d.id) !== -1 ? (
                       <Card
                         key={d.id}
