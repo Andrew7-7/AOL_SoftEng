@@ -40,7 +40,7 @@
     font-weight: bold;
 }
 .withdrawBalance .rightComponent .inputNumber{
-    border-radius: 15px;
+    border-radius: 10px;
     border: 0px;
     width: 50rem;
     padding: 12px 16px;
@@ -53,4 +53,32 @@
 }.withdrawBalance .rightComponent .inputContainer p{
     font-size: 16px;
     margin-right: 10px;
+}.withdrawBalance .rightComponent .withdrawButton{
+  display: flex;
+  background-color: #402528;
+  padding: 6px 24px;
+  color: white;
+  border-radius: 15px;
+  margin: 20px 0;
+}.withdrawBalance .rightComponent .withdrawButton:hover{
+  opacity: 0.95;
+}.withdrawBalance .rightComponent .withdrawButton:active{
+  opacity: 0.9;
 }
+
+.withdrawBalance .passwordInput{
+  padding: 6px 16px;
+  width: 20vw;
+  border-radius: 10px;
+  border: none;
+  margin: 20px 0 ;
+}
+
+.withdrawBalance .withdrawalValidationButton{
+  display: flex;
+  width: 20vw;
+}
+.withdrawBalance .withdrawalValidationButton .withdrawButton{
+  margin-right: 20px;
+}
+

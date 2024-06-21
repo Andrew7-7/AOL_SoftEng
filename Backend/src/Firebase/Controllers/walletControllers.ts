@@ -1,10 +1,18 @@
 import { Request, Response} from "express";
 import { db } from "../Config/config";
-import { collection, getDocs, where, query, getDoc } from "firebase/firestore";
+import { collection, getDocs, where, query, addDoc } from "firebase/firestore";
+import { encrypt } from "../../others/encrypt";
 
 const walletCollection = collection(db, "Wallet");
 const transactionCollection = collection(db, "Transaction");
 const courseCollection = collection(db, "Courses");
+const userCollection = collection(db, "users");
+interface UserData {
+  email?: string;
+  password?: string;
+  role?: string;
+  username?: string;
+}
 
 export class WalletController {
   static async getFinalTransaction(req: Request, res: Response){
@@ -100,6 +108,52 @@ export class WalletController {
       const data = querySnapshot.docs.map(doc => doc.data());
 
       res.status(200).json(data)
+    }catch(error){
+      res.status(500).json({error: "error fetching data"})
+    }
+  }static async validateUser(req: Request, res: Response){
+    try{
+      const {email, password} = req.body;
+      const q = query(userCollection, where("email", "==", email));
+      const user = await getDocs(q);
+
+      if (user.empty) {
+        return res.status(400).json({ message: "Invalid Email" });
+      }
+
+      let userData: UserData = {};
+      user.forEach((doc) => {
+        userData = { ...doc.data() };
+      });
+
+      const passwordMatch = await encrypt.comparePass(
+        password,
+        userData.password
+      );
+
+      if (!passwordMatch) {
+        return res.status(401).json({ error: "Invalid password" });
+      }else{
+        res.status(200).json({message: "valid"})
+      }
+    }catch(error){
+      res.status(500).json({error: "error fetching user"})
+    }
+  }static async addWallet (req: Request, res: Response){
+    try{
+      const {email, status, amount} = req.body;
+      const date = new Date();
+
+      await addDoc(walletCollection, {
+        amount: amount,
+        date: date,
+        email: email,
+        status: status,
+        title: "withdrawal",
+        type: false
+      })
+
+      res.status(200).json({message: "successfully adding data"})
     }catch(error){
       res.status(500).json({error: "error fetching data"})
     }

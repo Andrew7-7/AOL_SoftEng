@@ -1,19 +1,53 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import TutorNav from "../../../../global/components/navbar/tutor/tutorNav";
 import "./withdrawBalance.css";
 import { useEffect, useState } from "react";
 import useFetch from "../../../../global/hooks/useFetch";
+import verifyPassword from "./withdrawalController";
+
+
+const WithdrawalValidation = ({ email, amount }: any) => {
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <p className="sectionTitle">Input your password</p>
+      <input
+        className="passwordInput"
+        type="password"
+        placeholder="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <p style = {{color: "red"}}>{error}</p>
+      <div className="withdrawalValidationButton">
+        <button className="withdrawButton" onClick={() => verifyPassword(email, password, setError, navigate, amount)}>
+          <p>Confirm</p>
+        </button>
+        <Link to="/walletPage">
+          <button className="withdrawButton">
+            <p>Cancel</p>
+          </button>
+        </Link>
+      </div>
+    </>
+  );
+};
 
 const WithdrawBalance = () => {
   const [value, setValue] = useState(0);
   const user = JSON.parse(window.localStorage.getItem("user") || "{}");
   const amount = Number(
     useFetch("http://localhost:3002/wallet/getAmount/" + user.email).data
-  ); //tutor balance
+  ); // tutor balance
 
   const [withdrawAmount, setWithdrawAmount] = useState("");
   const [formattedValue, setFormattedValue] = useState("");
-  const [originalValue, setOriginalValue] = useState(0);//withdraw amount
+  const [originalValue, setOriginalValue] = useState(0); // withdraw amount
+  const [accountNumber, setAccountNumber] = useState("");
+  const [isClicked, setIsClicked] = useState(false);
 
   useEffect(() => {
     if (amount !== undefined) {
@@ -79,8 +113,34 @@ const WithdrawBalance = () => {
             onKeyPress={handleKeyPress}
             value={withdrawAmount}
             onChange={handleChange}
+            disabled={isClicked}
+            style={{ backgroundColor: "white" }}
           />
         </div>
+        {originalValue > amount ? (
+          <p style={{ color: "red" }}>Your balance is insufficient</p>
+        ) : null}
+        <p className="sectionTitle">Input your Account number</p>
+        <input
+          placeholder="Input Account Number"
+          className="inputNumber"
+          type="text"
+          onKeyPress={handleKeyPress}
+          value={accountNumber}
+          onChange={(e) => setAccountNumber(e.target.value)}
+          disabled={isClicked}
+          style={{ backgroundColor: "white" }}
+        />
+        <button
+          onClick={() => setIsClicked(true)}
+          disabled={!(accountNumber && originalValue <= amount && !isClicked)}
+          className="withdrawButton"
+          style={{ opacity: isClicked ? 0.8 : 1 }}
+        >
+          <p>Withdraw now</p>
+        </button>
+
+        {isClicked ? <WithdrawalValidation email={user.email} amount = {originalValue} /> : null}
       </div>
     </div>
   );
