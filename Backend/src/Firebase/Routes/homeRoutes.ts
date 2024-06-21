@@ -11,5 +11,6 @@ homeRoutes.get("/getCourses", HomeController.getCourses);
 homeRoutes.get("/getStudent", HomeController.getStudent);
 
 homeRoutes.get("/getStudentActiveCourse/:studentEmail", HomeController.getStudentByEmail)
+homeRoutes.get("/getPopularCourse", HomeController.getPopularCourseId)
 
 export { homeRoutes };

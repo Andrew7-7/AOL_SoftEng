@@ -53,6 +53,7 @@ const activecourse_page = () => {
 						img={CourseData.CourseImage}
 						courseId={CourseData.CourseID}
 						id={CourseData.id}
+						type={CourseData.Type}
 					/>
 				))}
 			</div>
