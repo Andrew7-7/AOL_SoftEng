@@ -1,4 +1,4 @@
-import { collection, QuerySnapshot, getDocs, getDoc, doc } from "firebase/firestore";
+import { collection, QuerySnapshot, getDocs, getDoc, doc, addDoc } from "firebase/firestore";
 import { db } from "../Config/config";
 import { Request, Response } from "express";
 
@@ -9,7 +9,7 @@ const courseCollection =  collection(db, "Courses")
 interface Tutor {
     id: string;
     courseIds?: string[];
-    name: string;
+    email: string;
 }
 
 interface Course {
@@ -27,15 +27,15 @@ export class courseControllers{
 
     static async getApplication(req: Request, res: Response){
         try {
-            const {tutorName} = req.body;
+            const {email} = req.body;
             const querySnapshot: QuerySnapshot = await getDocs(permissionCollection);
             const permissions = querySnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
             })) as Permission[];
 
-            const filteredPermissions = tutorName
-                ? permissions.filter(permission => permission.tutorName.toLowerCase() === tutorName.toLowerCase())
+            const filteredPermissions = email
+                ? permissions.filter(permission => permission.tutorName.toLowerCase() === email.toLowerCase())
                 : permissions;
 
             res.status(200).json({permissions: filteredPermissions})
@@ -47,7 +47,7 @@ export class courseControllers{
 
     static async getTutorCourses(req: Request, res: Response) {
         try {
-            const {name} = req.body;
+            const {email} = req.body;
             const tutorSnapshot: QuerySnapshot = await getDocs(tutorCollection);
             const courseSnapshot: QuerySnapshot = await getDocs(courseCollection);
 
@@ -64,18 +64,11 @@ export class courseControllers{
                 ...doc.data(),
             })) as Course[];
 
-            const filteredTutors = name
-                ? tutors.filter(tutor => tutor.name.toLowerCase() === name.toLowerCase())
+            const filteredTutors = email
+                ? tutors.filter(tutor => tutor.email.toLowerCase() === email.toLowerCase())
                 : tutors;
     
             const tutorCourses = filteredTutors.map(tutor => {
-                if (!tutor.courseIds || !Array.isArray(tutor.courseIds)) {
-                    console.warn(`Tutor with id ${tutor.id} has invalid or missing courseIds`);
-                    return {
-                        ...tutor,
-                        courses: [],
-                    };
-                }
 
                 const join = courses.filter(course => !tutor.courseIds.includes(course.CourseID.toString()));
                 return {
@@ -89,6 +82,33 @@ export class courseControllers{
          catch (error) {
             console.error('Error fetching tutors with courses:', error);
             res.status(500).json({ error: 'Failed to fetch tutors with courses' });
+        }
+    }
+
+    static async postPermission(req: Request, res: Response){
+        try {
+            const { permissionID, requestedClass, requestedClassID, tutorName } = req.body;
+            const status = '';
+            const message = '';
+
+            const certificateImg = req.file.path;
+
+            const newPermission = {
+                permissionID,
+                requestedClass,
+                requestedClassID,
+                tutorName,
+                status,
+                message,
+                certificateImg
+            };
+
+            await addDoc(permissionCollection, newPermission);
+
+            res.status(200).json({ message: 'Permission request submitted successfully' });
+        } catch (error) {
+            console.error('Error in postPermission:', error);
+            res.status(500).json({ message: 'Internal server error' });
         }
     }
 

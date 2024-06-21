@@ -16,7 +16,7 @@ import ContactSidebar from "./pages/sidebar/contactSidebar";
 import ChatPage from "./pages/chat/chatPage";
 import ForumPage from "./pages/forum/forumPage";
 import RepliesPage from "./pages/replies/RepliesPage";
-
+import CoursesPage from "./pages/applyCourses/courseList.tsx";
 import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
 import ActiveCourse from "./pages/activecourse/view/activecourse_page";
 import TutorDetailPage from "./pages/tutorDetail/view/tutor_detail_page.tsx";
@@ -79,6 +79,7 @@ function App() {
 						<Route element={<CheckRole role={"tutor"} />}>
 							<Route path="/tutorDummy" element={<TutorDummy />}></Route>
 							<Route path="/activeClass" element={<ActiveClass />}></Route>
+							<Route path="courseList" element={<CoursesPage />}></Route>
 							<Route
 								path="/activeClassDetail/:id"
 								element={<ActiveClassDetail />}
