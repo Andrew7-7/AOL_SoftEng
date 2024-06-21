@@ -59,8 +59,9 @@ export class chatControllers {
 
 		emailSnapshot.forEach((doc) => {
 			// Avoid adding duplicate documents
-			if (
-				!combinedResults.some(
+			
+			if (				
+				combinedResults.some(
 					(existingDoc: { id: string }) => existingDoc.id === doc.id
 				)
 			) {
