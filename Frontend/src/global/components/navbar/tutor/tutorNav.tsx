@@ -4,6 +4,7 @@ import accountImage from "../../../assets/account.png";
 import reportImage from "../../../assets/report.png";
 import courseImage from "../../../assets/online-learning.png";
 import signOutImage from "../../../assets/logout.png";
+import chatImage from "../../../assets/chatIcon.png";
 import "./tutorNav_css.css";
 import { useState } from "react";
 const TutorNav = ({ clickedItem }: { clickedItem: string }) => {
@@ -44,17 +45,10 @@ const TutorNav = ({ clickedItem }: { clickedItem: string }) => {
         <p>CODE</p>
       </div>
       <div>
-        <NavigationLabel
-          image={permissionImage}
-          title="Course Lists"
-          link=""
-        />
-        <NavigationLabel
-          image={accountImage}
-          title="Wallet"
-          link=""
-        />
+        <NavigationLabel image={permissionImage} title="Course Lists" link="" />
+        <NavigationLabel image={accountImage} title="Wallet" link="" />
         <NavigationLabel image={reportImage} title="Active Class" link="" />
+        <NavigationLabel image={chatImage} title="Chat" link="/chat/x" />
       </div>
       <div onClick={signOut} className="signOutTutor">
         <img className="tutornavLabelImage" src={signOutImage}></img>

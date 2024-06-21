@@ -90,21 +90,23 @@ export class TutorController {
   static async getActiveClassDetail(req: Request, res: Response) {
     try {
       const { id } = req.body;
-  
+
       if (!id) {
         return res.status(404).json({ error: "document ID is required" });
       }
-  
+
       const classDocRef = doc(classCollection, id);
       const classDocSnapshot = await getDoc(classDocRef);
-  
+
       if (!classDocSnapshot.exists()) {
         return res.status(404).json({ error: "Class not found" });
       }
-  
+
       const sessionCollectionRef = collection(classDocRef, "Session");
-      const sessionQuerySnapshot = await getDocs(query(sessionCollectionRef, orderBy("startDate", "asc")));
-  
+      const sessionQuerySnapshot = await getDocs(
+        query(sessionCollectionRef, orderBy("startDate", "asc"))
+      );
+
       const sessionData = sessionQuerySnapshot.docs.map((doc) => {
         const data = doc.data();
         const startDate = data.startDate.toDate();
@@ -116,8 +118,11 @@ export class TutorController {
           endDateTimestamp: endDate.getTime(),
         };
       });
-  
-      return res.status(200).json({ class: classDocSnapshot.data(), sessions: sessionData });
+
+      return res.status(200).json({
+        class: classDocSnapshot.data(),
+        sessions: sessionData,
+      });
     } catch (error) {
       console.error("Error fetching class details:", error);
       res.status(500).json({ error: "Error fetching class details" });
@@ -126,45 +131,63 @@ export class TutorController {
 
   static async getCurrActiveClass(req: Request, res: Response) {
     try {
-      const { id } = req.body;
-  
-      if (!id) {
+      const { courseId, student } = req.body;
+
+      if (!courseId) {
         return res.status(404).json({ error: "document ID is required" });
       }
-  
-      const classDocRef = doc(classCollection, id);
-      const classDocSnapshot = await getDoc(classDocRef);
-  
-      if (!classDocSnapshot.exists()) {
-        return res.status(404).json({ error: "Class not found" });
-      }
-  
+
+      const q1 = query(
+        classCollection,
+        where("courseId", "==", courseId),
+        where("student", "array-contains", student)
+      );
+
+      const classDocSnapshot = await getDocs(q1);
+
+      const classDocRef = classDocSnapshot.docs[0].ref;
+
       // Get current timestamp in Firestore-compatible format
       const currentTimestamp = Timestamp.now();
-  
+
       const sessionCollectionRef = collection(classDocRef, "Session");
-  
+
       // Query sessions that start after the current timestamp
-      const q = query(sessionCollectionRef, where("startDate", ">", currentTimestamp), orderBy("startDate", "asc"), limit(1));
+      const q = query(sessionCollectionRef, orderBy("startDate", "asc"));
       const sessionQuerySnapshot = await getDocs(q);
-  
+
       if (sessionQuerySnapshot.empty) {
         return res.status(404).json({ error: "No upcoming sessions found" });
       }
-  
-      const sessionDoc = sessionQuerySnapshot.docs[0];
-      const data = sessionDoc.data();
-      const startDate = data.startDate.toDate();
-      const endDate = data.endDate.toDate();
-  
-      const sessionData = {
-        ...data,
-        id: sessionDoc.id,
-        startDateTimestamp: startDate.getTime(),
-        endDateTimestamp: endDate.getTime(),
-      };
-  
-      return res.status(200).json({ class: classDocSnapshot.data(), session: sessionData });
+
+      const sessionDoc = sessionQuerySnapshot.docs;
+
+      const sessionData = sessionQuerySnapshot.docs.map((doc) => {
+        const data = doc.data();
+        const startDate = data.startDate.toDate();
+        const endDate = data.endDate.toDate();
+        return {
+          ...data,
+          id: doc.id,
+          startDateTimestamp: startDate.getTime(),
+          endDateTimestamp: endDate.getTime(),
+        };
+      });
+
+      const tutorRef = collection(db, "tutors");
+
+      const tutorSnapshot = await getDocs(
+        query(
+          tutorRef,
+          where("tutorEmail", "==", classDocSnapshot.docs[0].data().tutorEmail)
+        )
+      );
+
+      return res.status(200).json({
+        class: classDocSnapshot.docs[0].data(),
+        sessions: sessionData,
+        tutor: tutorSnapshot.docs[0].id,
+      });
     } catch (error) {
       console.error("Error fetching class details:", error);
       res.status(500).json({ error: "Error fetching class details" });
@@ -301,8 +324,6 @@ export class TutorController {
     try {
       const { classId, sessionId, attend, absent } = req.body;
 
-      console.log(req.body);
-
       if (!classId || !sessionId || !attend || !absent) {
         return res.status(404).json({ error: "required all items" });
       }
@@ -330,23 +351,20 @@ export class TutorController {
     }
   }
 
-  
-
-
   static async studentApplyClass(req: Request, res: Response) {
-    const {student, tutorEmail, courseId } = req.body
+    const { student, tutorEmail, courseId } = req.body;
 
-    const classRef = collection(db, "Class")
+    const classRef = collection(db, "Class");
 
     const q = query(
       classRef,
       where("courseId", "==", courseId),
       where("tutorEmail", "==", tutorEmail)
-    )
+    );
 
-    const classQuerySnapshot = await getDocs(q)
+    const classQuerySnapshot = await getDocs(q);
 
-    if(classQuerySnapshot.empty){
+    if (classQuerySnapshot.empty) {
       const courseDocRef = doc(db, "Courses", courseId);
 
       const courseDocSnapshot = await getDoc(courseDocRef);
@@ -356,17 +374,28 @@ export class TutorController {
         ...courseDocSnapshot.data(),
       };
 
-      const sessions: any = []
+      const sessions: any = [];
 
-      const currentDate = new Date()
+      const currentDate = new Date();
 
-      for(let sessionNumber = 0 ; sessionNumber < course.Sessions ; sessionNumber++){
-        const startDate = new Date(currentDate.getTime() + (sessionNumber + 1) * 7 * 24 * 60 * 60 * 1000);
-        const endDate = new Date(startDate.getTime() + parseInt(course.hourPerSession) * 60 * 60 * 1000);
+      for (
+        let sessionNumber = 0;
+        sessionNumber < course.Sessions;
+        sessionNumber++
+      ) {
+        const startDate = new Date(
+          currentDate.getTime() + (sessionNumber + 1) * 7 * 24 * 60 * 60 * 1000
+        );
+        const endDate = new Date(
+          startDate.getTime() + parseInt(course.hourPerSession) * 60 * 60 * 1000
+        );
 
-        const outline = (sessionNumber + 1 > course.chapterBreakdown.length) ? "Extra material" : course.chapterBreakdown[sessionNumber] 
+        const outline =
+          sessionNumber + 1 > course.chapterBreakdown.length
+            ? "Extra material"
+            : course.chapterBreakdown[sessionNumber];
 
-        const baseUrl = 'https://zoom.us/j/';
+        const baseUrl = "https://zoom.us/j/";
         const meetingId = Math.floor(Math.random() * 1000000000); // Generate a random meeting ID
         const password = Math.random().toString(36).slice(2, 8); // Generate a random 6-character password
 
@@ -378,9 +407,10 @@ export class TutorController {
           present: [],
           startDate: Timestamp.fromDate(startDate),
           zoomLink: `${baseUrl}${meetingId}?pwd=${password}`,
+          session: sessionNumber + 1,
         };
 
-        sessions.push(session)
+        sessions.push(session);
       }
 
       const classDocRef = await addDoc(classRef, {
@@ -388,24 +418,58 @@ export class TutorController {
         tutorEmail: tutorEmail,
         course: {
           courseName: course.CourseName,
-          totalSession: course.Sessions
-        }
-      })
+          totalSession: course.Sessions,
+        },
+        courseId: course.id,
+      });
 
       for (const session of sessions) {
-        await addDoc(collection(classDocRef, 'Session'), session);
+        await addDoc(collection(classDocRef, "Session"), session);
       }
 
-      return res.status(200)
-    }else{
-      const classDocRef = classQuerySnapshot.docs[0].ref
+      return res.status(200);
+    } else {
+      const classDocRef = classQuerySnapshot.docs[0].ref;
 
       await updateDoc(classDocRef, {
-        student: arrayUnion(student)
-      })
+        student: arrayUnion(student),
+      });
 
-      return res.status(200)
+      return res.status(200);
+    }
+  }
+
+  static async createReview(req: Request, res: Response) {
+    try {
+      const { comment, rating, studentEmail, tutorId } = req.body;
+
+      console.log(req.body);
+
+      const userEmail = studentEmail;
+
+      const userQuery = query(
+        collection(db, "users"),
+        where("email", "==", userEmail)
+      );
+
+      const userQuerySnapshot = await getDocs(userQuery);
+
+      let userDocSnapshot = null;
+      if (!userQuerySnapshot.empty) {
+        userDocSnapshot = userQuerySnapshot.docs[0];
+      }
+
+      const reviewRef = collection(db, "tutors", tutorId, "reviews");
+
+      await addDoc(reviewRef, {
+        comment: comment,
+        rating: rating,
+        studentId: userDocSnapshot.id,
+      });
+
+      res.status(200).json({ message: "success" });
+    } catch (error) {
+      res.status(500).json({ error: "error" });
     }
   }
 }
-	

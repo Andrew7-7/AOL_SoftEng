@@ -32,89 +32,94 @@ import ConfirmedPage from "./pages/paymentpage/view/confirmed_page.tsx";
 import ReportReviewPage from "./pages/admin/reportReview/reportReview.tsx";
 import PermissionManagementPage from "./pages/admin/permissionManagement/view/permissionManagement_page.tsx";
 import PermissionManagementDetailPage from "./pages/admin/permissionManagement/view/permissionManagementDetail_page.tsx";
+import MaterialPage from "./pages/material/MaterialPage.tsx";
 
 function App() {
-	return (
-		<>
-			<Routes>
-				{/* Is Banned */}
-				<Route path="/banned" element={<IsBanned />}></Route>
-				<Route path="/" element={<HomePage />}></Route>
-				{/* Verify Token */}
-				<Route element={<VerifyToken />}>
-					{/* Kalau udah login gabisa login register lagi */}
-					<Route element={<AlreadyLoggedIn />}>
-						<Route path="/login" element={<LoginPage />}></Route>
-						<Route path="/register" element={<RegisterPage />}></Route>
-					</Route>
+  return (
+    <>
+      <Routes>
+        {/* Is Banned */}
+        <Route path="/banned" element={<IsBanned />}></Route>
+        <Route path="/" element={<HomePage />}></Route>
+        {/* Verify Token */}
+        <Route element={<VerifyToken />}>
+          {/* Kalau udah login gabisa login register lagi */}
+          <Route element={<AlreadyLoggedIn />}>
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/register" element={<RegisterPage />}></Route>
+          </Route>
 
-					{/* Butuh Login */}
-					<Route element={<NeedLogin />}>
-						<Route path="/chat/:tutorId" element={<ChatPage />}></Route>
-						<Route path="/reply" element={<ForumPage />}></Route>
-						<Route path="/replies/:forumId" element={<RepliesPage />}></Route>
-						{/* Student Only Pages */}
-						<Route element={<CheckRole role={"student"} />}>
-							<Route path="/profile" element={<ProfilePage />}></Route>
-						</Route>
-						<Route
-							path="/activecourse/:courseId"
-							element={<CourseDetailPage />}
-						/>
-						<Route path="/activecourse" element={<ActiveCourse />}></Route>
-						<Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
-						<Route
-							path="/:courseId/pickTutor/:tutorId"
-							element={<TutorDetailPage />}
-						/>
-						<Route
-							path="/:courseId/:tutorId/payment"
-							element={<PaymentPage />}
-						/>
-						<Route
-							path="/:courseId/:tutorId/payment/confirmed"
-							element={<ConfirmedPage />}
-						/>
-						{/* Tutor Only Pages */}
-						<Route element={<CheckRole role={"tutor"} />}>
-							<Route path="/tutorDummy" element={<TutorDummy />}></Route>
-							<Route path="/activeClass" element={<ActiveClass />}></Route>
-							<Route
-								path="/activeClassDetail/:id"
-								element={<ActiveClassDetail />}
-							/>
-						</Route>
-						{/* Admin Only Pages */}
-						<Route element={<CheckRole role={"admin"} />}>
-							<Route path="/adminDummy" element={<AdminDummy />}></Route>
-							<Route
-								path="/permissionManagement"
-								element={<PermissionManagementPage />}
-							/>
-							<Route
-								path="/permissionManagement/:permissionId"
-								element={<PermissionManagementDetailPage />}
-							/>
-							<Route
-								path="/accountManagement"
-								element={<AccountManagementPage />}
-							/>
-							<Route
-								path="/courseManagement"
-								element={<CourseManagementPage />}
-							/>
-							<Route
-								path="/courseManagement/:courseId"
-								element={<CourseUpdatePage />}
-							/>
-							<Route path="/reportReview" element={<ReportReviewPage />} />
-							<Route path="/createCourse" element={<CreateCoursePage />} />
-						</Route>
-					</Route>
-				</Route>
-			</Routes>
-		</>
-	);
+          {/* Butuh Login */}
+          <Route element={<NeedLogin />}>
+            <Route path="/chat/:tutorId" element={<ChatPage />}></Route>
+            <Route
+              path="/material/:id/:email"
+              element={<MaterialPage />}
+            ></Route>
+            <Route path="/reply" element={<ForumPage />}></Route>
+            <Route path="/replies/:forumId" element={<RepliesPage />}></Route>
+            {/* Student Only Pages */}
+            <Route element={<CheckRole role={"student"} />}>
+              <Route path="/profile" element={<ProfilePage />}></Route>
+            </Route>
+            <Route
+              path="/activecourse/:courseId"
+              element={<CourseDetailPage />}
+            />
+            <Route path="/activecourse" element={<ActiveCourse />}></Route>
+            <Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
+            <Route
+              path="/:courseId/pickTutor/:tutorId"
+              element={<TutorDetailPage />}
+            />
+            <Route
+              path="/:courseId/:tutorId/payment"
+              element={<PaymentPage />}
+            />
+            <Route
+              path="/:courseId/:tutorId/payment/confirmed"
+              element={<ConfirmedPage />}
+            />
+            {/* Tutor Only Pages */}
+            <Route element={<CheckRole role={"tutor"} />}>
+              <Route path="/tutorDummy" element={<TutorDummy />}></Route>
+              <Route path="/activeClass" element={<ActiveClass />}></Route>
+              <Route
+                path="/activeClassDetail/:id"
+                element={<ActiveClassDetail />}
+              />
+            </Route>
+            {/* Admin Only Pages */}
+            <Route element={<CheckRole role={"admin"} />}>
+              <Route path="/adminDummy" element={<AdminDummy />}></Route>
+              <Route
+                path="/permissionManagement"
+                element={<PermissionManagementPage />}
+              />
+              <Route
+                path="/permissionManagement/:permissionId"
+                element={<PermissionManagementDetailPage />}
+              />
+              <Route
+                path="/accountManagement"
+                element={<AccountManagementPage />}
+              />
+              <Route
+                path="/courseManagement"
+                element={<CourseManagementPage />}
+              />
+              <Route
+                path="/courseManagement/:courseId"
+                element={<CourseUpdatePage />}
+              />
+              <Route path="/reportReview" element={<ReportReviewPage />} />
+              <Route path="/createCourse" element={<CreateCoursePage />} />
+            </Route>
+          </Route>
+        </Route>
+      </Routes>
+    </>
+  );
 }
 
 export default App;
