@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import './RepliesPage.css';
 import StudentNav from '../../global/components/navbar/student/student_navbar';
 
@@ -36,11 +36,51 @@ const RepliesPage = () => {
     const { forumId } = useParams<{ forumId: string }>();
     const user = JSON.parse(window.localStorage.getItem("user") || "{}");
     const location = useLocation();
-    const forum = location.state?.forum as Forum;
+    const forum = location.state?.forum as Forum | null;
     const [details, setDetails] = useState<ForumDetails | null>(null);
     const [newReply, setNewReply] = useState<string>('');
     const [editReplyId, setEditReplyId] = useState<string | null>(null);
     const [editReplyMessage, setEditReplyMessage] = useState<string>('');
+    const [forums, setForums] = useState([]);
+
+    const fetchForums = async () => {
+        try {
+            const response = await fetch('http://localhost:3002/forum/getForum', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth': 'Bearer aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k'
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch forums');
+            }
+            const data = await response.json();
+            setForums(data.forums);
+        } catch (error) {
+            console.error('Error fetching forums:', error);
+        }
+    };
+
+    const fetchForumsbyId = async () => {
+        try {
+            const response = await fetch(`http://localhost:3002/forum/getForum/${forumId}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth': 'Bearer aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k'
+                },
+            });
+            if (!response.ok) {
+                throw new Error('Failed to fetch forums');
+            }
+            const data = await response.json();
+            setForums(data.forums);
+            console.log(data)
+        } catch (error) {
+            console.error('Error fetching forums:', error);
+        }
+    };
 
     const fetchReplies = async () => {
         try {
@@ -161,6 +201,7 @@ const RepliesPage = () => {
     useEffect(() => {
         fetchReplies();
         fetchDetails();
+        fetchForumsbyId();
     }, [forumId]);
 
     if (loading) {
@@ -179,9 +220,12 @@ const RepliesPage = () => {
                 <div className="sharing-banner">#sharingiscaring</div>
             </div>
             <div className="Replies">
-                <h1>Question: {forum?.question}</h1>
+                <h1>Question: {forum?.question || 'No question available'}</h1>
                 {details && details.sender && (
-                    <p> {details.sender.senderEmail}<img src={details.sender.senderImageURL} alt="Profile" /></p>
+                    <p>
+                        {details.sender.senderEmail}
+                        <img src={details.sender.senderImageURL} alt="Profile" />
+                    </p>
                 )}
 
                 <div className="add-reply">

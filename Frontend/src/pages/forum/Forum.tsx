@@ -1,5 +1,6 @@
-
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useForumId } from './ForumIdContext'; // Import the context hook
 import "./Forum.css";
 
 interface ForumProps {
@@ -21,6 +22,7 @@ const Forum: React.FC<ForumProps> = ({ forum }) => {
     const { id, question, detailSnippet, course, senderEmail, view, repliesCount } = forum;
     const { courseName, color } = course;
     const navigate = useNavigate();
+    const { setForumId } = useForumId();
 
     const incrementViewCount = async () => {
         try {
@@ -42,11 +44,11 @@ const Forum: React.FC<ForumProps> = ({ forum }) => {
 
     const handleSeeMore = async () => {
         await incrementViewCount();
+        setForumId(id);
         navigate(`/replies/${id}`, { state: { forum } });
     }
 
     return (
-
         <div className="forum-item">
             <div className="forum-header">
                 <h2 className="forum-question">{question}</h2>
@@ -55,11 +57,9 @@ const Forum: React.FC<ForumProps> = ({ forum }) => {
                     <div className="forum-meta">
                         <span className="forum-course" style={{ backgroundColor: color }}>{courseName}</span>
                         <span className="forum-replies">{repliesCount} replies</span>
-
                     </div>
-                    <Link to={`/replies/${id}`} className="see-more">see more..</Link>
+                    <button onClick={handleSeeMore} className="see-more">see more..</button>
                 </div>
-
             </div>
         </div>
     );

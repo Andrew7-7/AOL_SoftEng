@@ -24,4 +24,6 @@ forumRoutes.delete('/deleteForum/:forumId', forumControllers.deleteForum);
 
 forumRoutes.post('/incrementView/:forumId', forumControllers.incrementView);
 
+forumRoutes.get('/getForum/:forumId',extraAuthorization, forumControllers.getForumById)
+
 export {forumRoutes};
