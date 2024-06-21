@@ -11,6 +11,7 @@ import {
   updateDoc,
   arrayUnion,
   orderBy,
+  limit,
 } from "firebase/firestore";
 import { db } from "../Config/config";
 import { Request, Response } from "express";
@@ -117,6 +118,53 @@ export class TutorController {
       });
   
       return res.status(200).json({ class: classDocSnapshot.data(), sessions: sessionData });
+    } catch (error) {
+      console.error("Error fetching class details:", error);
+      res.status(500).json({ error: "Error fetching class details" });
+    }
+  }
+
+  static async getCurrActiveClass(req: Request, res: Response) {
+    try {
+      const { id } = req.body;
+  
+      if (!id) {
+        return res.status(404).json({ error: "document ID is required" });
+      }
+  
+      const classDocRef = doc(classCollection, id);
+      const classDocSnapshot = await getDoc(classDocRef);
+  
+      if (!classDocSnapshot.exists()) {
+        return res.status(404).json({ error: "Class not found" });
+      }
+  
+      // Get current timestamp in Firestore-compatible format
+      const currentTimestamp = Timestamp.now();
+  
+      const sessionCollectionRef = collection(classDocRef, "Session");
+  
+      // Query sessions that start after the current timestamp
+      const q = query(sessionCollectionRef, where("startDate", ">", currentTimestamp), orderBy("startDate", "asc"), limit(1));
+      const sessionQuerySnapshot = await getDocs(q);
+  
+      if (sessionQuerySnapshot.empty) {
+        return res.status(404).json({ error: "No upcoming sessions found" });
+      }
+  
+      const sessionDoc = sessionQuerySnapshot.docs[0];
+      const data = sessionDoc.data();
+      const startDate = data.startDate.toDate();
+      const endDate = data.endDate.toDate();
+  
+      const sessionData = {
+        ...data,
+        id: sessionDoc.id,
+        startDateTimestamp: startDate.getTime(),
+        endDateTimestamp: endDate.getTime(),
+      };
+  
+      return res.status(200).json({ class: classDocSnapshot.data(), session: sessionData });
     } catch (error) {
       console.error("Error fetching class details:", error);
       res.status(500).json({ error: "Error fetching class details" });
