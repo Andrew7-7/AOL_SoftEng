@@ -1,0 +1,34 @@
+.yeayMain {
+    display: flex;
+}
+
+.yeayMain .rightComponent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 45vw;
+    margin: 10vh 20vw;
+    text-align: center;
+    background-color: white;
+    border-radius: 15px;
+}.yeayMain .rightComponent img{
+    width: 200px;
+}.yeayMain .rightComponent .text{
+    font-weight: bold;
+    font-size: 24px;
+    margin: 20px;
+}.yeayMain .rightComponent button{
+    padding: 8px 24px;
+    background-color: #402528;
+    color: white;
+    border-radius: 15px;
+    border: none;
+}.yeayMain .rightComponent button > p{
+  font-weight: 500;
+  font-size: 16px;
+}.yeayMain .rightComponent button:hover{
+    opacity: 0.92
+}.yeayMain .rightComponent button:active{
+    opacity: 0.85;
+}

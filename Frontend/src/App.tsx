@@ -16,7 +16,7 @@ import ContactSidebar from "./pages/sidebar/contactSidebar";
 import ChatPage from "./pages/chat/chatPage";
 import ForumPage from "./pages/forum/forumPage";
 import RepliesPage from "./pages/replies/RepliesPage";
-
+import WalletPage from "./pages/tutor/walletPage/walletPage.tsx";
 import PickTutorPage from "./pages/pickTutor/view/pick_tutor_page.tsx";
 import ActiveCourse from "./pages/activecourse/view/activecourse_page";
 import TutorDetailPage from "./pages/tutorDetail/view/tutor_detail_page.tsx";
@@ -32,6 +32,10 @@ import ConfirmedPage from "./pages/paymentpage/view/confirmed_page.tsx";
 import ReportReviewPage from "./pages/admin/reportReview/reportReview.tsx";
 import PermissionManagementPage from "./pages/admin/permissionManagement/view/permissionManagement_page.tsx";
 import PermissionManagementDetailPage from "./pages/admin/permissionManagement/view/permissionManagementDetail_page.tsx";
+import TransactionHistory from "./pages/tutor/walletPage/pages/transactionHisotory.tsx";
+import WithdrawBalance from "./pages/tutor/walletPage/pages/withdrawBalance.tsx";
+import PaymentReceived from "./pages/tutor/walletPage/pages/paymentReceived.tsx";
+import Yeay from "./pages/tutor/walletPage/pages/yeay.tsx";
 
 function App() {
 	return (
@@ -83,6 +87,11 @@ function App() {
 								path="/activeClassDetail/:id"
 								element={<ActiveClassDetail />}
 							/>
+							<Route path = "/walletPage" element = {<WalletPage/>}></Route>
+							<Route path = "/walletPage/TransactionHistory" element = {<TransactionHistory />}></Route>
+							<Route path = "/walletPage/withdraw" element = {<WithdrawBalance />}></Route>
+							<Route path = "/walletPage/payment" element = {<PaymentReceived />}></Route>
+							<Route path = "/walletPage/withdraw/yeay" element = {<Yeay />}></Route>
 						</Route>
 						{/* Admin Only Pages */}
 						<Route element={<CheckRole role={"admin"} />}>
