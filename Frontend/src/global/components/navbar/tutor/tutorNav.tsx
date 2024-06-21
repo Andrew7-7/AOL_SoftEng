@@ -45,13 +45,21 @@ const TutorNav = ({ clickedItem }: { clickedItem: string }) => {
         <p>CODE</p>
       </div>
       <div>
-        <NavigationLabel image={permissionImage} title="Course Lists" link="" />
+        <NavigationLabel
+          image={permissionImage}
+          title="Course Lists"
+          link="/applyCourse"
+        />
         <NavigationLabel
           image={accountImage}
           title="Wallet"
           link="/walletPage"
         />
-        <NavigationLabel image={reportImage} title="Active Class" link="/activeClass" />
+        <NavigationLabel
+          image={reportImage}
+          title="Active Class"
+          link="/activeClass"
+        />
         <NavigationLabel image={chatImage} title="Chat" link="/chat/x" />
       </div>
       <div onClick={signOut} className="signOutTutor">
