@@ -9,6 +9,8 @@ import {
   getDoc,
   Timestamp,
   updateDoc,
+  arrayUnion,
+  orderBy,
 } from "firebase/firestore";
 import { db } from "../Config/config";
 import { Request, Response } from "express";
@@ -16,6 +18,11 @@ import { Request, Response } from "express";
 interface Tutor {
   id: string;
   rating: number;
+  [key: string]: any;
+}
+
+interface Course {
+  id: string;
   [key: string]: any;
 }
 
@@ -82,21 +89,21 @@ export class TutorController {
   static async getActiveClassDetail(req: Request, res: Response) {
     try {
       const { id } = req.body;
-
+  
       if (!id) {
         return res.status(404).json({ error: "document ID is required" });
       }
-
+  
       const classDocRef = doc(classCollection, id);
-
       const classDocSnapshot = await getDoc(classDocRef);
-
+  
       if (!classDocSnapshot.exists()) {
         return res.status(404).json({ error: "Class not found" });
       }
+  
       const sessionCollectionRef = collection(classDocRef, "Session");
-
-      const sessionQuerySnapshot = await getDocs(sessionCollectionRef);
+      const sessionQuerySnapshot = await getDocs(query(sessionCollectionRef, orderBy("startDate", "asc")));
+  
       const sessionData = sessionQuerySnapshot.docs.map((doc) => {
         const data = doc.data();
         const startDate = data.startDate.toDate();
@@ -108,12 +115,11 @@ export class TutorController {
           endDateTimestamp: endDate.getTime(),
         };
       });
-
-      return res
-        .status(200)
-        .json({ class: classDocSnapshot.data(), sessions: sessionData });
+  
+      return res.status(200).json({ class: classDocSnapshot.data(), sessions: sessionData });
     } catch (error) {
-      res.status(500).json({ error: "Error fetching tutor" });
+      console.error("Error fetching class details:", error);
+      res.status(500).json({ error: "Error fetching class details" });
     }
   }
 
@@ -273,6 +279,84 @@ export class TutorController {
         .json({ message: "Attendance submitted successfully" });
     } catch (error) {
       res.status(500).json({ error: "error" });
+    }
+  }
+
+  
+
+
+  static async studentApplyClass(req: Request, res: Response) {
+    const {student, tutorEmail, courseId } = req.body
+
+    const classRef = collection(db, "Class")
+
+    const q = query(
+      classRef,
+      where("courseId", "==", courseId),
+      where("tutorEmail", "==", tutorEmail)
+    )
+
+    const classQuerySnapshot = await getDocs(q)
+
+    if(classQuerySnapshot.empty){
+      const courseDocRef = doc(db, "Courses", courseId);
+
+      const courseDocSnapshot = await getDoc(courseDocRef);
+
+      const course: Course = {
+        id: courseId,
+        ...courseDocSnapshot.data(),
+      };
+
+      const sessions: any = []
+
+      const currentDate = new Date()
+
+      for(let sessionNumber = 0 ; sessionNumber < course.Sessions ; sessionNumber++){
+        const startDate = new Date(currentDate.getTime() + (sessionNumber + 1) * 7 * 24 * 60 * 60 * 1000);
+        const endDate = new Date(startDate.getTime() + parseInt(course.hourPerSession) * 60 * 60 * 1000);
+
+        const outline = (sessionNumber + 1 > course.chapterBreakdown.length) ? "Extra material" : course.chapterBreakdown[sessionNumber] 
+
+        const baseUrl = 'https://zoom.us/j/';
+        const meetingId = Math.floor(Math.random() * 1000000000); // Generate a random meeting ID
+        const password = Math.random().toString(36).slice(2, 8); // Generate a random 6-character password
+
+        const session: any = {
+          absent: [],
+          done: false,
+          endDate: Timestamp.fromDate(endDate),
+          outline: outline,
+          present: [],
+          startDate: Timestamp.fromDate(startDate),
+          zoomLink: `${baseUrl}${meetingId}?pwd=${password}`,
+        };
+
+        sessions.push(session)
+      }
+
+      const classDocRef = await addDoc(classRef, {
+        student: [student],
+        tutorEmail: tutorEmail,
+        course: {
+          courseName: course.CourseName,
+          totalSession: course.Sessions
+        }
+      })
+
+      for (const session of sessions) {
+        await addDoc(collection(classDocRef, 'Session'), session);
+      }
+
+      return res.status(200)
+    }else{
+      const classDocRef = classQuerySnapshot.docs[0].ref
+
+      await updateDoc(classDocRef, {
+        student: arrayUnion(student)
+      })
+
+      return res.status(200)
     }
   }
 }

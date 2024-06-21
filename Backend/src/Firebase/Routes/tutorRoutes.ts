@@ -23,4 +23,6 @@ tutorRoutes.put(
   TutorController.submitAttendance
 );
 
+tutorRoutes.post("/studentApplyClass", TutorController.studentApplyClass);
+
 export { tutorRoutes };
