@@ -6,6 +6,8 @@
   background-color: white;
   padding: 30px 0px;
   height: 92vh;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .leftChatDiv .top {

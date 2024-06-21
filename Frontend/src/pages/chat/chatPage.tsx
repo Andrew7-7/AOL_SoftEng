@@ -29,7 +29,7 @@ const ChatPage = () => {
 	const [currRoom, setCurrRoom] = useState<string>("");
 	const [currProfileURL, setCurrProfileURL] = useState<string>("");
 	const [userCache, setUserCache] = useState<{ [key: string]: any }>({});
-	const [trigger, setTrigger] = useState(false);
+	const [triggerChatRoomsUpdate, setTriggerChatRoomsUpdate] = useState(false);
 
 	const createRoom = async () => {
 		try {
@@ -41,13 +41,37 @@ const ChatPage = () => {
 			console.log("RESPONSE: ", res);
 
 			setCurrRoom(res.data.room.id);
-			const userData = await fetchUserData(res.data.tutor.email);
+
+			const userData = await fetchUserData(res.data.tutor.tutorEmail);
+
+			console.log(res.data.tutor.profilePictureURL);
+
+			
 			setCurrProfileURL(
-				userData.profileURL ||
-					"https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/Profile%2Fanonymous_profilce_picture.webp?alt=media&token=24c17cb1-3032-432f-a1a1-98c7d9fbff06"
-			);
+				res.data.tutor.profilePictureURL ||
+				"https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/Profile%2Fanonymous_profilce_picture.webp?alt=media&token=24c17cb1-3032-432f-a1a1-98c7d9fbff06"
+				);
+			setTriggerChatRoomsUpdate(true);
 		} catch (error) {}
 	};
+
+	useEffect(() => {
+    const fetchChatRooms = async () => {
+      try {
+        const res = await axios.post("http://localhost:3002/chat/getChat", {
+          email: user.email,
+        });
+
+        if (res != null) {
+          setChatRooms(res.data.chatroomDocs);
+        }
+      } catch (error: any) {
+        console.error("Error fetching chat rooms:", error);
+      }
+    };
+
+    fetchChatRooms();
+  }, [triggerChatRoomsUpdate]);
 
 	useEffect(() => {
 		if (tutorId != "x") {
