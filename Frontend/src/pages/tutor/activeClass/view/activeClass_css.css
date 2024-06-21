@@ -19,12 +19,11 @@
   background-color: white;
   padding: 1vw;
   width: 20vw;
-  height: 12vw;
+  height: 15vw;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   cursor: pointer;
 }
-
 .ActiveClassCardSubtitle {
   display: flex;
   font-size: 1vw;

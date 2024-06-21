@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import "./pupular_course_card.css";
 import arrow from "../../assets/arrow.png";
 
-export const Card = ({ id, img, title, session, chapter, link }: any) => {
+export const Card2 = ({ id, img, title, session, chapter, link }: any) => {
   const imgUrl = img;
   const text = title;
   const sessions = session;
@@ -12,7 +12,7 @@ export const Card = ({ id, img, title, session, chapter, link }: any) => {
 
   return (
     <div className="globalCard">
-      <Link to={`/material/${docId}/${user.email}`}>
+      <Link to={`/activecourse/${docId}`}>
         <div className="card2">
           <div
             className="card-title"

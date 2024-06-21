@@ -377,6 +377,13 @@ export class UserControllers {
           } else {
             console.log("No document found with the given email.");
           }
+          
+          const userSnapshot = await getDocs(query(userCollection, where("email", "==", email)))
+
+          await updateDoc(userSnapshot.docs[0].ref, {
+            profileURL: downloadURLs
+          })
+
           res.json({ downloadURLs, profile: updatedData });
         }
       );

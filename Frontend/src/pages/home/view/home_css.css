@@ -134,6 +134,22 @@
   margin-left: 0.5vw;
 }
 
+.popular-course-section {
+  margin-top: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 5vw;
+}
+
+.popular-course-section .link {
+  font-size: 20px;
+  text-decoration: underline;
+}
+
+.popular-course-section .link:hover {
+  font-weight: 600;
+}
 
 @media only screen and (max-width: 1080px) {
   .banner-text-home p {
