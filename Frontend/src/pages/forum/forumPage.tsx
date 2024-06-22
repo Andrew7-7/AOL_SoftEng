@@ -36,7 +36,7 @@ const ForumPage = () => {
     const indexOfFirstForum = indexOfLastForum - forumsPerPage;
     const currentForums = forums.slice(indexOfFirstForum, indexOfLastForum);
 
-    const paginate = (pageNumber) => {
+    const paginate = (pageNumber:any) => {
         setCurrentPage(pageNumber);
     };
 

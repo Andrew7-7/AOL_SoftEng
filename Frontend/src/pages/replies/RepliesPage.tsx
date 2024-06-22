@@ -223,7 +223,7 @@ const RepliesPage = () => {
                 <h1>Question: {forum?.question}</h1>
                 {details && details.sender && (
                     <p>
-                        {details.sender.senderEmail}
+                        by {details.sender.senderEmail}
                     </p>
                 )}
 
