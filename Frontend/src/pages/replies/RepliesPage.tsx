@@ -220,11 +220,10 @@ const RepliesPage = () => {
                 <div className="sharing-banner">#sharingiscaring</div>
             </div>
             <div className="Replies">
-                <h1>Question: {forum?.question || 'No question available'}</h1>
+                <h1>Question: {forum?.question}</h1>
                 {details && details.sender && (
                     <p>
                         {details.sender.senderEmail}
-                        <img src={details.sender.senderImageURL} alt="Profile" />
                     </p>
                 )}
 

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { useForumId } from './ForumIdContext'; // Import the context hook
+import { useForumId } from './ForumIdContext';
 import "./Forum.css";
 
 interface ForumProps {
