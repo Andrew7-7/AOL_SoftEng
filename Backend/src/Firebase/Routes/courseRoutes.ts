@@ -9,19 +9,29 @@ const upload = multer({ storage: storage });
 
 // TODO: middleware
 coursesRoutes.get("/getCourses", CoursesController.getCourses);
+coursesRoutes.get(
+  "/getApplyCourses/:tutorEmail",
+  CoursesController.getApplyCourses
+);
 coursesRoutes.get("/getCourse/:courseId", CoursesController.getCourse);
 
 coursesRoutes.get("/getCourseById/:courseId", CoursesController.getCourseById);
 coursesRoutes.post(
-	"/createCourse",
-	upload.single("imageURL"),
-	CoursesController.createCourse
+  "/createCourse",
+  upload.single("imageURL"),
+  CoursesController.createCourse
 );
 
 coursesRoutes.post(
-	"/updateCourse",
-	upload.single("imageURL"),
-	CoursesController.updateCourse
+  "/applyCourse",
+  upload.single("imageURL"),
+  CoursesController.appyCourse
+);
+
+coursesRoutes.post(
+  "/updateCourse",
+  upload.single("imageURL"),
+  CoursesController.updateCourse
 );
 
 coursesRoutes.delete("/deleteCourse/:courseId", CoursesController.deleteCourse);

@@ -1,14 +1,14 @@
 import React from "react";
-import "./course_table.css";
-import { ICourse } from "../../../../global/model/course-interface";
 import { Link } from "react-router-dom";
+import { ICourse } from "../../../global/model/course-interface";
+import "./courseList.css";
 
-const CourseTable: React.FC<{ courseDatas: ICourse[]; handleDelete: any }> = ({
+const CourseList: React.FC<{ courseDatas: ICourse[]; handleDelete: any }> = ({
   courseDatas,
   handleDelete,
 }) => {
   return (
-    <div className="course-table-container">
+    <div className="course-list-container">
       <div className="table-content">
         <div className="table-header">
           <p>Name</p>
@@ -25,18 +25,13 @@ const CourseTable: React.FC<{ courseDatas: ICourse[]; handleDelete: any }> = ({
               <p>{courseData.Chapters}</p>
               <p>{courseData.hourPerSession}h</p>
               <p>{courseData.skill}</p>
-              <Link
-                to={courseData.id}
-                className="edit-button"
-                key={courseData.id}
-              >
-                Edit
-              </Link>
               <div
-                onClick={() => handleDelete(courseData.id)}
-                className="delete-button"
+                onClick={() =>
+                  handleDelete(courseData.id, courseData.CourseName)
+                }
+                className="apply-button"
               >
-                Delete
+                Apply
               </div>
             </div>
           ))}
@@ -46,4 +41,4 @@ const CourseTable: React.FC<{ courseDatas: ICourse[]; handleDelete: any }> = ({
   );
 };
 
-export default CourseTable;
+export default CourseList;

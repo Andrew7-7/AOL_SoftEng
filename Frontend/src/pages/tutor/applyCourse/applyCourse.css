@@ -1,0 +1,69 @@
+.apply-course-page {
+  display: flex;
+}
+
+.apply-course-page .content-section {
+  padding-top: 50px;
+  flex: 1;
+}
+
+.apply-course-page .top-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.apply-course-page .top-section .button-container {
+  width: 200px;
+}
+
+.apply-modal .overlay {
+  z-index: 1;
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.361);
+}
+
+.apply-modal .modal-container {
+  padding: 35px;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  width: 800px;
+  height: 400px;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.apply-modal .modal-container .close-icon img {
+  cursor: pointer;
+  right: 4%;
+  position: absolute;
+  width: 20px;
+}
+
+.apply-modal .modal-container .top-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.apply-modal .modal-container .top-section .title {
+  font-size: 22px;
+}
+
+.apply-modal .content-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px;
+  justify-content: space-between;
+}
