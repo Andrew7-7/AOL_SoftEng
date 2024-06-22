@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Forum from "../forum/Forum";
 import "./forumPage.css";
 import StudentNav from "../../global/components/navbar/student/student_navbar";
+import Footer from "../../global/components/footer/Footer";
 
 const ForumPage = () => {
   const [forums, setForums] = useState([]);
@@ -75,6 +76,7 @@ const ForumPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

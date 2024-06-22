@@ -9,6 +9,7 @@ import { ITutor } from "../../../global/model/tutor-interface";
 import { CourseCard } from "../components/courseCard";
 import { TutorCard } from "../components/tutorCard";
 import Modal from "../components/confirmModal";
+import Footer from "../../../global/components/footer/Footer";
 // import PaymentForm from '../components/choosePayment';
 // import useFetch from '../../../global/hooks/useFetch';
 
@@ -115,7 +116,7 @@ const PaymentPage = () => {
                 </div>
                 <div className="transaction-detail-payment-page-container-1-column-container">
                   <div>Total Hours</div>
-                  <div>{course.totalHours} Hours</div>
+                  <div>{course.hourPerSession} Hours</div>
                 </div>
                 <div className="transaction-detail-payment-page-container-1-column-container">
                   <div>Skill Level</div>
@@ -239,6 +240,7 @@ const PaymentPage = () => {
           </div>
         </div>
       )}
+      <Footer />
     </>
   );
 };

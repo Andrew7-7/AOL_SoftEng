@@ -9,6 +9,7 @@ import Banner from "../../../global/components/loginRegister/banner/banner";
 import handleLogin from "../controller/login_controller";
 import showImage from "../../../global/assets/view.png";
 import hideImage from "../../../global/assets/hide.png";
+import Footer from "../../../global/components/footer/Footer";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
@@ -62,6 +63,7 @@ const LoginPage = () => {
           <Banner />
         </div>
       </div>
+      <Footer />
     </>
   );
 };

@@ -14,6 +14,7 @@ import loadingSvg from "../../../global/assets/Spin@1x-1.1s-200px-200px.svg";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { log } from "console";
 import axios from "axios";
+import Footer from "../../../global/components/footer/Footer";
 
 const ProfilePage = () => {
   const user = JSON.parse(window.localStorage.getItem("user") || "{}");
@@ -254,6 +255,7 @@ const ProfilePage = () => {
         </div>
       </div>
       {edit == true ? editPopup() : null}
+      <Footer />
     </>
   );
 };

@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import closeIcon from "../../global/assets/closeIcon.png";
 import InputForm from "../../global/components/textBox/InputForm";
 import SuccessMessage from "../../global/components/successMessage/SuccessMessage";
+import Footer from "../../global/components/footer/Footer";
 
 const ReviewModal = ({
   handleChange,
@@ -247,6 +248,7 @@ const MaterialPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

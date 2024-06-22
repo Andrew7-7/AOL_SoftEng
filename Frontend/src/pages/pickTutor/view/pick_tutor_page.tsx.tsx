@@ -4,6 +4,7 @@ import "./pick_tutor_page.css";
 import useFetch from "../../../global/hooks/useFetch";
 import { ITutor } from "../../../global/model/tutor-interface";
 import TutorCard from "../components/tutor_card";
+import Footer from "../../../global/components/footer/Footer";
 
 const PickTutorPage = () => {
   const { courseId } = useParams();
@@ -36,6 +37,7 @@ const PickTutorPage = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

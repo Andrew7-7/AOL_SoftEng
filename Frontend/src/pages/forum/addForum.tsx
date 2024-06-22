@@ -3,6 +3,7 @@ import "./addForum.css";
 import StudentNav from "../../global/components/navbar/student/student_navbar";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Footer from "../../global/components/footer/Footer";
 
 const AddForum = () => {
   const user = JSON.parse(window.localStorage.getItem("user") || "{}");
@@ -99,6 +100,7 @@ const AddForum = () => {
           </button>
         </form>
       </div>
+      <Footer />
     </>
   );
 };

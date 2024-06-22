@@ -3,6 +3,7 @@ import useFetch from "../../../global/hooks/useFetch";
 import StudentNav from "../../../global/components/navbar/student/student_navbar";
 import "./course_detail_page.css";
 import Modal from "../components/modal";
+import Footer from "../../../global/components/footer/Footer";
 const CourseDetailPage = () => {
   const { courseId } = useParams();
 
@@ -20,7 +21,13 @@ const CourseDetailPage = () => {
     <>
       <StudentNav />
       <div className="container-coursedetail">
-      <div className="banner-coursedetail" style={{ backgroundImage: `url("${courseData.banner}")`, backgroundSize: "100%" }}>
+        <div
+          className="banner-coursedetail"
+          style={{
+            backgroundImage: `url("${courseData.banner}")`,
+            backgroundSize: "100%",
+          }}
+        >
           <Link to={`/activecourse`}>
             <div className="back-t0-home-page-coursedetail">
               <div className="back-t0-home-page-coursedetail">
@@ -80,6 +87,7 @@ const CourseDetailPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

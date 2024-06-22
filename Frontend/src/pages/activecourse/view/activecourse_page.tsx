@@ -5,6 +5,7 @@ import { Card } from './components/coursecard';
 import { ICourse } from '../../../global/model/course-interface';
 import { Link, useParams } from 'react-router-dom';
 import './activecourse_page.css'
+import Footer from '../../../global/components/footer/Footer';
 
 const activecourse_page = () => {
 	const { id } = useParams();
@@ -20,45 +21,46 @@ const activecourse_page = () => {
 	}
 
 	return (
-		<>
-			<StudentNav />
-			<div className="banner-activecourse">
-				<div className="banner-title-activecourse">
-					Welcome to our comprehensive course
-				</div>
-				<span className="banner-subtitle-activecourse">
-					We offer a wide range of courses designed to help you master the art of coding. Whether you&#39;re a beginner or an experienced programmer, we have something for everyone.
-				</span>
-				<div className="banner-image-activecourse"></div>
-			</div>
-			<Link to={`/`}>
-			<div className="back-t0-home-page-activecourse">
-				<div className="back-to-home-button-1-activecourse">
-					<div className="btn-activecourse"></div>
-				</div>
-				<span className="back-to-home-page-title-activecourse">
-					Back to Home Page
-				</span>
-			</div>
-			</Link>
-			<div className="all-course-activecourse">
-				All Course
-			</div>
-			<div className="course-list-container-activecourse">
-				{courseDatas.map((CourseData: ICourse) => (
-					<Card
-						title={CourseData.CourseName}
-						session={CourseData.Sessions}
-						chapter={CourseData.Chapters}
-						img={CourseData.CourseImage}
-						courseId={CourseData.CourseID}
-						id={CourseData.id}
-						type={CourseData.Type}
-					/>
-				))}
-			</div>
-		</>
-	);
+    <>
+      <StudentNav />
+      <div className="banner-activecourse">
+        <div className="banner-title-activecourse">
+          Welcome to our comprehensive course
+        </div>
+        <span className="banner-subtitle-activecourse">
+          We offer a wide range of courses designed to help you master the art
+          of coding. Whether you&#39;re a beginner or an experienced programmer,
+          we have something for everyone.
+        </span>
+        <div className="banner-image-activecourse"></div>
+      </div>
+      <Link to={`/`}>
+        <div className="back-t0-home-page-activecourse">
+          <div className="back-to-home-button-1-activecourse">
+            <div className="btn-activecourse"></div>
+          </div>
+          <span className="back-to-home-page-title-activecourse">
+            Back to Home Page
+          </span>
+        </div>
+      </Link>
+      <div className="all-course-activecourse">All Course</div>
+      <div className="course-list-container-activecourse">
+        {courseDatas.map((CourseData: ICourse) => (
+          <Card
+            title={CourseData.CourseName}
+            session={CourseData.Sessions}
+            chapter={CourseData.Chapters}
+            img={CourseData.CourseImage}
+            courseId={CourseData.CourseID}
+            id={CourseData.id}
+            type={CourseData.Type}
+          />
+        ))}
+      </div>
+      <Footer />
+    </>
+  );
 };
 
 export default activecourse_page;

@@ -11,6 +11,7 @@ import showImage from "../../../global/assets/view.png";
 import hideImage from "../../../global/assets/hide.png";
 import CountdownTimer from "../../../global/components/countDown/countDown";
 import loadingSVG from "../../../global/assets/Spin@1x-1.1s-200px-200px.svg";
+import Footer from "../../../global/components/footer/Footer";
 const RegisterPage = () => {
   const extraAuth =
     "aolsoftengasdaskjdbasdjbasjbk342342j3aasjdnasjndakjdn73628732h34m23423jh4v2jg32g34c23h42j4k24nl234l2423kn4k23n42k";
@@ -255,6 +256,7 @@ const RegisterPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

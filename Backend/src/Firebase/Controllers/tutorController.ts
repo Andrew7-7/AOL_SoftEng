@@ -228,7 +228,7 @@ export class TutorController {
               id: collectionDoc.id,
               ...collectionDoc.data(),
             });
-            totalRating += collectionDoc.data().rating;
+            totalRating += parseInt(collectionDoc.data().rating);
           });
         }
 
@@ -275,7 +275,7 @@ export class TutorController {
               id: collectionDoc.id,
               ...collectionDoc.data(),
             });
-            totalRating += collectionDoc.data().rating;
+            totalRating += parseInt(collectionDoc.data().rating);
           });
         }
 
