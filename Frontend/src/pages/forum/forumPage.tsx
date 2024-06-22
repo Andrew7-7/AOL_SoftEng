@@ -36,7 +36,7 @@ const ForumPage = () => {
     const indexOfFirstForum = indexOfLastForum - forumsPerPage;
     const currentForums = forums.slice(indexOfFirstForum, indexOfLastForum);
 
-    const paginate = (pageNumber) => {
+    const paginate = (pageNumber:any) => {
         setCurrentPage(pageNumber);
     };
 
@@ -47,7 +47,8 @@ const ForumPage = () => {
 
             <StudentNav />
             <div className="forum-page-banner-sharing-iscaring"></div>
-            <div className="forum-page">
+            <Link to={"/"} className='backForum'>Back</Link>
+            <div className="forum-page-real">
                 <div className="pagination">
                     {[...Array(totalPages)].map((_, index) => (
                         <button
@@ -59,6 +60,7 @@ const ForumPage = () => {
                         </button>
                     ))}
                     {totalPages > 3 && <span>...</span>}
+                    <Link to={'/add'} className='askQuestionForum'>Ask Question</Link>
                 </div>
                 <div className="forums">
                     {currentForums.map((forum, index) => (

@@ -38,6 +38,7 @@ import WithdrawBalance from "./pages/tutor/walletPage/pages/withdrawBalance.tsx"
 import PaymentReceived from "./pages/tutor/walletPage/pages/paymentReceived.tsx";
 import Yeay from "./pages/tutor/walletPage/pages/yeay.tsx";
 import ApplyCourse from "./pages/tutor/applyCourse/ApplyCourse.tsx";
+import AddForum from "./pages/forum/addForum";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
               path="/material/:id/:email"
               element={<MaterialPage />}
             ></Route>
+            <Route path="/add" element={<AddForum />}></Route>
             <Route path="/reply" element={<ForumPage />}></Route>
             <Route path="/replies/:forumId" element={<RepliesPage />}></Route>
             {/* Student Only Pages */}

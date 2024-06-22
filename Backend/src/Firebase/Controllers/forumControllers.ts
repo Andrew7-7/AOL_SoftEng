@@ -30,6 +30,27 @@ export class forumControllers{
         }
     }
 
+    static async getForumById(req: Request, res: Response) {
+        try {
+            const { id } = req.params;
+            console.log(`Fetching forum with ID: ${id}`);
+
+            const forumRef = collection(db, "Forum", id);
+            const forumDoc: QuerySnapshot = await getDocs(forumRef);
+
+            const forum = forumDoc.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+
+            return res.status(200).json({ forum });
+        } catch (error) {
+            console.error("Error fetching forum:", error);
+            return res.status(500).json({ error: "Failed to fetch forum" });
+        }
+    }
+
+
     static async getForumDetail(req: Request, res: Response) {
         try {
             const forumId = req.params.forumsId;
