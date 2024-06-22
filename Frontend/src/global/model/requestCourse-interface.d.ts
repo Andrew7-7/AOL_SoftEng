@@ -7,4 +7,5 @@ export interface IReqCourse {
     status: string,
     tutorName: string,
     requestedClassID: string,
+    email: string,
 }

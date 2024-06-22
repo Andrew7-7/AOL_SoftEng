@@ -64,8 +64,7 @@ const CreateCoursePage = () => {
     >
   ) => {
     const { name, value } = event.target;
-
-    if (name === "hourPerSession") {
+    if (name === "hourPerSession" || "totalSession") {
       const num = parseFloat(value);
       if (num < 1) {
         setCourseFormData((prevData) => ({

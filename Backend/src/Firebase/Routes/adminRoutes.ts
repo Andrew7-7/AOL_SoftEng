@@ -6,6 +6,7 @@ const adminRoutes = Router();
 
 adminRoutes.get("/getUsers", accToken, AdminControllers.getUser);
 adminRoutes.post("/blockUser", accToken, AdminControllers.blockUser);
+adminRoutes.post("/doneReview", accToken, AdminControllers.doneReview);
 adminRoutes.post("/warningUser", accToken, AdminControllers.warningUser);
 
 export { adminRoutes };

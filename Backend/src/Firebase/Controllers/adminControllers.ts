@@ -11,6 +11,7 @@ import { Request, Response } from "express";
 import { SendEmail } from "../../others/sendEmail";
 // Collection User
 const userCollection = collection(db, "users");
+const reviewCollection = collection(db, "reportList");
 export class AdminControllers {
   static async getUser(req: Request, res: Response) {
     try {
@@ -41,6 +42,29 @@ export class AdminControllers {
         const updatedDocSnapshot = await getDoc(docRef);
         updatedUser = updatedDocSnapshot.data();
         res.status(200).json({ updatedUser });
+      } else {
+        console.log("No document found with the given email.");
+      }
+    } catch (error) {
+      res.status(500).json({ error: "Error updating profile data" });
+    }
+  }
+
+  static async doneReview(req: Request, res: Response) {
+    const { email } = req.body;
+    // let updatedUser;
+    try {
+      const qUser = query(reviewCollection, where("user", "==", email));
+      const queryUser = await getDocs(qUser);
+      if (!queryUser.empty) {
+        const doc = queryUser.docs[0];
+        const docRef = doc.ref;
+        await updateDoc(docRef, {
+          reviewed: true,
+        });
+        const updatedDocSnapshot = await getDoc(docRef);
+        // updatedUser = updatedDocSnapshot.data();
+        res.status(200).json({ message:"success" });
       } else {
         console.log("No document found with the given email.");
       }

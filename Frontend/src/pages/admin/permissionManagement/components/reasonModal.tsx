@@ -1,14 +1,20 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
-import './reasonModal.css';
-import toast from 'react-hot-toast';
-import { IReqCourse } from '../../../../global/model/requestCourse-interface';
-import { useNavigate } from 'react-router-dom';
+import "./reasonModal.css";
+import toast from "react-hot-toast";
+import { IReqCourse } from "../../../../global/model/requestCourse-interface";
+import { useNavigate } from "react-router-dom";
 
-const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; handleOpen: boolean; onClose: () => void }> = ({ permissionData, statusData, handleOpen, onClose }) => {
+const ReasonModal: React.FC<{
+  permissionData: IReqCourse;
+  statusData: string;
+  handleOpen: boolean;
+  onClose: () => void;
+}> = ({ permissionData, statusData, handleOpen, onClose }) => {
   const [isOpen, setIsOpen] = useState(handleOpen);
-  const [message, setMessage] = useState('');
-  const [statusForm, setStatusForm] = useState('');
+  const user = JSON.parse(window.localStorage.getItem("user") || "{}");
+  const [message, setMessage] = useState("");
+  const [statusForm, setStatusForm] = useState("");
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const [error, setError] = useState({
     message: "",
@@ -19,7 +25,7 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
     show: false,
   });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsOpen(handleOpen);
@@ -46,7 +52,8 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
     status: "",
     tutorName: "",
     certificateImg: "",
-    requestedClassID:"",
+    requestedClassID: "",
+    email: "",
   });
 
   const resetForm = () => {
@@ -59,18 +66,23 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
       tutorName: permissionData.tutorName,
       certificateImg: permissionData.certificateImg,
       requestedClassID: permissionData.requestedClassID,
+      email: permissionData.email,
     });
     setMessage(permissionData.message);
     setStatusForm(permissionData.status);
   };
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const { name, value } = event.target;
     setPermissionFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
-    if (name === 'message') {
+    if (name === "message") {
       setMessage(value);
     }
   };
@@ -105,7 +117,7 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
     e.preventDefault();
 
     if (!message.trim()) {
-      toast.error('Please fill in the required field.');
+      toast.error("Please fill in the required field.");
       return;
     }
 
@@ -119,9 +131,10 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
         tutorName,
         certificateImg,
         requestedClassID,
+        email,
       } = permissionFormData;
 
-      const status = statusData === 'Accept' ? 'Accepted' : 'Denied';
+      const status = statusData === "Accept" ? "Accepted" : "Denied";
 
       const res = await axios.post(
         `http://localhost:3002/permission/updatePermission`,
@@ -134,6 +147,7 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
           tutorName,
           certificateImg,
           requestedClassID,
+          email: email,
         },
         {
           headers: {
@@ -141,20 +155,19 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
           },
         }
       );
-      
+
       handleSuccess(res.data.message);
-      navigate("/permissionManagement")
+      navigate("/permissionManagement");
     } catch (error: any) {
       console.error(error);
-      handleError('An error occurred while submitting the form.');
+      handleError("An error occurred while submitting the form.");
     } finally {
       setSubmitLoading(false);
     }
   };
 
-
   const handleStatusChange = () => {
-    setStatusForm(statusData === 'Accept' ? 'Accepted' : 'Denied');
+    setStatusForm(statusData === "Accept" ? "Accepted" : "Denied");
   };
 
   return (
@@ -162,11 +175,13 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
       {isOpen && (
         <div className="reason-modal-overlay">
           <div className="reason-modal-content">
-            <div className='reason-modal-header'>
+            <div className="reason-modal-header">
               <h1>Permission Details</h1>
-              <button className='reason-modal-close-btn' onClick={toggleModal}>×</button>
+              <button className="reason-modal-close-btn" onClick={toggleModal}>
+                ×
+              </button>
             </div>
-            <div className='reason-modal-body'>
+            <div className="reason-modal-body">
               <p>Are you sure to {statusData} this request?</p>
               <p>Tutor's Name: {permissionData.tutorName}</p>
               <p>Requested Class: {permissionData.requestedClass}</p>
@@ -179,8 +194,12 @@ const ReasonModal: React.FC<{ permissionData: IReqCourse; statusData: string; ha
                   placeholder="Type your message..."
                   required
                 />
-                <button type="submit" className="reason-modal-submit-btn" disabled={submitLoading}>
-                  {submitLoading ? 'Submitting...' : statusData}
+                <button
+                  type="submit"
+                  className="reason-modal-submit-btn"
+                  disabled={submitLoading}
+                >
+                  {submitLoading ? "Submitting..." : statusData}
                 </button>
               </form>
             </div>

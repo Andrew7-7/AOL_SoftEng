@@ -223,7 +223,7 @@ export class CoursesController {
             CourseImage: downloadURL,
             CourseName: courseName,
             Sessions: Number(totalSession),
-            Status: "",
+            Status: "Active",
             Type: "",
             banner: "",
             chapterBreakdown: chapterBreakdowns,

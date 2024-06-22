@@ -47,6 +47,9 @@ function App() {
         {/* Is Banned */}
         <Route path="/banned" element={<IsBanned />}></Route>
         <Route path="/" element={<HomePage />}></Route>
+        <Route path="/activecourse/:courseId" element={<CourseDetailPage />} />
+        <Route path="/activecourse" element={<ActiveCourse />}></Route>
+
         {/* Verify Token */}
         <Route element={<VerifyToken />}>
           {/* Kalau udah login gabisa login register lagi */}
@@ -64,16 +67,11 @@ function App() {
             <Route path="/add" element={<AddForum />}></Route>
             <Route path="/reply" element={<ForumPage />}></Route>
             <Route path="/replies/:forumId" element={<RepliesPage />}></Route>
+            <Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
             {/* Student Only Pages */}
             <Route element={<CheckRole role={"student"} />}>
               <Route path="/profile" element={<ProfilePage />}></Route>
             </Route>
-            <Route
-              path="/activecourse/:courseId"
-              element={<CourseDetailPage />}
-            />
-            <Route path="/activecourse" element={<ActiveCourse />}></Route>
-            <Route path="/:courseId/pickTutor" element={<PickTutorPage />} />
             <Route
               path="/:courseId/pickTutor/:tutorId"
               element={<TutorDetailPage />}

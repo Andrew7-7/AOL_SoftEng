@@ -9,16 +9,21 @@ const AddForum = () => {
   const [question, setQuestion] = useState("");
   const [detailSnippet, setDetailSnippet] = useState("");
   const [courseName, setCourseName] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [color, setColor] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (question === "" || detailSnippet === "" || courseName === "") {
+      setErrorMessage("* All fields must be filled");
+      return;
+    }
     try {
       const response = await axios.post(
         "http://localhost:3002/forum/postForum",
         {
-          course: { color: "#FFFF00", courseName },
+          course: { color: "rgb(241, 124, 65)", courseName },
           detailSnippet,
           question,
           forumDetail: {
@@ -43,7 +48,6 @@ const AddForum = () => {
         throw new Error("Failed to add forum");
       }
 
-    
       setQuestion("");
       setDetailSnippet("");
       setCourseName("");
@@ -89,6 +93,7 @@ const AddForum = () => {
               placeholder="Type here ..."
             />
           </div>
+          <p>{errorMessage}</p>
           <button type="submit" className="submit-button">
             Post Question
           </button>

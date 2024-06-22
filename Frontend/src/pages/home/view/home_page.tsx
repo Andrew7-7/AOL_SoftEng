@@ -124,20 +124,19 @@ const HomePage = () => {
 
         <div className="popolarCourseSliderContainer">
           <Slider {...settings}>
-
             {data2 != null
               ? data.map((d: any) =>
-                    data2.indexOf(d.id) !== -1 ? (
-                      <Card
-                        key={d.id}
-                        title={d.CourseName}
-                        session={d.Sessions}
-                        chapter={d.Chapters}
-                        img={d.CourseImage}
-                        id={d.id}
-                      />
-                    ) : null
-                  )
+                  data2.indexOf(d.id) !== -1 ? (
+                    <Card2
+                      key={d.id}
+                      title={d.CourseName}
+                      session={d.Sessions}
+                      chapter={d.Chapters}
+                      img={d.CourseImage}
+                      id={d.id}
+                    />
+                  ) : null
+                )
               : null}
             {/* <LastCard /> */}
           </Slider>

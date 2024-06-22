@@ -55,6 +55,18 @@ const ReportListComponent = (props: any) => {
 
       if (res.status === 200) {
         /// buat API reviewed TRUE
+        const response = await axios.post(
+          "http://localhost:3002/admin/doneReview",
+          { email: user },
+          {
+            headers: {
+              auth: `Bearer ${accToken}`,
+            },
+          }
+        );
+        if (response.status === 200) {
+          window.location.reload();
+        }
       }
     } catch (error) {
       console.log(error);
@@ -146,12 +158,12 @@ const ReportReviewPage = () => {
       <div className="reportReviewMainContent">
         <div className="reportReviewHeader">
           <p className="reportReviewHeader-title">Report Review</p>
-          <input
+          {/* <input
             className="searchBar"
             placeholder="Search"
             type="search"
             onChange={(e) => setSearchInput(e.target.value)}
-          />
+          /> */}
         </div>
         <div className="reportReviewBody">
           <ReportList data={reportData} searchInput={searchInput} />

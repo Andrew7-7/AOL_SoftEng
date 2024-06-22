@@ -6,6 +6,8 @@ import closeIcon from "../../../global/assets/closeIcon.png";
 import TutorNav from "../../../global/components/navbar/tutor/tutorNav";
 import "./applyCourse.css";
 import CourseList from "./CourseList";
+import PermissionTable from "../../admin/permissionManagement/components/permission_table";
+import AppliedCourseTable from "./AppliedCourseTable";
 
 const ApplyModal = ({
   showModal,
@@ -67,6 +69,19 @@ const ApplyCourseManage = () => {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
 
   const [currCourseId, setCurrCourseId] = useState("");
+  const {
+    data: reqcourseDatas,
+    loading: reqCourseLoading,
+    refetch: reqCourseRefetch,
+  } = useFetch(
+    `http://localhost:3002/permission/getPermissionByTutorEmail/${user.email}`
+  );
+
+  useEffect(() => {
+    if (reqcourseDatas) {
+      setSearchItem(reqcourseDatas);
+    }
+  }, [reqcourseDatas]);
 
   const [currCourseName, setCurrCourseName] = useState("");
 
@@ -128,6 +143,7 @@ const ApplyCourseManage = () => {
     } finally {
       setSubmitLoading(false);
       refetch();
+      reqCourseRefetch();
     }
   };
 
@@ -165,6 +181,14 @@ const ApplyCourseManage = () => {
             <div className="table-section">
               {!courseLoading && (
                 <CourseList handleDelete={openModal} courseDatas={searchItem} />
+              )}
+            </div>
+            <div className="header-section">
+              <div className="header">Requested course list</div>
+            </div>
+            <div className="table-section">
+              {!reqCourseLoading && (
+                <AppliedCourseTable reqCourses={reqcourseDatas} />
               )}
             </div>
           </div>

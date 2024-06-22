@@ -40,10 +40,10 @@ const TutorNav = ({ clickedItem }: { clickedItem: string }) => {
   };
   return (
     <div className="tutorNav">
-      <div className="tutorNavTitle">
+      <Link to={"/"} className="tutorNavTitle">
         <p style={{ color: "#E24E03" }}>STEP</p>
         <p>CODE</p>
-      </div>
+      </Link>
       <div>
         <NavigationLabel
           image={permissionImage}
