@@ -1,17 +1,17 @@
-.forum-page-real  {
+.forum-page-real {
   font-family: Arial, sans-serif;
-  margin: 370px 20px 20px 20px;
+  /* margin: 370px 20px 20px 20px; */
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
   z-index: 0;
   position: relative;
-  margin-top: 350px;
+  /* margin-top: 350px; */
   height: 100vh;
 }
 
-.backForum{
-  margin: 30px;
+.backForum {
+  margin: 50px;
   text-decoration: underline;
 }
 
@@ -54,7 +54,7 @@
   align-items: center;
 }
 
-.askQuestionForum{
+.askQuestionForum {
   background-color: rgb(241, 124, 65);
   color: white;
   padding-left: 1vw;
@@ -83,12 +83,16 @@
   border-color: #ffda44;
 }
 
+/* g bisa pencet btn nav */
 .forum-page-banner-sharing-iscaring {
   background: url("https://firebasestorage.googleapis.com/v0/b/aolsofteng.appspot.com/o/asset%2FGroup%20152.png?alt=media&token=6980bd63-1bd4-45c3-92ca-6ad5d78f7c66");
-  position: absolute;
-  top: 0;
-  right: 0;
+  /* position: absolute; */
+  /* top: 0; */
+  /* right: 0; */
   width: 940px;
+  margin: 0 auto;
   height: 450px;
+  /* background-color: red; */
   z-index: 999;
+  display: flex;
 }
