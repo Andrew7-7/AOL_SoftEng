@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation, useNavigate } from 'react-router-dom';
+import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
 import './RepliesPage.css';
 import StudentNav from '../../global/components/navbar/student/student_navbar';
 
@@ -213,60 +213,61 @@ const RepliesPage = () => {
     }
 
     return (
-        <div className="Replies">
-            <StudentNav />
-            <div className="forum-header">
-                <h1>FORUM PAGE</h1>
-                <div className="sharing-banner">#sharingiscaring</div>
-            </div>
-            <div className="Replies">
-                <h1>Question: {forum?.question}</h1>
-                {details && details.sender && (
-                    <p>
-                        by {details.sender.senderEmail}
-                    </p>
-                )}
-
-                <div className="add-reply">
-                    <h2>Add a Reply</h2>
-                    <textarea
-                        value={newReply}
-                        onChange={(e) => setNewReply(e.target.value)}
-                        placeholder="Type your reply here..."
-                    />
-                    <button onClick={addReply}>Add Reply</button>
-                </div>
-
-                <ul>
-                    {replies.map((reply) => (
-                        <li key={reply.id} className='reply-item'>
-                            <div className='reply-content'>
-                                <span className="sender-email">{reply.senderEmail}</span>
-                                <p className="reply-message">{reply.message}</p>
-                                {reply.senderEmail === user.email && (
-                                    <div className="reply-actions">
-                                        <button onClick={() => editReply(reply)}>Edit</button>
-                                        <button onClick={() => deleteReply(reply.id)}>Delete</button>
-                                    </div>
-                                )}
-                            </div>
-                        </li>
-                    ))}
-                </ul>
-                {editReplyId && (
-                    <div className="edit-reply">
-                        <h2>Edit Reply</h2>
-                        <textarea
-                            value={editReplyMessage}
-                            onChange={(e) => setEditReplyMessage(e.target.value)}
-                            placeholder="Edit your reply here..."
-                        />
-                        <button onClick={updateReply}>Update Reply</button>
-                        <button onClick={() => setEditReplyId(null)}>Cancel</button>
-                    </div>
-                )}
-            </div>
+      <div className="Replies">
+        <StudentNav />
+        <div className="forum-header">
+          <h1>FORUM PAGE</h1>
+          <div className="sharing-banner">#sharingiscaring</div>
         </div>
+        <div className="Replies">
+          <Link to={"/reply"} className="backForumReply">
+            Back
+          </Link>
+          <h1>Question: {forum?.question}</h1>
+          {details && details.sender && <p>by {details.sender.senderEmail}</p>}
+
+          <div className="add-reply">
+            <h2>Add a Reply</h2>
+            <textarea
+              value={newReply}
+              onChange={(e) => setNewReply(e.target.value)}
+              placeholder="Type your reply here..."
+            />
+            <button onClick={addReply}>Add Reply</button>
+          </div>
+
+          <ul>
+            {replies.map((reply) => (
+              <li key={reply.id} className="reply-item">
+                <div className="reply-content">
+                  <span className="sender-email">{reply.senderEmail}</span>
+                  <p className="reply-message">{reply.message}</p>
+                  {reply.senderEmail === user.email && (
+                    <div className="reply-actions">
+                      <button onClick={() => editReply(reply)}>Edit</button>
+                      <button onClick={() => deleteReply(reply.id)}>
+                        Delete
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+          {editReplyId && (
+            <div className="edit-reply">
+              <h2>Edit Reply</h2>
+              <textarea
+                value={editReplyMessage}
+                onChange={(e) => setEditReplyMessage(e.target.value)}
+                placeholder="Edit your reply here..."
+              />
+              <button onClick={updateReply}>Update Reply</button>
+              <button onClick={() => setEditReplyId(null)}>Cancel</button>
+            </div>
+          )}
+        </div>
+      </div>
     );
 }
 
